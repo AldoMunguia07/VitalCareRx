@@ -1,0 +1,64 @@
+﻿<Window x:Class="VitalCareRx.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VitalCareRx"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="VirtualCareRX" Height="500" Width="370" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Visibility="Visible"
+>
+    <Grid Margin="0,0,-8,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="99*"/>
+            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Rectangle Height="240" VerticalAlignment="Bottom" Margin="19,0,19,80" RadiusY="10" RadiusX="10" Fill="White" Grid.ColumnSpan="2">
+            <Rectangle.Effect>
+                <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <Grid VerticalAlignment="Bottom" Margin="35,0,13,80" Height="240" Grid.ColumnSpan="2">
+            <Label Content="LOGIN" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5" Foreground="Gray" FontSize="18"/>
+            <StackPanel VerticalAlignment="Center" Margin="15,69,34,70" Height="101">
+                <TextBox Name="txtUsuario" Margin="0,10" materialDesign:HintAssist.Hint="USUARIO"  FontFamily="Champagne &amp; Limousines" FontSize="18"/>
+                <PasswordBox Name="pwbPassword" Margin="0,10" materialDesign:HintAssist.Hint="CONTRASEÑA"  FontFamily="Champagne &amp; Limousines" FontSize="18" Height="33" />
+            </StackPanel>
+        </Grid>
+        <Button Name="btnLogin" Width="150" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="116,0,92,65" Content="LOGIN" Grid.ColumnSpan="2" Click="Button_Click">
+            <Button.Background>
+                <LinearGradientBrush>
+
+                    <GradientStop Color="#59D3FC" Offset="0"/>
+                    <GradientStop Color="#553DDE" Offset="1"/>
+
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Image Source="IMAGENES/PrimeroDios.png" Height="95" VerticalAlignment="Top" Margin="63,39,41,0" Grid.ColumnSpan="2"/>
+        <Button Name="btnCerrar" HorizontalAlignment="Left" Margin="109,0,0,0" VerticalAlignment="Top" Width="54" Height="23" Grid.ColumnSpan="2" Grid.Column="1" Click="btnCerrar_Click"  >
+            <materialDesign:PackIcon Kind="CloseCircleOutline" Height="15" Width="15" />
+            <Button.Background>
+                <LinearGradientBrush>
+
+                    <GradientStop Color="#B71C1C" Offset="0"/>
+                    <GradientStop Color="#D50000" Offset="1"/>
+
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Name="btnMostrarContrasenia" HorizontalAlignment="Left" Margin="69,315,0,0" VerticalAlignment="Top" Width="54" Height="23" Grid.Column="1" Background="Transparent" >
+            <materialDesign:PackIcon Kind="Eye" Height="15" Width="15" Foreground="Black"/>
+        </Button>
+        <Button Name="btnOcultarContrasenia" HorizontalAlignment="Left" Margin="69,315,0,0" VerticalAlignment="Top" Width="54" Height="23" Grid.Column="1" Background="Transparent" >
+            <materialDesign:PackIcon Kind="EyeOff" Height="15" Width="15" Foreground="Black"/>
+        </Button>
+        <Button Name="btnNuevaCuenta" Width="251" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="63,0,52,10" Content="¿DESEA UNA NUEVA CUENTA?" Foreground="Gray" Background="Transparent" Grid.ColumnSpan="2" Height="29" Click="btnNuevaCuenta_Click"/>
+
+
+
+
+    </Grid>
+</Window>
