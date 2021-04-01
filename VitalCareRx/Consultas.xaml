@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:VitalCareRx"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="590" Width="774" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" 
-        Left="500" Top="100">
+        Title="MainWindow" Height="600" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" 
+        >
     <Grid>
-        <Image Source="IMAGENES/PrimeroDios.png" Height="41" VerticalAlignment="Top" Margin="428,541,280,0" RenderTransformOrigin="0.5,0.5"/>
-        <Grid HorizontalAlignment="Left" Height="582" Margin="491,0,0,0" VerticalAlignment="Top" Width="275" Opacity="0.7">
+        <Image Source="IMAGENES/PrimeroDios.png" Height="66" VerticalAlignment="Top" Margin="621,516,304,0" RenderTransformOrigin="0.5,0.5"/>
+        <Grid HorizontalAlignment="Left" Height="600" Margin="742,0,0,0" VerticalAlignment="Top" Width="282" Opacity="0.7">
 
             <Grid.Background>
 
@@ -20,11 +20,11 @@
 
                 </LinearGradientBrush>
             </Grid.Background>
-            <Button x:Name="ButtonFechar" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Red"  Margin="235,0,0,544">
+            <Button Name="ButtonFechar" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Red"  Margin="235,0,0,544" Click="ButtonFechar_Click">
                 <materialDesign:PackIcon Kind="CloseCircleOutline" Height="28" Width="30" RenderTransformOrigin="0.352,0.42" />
             </Button>
 
-            <RichTextBox Name="rtxtDiagnostico" HorizontalAlignment="Left" Height="74" Margin="10,254,0,0" VerticalAlignment="Top" Width="255" Background="White">
+            <RichTextBox Name="rtxtDiagnostico" HorizontalAlignment="Left" Height="74" Margin="10,237,0,0" VerticalAlignment="Top" Width="255" Background="White">
                 <FlowDocument>
                     <Paragraph>
                         <Run Text=""/>
@@ -38,27 +38,27 @@
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
-            <Label Background="#FF222222" Content="         Temperatura" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,348,0,202" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="275" RenderTransformOrigin="0.612,0.375"/>
-            <TextBox Name="txtTemperatura"  Background="White" HorizontalAlignment="Left" Height="37" Margin="10,385,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="255" FontSize="20"/>
-            <Label Background="#FF222222" Content="         Presión Arterial" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,452,0,98" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="275" RenderTransformOrigin="0.612,0.375"/>
+            <Label Background="#FF222222" Content="         Temperatura" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,348,0,202" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="283" RenderTransformOrigin="0.612,0.375"/>
+            <TextBox Name="txtTemperatura"  Background="White" HorizontalAlignment="Left" Height="37" Margin="10,394,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="255" FontSize="20"/>
+            <Label Background="#FF222222" Content="         Presión Arterial" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,452,0,98" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="283" RenderTransformOrigin="0.612,0.375"/>
             <TextBox Name="txtPresionArterial" Background="White" HorizontalAlignment="Left" Height="37" Margin="10,505,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="255" FontSize="20"/>
-            <Label Background="#FF222222" Content="Diagnostico de la Consulta" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,191,0,359" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="275" RenderTransformOrigin="0.612,0.375"/>
-            <Label Background="#FF222222" Content="   Motivo de la Consulta" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,66,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="275"/>
+            <Label Background="#FF222222" Content="Diagnostico de la Consulta" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,191,0,359" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="283" RenderTransformOrigin="0.612,0.375"/>
+            <Label Background="#FF222222" Content="   Motivo de la Consulta" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,66,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="283"/>
         </Grid>
-        <DataGrid Name="dgConsultas" HorizontalAlignment="Left" Height="332" Margin="10,52,0,0" VerticalAlignment="Top" Width="463" SelectionChanged="dgConsultas_SelectionChanged" />
-        <Label Content="             Listado de Consultas" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="463">
+        <DataGrid Name="dgConsultas" HorizontalAlignment="Left" Height="332" Margin="10,76,0,0" VerticalAlignment="Top" Width="710" SelectionChanged="dgConsultas_SelectionChanged" />
+        <Label Content="             Listado de Consultas" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="136,15,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="464">
             <Label.Background>
 
                 <LinearGradientBrush>
-                    <GradientStop Color="#FF222222" Offset="0.06"/>
+                    <GradientStop Color="#406fb3" Offset="0.06"/>
 
 
                 </LinearGradientBrush>
 
             </Label.Background>
         </Label>
-        <TextBox Name="txtBuscar" HorizontalAlignment="Left" Height="25" Margin="85,467,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="128" RenderTransformOrigin="0.455,1.52"/>
-        <Button Name="btnAñadir" Content="Añadir" HorizontalAlignment="Left" Margin="31,405,0,0" VerticalAlignment="Top" Width="110" Click="btnAñadir_Click">
+        <TextBox Name="txtBuscar" HorizontalAlignment="Left" Height="25" Margin="185,486,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="128" RenderTransformOrigin="0.455,1.52"/>
+        <Button Name="btnAñadir" Content="Añadir" HorizontalAlignment="Left" Margin="131,424,0,0" VerticalAlignment="Top" Width="110" Click="btnAñadir_Click">
             <Button.Background>
                 <LinearGradientBrush>
 
@@ -67,8 +67,8 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="180,405,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="-0.242,0.544" Click="btnModificar_Click"/>
-        <Button Name= "btnBuscar"  Content="Buscar" HorizontalAlignment="Left" Margin="94,497,0,0" VerticalAlignment="Top" Width="109" Click="btnBuscar_Click">
+        <Button Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="280,424,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="-0.242,0.544" Click="btnModificar_Click"/>
+        <Button Name= "btnBuscar"  Content="Buscar" HorizontalAlignment="Left" Margin="194,516,0,0" VerticalAlignment="Top" Width="109" Click="btnBuscar_Click">
             <Button.Background>
                 <LinearGradientBrush>
 
@@ -77,18 +77,18 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <materialDesign:PackIcon Kind="SquareEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="31,405,0,0" />
-        <materialDesign:PackIcon Kind="BookEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="180,405,0,0" />
-        <materialDesign:PackIcon Kind="FeatureSearchOutline" Height="32" Width="24" Foreground="#FFF" Margin="104,497,0,0" />
+        <materialDesign:PackIcon Kind="SquareEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="131,424,0,0" />
+        <materialDesign:PackIcon Kind="BookEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="280,424,0,0" />
+        <materialDesign:PackIcon Kind="FeatureSearchOutline" Height="32" Width="24" Foreground="#FFF" Margin="204,516,0,0" />
 
-        <Button Name="btnReceta" Background="#406fb3" Content="Receta" HorizontalAlignment="Left" Margin="337,405,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="-0.242,0.544" Click="btnReceta_Click"/>
-        <materialDesign:PackIcon Kind="BriefcaseAccount" Height="32" Width="24" Foreground="#FFF" Margin="337,405,0,0" />
-
-
+        <Button Name="btnReceta" Background="#406fb3" Content="Receta" HorizontalAlignment="Left" Margin="437,424,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="-0.242,0.544" Click="btnReceta_Click"/>
+        <materialDesign:PackIcon Kind="BriefcaseAccount" Height="32" Width="24" Foreground="#FFF" Margin="437,424,0,0" />
 
 
-        <Label Content="       Codigo Citas" Foreground="White" HorizontalAlignment="Left" Margin="262,497,0,0" VerticalAlignment="Top" Background="Green" Height="30" Width="141" FontSize="14" FontWeight="Bold"/>
-        <ComboBox Name="cmbCodigoCitas" HorizontalAlignment="Left" Margin="262,467,0,0" VerticalAlignment="Top" Width="141"/>
+
+
+        <Label Content="       Codigo Citas" Foreground="White" HorizontalAlignment="Left" Margin="362,516,0,0" VerticalAlignment="Top" Background="Green" Height="30" Width="141" FontSize="14" FontWeight="Bold"/>
+        <ComboBox Name="cmbCodigoCitas" HorizontalAlignment="Left" Margin="362,486,0,0" VerticalAlignment="Top" Width="141"/>
 
 
     </Grid>

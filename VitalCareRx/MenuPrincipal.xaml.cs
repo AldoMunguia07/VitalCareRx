@@ -21,11 +21,13 @@ namespace VitalCareRx
     {
 
         private int codigoEmpleado;
+        private string nombreEmpleado;
         public MenuPrincipal(string usuario, int codigo)
         {
             InitializeComponent();
 
             codigoEmpleado = codigo;
+            nombreEmpleado = usuario;
             lbUsuario.Content = usuario; 
             
         }
@@ -50,8 +52,18 @@ namespace VitalCareRx
 
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
             int index = ListViewMenu.SelectedIndex;
-            MoveCursorMenu(index);
+            if (index == 6)
+            {
+                ListViewMenu.SelectedIndex = 0;
+                index = ListViewMenu.SelectedIndex;
+                
+            }
+            else
+            {   
+                MoveCursorMenu(index);
+            }
 
 
         }
@@ -70,8 +82,9 @@ namespace VitalCareRx
 
         private void ltConsultas_Selected(object sender, RoutedEventArgs e)
         {
-            Consultas consultas = new Consultas(codigoEmpleado);
+            Consultas consultas = new Consultas(codigoEmpleado, nombreEmpleado);
             consultas.Show();
+            this.Close();
         }
 
         private void ltFarmacos_Selected(object sender, RoutedEventArgs e)
@@ -94,11 +107,7 @@ namespace VitalCareRx
                 Login login = new Login();
                 login.Show();
                 this.Close();
-            } else if(result == MessageBoxResult.No)
-            {
-                
-                
-            }
+            } 
            
 
          

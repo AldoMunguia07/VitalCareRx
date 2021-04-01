@@ -32,17 +32,17 @@ namespace VitalCareRx
         SqlConnection sqlConnection;
         private Consulta consulta = new Consulta();
         private int codigoEmpleado;
-        
+        private string nombreEmpleado;
 
 
-        public Consultas(int codigo)
+        public Consultas(int codigo, string empleado)
         {
             InitializeComponent();
 
             //Variables miembro
 
             codigoEmpleado = codigo;
-
+            nombreEmpleado = empleado;
             string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
 
             sqlConnection = new SqlConnection(connectionString);
@@ -210,17 +210,22 @@ namespace VitalCareRx
             DataGrid dataGrid = (DataGrid)sender;
             DataRowView rowSelected = dataGrid.SelectedItem as DataRowView;
 
-            TextRange MotivoConsulta = new TextRange(rtxtMotivoConsulta.Document.ContentStart, rtxtMotivoConsulta.Document.ContentEnd);
-            TextRange DiagnosticoConsulta = new TextRange(rtxtDiagnostico.Document.ContentStart, rtxtDiagnostico.Document.ContentEnd);
+            if (rowSelected != null)
+            {
+                TextRange MotivoConsulta = new TextRange(rtxtMotivoConsulta.Document.ContentStart, rtxtMotivoConsulta.Document.ContentEnd);
+                TextRange DiagnosticoConsulta = new TextRange(rtxtDiagnostico.Document.ContentStart, rtxtDiagnostico.Document.ContentEnd);
 
-            MotivoConsulta.Text = rowSelected.Row["Motivo"].ToString();
-            DiagnosticoConsulta.Text = rowSelected.Row["Diagnostico"].ToString();
+                MotivoConsulta.Text = rowSelected.Row["Motivo"].ToString();
+                DiagnosticoConsulta.Text = rowSelected.Row["Diagnostico"].ToString();
 
-            txtTemperatura.Text = rowSelected.Row["Temperatura"].ToString();
-            txtPresionArterial.Text = rowSelected.Row["Presion arterial"].ToString();
-            cmbCodigoCitas.SelectedValue = rowSelected.Row["Codigo de cita"].ToString();
+                txtTemperatura.Text = rowSelected.Row["Temperatura"].ToString();
+                txtPresionArterial.Text = rowSelected.Row["Presion arterial"].ToString();
+                cmbCodigoCitas.SelectedValue = rowSelected.Row["Codigo de cita"].ToString();
 
-            consulta.IdConsulta = Convert.ToInt32(rowSelected.Row["Codigo de consulta"]);
+                consulta.IdConsulta = Convert.ToInt32(rowSelected.Row["Codigo de consulta"]);
+            }
+
+            
 
         }
 
@@ -294,12 +299,17 @@ namespace VitalCareRx
         private void btnReceta_Click(object sender, RoutedEventArgs e)
         {
             
-            Recetas recetas = new Recetas(int idConsulta);
-            recetas.show();
-            this.Close();
+           // Recetas recetas = new Recetas(int idConsulta);
+          //  recetas.show();
+          //  this.Close();
             
         }
 
-        
+        private void ButtonFechar_Click(object sender, RoutedEventArgs e)
+        {
+            MenuPrincipal menu = new MenuPrincipal(nombreEmpleado, codigoEmpleado);
+            menu.Show();
+            this.Close();
+        }
     }
 }

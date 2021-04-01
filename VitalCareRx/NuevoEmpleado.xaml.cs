@@ -49,7 +49,7 @@ namespace VitalCareRx
                     ObtenerValores();
                     empleado.CrearNuevoEmpleado(empleado);
                     LimpiarFormulario();
-                    Loading loading = new Loading(String.Format("{0} {1}", empleado.PrimerNombre, empleado.SegundoNombre), empleado.IdEmpleado);
+                    Loading loading = new Loading(String.Format("{0} {1}", empleado.PrimerNombre, empleado.PrimerApellido), empleado.IdEmpleado);
                     loading.Show();
                     this.Close();
                 }
