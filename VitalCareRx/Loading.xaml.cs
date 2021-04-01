@@ -26,12 +26,17 @@ namespace VitalCareRx
         private Timer timer;
         private int a = 0;
         private string str;
+        private string usuarioActual;
+
         public Loading(string empleado)
         {
             InitializeComponent();
+            usuarioActual = empleado;
             timer = new Timer(100);
             timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
             timer.Start();
+
+
         }
 
         /// <summary>
@@ -51,13 +56,13 @@ namespace VitalCareRx
                     lbLoad.Content = str;
                     //lbPorciento.Visibility = Visibility;
                     BAR.Value += 0.3;
-
+                    
                 }
                 else
                 {
 
                     timer.Stop();
-                    MenuPrincipal menupincipal = new MenuPrincipal();
+                    MenuPrincipal menupincipal = new MenuPrincipal(usuarioActual);
                     menupincipal.Show();
                     this.Close();
                 }

@@ -1,0 +1,93 @@
+﻿<Window x:Class="VitalCareRx.MenuPrincipal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VitalCareRx"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
+    <Grid Background="#FFEEEEEE" MouseDown="Grid_MouseDown">
+        <StackPanel VerticalAlignment="Top">
+            <Grid Background="#FF222222" Height="10"/>
+            <Grid Margin="5">
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 0">
+
+
+                    <Button  x:Name="ButtonFechar" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Red" Click="ButtonFechar_Click">
+                        <materialDesign:PackIcon Kind="CloseCircleOutline" Height="30" Width="30" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+
+        <Grid Margin="250,10,0,0">
+
+            <Grid x:Name="GridPrincipal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Margin="183,295,334.2,295"/>
+            <Image Source="IMAGENES/PrimeroDios.png" Height="155" VerticalAlignment="Top" Margin="10,158,10,0" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="4"/>
+            <TextBlock Foreground="#74EEAB" HorizontalAlignment="Left" Height="71" Margin="212,318,0,0" TextWrapping="Wrap" Text="¡BIENVENIDO!" VerticalAlignment="Top" Width="364" TextAlignment="Center" FontSize="48" FontWeight="Bold"/>
+        </Grid>
+
+        <Grid Width="250" HorizontalAlignment="Left" >
+            <Grid.Background>
+                <LinearGradientBrush>
+
+                    <GradientStop Color="#74EEAB" Offset="1"/>
+                    <GradientStop Color="#FF222222" Offset="0.3"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <materialDesign:PackIcon Kind="Account" Height="95" Width="86" Margin="0,0,0,505" VerticalAlignment="Bottom" Foreground="White" />
+
+            <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}">
+                <Grid x:Name="GridCursor" Margin="0 100 0 0" Background="#FF0069C0" Width="10" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top"/>
+            </materialDesign:TransitioningContent>
+            <ListView x:Name="ListViewMenu" Margin="0,100,-14,70" Foreground="LightGray" FontFamily="Champagne &amp; Limousines" FontSize="18" SelectionChanged="ListViewMenu_SelectionChanged" SelectedIndex="0">
+               
+                
+                <ListViewItem Name="ltPacientes" Height="60" Selected="ltPacientes_Selected" >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="ClipboardAccountOutline"  Height="30" Width="30" />
+                        <TextBlock Text="Pacientes" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Name="ltConsultas" Height="60" Selected="ltConsultas_Selected">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="ClipboardTextSearch" Height="30" Width="30"  />
+                        <TextBlock Text="Consultas" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Name="ltFarmacos" Height="60" Selected="ltFarmacos_Selected" Width="258">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="BottleTonicPlus" Height="30" Width="30" />
+                        <TextBlock Text="Farmacos" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Name="ltUsuario" Height="60" Selected="ltUsuario_Selected">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="AccountCircleOutline" Height="30" Width="30" />
+                        <TextBlock Text="Mi Usuario" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Name="ltInformacion" Height="60">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="InformationOutline" Height="30" Width="30" />
+                        <TextBlock Text="Información" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Name="ltSalida" Height="60" Selected="ltSalida_Selected">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="ExitRun" Height="30" Width="30" />
+                        <TextBlock Text="Salir" FontSize="17" VerticalAlignment="Center" Margin="20 0" Width="34"/>
+                    </StackPanel>
+                </ListViewItem>
+               
+            </ListView>
+            <Label Name="lbUsuario"  Foreground="White" Content="NAME" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="86,38,0,0" FontSize="18" Width="164" Height="36"/>
+        </Grid>
+
+    </Grid>
+</Window>
