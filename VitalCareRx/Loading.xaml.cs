@@ -55,7 +55,10 @@ namespace VitalCareRx
                 }
                 else
                 {
+
                     timer.Stop();
+                    MenuPrincipal menupincipal = new MenuPrincipal();
+                    menupincipal.Show();
                     this.Close();
                 }
             }));
