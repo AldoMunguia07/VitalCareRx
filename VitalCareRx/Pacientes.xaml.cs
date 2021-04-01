@@ -1,0 +1,300 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+// Agregar los namespaces requeridos
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Data;
+
+namespace VitalCareRx
+{
+    /// <summary>
+    /// Lógica de interacción para Pacientes.xaml
+    /// </summary>
+    public partial class Pacientes : Window
+    {
+        private string nombreEmpleado;
+        private int codigoEmpleado;
+        private int estado = 0;
+        bool cargado = false;
+        SqlConnection sqlConnection;
+
+
+        public Pacientes(int codigo, string empleado)
+        {
+            InitializeComponent();
+
+            string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
+            sqlConnection = new SqlConnection(connectionString);
+
+            btnEstado.Background = new SolidColorBrush(Color.FromArgb(140, 255, 0, 0));
+            nombreEmpleado = empleado;
+            codigoEmpleado = codigo;
+
+            MostrarPacientes();
+            CargarComboBoxSexo();
+            CargarComboBoxEstado();
+            CargarComboBoxTipoSangre();
+        }
+
+
+
+        /// <summary>
+        /// Trae todos los clientes de la base de datos al iniciar el programa.
+        /// </summary>
+        public void MostrarPacientes()
+        {
+            string query = @"SELECT P.numeroIdentidad Identidad,primerNombre,segundoNombre,PrimerApellido,segundoApellido, P.idTipoSangre, P.idSexo,
+                            CONCAT(P.primerNombre, ' ', P.segundoNombre, ' ', P.primerApellido, ' ', P.segundoApellido) Paciente,
+                            P.direccion Direccion, P.celular Celular, P.fechaNacimiento 'Fecha de nacimiento', P.peso Peso, P.estatura Estatura, P.estado Estado,
+                            T.descripcionTipoSangre 'Tipo de sangre', S.descripcionSexo Sexo
+                            FROM [Personas].[Paciente] P INNER JOIN [Personas].[TipoSangre] T
+                            ON P.idTipoSangre = T.idTipoSangre
+                            INNER JOIN [Personas].[Sexo] S
+                            ON P.idSexo = S.idSexo
+                            WHERE P.estado = @estado
+                            ";
+            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+            sqlCommand.Parameters.AddWithValue("@estado", cmbEstado.SelectedValue);
+
+            try
+            {
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    gridPacientes.ItemsSource = dataTable.DefaultView;
+
+                    gridPacientes.IsReadOnly = true;
+
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void btnSalir_Click(object sender, RoutedEventArgs e)
+        {
+            MenuPrincipal menu = new MenuPrincipal(nombreEmpleado, codigoEmpleado);
+            menu.Show();
+            this.Close();
+        }
+
+        /// <summary>
+        /// Carga el ComboBox de estado
+        /// </summary>
+        private void CargarComboBoxEstado()
+        {
+            string query = @"SELECT '1' id, 'Activos' estado
+                            UNION
+                            SELECT '0', 'Inactivos'";
+
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
+
+            using (sqlDataAdapter)
+            {
+                DataTable dataTable = new DataTable();
+                sqlDataAdapter.Fill(dataTable);
+                cmbEstado.DisplayMemberPath = "estado";
+                cmbEstado.SelectedValuePath = "id";
+                cmbEstado.ItemsSource = dataTable.DefaultView;
+                
+            }
+        }
+
+        /// <summary>
+        /// Obtener los datos de la tabla Sexo.
+        /// </summary>
+        public void CargarComboBoxSexo()
+        {
+
+            // Query de selección
+            string query = @"SELECT * FROM [Personas].[Sexo]";
+
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
+
+            using (sqlDataAdapter)
+            {
+                DataTable dataTable = new DataTable();
+                sqlDataAdapter.Fill(dataTable);
+                cmbSexo.DisplayMemberPath = "descripcionSexo";
+                cmbSexo.SelectedValuePath = "idSexo";
+                cmbSexo.ItemsSource = dataTable.DefaultView;
+            }
+
+
+
+        }
+
+        /// <summary>
+        /// Obtener los datos de la tabla TipoSangre.
+        /// </summary>
+        public void CargarComboBoxTipoSangre()
+        {
+
+            // Query de selección
+            string query = @"SELECT * FROM [Personas].[TipoSangre]";
+
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
+
+            using (sqlDataAdapter)
+            {
+                DataTable dataTable = new DataTable();
+                sqlDataAdapter.Fill(dataTable);
+                cmbTipoSangre.DisplayMemberPath = "descripcionTipoSangre";
+                cmbTipoSangre.SelectedValuePath = "idTipoSangre";
+                cmbTipoSangre.ItemsSource = dataTable.DefaultView;
+            }
+
+
+
+        }
+
+        /// <summary>
+        /// Ocultar columnas del DataGridView
+        /// </summary>
+        private void OcultarColumnas()
+        {
+            gridPacientes.Columns[1].Visibility = Visibility.Hidden;
+            gridPacientes.Columns[2].Visibility = Visibility.Hidden;
+            gridPacientes.Columns[3].Visibility = Visibility.Hidden;
+            gridPacientes.Columns[4].Visibility = Visibility.Hidden;
+            gridPacientes.Columns[5].Visibility = Visibility.Hidden;
+            gridPacientes.Columns[6].Visibility = Visibility.Hidden;
+            
+        }
+
+        private void gridPacientes_Loaded(object sender, RoutedEventArgs e)
+        {
+            OcultarColumnas();
+            cargado = true;
+        }
+
+       
+
+        private void cmbEstado_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MostrarPacientes();
+            if (cargado)
+            {
+                OcultarColumnas();
+            }
+           
+        }
+
+        private void gridPacientes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DataGrid dataGrid = (DataGrid)sender;
+            DataRowView rowSelected = dataGrid.SelectedItem as DataRowView;
+            TextRange direccion = new TextRange(richTxtDireccion.Document.ContentStart, richTxtDireccion.Document.ContentEnd);
+            
+           if (rowSelected != null)
+            {
+                
+                txtDni.IsEnabled = false;
+                txtDni.Text = rowSelected.Row["Identidad"].ToString();
+                 txtPrimerNombre.Text = rowSelected.Row["primerNombre"].ToString();
+                 txtSegundoNombre.Text = rowSelected.Row["segundoNombre"].ToString();
+                 txtPrimerApellido.Text = rowSelected.Row["primerApellido"].ToString();
+                 txtSegundoApellido.Text = rowSelected.Row["segundoApellido"].ToString();
+                 direccion.Text = rowSelected.Row["Direccion"].ToString();
+                 txtCelular.Text = rowSelected.Row["Celular"].ToString();
+                 dtFechaNacimiento.SelectedDate = Convert.ToDateTime(rowSelected.Row["Fecha de nacimiento"]);
+                 txtPeso.Text = rowSelected.Row["Peso"].ToString();
+                 txtEstatura.Text = rowSelected.Row["Estatura"].ToString();
+
+                 if (rowSelected.Row["Estado"].ToString() == "True")
+                 {
+                     
+                     estado = 1;
+                 }
+                 else if (rowSelected.Row["Estado"].ToString() == "False")
+                 {
+                     
+                     estado = 0;
+                 }
+
+                CargarColorBoton();
+                cmbTipoSangre.SelectedValue = rowSelected.Row["idTipoSangre"].ToString();
+                cmbSexo.SelectedValue = rowSelected.Row["idSexo"].ToString();
+
+            }
+        }
+
+        private void LimpiarFormulario()
+        {
+            txtDni.Clear();
+            txtPrimerNombre.Clear();
+            txtSegundoNombre.Clear();
+            txtPrimerApellido.Clear();
+            txtSegundoApellido.Clear();
+            richTxtDireccion.Document.Blocks.Clear();
+            txtCelular.Clear();
+            dtFechaNacimiento.Text = String.Empty;
+            txtPeso.Clear();
+            txtEstatura.Clear();
+            estado = 0;
+            CargarColorBoton();
+            cmbTipoSangre.SelectedValue = null;
+            cmbSexo.SelectedValue = null;
+
+            txtDni.IsEnabled = true;
+
+
+        }
+
+        private void CargarColorBoton()
+        {
+            if (estado == 1)
+            {
+                btnEstado.Background = new SolidColorBrush(Color.FromArgb(165, 42, 165, 42));
+            }
+            else
+            {
+                btnEstado.Background = new SolidColorBrush(Color.FromArgb(140, 255, 0, 0));
+            }
+        }
+
+        private void btnEstado_Click(object sender, RoutedEventArgs e)
+        {
+            
+            if (estado == 0)
+            {
+                btnEstado.Background = new SolidColorBrush(Color.FromArgb(165, 42, 165, 42));
+                estado = 1;
+            }
+            else
+            {
+                
+                btnEstado.Background = new SolidColorBrush(Color.FromArgb(140, 255, 0, 0));
+                estado = 0;
+            }
+
+        }
+
+        private void btnModificarr_Click(object sender, RoutedEventArgs e)
+        {
+            LimpiarFormulario();
+        }
+    }
+}

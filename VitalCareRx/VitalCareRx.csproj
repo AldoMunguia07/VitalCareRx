@@ -132,6 +132,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pacientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MenuPrincipal.xaml.cs">
@@ -139,6 +143,9 @@
     </Compile>
     <Compile Include="NuevoEmpleado.xaml.cs">
       <DependentUpon>NuevoEmpleado.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pacientes.xaml.cs">
+      <DependentUpon>Pacientes.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

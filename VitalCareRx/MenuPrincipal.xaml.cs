@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
+
+
 namespace VitalCareRx
 {
     /// <summary>
@@ -76,8 +79,9 @@ namespace VitalCareRx
 
         private void ltPacientes_Selected(object sender, RoutedEventArgs e)
         {
-          //  Pacientes pacientes = new Pacientes();
-            //pacientes.Show();
+            Pacientes pacientes = new Pacientes(codigoEmpleado, nombreEmpleado);
+            pacientes.Show();
+            this.Close();
         }
 
         private void ltConsultas_Selected(object sender, RoutedEventArgs e)
