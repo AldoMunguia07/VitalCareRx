@@ -20,10 +20,12 @@ namespace VitalCareRx
     public partial class MenuPrincipal : Window
     {
 
-
-        public MenuPrincipal(string usuario)
+        private int codigoEmpleado;
+        public MenuPrincipal(string usuario, int codigo)
         {
             InitializeComponent();
+
+            codigoEmpleado = codigo;
             lbUsuario.Content = usuario; 
             
         }
@@ -68,7 +70,7 @@ namespace VitalCareRx
 
         private void ltConsultas_Selected(object sender, RoutedEventArgs e)
         {
-            Consultas consultas = new Consultas();
+            Consultas consultas = new Consultas(codigoEmpleado);
             consultas.Show();
         }
 

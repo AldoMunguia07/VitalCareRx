@@ -45,7 +45,7 @@ namespace VitalCareRx
                         // Mostrar el formulario de carga
 
 
-                        Loading loading = new Loading(String.Format("{0} {1}", unEmpleado.PrimerNombre, unEmpleado.SegundoNombre));
+                        Loading loading = new Loading(String.Format("{0} {1}", unEmpleado.PrimerNombre, unEmpleado.SegundoNombre), unEmpleado.IdEmpleado);
                         loading.Show();
                         this.Close();
 
