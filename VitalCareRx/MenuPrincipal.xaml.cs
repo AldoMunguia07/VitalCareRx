@@ -32,7 +32,7 @@ namespace VitalCareRx
         private void ButtonFechar_Click(object sender, RoutedEventArgs e)
         {
 
-            MessageBoxResult result = MessageBox.Show("¿Deseas eliminar la habitación?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult result = MessageBox.Show("¿Desea cerrar sesión?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
                 Login login = new Login();
@@ -86,7 +86,7 @@ namespace VitalCareRx
 
         private void ltSalida_Selected(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("¿Deseas eliminar la habitación?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult result = MessageBox.Show("¿Desea cerrar sesión?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
                 Login login = new Login();
