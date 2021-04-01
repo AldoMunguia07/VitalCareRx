@@ -38,14 +38,14 @@ namespace VitalCareRx
                     MessageBox.Show("El usuario o la contraseña no es correcta. Favor verificar.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 else
                 {
-                    // Verificar que la contraseña ingresada es igual a la contraseña
+                    //Verificar que la contraseña ingresada es igual a la contraseña
                     // almacenada en la base de datos
                     if (unEmpleado.Contrasenia == pwbPassword.Password)
                     {
                         // Mostrar el formulario de carga
 
-                        
-                        Loading loading = new Loading(txtUsuario);
+
+                        Loading loading = new Loading(String.Format("{0} {1}", unEmpleado.PrimerNombre, unEmpleado.SegundoNombre));
                         loading.Show();
                         this.Close();
 
@@ -74,7 +74,7 @@ namespace VitalCareRx
         private void btnNuevaCuenta_Click(object sender, RoutedEventArgs e)
         {
             NuevoEmpleado nuevoEmpleado = new NuevoEmpleado();
-            nuevoEmpleado.show();
+            nuevoEmpleado.Show();
             this.Close();
         }
     }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 // Agregar los namespaces de conexión con SQL Server
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Data;
 
 namespace VitalCareRx
 {
@@ -53,6 +54,11 @@ namespace VitalCareRx
 
         }
 
+        /// <summary>
+        /// Buscar un empleado en la base de datos 
+        /// </summary>
+        /// <param name="nombreUsuario">Es el nombre de usuario</param>
+        /// <returns>Datos de usuario </returns>
         public Empleado BuscarEmpleado(string nombreUsuario)
         {
             Empleado empleado = new Empleado();
@@ -105,6 +111,51 @@ namespace VitalCareRx
                 sqlConnection.Close();
             }
         }
+        
+        /// <summary>
+        /// Método para crear un nuevo empleado 
+        /// </summary>
+        public void CrearNuevoEmpleado(Empleado empleado)
+        {
+           
+            try
+            {
+                // Query de selección
+                string query = @"INSERT INTO [Personas].[Empleado] VALUES 
+                                (@primerNombre,@segundoNombre,@primerApellido,
+                                @segundoApellido,@celular,@idSexo,@usuario,@pass)";
+                // Establecer la conexión
+                sqlConnection.Open();
+
+                // Crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                // Establecer los valores de los parámetros
+                sqlCommand.Parameters.AddWithValue("@primerNombre", empleado.PrimerNombre);
+                sqlCommand.Parameters.AddWithValue("@segundoNombre", empleado.SegundoNombre);
+                sqlCommand.Parameters.AddWithValue("@primerApellido", empleado.PrimerApellido);
+                sqlCommand.Parameters.AddWithValue("@segundoApellido", empleado.SegundoApellido);
+                sqlCommand.Parameters.AddWithValue("@celular", empleado.Celular);
+                sqlCommand.Parameters.AddWithValue("@idSexo", empleado.IdSexo);
+                sqlCommand.Parameters.AddWithValue("@usuario", empleado.NombreUsuario);
+                sqlCommand.Parameters.AddWithValue("@pass", empleado.Contrasenia);
+
+                sqlCommand.ExecuteNonQuery();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                // Cerrar la conexión
+                sqlConnection.Close();
+            }
+
+        }
+
 
     }
 }
