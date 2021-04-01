@@ -1,4 +1,7 @@
-﻿
+﻿using System;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 // Agregar los namespaces requeridos
 using System.Configuration;
@@ -41,22 +44,57 @@ namespace VitalCareRx
             try
             {
 
-                string query = @"INSERT INTO [Consultas].[Consulta] VALUES (@motivoConsulta,@diagnosticoConsulta,@temperatura,@presionArterial,@idEmpleado,@idCita";
+                string query = @"INSERT INTO [Consultas].[Consulta] VALUES (@motivoConsulta,@diagnosticoConsulta,@temperatura,@presionArterial,@idEmpleado,@idCita)";
 
                 sqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand();
+                SqlCommand sqlCommand = new SqlCommand(query,sqlConnection);
 
-                sqlCommand.Parameters.AddWithValue("motivoConsulta", consulta.MotivoConsulta);
-                sqlCommand.Parameters.AddWithValue("diagnosticoConsulta", consulta.DiagnosticoConsulta);
-                sqlCommand.Parameters.AddWithValue("temperatura", consulta.Temperatura);
-                sqlCommand.Parameters.AddWithValue("presionArterial", consulta.PresionArterial);
-                sqlCommand.Parameters.AddWithValue("idEmpleado", consulta.IdEmpleado);
-                sqlCommand.Parameters.AddWithValue("idCita", consulta.IdCita);
+                sqlCommand.Parameters.AddWithValue("@motivoConsulta", consulta.MotivoConsulta);
+                sqlCommand.Parameters.AddWithValue("@diagnosticoConsulta", consulta.DiagnosticoConsulta);
+                sqlCommand.Parameters.AddWithValue("@temperatura", consulta.Temperatura);
+                sqlCommand.Parameters.AddWithValue("@presionArterial", consulta.PresionArterial);
+                sqlCommand.Parameters.AddWithValue("@idEmpleado", consulta.IdEmpleado);
+                sqlCommand.Parameters.AddWithValue("@idCita", consulta.IdCita);
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                sqlConnection.Close();
+
+                
+            }
+        }
+
+        public void ModificarConsulta(Consulta consulta)
+        {
+
+            try
+            {
+
+                string query = @"UPDATE [Consultas].[Consulta]
+                                SET motivoConsulta = @motivoConsulta, diagnosticoConsulta = @diagnosticoConsulta,temperatura = @temperatura, 
+                                presionArterial = @presionArterial, idEmpleado = @idEmpleado, idCita = @idCita
+                                WHERE idConsulta = @idConsulta";
+
+                sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand(query,sqlConnection);
+
+                sqlCommand.Parameters.AddWithValue("@motivoConsulta", consulta.MotivoConsulta);
+                sqlCommand.Parameters.AddWithValue("@diagnosticoConsulta", consulta.DiagnosticoConsulta);
+                sqlCommand.Parameters.AddWithValue("@temperatura", consulta.Temperatura);
+                sqlCommand.Parameters.AddWithValue("@presionArterial", consulta.PresionArterial);
+                sqlCommand.Parameters.AddWithValue("@idEmpleado", consulta.IdEmpleado);
+                sqlCommand.Parameters.AddWithValue("@idCita", consulta.IdCita);
+                sqlCommand.Parameters.AddWithValue("@idConsulta", consulta.IdConsulta);
 
                 sqlCommand.ExecuteNonQuery();
-
-
             }
             catch (System.Exception)
             {
@@ -66,14 +104,10 @@ namespace VitalCareRx
             finally
             {
                 sqlConnection.Close();
-                
+
             }
-            
-
-
         }
 
-       
 
 
 

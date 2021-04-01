@@ -45,7 +45,7 @@
             <Label Background="#FF222222" Content="Diagnostico de la Consulta" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,191,0,359" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="275" RenderTransformOrigin="0.612,0.375"/>
             <Label Background="#FF222222" Content="   Motivo de la Consulta" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,66,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="275"/>
         </Grid>
-        <DataGrid Name="dgConsultas" HorizontalAlignment="Left" Height="332" Margin="10,52,0,0" VerticalAlignment="Top" Width="463"/>
+        <DataGrid Name="dgConsultas" HorizontalAlignment="Left" Height="332" Margin="10,52,0,0" VerticalAlignment="Top" Width="463" SelectionChanged="dgConsultas_SelectionChanged" />
         <Label Content="             Listado de Consultas" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="463">
             <Label.Background>
 
@@ -57,7 +57,7 @@
 
             </Label.Background>
         </Label>
-        <TextBox HorizontalAlignment="Left" Height="25" Margin="85,467,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="128" RenderTransformOrigin="0.455,1.52"/>
+        <TextBox Name="txtBuscar" HorizontalAlignment="Left" Height="25" Margin="85,467,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="128" RenderTransformOrigin="0.455,1.52"/>
         <Button Name="btnAñadir" Content="Añadir" HorizontalAlignment="Left" Margin="31,405,0,0" VerticalAlignment="Top" Width="110" Click="btnAñadir_Click">
             <Button.Background>
                 <LinearGradientBrush>
@@ -67,8 +67,8 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Content="Modificar" HorizontalAlignment="Left" Margin="180,405,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="-0.242,0.544"/>
-        <Button Content="Buscar" HorizontalAlignment="Left" Margin="94,497,0,0" VerticalAlignment="Top" Width="109">
+        <Button Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="180,405,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="-0.242,0.544" Click="btnModificar_Click"/>
+        <Button Name= "btnBuscar"  Content="Buscar" HorizontalAlignment="Left" Margin="94,497,0,0" VerticalAlignment="Top" Width="109" Click="btnBuscar_Click">
             <Button.Background>
                 <LinearGradientBrush>
 
@@ -81,7 +81,7 @@
         <materialDesign:PackIcon Kind="BookEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="180,405,0,0" />
         <materialDesign:PackIcon Kind="FeatureSearchOutline" Height="32" Width="24" Foreground="#FFF" Margin="104,497,0,0" />
 
-        <Button Background="#406fb3" Content="Receta" HorizontalAlignment="Left" Margin="337,405,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="-0.242,0.544"/>
+        <Button Name="btnReceta" Background="#406fb3" Content="Receta" HorizontalAlignment="Left" Margin="337,405,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="-0.242,0.544" Click="btnReceta_Click"/>
         <materialDesign:PackIcon Kind="BriefcaseAccount" Height="32" Width="24" Foreground="#FFF" Margin="337,405,0,0" />
 
 
