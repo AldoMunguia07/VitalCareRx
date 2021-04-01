@@ -1,0 +1,43 @@
+﻿<Window x:Class="VitalCareRx.Loading"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VitalCareRx"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+       Title="MainWindow" Height="500" Width="370" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush>
+
+                <GradientStop Color="#FFFF" Offset="0.4"/>
+                <GradientStop Color="#74EEAB" Offset="0.4"/>
+
+
+
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Image Source="IMAGENES/PrimeroDios.png" Height="95" VerticalAlignment="Top" Margin="-40,7,144,0" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.37"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+
+        <ProgressBar
+        Style="{StaticResource MaterialDesignCircularProgressBar}"
+        Value="0" 
+        Foreground="White"
+        
+         
+        IsIndeterminate="True" Maximum="30" Name="BAR" Height="Auto" Margin="110,186,98,121" Width="Auto" />
+        <Label FontFamily="Microsoft Sans Serif"  Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="153,242,0,0" Height="52" Width="92" FontSize="30" Name="lbLoad" />
+        <Label FontWeight="Black"  FontFamily="Microsoft Sans Serif" Content="Loading..."  Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="108,424,0,0" Height="48" Width="150" FontSize="30" />
+
+    </Grid>
+</Window>
