@@ -389,7 +389,7 @@ namespace VitalCareRx
             TextRange direccion = new TextRange(richTxtDireccion.Document.ContentStart, richTxtDireccion.Document.ContentEnd);
 
             if (txtDni.Text != String.Empty && txtPrimerNombre.Text != String.Empty && txtSegundoNombre.Text != String.Empty && txtPrimerApellido.Text !=
-                String.Empty && txtSegundoApellido.Text != String.Empty && direccion.Text != String.Empty && txtCelular.Text != String.Empty && dtFechaNacimiento.SelectedDate != null
+                String.Empty && txtSegundoApellido.Text != String.Empty && direccion.Text != "\r\n" && txtCelular.Text != String.Empty && dtFechaNacimiento.SelectedDate != null
                 && txtPeso.Text != String.Empty && txtEstatura.Text != String.Empty && cmbSexo.SelectedValue != null && cmbTipoSangre.SelectedValue != null )
             {
                 return true;
@@ -477,14 +477,14 @@ namespace VitalCareRx
 
         private void btnCitas_Click(object sender, RoutedEventArgs e)
         {
-            CitasPaciente citasPaciente = new CitasPaciente();
-            citasPaciente.Show();
+           // CitasPaciente citasPaciente = new CitasPaciente();
+           // citasPaciente.Show();
         }
 
         private void btnConsultas_Click(object sender, RoutedEventArgs e)
         {
-            ConsultasPaciente consultasPaciente = new ConsultasPaciente();
-            consultasPaciente.Show();
+          //  ConsultasPaciente consultasPaciente = new ConsultasPaciente();
+          //  consultasPaciente.Show();
             
         }
     }
