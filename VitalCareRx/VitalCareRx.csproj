@@ -144,6 +144,7 @@
     <Compile Include="NuevoEmpleado.xaml.cs">
       <DependentUpon>NuevoEmpleado.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Paciente.cs" />
     <Compile Include="Pacientes.xaml.cs">
       <DependentUpon>Pacientes.xaml</DependentUpon>
     </Compile>

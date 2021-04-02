@@ -33,7 +33,7 @@
                 </Label.RenderTransform>
             </Label>
             <Button Name="btnModificarr"  Content="Modificar" HorizontalAlignment="Left" Margin="671,262,0,0" VerticalAlignment="Top" Width="113" Click="btnModificarr_Click"/>
-            <Button Name="btnEliminar"  Content="Eliminar" HorizontalAlignment="Left" Margin="850,262,0,0" VerticalAlignment="Top" Width="102"  Height="33">
+            <Button Name="btnEliminar"  Content="Eliminar" HorizontalAlignment="Left" Margin="850,262,0,0" VerticalAlignment="Top" Width="102"  Height="33" Click="btnEliminar_Click">
                 <Button.Background>
                     <LinearGradientBrush>
 
@@ -43,7 +43,7 @@
                 </Button.Background>
             </Button>
 
-            <Button Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="499,262,0,0" VerticalAlignment="Top" Width="109">
+            <Button Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="499,262,0,0" VerticalAlignment="Top" Width="109" Click="btnAgregar_Click">
                 <Button.Background>
                     <LinearGradientBrush>
 
@@ -55,7 +55,7 @@
             <materialDesign:PackIcon Kind="AccountPlus" Height="32" Width="26" Foreground="#FFF" Margin="499,261,0,0" />
             <materialDesign:PackIcon Kind="SquareEditOutline" Height="32" Width="25" Foreground="#FFF" Margin="671,262,0,0" />
             <materialDesign:PackIcon Kind="Delete" Height="32" Width="24" Foreground="#FFF" Margin="850,262,0,0" RenderTransformOrigin="5.742,0.696" />
-            <Button Content="Buscar" HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top" Width="112" Height="33">
+            <Button Content="Buscar" HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top" Width="112" Height="33" Click="Button_Click">
                 <Button.Background>
                     <LinearGradientBrush>
 
@@ -130,8 +130,8 @@
             <materialDesign:PackIcon Kind="AccountCheckOutline" Height="17" Width="25" Foreground="#FFF" />
         </Button>
 
-        <Button Name="btnCitas" Content="Citas" HorizontalAlignment="Left" VerticalAlignment="Top" Width="109" Margin="242,527,0,0"/>
-        <Button Name="btnConsultas" Content="  Consultas" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114" Margin="29,527,0,0" RenderTransformOrigin="0.4,0.594" Grid.Column="1"/>
+        <Button Name="btnCitas" Content="Citas" HorizontalAlignment="Left" VerticalAlignment="Top" Width="109" Margin="242,527,0,0" Click="btnCitas_Click"/>
+        <Button Name="btnConsultas" Content="  Consultas" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114" Margin="29,527,0,0" RenderTransformOrigin="0.4,0.594" Grid.Column="1" Click="btnConsultas_Click"/>
         <materialDesign:PackIcon Kind="BookAccountOutline" Height="27" Width="48" Foreground="#FFF" Margin="24,527,0,0" Grid.Column="1" />
         <materialDesign:PackIcon Kind="BookClockOutline" Height="27" Width="48" Foreground="#FFF" Margin="242,527,0,0" />
         <ComboBox Name ="cmbEstado"  HorizontalAlignment="Left" Margin="10,546,0,0" VerticalAlignment="Top" Width="168" Background="White" SelectionChanged="cmbEstado_SelectionChanged" SelectedValue="1"/>

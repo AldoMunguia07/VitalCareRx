@@ -29,7 +29,8 @@ namespace VitalCareRx
         private int estado = 0;
         bool cargado = false;
         SqlConnection sqlConnection;
-
+        bool selecionado = false;
+        Paciente paciente = new Paciente();
 
         public Pacientes(int codigo, string empleado)
         {
@@ -69,6 +70,52 @@ namespace VitalCareRx
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
 
             sqlCommand.Parameters.AddWithValue("@estado", cmbEstado.SelectedValue);
+
+            try
+            {
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    gridPacientes.ItemsSource = dataTable.DefaultView;
+
+                    gridPacientes.IsReadOnly = true;
+
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Metodo para buscar un paciente
+        /// </summary>
+        public void MostrarUnPaciente()
+        {
+            string query = @"SELECT P.numeroIdentidad Identidad,primerNombre,segundoNombre,PrimerApellido,segundoApellido, P.idTipoSangre, P.idSexo,
+                            CONCAT(P.primerNombre, ' ', P.segundoNombre, ' ', P.primerApellido, ' ', P.segundoApellido) Paciente,
+                            P.direccion Direccion, P.celular Celular, P.fechaNacimiento 'Fecha de nacimiento', P.peso Peso, P.estatura Estatura, P.estado Estado,
+                            T.descripcionTipoSangre 'Tipo de sangre', S.descripcionSexo Sexo
+                            FROM [Personas].[Paciente] P INNER JOIN [Personas].[TipoSangre] T
+                            ON P.idTipoSangre = T.idTipoSangre
+                            INNER JOIN [Personas].[Sexo] S
+                            ON P.idSexo = S.idSexo
+                            WHERE P.estado = @estado and CONCAT(P.primerNombre, ' ', P.segundoNombre, ' ', P.primerApellido, ' ', P.segundoApellido) LIKE CONCAT('%', @nombrePaciente,'%')
+                           
+                            ";
+            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+            sqlCommand.Parameters.AddWithValue("@estado", cmbEstado.SelectedValue);
+            sqlCommand.Parameters.AddWithValue("@nombrePaciente", txtBuscar.Text);
 
             try
             {
@@ -199,6 +246,14 @@ namespace VitalCareRx
             {
                 OcultarColumnas();
             }
+            if (Convert.ToInt32(cmbEstado.SelectedValue) == 0)
+            {
+                btnEliminar.IsEnabled = false;
+            }
+            else
+            {
+                btnEliminar.IsEnabled = true;
+            }
            
         }
 
@@ -207,12 +262,11 @@ namespace VitalCareRx
             DataGrid dataGrid = (DataGrid)sender;
             DataRowView rowSelected = dataGrid.SelectedItem as DataRowView;
             TextRange direccion = new TextRange(richTxtDireccion.Document.ContentStart, richTxtDireccion.Document.ContentEnd);
-            
+            selecionado = true;
            if (rowSelected != null)
             {
                 
-                txtDni.IsEnabled = false;
-                txtDni.Text = rowSelected.Row["Identidad"].ToString();
+                 txtDni.Text = rowSelected.Row["Identidad"].ToString();
                  txtPrimerNombre.Text = rowSelected.Row["primerNombre"].ToString();
                  txtSegundoNombre.Text = rowSelected.Row["segundoNombre"].ToString();
                  txtPrimerApellido.Text = rowSelected.Row["primerApellido"].ToString();
@@ -233,6 +287,7 @@ namespace VitalCareRx
                      
                      estado = 0;
                  }
+                
 
                 CargarColorBoton();
                 cmbTipoSangre.SelectedValue = rowSelected.Row["idTipoSangre"].ToString();
@@ -241,6 +296,9 @@ namespace VitalCareRx
             }
         }
 
+        /// <summary>
+        /// Limpiar las cajas de texto del formulario.
+        /// </summary>
         private void LimpiarFormulario()
         {
             txtDni.Clear();
@@ -257,12 +315,15 @@ namespace VitalCareRx
             CargarColorBoton();
             cmbTipoSangre.SelectedValue = null;
             cmbSexo.SelectedValue = null;
-
-            txtDni.IsEnabled = true;
+            selecionado = false;
+           
 
 
         }
 
+        /// <summary>
+        /// Cargar el color al boton del estado.
+        /// </summary>
         private void CargarColorBoton()
         {
             if (estado == 1)
@@ -294,7 +355,137 @@ namespace VitalCareRx
 
         private void btnModificarr_Click(object sender, RoutedEventArgs e)
         {
-            LimpiarFormulario();
+            if (Validar())
+            {
+                try
+                {
+                    ObtenerDatos();
+
+                    paciente.ActualizarPaciente(paciente);
+                    MessageBox.Show("El paciente se ha modificado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MostrarPacientes();
+                    LimpiarFormulario();
+                    OcultarColumnas();
+                }
+                catch (Exception E)
+                {
+
+                    MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
+        }
+
+        /// <summary>
+        /// Valdar que ingrese todos los datos.
+        /// </summary>
+        /// <returns></returns>
+        private bool Validar()
+        {
+            TextRange direccion = new TextRange(richTxtDireccion.Document.ContentStart, richTxtDireccion.Document.ContentEnd);
+
+            if (txtDni.Text != String.Empty && txtPrimerNombre.Text != String.Empty && txtSegundoNombre.Text != String.Empty && txtPrimerApellido.Text !=
+                String.Empty && txtSegundoApellido.Text != String.Empty && direccion.Text != String.Empty && txtCelular.Text != String.Empty && dtFechaNacimiento.SelectedDate != null
+                && txtPeso.Text != String.Empty && txtEstatura.Text != String.Empty && cmbSexo.SelectedValue != null && cmbTipoSangre.SelectedValue != null )
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Metodo que se encarga de la obtencion de valores
+        /// </summary>
+        private void ObtenerDatos()
+        {
+            TextRange direccion = new TextRange(richTxtDireccion.Document.ContentStart, richTxtDireccion.Document.ContentEnd);
+            bool status;
+            paciente.NumeroIdentidad = txtDni.Text;
+            paciente.PrimerNombre = txtPrimerNombre.Text;
+            paciente.SegundoNombre = txtSegundoNombre.Text;
+            paciente.PrimerApellido = txtPrimerApellido.Text;
+            paciente.SegundoApellido = txtSegundoApellido.Text;
+            paciente.Direccion = direccion.Text;
+            paciente.Celular = txtCelular.Text;
+            paciente.FechaNacimiento = dtFechaNacimiento.SelectedDate.Value;
+            paciente.Peso = float.Parse(Math.Round(float.Parse(txtPeso.Text), 2).ToString());
+            paciente.Estatura = float.Parse(Math.Round(float.Parse(txtEstatura.Text), 2).ToString());
+            if (estado == 1)
+            {
+                status = true;
+            }
+            else
+            {
+                status = false;
+            }
+            paciente.Estado = status;
+            paciente.IdTipoSangre = Convert.ToInt32(cmbTipoSangre.SelectedValue);
+            paciente.IdSexo = Convert.ToInt32(cmbSexo.SelectedValue);
+            
+        }
+
+        private void btnAgregar_Click(object sender, RoutedEventArgs e)
+        {
+            if (Validar())
+            {
+                try
+                {
+                    ObtenerDatos();
+
+                    paciente.CrearPaciente(paciente);
+                    MessageBox.Show("El paciente se ha insertado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MostrarPacientes();
+                    LimpiarFormulario();
+                    OcultarColumnas();
+                }
+                catch (Exception E)
+                {
+
+                    MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
+
+        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            if (selecionado)
+            {
+                ObtenerDatos();
+                paciente.EliminarPaciente(paciente);
+                MostrarPacientes();
+                LimpiarFormulario();
+                OcultarColumnas();
+                MessageBox.Show("El paciente se ha eliminado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MostrarUnPaciente();
+            OcultarColumnas();
+        }
+
+        private void btnCitas_Click(object sender, RoutedEventArgs e)
+        {
+            CitasPaciente citasPaciente = new CitasPaciente();
+            citasPaciente.Show();
+        }
+
+        private void btnConsultas_Click(object sender, RoutedEventArgs e)
+        {
+            ConsultasPaciente consultasPaciente = new ConsultasPaciente();
+            consultasPaciente.Show();
+            
         }
     }
 }
