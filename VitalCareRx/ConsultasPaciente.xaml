@@ -1,0 +1,61 @@
+﻿<Window x:Class="VitalCareRx.ConsultasPaciente"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VitalCareRx"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="ConsultasPaciente" Height="590" Width="774" WindowStyle="None" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Image Source="IMAGENES/PrimeroDios.png" Height="126" VerticalAlignment="Top" Margin="0,456,573,0" RenderTransformOrigin="0.5,0.5"/>
+
+        <Grid HorizontalAlignment="Left" Height="582" Margin="712,0,0,0" VerticalAlignment="Top" Width="54">
+
+            <Grid.Background>
+
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF222222" Offset="0.01"/>
+                    <GradientStop Color="#74EEAB" Offset="1"/>
+
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Button Name="btnCerrar" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Red" Click="btnCerrar_Click" Margin="2,1,3,544" RenderTransformOrigin="0.5,0.5">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+                <materialDesign:PackIcon Kind="CloseCircleOutline" Height="35" Width="44" RenderTransformOrigin="0.352,0.42" />
+            </Button>
+        </Grid>
+        <Button Name="btnRecetas" Content="Receta" HorizontalAlignment="Left" Margin="284,436,0,0" VerticalAlignment="Top" Width="179" Height="54" Click="btnRecetas_Click">
+            <Button.Background>
+                <LinearGradientBrush>
+
+                    <GradientStop Color="#FF48C7A0" Offset="0.1"/>
+                    <GradientStop Color="#74EEAB" Offset="2"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <materialDesign:PackIcon Kind="BookmarkPlus" Height="53" Width="37" Foreground="#FFF" Margin="295,436,0,0" />
+        <DataGrid Name="gridConsultas" HorizontalAlignment="Left" Height="307" Margin="10,104,0,0" VerticalAlignment="Top" Width="697" SelectionChanged="gridConsultas_SelectionChanged"/>
+
+
+        <Label Content="Listado de Consultas" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,62,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="712" HorizontalContentAlignment="Center">
+            <Label.Background>
+
+                <LinearGradientBrush>
+
+                    <GradientStop Color="#FF48C7A0" Offset="0.1"/>
+
+
+                </LinearGradientBrush>
+
+            </Label.Background>
+        </Label>
+    </Grid>
+</Window>

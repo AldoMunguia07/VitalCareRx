@@ -496,8 +496,8 @@ namespace VitalCareRx
 
         private void btnConsultas_Click(object sender, RoutedEventArgs e)
         {
-          //  ConsultasPaciente consultasPaciente = new ConsultasPaciente();
-          //  consultasPaciente.Show();
+            ConsultasPaciente consultasPaciente = new ConsultasPaciente(dni);
+            consultasPaciente.ShowDialog();
             
         }
     }
