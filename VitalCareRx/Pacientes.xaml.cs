@@ -26,10 +26,15 @@ namespace VitalCareRx
     {
         private string nombreEmpleado;
         private int codigoEmpleado;
+
         private int estado = 0;
-        bool cargado = false;
-        SqlConnection sqlConnection;
+        bool cargado = false;        
         bool selecionado = false;
+        private string dni;
+
+
+        SqlConnection sqlConnection;
+
         Paciente paciente = new Paciente();
 
         public Pacientes(int codigo, string empleado)
@@ -265,8 +270,8 @@ namespace VitalCareRx
             selecionado = true;
            if (rowSelected != null)
             {
-                
-                 txtDni.Text = rowSelected.Row["Identidad"].ToString();
+                dni = rowSelected.Row["Identidad"].ToString(); ;
+                txtDni.Text = rowSelected.Row["Identidad"].ToString();
                  txtPrimerNombre.Text = rowSelected.Row["primerNombre"].ToString();
                  txtSegundoNombre.Text = rowSelected.Row["segundoNombre"].ToString();
                  txtPrimerApellido.Text = rowSelected.Row["primerApellido"].ToString();
@@ -361,11 +366,11 @@ namespace VitalCareRx
                 {
                     ObtenerDatos();
 
-                    paciente.ActualizarPaciente(paciente);
-                    MessageBox.Show("El paciente se ha modificado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
+                    paciente.ActualizarPaciente(paciente);                    
                     MostrarPacientes();
                     LimpiarFormulario();
                     OcultarColumnas();
+                    MessageBox.Show("El paciente se ha modificado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception E)
                 {
@@ -477,8 +482,16 @@ namespace VitalCareRx
 
         private void btnCitas_Click(object sender, RoutedEventArgs e)
         {
-           // CitasPaciente citasPaciente = new CitasPaciente();
-           // citasPaciente.Show();
+            if (selecionado)
+            {
+                CitasPaciente citasPaciente = new CitasPaciente(dni);
+                citasPaciente.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("¡Para ver las citas debes seleccionar un paciente!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+           
         }
 
         private void btnConsultas_Click(object sender, RoutedEventArgs e)

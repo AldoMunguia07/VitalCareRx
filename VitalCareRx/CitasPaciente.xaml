@@ -1,0 +1,67 @@
+﻿<Window x:Class="VitalCareRx.CitasPaciente"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VitalCareRx"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="CitasPaciente" Height="580" Width="766" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="196*"/>
+            <RowDefinition Height="95*"/>
+        </Grid.RowDefinitions>
+        <Image Source="IMAGENES/PrimeroDios.png" Height="117" VerticalAlignment="Top" Margin="0,73,275,0" RenderTransformOrigin="0.5,0.5" Grid.Row="1"/>
+        <Grid HorizontalAlignment="Left" Height="582" Margin="491,0,-36,0" VerticalAlignment="Top" Width="275" Grid.RowSpan="2">
+
+            <Grid.Background>
+
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF222222" Offset="0.01"/>
+                    <GradientStop Color="#74EEAB" Offset="1"/>
+
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Button Name="btnCerrar" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Red" Margin="235,0,0,544" Click="btnCerrar_Click">
+                <materialDesign:PackIcon Kind="CloseCircleOutline" Height="30" Width="30" RenderTransformOrigin="0.352,0.42" />
+            </Button>
+
+            <DatePicker Name="dtFecha"  HorizontalAlignment="Left" Margin="46,173,0,0" VerticalAlignment="Top" Width="180" Height="43"/>
+            <RichTextBox Name="richTextBoxNotas" HorizontalAlignment="Left" Height="168" Margin="10,306,0,0" VerticalAlignment="Top" Width="255" Background="White">
+                <FlowDocument>
+                    <Paragraph>
+                        <Run Text=""/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+        </Grid>
+        <DataGrid Name="gridCitas" HorizontalAlignment="Left" Height="283" Margin="10,104,0,0" VerticalAlignment="Top" Width="470" SelectionChanged="gridCitas_SelectionChanged"/>
+        <Label Background="#FF222222" Content="Fecha Cita" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="491,104,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="275" HorizontalContentAlignment="Center"/>
+        <Label Content="Notas" Background="#FF222222" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="491,252,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Height="34" Width="275" RenderTransformOrigin="0.612,0.375" HorizontalContentAlignment="Center"/>
+        <Label Content="Listado de Citas" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,62,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="491" HorizontalContentAlignment="Center">
+            <Label.Background>
+
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF48C7A0" Offset="0.1"/>
+
+
+
+                </LinearGradientBrush>
+
+            </Label.Background>
+        </Label>
+        <Button Name="btnAgregar" Content="Añadir" HorizontalAlignment="Left" Margin="80,12,0,0" VerticalAlignment="Top" Width="110" Grid.Row="1" Click="btnAgregar_Click">
+            <Button.Background>
+                <LinearGradientBrush>
+
+                    <GradientStop Color="#FF48C7A0" Offset="0.1"/>
+                    <GradientStop Color="#74EEAB" Offset="2"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <materialDesign:PackIcon Kind="BookPlusOutline" Height="32" Width="24" Foreground="#FFF" Margin="80,10,0,0" RenderTransformOrigin="0.771,0.656" Grid.Row="1" />
+        <Button Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="250,12,0,0" VerticalAlignment="Top" Width="114" Grid.Row="1" Click="btnModificar_Click"/>
+        <materialDesign:PackIcon Kind="SquareEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="250,12,0,0" Grid.Row="1" />
+    </Grid>
+</Window>
