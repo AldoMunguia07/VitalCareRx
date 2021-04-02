@@ -8,24 +8,31 @@
         mc:Ignorable="d"
         Title="VirtualCareRX" Height="500" Width="370" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Visibility="Visible" MouseDown="Window_MouseDown"
 >
-    <Grid Margin="0,0,-8,0">
+    <Grid Margin="0,0,10,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="99*"/>
             <ColumnDefinition Width="80*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
-        <Rectangle Height="240" VerticalAlignment="Bottom" Margin="19,0,19,80" RadiusY="10" RadiusX="10" Fill="White" Grid.ColumnSpan="2">
+        <Rectangle Height="240" VerticalAlignment="Bottom" Margin="10,0,4.541,80" RadiusY="10" RadiusX="10" Fill="White" Grid.ColumnSpan="3">
             <Rectangle.Effect>
                 <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
             </Rectangle.Effect>
         </Rectangle>
-        <Grid VerticalAlignment="Bottom" Margin="35,0,13,80" Height="240" Grid.ColumnSpan="2">
-            <Label Content="LOGIN" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5" Foreground="Gray" FontSize="18"/>
-            <StackPanel VerticalAlignment="Center" Margin="15,69,34,70" Height="101">
-                <TextBox Name="txtUsuario" Margin="0,10" materialDesign:HintAssist.Hint="USUARIO"  FontFamily="Champagne &amp; Limousines" FontSize="18"/>
-                <PasswordBox Name="pwbPassword" Margin="0,10" materialDesign:HintAssist.Hint="CONTRASEÑA"  FontFamily="Champagne &amp; Limousines" FontSize="18" Height="33" />
+        <Grid VerticalAlignment="Bottom" Margin="35,0,13,80" Height="240" Grid.ColumnSpan="2" RenderTransformOrigin="0.497,0.551">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="59*"/>
+                <RowDefinition Height="181*"/>
+            </Grid.RowDefinitions>
+            <Label Content="LOGIN" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="150,5,151,0" Foreground="Gray" FontSize="18"/>
+
+            <StackPanel VerticalAlignment="Center" Margin="15,9.563,34,70" Height="101" Grid.Row="1">
+                <TextBox Name="txtUsuario" Margin="0,10,30,1" materialDesign:HintAssist.Hint="USUARIO"  FontFamily="Champagne &amp; Limousines" FontSize="18"/>
+                <PasswordBox Name="pwbPassword" Margin="0,10,30,10" materialDesign:HintAssist.Hint="CONTRASEÑA"  FontFamily="Champagne &amp; Limousines" FontSize="18" Height="33" />
             </StackPanel>
+            <TextBox Name="txtPassword" Height="33" materialDesign:HintAssist.Hint="CONTRASEÑA"  RenderTransformOrigin="0.494,2.135" Margin="15,62,64,86" FontFamily="Champagne &amp; Limousines" FontSize="18" Visibility="Hidden" Grid.Row="1" />
+
         </Grid>
         <Button Name="btnLogin" Width="150" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="116,0,92,65" Content="LOGIN" Grid.ColumnSpan="2" Click="Button_Click">
             <Button.Background>
@@ -37,7 +44,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Image Source="IMAGENES/PrimeroDios.png" Height="95" VerticalAlignment="Top" Margin="63,39,41,0" Grid.ColumnSpan="2"/>
+        <Image Source="IMAGENES/PrimeroDios.png" Height="95" VerticalAlignment="Top" Margin="56,59,47.541,0" Grid.ColumnSpan="2"/>
         <Button Name="btnCerrar" HorizontalAlignment="Left" Margin="109,0,0,0" VerticalAlignment="Top" Width="54" Height="23" Grid.ColumnSpan="2" Grid.Column="1" Click="btnCerrar_Click"  >
             <materialDesign:PackIcon Kind="CloseCircleOutline" Height="15" Width="15" />
             <Button.Background>
@@ -49,12 +56,10 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Name="btnMostrarContrasenia" HorizontalAlignment="Left" Margin="69,315,0,0" VerticalAlignment="Top" Width="54" Height="23" Grid.Column="1" Background="Transparent" >
-            <materialDesign:PackIcon Kind="Eye" Height="15" Width="15" Foreground="Black"/>
+        <Button Name="btnMostrarContrasenia" HorizontalAlignment="Left" Margin="92,314,0,0" VerticalAlignment="Top" Width="54" Height="23" Grid.Column="1" Background="Transparent" Click="btnMostrarContrasenia_Click">
+            <materialDesign:PackIcon Name="IconoBoton" Kind="EyeOff" Height="15" Width="15" Foreground="Black"/>
         </Button>
-        <Button Name="btnOcultarContrasenia" HorizontalAlignment="Left" Margin="69,315,0,0" VerticalAlignment="Top" Width="54" Height="23" Grid.Column="1" Background="Transparent" >
-            <materialDesign:PackIcon Kind="EyeOff" Height="15" Width="15" Foreground="Black"/>
-        </Button>
+
         <Button Name="btnNuevaCuenta" Width="251" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="63,0,52,10" Content="¿DESEA UNA NUEVA CUENTA?" Foreground="Gray" Background="Transparent" Grid.ColumnSpan="2" Height="29" Click="btnNuevaCuenta_Click"/>
 
 

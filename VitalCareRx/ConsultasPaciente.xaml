@@ -45,7 +45,7 @@
         <DataGrid Name="gridConsultas" HorizontalAlignment="Left" Height="307" Margin="10,104,0,0" VerticalAlignment="Top" Width="697" SelectionChanged="gridConsultas_SelectionChanged"/>
 
 
-        <Label Content="Listado de Consultas" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,62,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="712" HorizontalContentAlignment="Center">
+        <Label Content="Listado de Consultas" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,24,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="712" HorizontalContentAlignment="Center">
             <Label.Background>
 
                 <LinearGradientBrush>

@@ -82,5 +82,30 @@ namespace VitalCareRx
         {
             DragMove();
         }
+
+        
+        private int i = 0;
+        private void btnMostrarContrasenia_Click(object sender, RoutedEventArgs e)
+        {
+            i++;
+            if (i == 1)
+            {
+                txtPassword.Text = pwbPassword.Password;                
+                txtPassword.Visibility = Visibility.Visible;
+                pwbPassword.Visibility = Visibility.Hidden;
+                txtPassword.SelectionStart = txtPassword.Text.Length;
+                txtPassword.Focus();
+                IconoBoton.Kind = MaterialDesignThemes.Wpf.PackIconKind.Eye;
+
+            }
+            else
+            {
+                i = 0;
+                pwbPassword.Password = txtPassword.Text;
+                txtPassword.Visibility = Visibility.Hidden;
+                pwbPassword.Visibility = Visibility.Visible;
+                IconoBoton.Kind = MaterialDesignThemes.Wpf.PackIconKind.EyeOff;
+            }
+        }
     }
 }
