@@ -156,6 +156,51 @@ namespace VitalCareRx
 
         }
 
+        /// <summary>
+        /// Metodo para midificar un empleado.
+        /// </summary>
+        /// <param name="empleado"></param>
+        public void ModificarEmpleado(Empleado empleado)
+        {
+            try
+            {
+                //Query para modificar un paciente
+                string query = @"UPDATE [Personas].[Empleado]
+                                SET primerNombre = @primerNombre, segundoNombre = @segundoNombre, primerApellido = @primerApellido, segundoApellido = @segundoApellido,
+                                celular = @celular, idSexo = @idSexo, nombreUsuario = @usuario, contrasenia =  @pass
+                                WHERE idEmpleado = @idEmpleado";
+
+                // Abrir la conexión
+                sqlConnection.Open();
+                
+                // Crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                // Establecer los valores de los parámetros
+                sqlCommand.Parameters.AddWithValue("@idEmpleado", empleado.IdEmpleado);
+                sqlCommand.Parameters.AddWithValue("@primerNombre", empleado.PrimerNombre);
+                sqlCommand.Parameters.AddWithValue("@segundoNombre", empleado.SegundoNombre);
+                sqlCommand.Parameters.AddWithValue("@primerApellido", empleado.PrimerApellido);
+                sqlCommand.Parameters.AddWithValue("@segundoApellido", empleado.SegundoApellido);
+                sqlCommand.Parameters.AddWithValue("@celular", empleado.Celular);
+                sqlCommand.Parameters.AddWithValue("@idSexo", empleado.IdSexo);
+                sqlCommand.Parameters.AddWithValue("@usuario", empleado.NombreUsuario);
+                sqlCommand.Parameters.AddWithValue("@pass", empleado.Contrasenia);
+
+                sqlCommand.ExecuteNonQuery();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
 
     }
 }

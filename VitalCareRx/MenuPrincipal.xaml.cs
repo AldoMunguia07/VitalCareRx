@@ -99,8 +99,9 @@ namespace VitalCareRx
 
         private void ltUsuario_Selected(object sender, RoutedEventArgs e)
         {
-            //MiUsuario miusuario = new MiUsuario();
-            //miusuario.Show();
+            MiUsuario miusuario = new MiUsuario(codigoEmpleado);
+            miusuario.Show();
+            this.Close();
         }
 
         private void ltSalida_Selected(object sender, RoutedEventArgs e)
