@@ -28,6 +28,7 @@ namespace VitalCareRx
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            pwbPassword.Password = txtPassword.Text;
             try
             {
                 // Implementar la búsqueda del usuario desde la clase Usuario
