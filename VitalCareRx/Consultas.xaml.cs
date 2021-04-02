@@ -33,7 +33,7 @@ namespace VitalCareRx
         private Consulta consulta = new Consulta();
         private int codigoEmpleado;
         private string nombreEmpleado;
-
+        private bool seleccionado = false;
 
         public Consultas(int codigo, string empleado)
         {
@@ -197,6 +197,7 @@ namespace VitalCareRx
             txtTemperatura.Text = string.Empty;
             txtPresionArterial.Text = string.Empty;
             cmbCodigoCitas.SelectedValue = null;
+            seleccionado = false;
         }
 
 
@@ -212,6 +213,7 @@ namespace VitalCareRx
 
             if (rowSelected != null)
             {
+                seleccionado = true;
                 TextRange MotivoConsulta = new TextRange(rtxtMotivoConsulta.Document.ContentStart, rtxtMotivoConsulta.Document.ContentEnd);
                 TextRange DiagnosticoConsulta = new TextRange(rtxtDiagnostico.Document.ContentStart, rtxtDiagnostico.Document.ContentEnd);
 
@@ -231,36 +233,41 @@ namespace VitalCareRx
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            if (ValidarCampos())
+            if (seleccionado)
             {
-
-                try
-                {
-                    ObtenerValores();
-
-                    consulta.ModificarConsulta(consulta);
-
-                    LimpiarFormulario();
-
-                    MessageBox.Show("La consulta se ha modificado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                    MostrarConsultas();
-
-
-
-                }
-                catch (Exception)
+                if (ValidarCampos())
                 {
 
+                    try
+                    {
+                        ObtenerValores();
 
-                    MessageBox.Show("Ha ocurrido un error al momento de realizar la modificacion... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        consulta.ModificarConsulta(consulta);
+
+                        LimpiarFormulario();
+
+                        MessageBox.Show("La consulta se ha modificado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                        MostrarConsultas();
+
+                    }
+                    catch (Exception)
+                    {
+
+                        MessageBox.Show("Ha ocurrido un error al momento de realizar la modificacion... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+
                 }
-                
+                else
+                {
+                    MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             else
             {
-                MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("¡Debe seleccionar una consulta!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            
         }
 
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
@@ -310,6 +317,11 @@ namespace VitalCareRx
             MenuPrincipal menu = new MenuPrincipal(nombreEmpleado, codigoEmpleado);
             menu.Show();
             this.Close();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
     }
 }

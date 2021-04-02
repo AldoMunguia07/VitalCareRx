@@ -29,6 +29,7 @@ namespace VitalCareRx
         private int codigoConsulta;
         private string paciente;
         SqlConnection sqlConnection;
+        private bool seleccionado = false;
         public ConsultasPaciente(string codigoPaciente)
         {
             InitializeComponent();
@@ -93,14 +94,32 @@ namespace VitalCareRx
 
             if (rowSelected != null)
             {
+                seleccionado = true;
                 codigoConsulta = Convert.ToInt32(rowSelected.Row["Codigo de consulta"]);
+            }
+            else
+            {
+                seleccionado = false;
             }
         }
 
         private void btnRecetas_Click(object sender, RoutedEventArgs e)
         {
-            RecetasConsultaPaciente recetasConsultaPaciente = new RecetasConsultaPaciente(codigoConsulta);
-            recetasConsultaPaciente.ShowDialog();
+            if (seleccionado)
+            {
+                RecetasConsultaPaciente recetasConsultaPaciente = new RecetasConsultaPaciente(codigoConsulta);
+                recetasConsultaPaciente.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("¡Para ver una receta debe seleccionar una consulta!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
     }
 }

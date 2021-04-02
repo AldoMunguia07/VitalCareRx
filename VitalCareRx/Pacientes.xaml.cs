@@ -29,7 +29,7 @@ namespace VitalCareRx
 
         private int estado = 0;
         bool cargado = false;        
-        bool selecionado = false;
+        bool seleccionado = false;
         private string dni;
 
 
@@ -267,9 +267,10 @@ namespace VitalCareRx
             DataGrid dataGrid = (DataGrid)sender;
             DataRowView rowSelected = dataGrid.SelectedItem as DataRowView;
             TextRange direccion = new TextRange(richTxtDireccion.Document.ContentStart, richTxtDireccion.Document.ContentEnd);
-            selecionado = true;
+            
            if (rowSelected != null)
             {
+                seleccionado = true;
                 dni = rowSelected.Row["Identidad"].ToString(); ;
                 txtDni.Text = rowSelected.Row["Identidad"].ToString();
                  txtPrimerNombre.Text = rowSelected.Row["primerNombre"].ToString();
@@ -320,7 +321,7 @@ namespace VitalCareRx
             CargarColorBoton();
             cmbTipoSangre.SelectedValue = null;
             cmbSexo.SelectedValue = null;
-            selecionado = false;
+            seleccionado = false;
            
 
 
@@ -360,28 +361,36 @@ namespace VitalCareRx
 
         private void btnModificarr_Click(object sender, RoutedEventArgs e)
         {
-            if (Validar())
+            if (seleccionado)
             {
-                try
+                if (Validar())
                 {
-                    ObtenerDatos();
+                    try
+                    {
+                        ObtenerDatos();
 
-                    paciente.ActualizarPaciente(paciente);                    
-                    MostrarPacientes();
-                    LimpiarFormulario();
-                    OcultarColumnas();
-                    MessageBox.Show("El paciente se ha modificado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
+                        paciente.ActualizarPaciente(paciente);
+                        MostrarPacientes();
+                        LimpiarFormulario();
+                        OcultarColumnas();
+                        MessageBox.Show("El paciente se ha modificado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    catch (Exception E)
+                    {
+
+                        MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
-                catch (Exception E)
+                else
                 {
-
-                    MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else
             {
-                MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("¡Debe seleccionar un paciente!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            
             
         }
 
@@ -462,7 +471,7 @@ namespace VitalCareRx
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
-            if (selecionado)
+            if (seleccionado)
             {
                 ObtenerDatos();
                 paciente.EliminarPaciente(paciente);
@@ -471,7 +480,11 @@ namespace VitalCareRx
                 OcultarColumnas();
                 MessageBox.Show("El paciente se ha eliminado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            
+            else
+            {
+                MessageBox.Show("¡Debe seleccionar un paciente!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -482,7 +495,7 @@ namespace VitalCareRx
 
         private void btnCitas_Click(object sender, RoutedEventArgs e)
         {
-            if (selecionado)
+            if (seleccionado)
             {
                 CitasPaciente citasPaciente = new CitasPaciente(dni);
                 citasPaciente.ShowDialog();
@@ -496,9 +509,22 @@ namespace VitalCareRx
 
         private void btnConsultas_Click(object sender, RoutedEventArgs e)
         {
-            ConsultasPaciente consultasPaciente = new ConsultasPaciente(dni);
-            consultasPaciente.ShowDialog();
+            if (seleccionado)
+            {
+                ConsultasPaciente consultasPaciente = new ConsultasPaciente(dni);
+                consultasPaciente.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("¡Para ver las consultas debes seleccionar un paciente!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             
+            
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
     }
 }

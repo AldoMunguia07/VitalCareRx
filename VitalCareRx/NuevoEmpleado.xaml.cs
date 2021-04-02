@@ -128,6 +128,9 @@ namespace VitalCareRx
             cmbSexo.SelectedValue = null;
         }
 
-
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
     }
 }
