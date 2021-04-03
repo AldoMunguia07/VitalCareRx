@@ -145,7 +145,7 @@ namespace VitalCareRx
 
 
             farmaco.DescripcionFarmaco = txtDescripcionFarmaco.Text;
-            farmaco.InformacionPrecaucion = IndicacionesFarmaco.Text;
+            farmaco.InformacionPrecaucion = IndicacionesFarmaco.Text.Substring(0, IndicacionesFarmaco.Text.Length - 2);
 
 
         }

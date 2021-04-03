@@ -183,8 +183,8 @@ namespace VitalCareRx
             TextRange duracionTratamiento = new TextRange(rtxtDuracionTratamiento.Document.ContentStart, rtxtDuracionTratamiento.Document.ContentEnd);
 
             receta.IdConsulta = codigoConsulta;
-            receta.Indicaciones = indicaciones.Text;
-            receta.DuracionTratamiento = duracionTratamiento.Text;
+            receta.Indicaciones = indicaciones.Text.Substring(0, indicaciones.Text.Length - 2);
+            receta.DuracionTratamiento = duracionTratamiento.Text.Substring(0, duracionTratamiento.Text.Length - 2);
             receta.IdFarmaco = Convert.ToInt32(cmbFarmacos.SelectedValue);
             receta.IdReceta = codigoRecetaMedica;
         }

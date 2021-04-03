@@ -423,7 +423,7 @@ namespace VitalCareRx
             paciente.SegundoNombre = txtSegundoNombre.Text;
             paciente.PrimerApellido = txtPrimerApellido.Text;
             paciente.SegundoApellido = txtSegundoApellido.Text;
-            paciente.Direccion = direccion.Text;
+            paciente.Direccion = direccion.Text.Substring(0, direccion.Text.Length - 2);
             paciente.Celular = txtCelular.Text;
             paciente.FechaNacimiento = dtFechaNacimiento.SelectedDate.Value;
             paciente.Peso = float.Parse(Math.Round(float.Parse(txtPeso.Text), 2).ToString());

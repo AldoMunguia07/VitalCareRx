@@ -115,7 +115,7 @@ namespace VitalCareRx
             TextRange notas = new TextRange(richTextBoxNotas.Document.ContentStart, richTextBoxNotas.Document.ContentEnd);
             cita.NumeroIdentidad = codigoPaciente;
             cita.FechaCita = Convert.ToDateTime(dtFecha.SelectedDate);
-            cita.Notas = notas.Text;
+            cita.Notas = notas.Text.Substring(0, notas.Text.Length - 2);
         }
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)

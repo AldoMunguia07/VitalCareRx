@@ -190,8 +190,8 @@ namespace VitalCareRx
             TextRange MotivoConsulta = new TextRange(rtxtMotivoConsulta.Document.ContentStart, rtxtMotivoConsulta.Document.ContentEnd);
             TextRange DiagnosticoConsulta = new TextRange(rtxtDiagnostico.Document.ContentStart, rtxtDiagnostico.Document.ContentEnd);
 
-            consulta.MotivoConsulta = MotivoConsulta.Text;
-            consulta.DiagnosticoConsulta = DiagnosticoConsulta.Text;
+            consulta.MotivoConsulta = MotivoConsulta.Text.Substring(0, MotivoConsulta.Text.Length - 2);
+            consulta.DiagnosticoConsulta = DiagnosticoConsulta.Text.Substring(0, DiagnosticoConsulta.Text.Length - 2);
             consulta.Temperatura = float.Parse(txtTemperatura.Text);
             consulta.PresionArterial = txtPresionArterial.Text;
             consulta.IdEmpleado = codigoEmpleado;
@@ -220,6 +220,29 @@ namespace VitalCareRx
         }
 
         /// <summary>
+        /// Cargar el codigode la cita en el comboBox al seleccionar una consulta.
+        /// </summary>
+        private void CargarCodigoCitaSeleccionar(int idConsulta)
+        {
+            string query = @"SELECT idCita FROM [Consultas].[Consulta] WHERE idConsulta = @idConsulta";
+
+            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+            sqlCommand.Parameters.AddWithValue("@idConsulta", idConsulta);
+
+            using (sqlDataAdapter)
+            {
+                DataTable dataTable = new DataTable();
+                sqlDataAdapter.Fill(dataTable);
+                cmbCodigoCitas.DisplayMemberPath = "idCita";
+                cmbCodigoCitas.SelectedValuePath = "idCita";
+                cmbCodigoCitas.ItemsSource = dataTable.DefaultView;
+                ;
+            }
+        }
+
+        /// <summary>
         /// Limpia todos los campos del formulario
         /// </summary>
         private void LimpiarFormulario()
@@ -232,6 +255,7 @@ namespace VitalCareRx
             cmbCodigoCitas.SelectedValue = null;
             seleccionado = false;
             btnReceta.Content = "Receta";
+            CargarCodigoCita();
         }
 
 
@@ -258,6 +282,7 @@ namespace VitalCareRx
 
                 txtTemperatura.Text = rowSelected.Row["Temperatura"].ToString();
                 txtPresionArterial.Text = rowSelected.Row["Presion arterial"].ToString();
+                CargarCodigoCitaSeleccionar(Convert.ToInt32(rowSelected.Row["Codigo de consulta"]));
                 cmbCodigoCitas.SelectedValue = rowSelected.Row["Codigo de cita"].ToString();
 
                 consulta.IdConsulta = Convert.ToInt32(rowSelected.Row["Codigo de consulta"]);

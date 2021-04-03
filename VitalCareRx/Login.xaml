@@ -45,7 +45,7 @@
             </Button.Background>
         </Button>
         <Image Source="IMAGENES/PrimeroDios.png" Height="95" VerticalAlignment="Top" Margin="56,59,47.541,0" Grid.ColumnSpan="2"/>
-        <Button Name="btnCerrar" HorizontalAlignment="Left" Margin="109,0,0,0" VerticalAlignment="Top" Width="54" Height="23" Grid.ColumnSpan="2" Grid.Column="1" Click="btnCerrar_Click"  >
+        <Button Name="btnCerrar" HorizontalAlignment="Left" Margin="120,0,-10,0" VerticalAlignment="Top" Width="53" Height="23" Grid.ColumnSpan="2" Grid.Column="1" Click="btnCerrar_Click"  >
             <materialDesign:PackIcon Kind="CloseCircleOutline" Height="15" Width="15" />
             <Button.Background>
                 <LinearGradientBrush>
