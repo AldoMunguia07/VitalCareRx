@@ -93,8 +93,9 @@ namespace VitalCareRx
 
         private void ltFarmacos_Selected(object sender, RoutedEventArgs e)
         {
-            //Farmacos farmacos= new Farmacos();
-            //farmacos.Show();
+            Farmacos farmacos= new Farmacos(codigoEmpleado, nombreEmpleado);
+            farmacos.Show();
+            this.Close();
         }
 
         private void ltUsuario_Selected(object sender, RoutedEventArgs e)

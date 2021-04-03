@@ -97,6 +97,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Farmaco.cs" />
+    <Compile Include="Farmacos.xaml.cs">
+      <DependentUpon>Farmacos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MiUsuario.xaml.cs">
       <DependentUpon>MiUsuario.xaml</DependentUpon>
     </Compile>
@@ -116,6 +120,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ConsultasPaciente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Farmacos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
