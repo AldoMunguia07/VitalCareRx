@@ -171,7 +171,7 @@ namespace VitalCareRx
         /// </summary>
         private void CargarCodigoCita()
         {
-            string query = @"SELECT idCita FROM [Consultas].[Cita]";
+            string query = @"SELECT idCita FROM [Consultas].[Cita] WHERE idCita not in(SELECT IdCita from [Consultas].[Consulta])";
 
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
 
