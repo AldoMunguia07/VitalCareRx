@@ -101,6 +101,9 @@
     <Compile Include="Farmacos.xaml.cs">
       <DependentUpon>Farmacos.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Informacion.xaml.cs">
+      <DependentUpon>Informacion.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MiUsuario.xaml.cs">
       <DependentUpon>MiUsuario.xaml</DependentUpon>
     </Compile>
@@ -124,6 +127,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Farmacos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Informacion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

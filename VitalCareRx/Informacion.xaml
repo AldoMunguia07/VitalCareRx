@@ -1,0 +1,40 @@
+﻿<Window x:Class="VitalCareRx.Informacion"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VitalCareRx"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"  
+        mc:Ignorable="d"
+          Title="MainWindow" Height="412" Width="658" WindowStyle="None" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown">
+    <Grid>
+        <Image Source="IMAGENES/PrimeroDios.png" Height="151" VerticalAlignment="Top" Margin="10,10,425,0" RenderTransformOrigin="0.5,0.5"/>
+        <Label Foreground="White" Content="Vital Care Rx 2021" HorizontalAlignment="Left" Margin="335,147,0,0" VerticalAlignment="Top" FontSize="35" FontFamily="Segoe UI Emoji"/>
+        <Label Foreground="White" Content="Version Beta" HorizontalAlignment="Left" Margin="415,202,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Foreground="#74EEAB" Content="copyright © 2021 Omega Soft-Evolution&#xD;&#xA;" HorizontalAlignment="Left" Margin="26,256,0,0" VerticalAlignment="Top" Width="294" FontSize="15" RenderTransformOrigin="0.5,0.5" FontWeight="Bold" Height="31">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-58.346"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Button Name="btnCerrar" Background="Red" HorizontalAlignment="Left" Margin="602,0,0,0" VerticalAlignment="Top" Width="48" Height="23" Click="btnCerrar_Click">
+            <materialDesign:PackIcon Foreground="White" Kind="CloseCircle"/>
+        </Button>
+
+        <Grid.Background>
+            <LinearGradientBrush>
+
+                <GradientStop Color="#FFFF" Offset="0.4"/>
+                <GradientStop Color="#74EEAB" Offset="0.4"/>
+
+
+
+            </LinearGradientBrush>
+        </Grid.Background>
+
+    </Grid>
+</Window>

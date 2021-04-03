@@ -118,5 +118,12 @@ namespace VitalCareRx
 
          
         }
+
+        private void ltInformacion_Selected(object sender, RoutedEventArgs e)
+        {
+           Informacion informacion= new Informacion(codigoEmpleado, nombreEmpleado);
+           informacion.Show();
+           this.Close();
+        }
     }
 }
