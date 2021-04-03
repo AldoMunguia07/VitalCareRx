@@ -15,12 +15,13 @@
             <TextBox Name="txtSegundoApellido" HorizontalAlignment="Left" Height="28" Margin="25,307,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" Background="White" RenderTransformOrigin="0.5,0.5" />
             <TextBox Name="txtCelular" HorizontalAlignment="Left" Height="28" Margin="25,377,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" Background="White" RenderTransformOrigin="0.5,0.5" />
             <ComboBox Name="cmbSexo" HorizontalAlignment="Left" Margin="25,441,0,0" VerticalAlignment="Top" Width="303" Background="White"/>
-            <Button Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="110,526,0,0" VerticalAlignment="Top" Width="137" Click="btnModificar_Click"/>
-            <materialDesign:PackIcon Kind="AccountEdit" Width="29" Height="28" VerticalAlignment="Center" Foreground="White" Margin="218,530,0,24"/>
+
             <Button Name="btnCerrar" Background="#a30000" HorizontalAlignment="Left" Margin="298,0,0,0" VerticalAlignment="Top" Width="58" Click="btnCerrar_Click">
                 <materialDesign:PackIcon Kind="CloseCircleOutline" Width="29" Height="28" VerticalAlignment="Center" Foreground="White"/>
             </Button>
         </Grid>
+        <Button Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="520,515,0,0" VerticalAlignment="Top" Width="137" Click="btnModificar_Click"/>
+        <materialDesign:PackIcon Kind="AccountEdit" Width="29" Height="28" VerticalAlignment="Center" Foreground="White" Margin="520,519,0,35"/>
 
         <Grid HorizontalAlignment="Left" Height="582" VerticalAlignment="Top" Width="410" Background="White">
             <materialDesign:PackIcon Kind="Account" Width="202" Height="196" VerticalAlignment="Center" Margin="86,154,0,232" Foreground="#1274d0"/>
