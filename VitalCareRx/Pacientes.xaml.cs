@@ -375,7 +375,7 @@ namespace VitalCareRx
                         OcultarColumnas();
                         MessageBox.Show("El paciente se ha modificado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
-                    catch (Exception E)
+                    catch (Exception )
                     {
 
                         MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -456,7 +456,7 @@ namespace VitalCareRx
                     LimpiarFormulario();
                     OcultarColumnas();
                 }
-                catch (Exception E)
+                catch (Exception )
                 {
 
                     MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);

@@ -1,0 +1,82 @@
+﻿<Window x:Class="VitalCareRx.Recetas"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VitalCareRx"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="590" Width="774" WindowStyle="None" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Image Source="IMAGENES/PrimeroDios.png" Height="121" VerticalAlignment="Top" Margin="0,461,586,0" RenderTransformOrigin="0.5,0.5"/>
+        <Grid HorizontalAlignment="Left" Height="582" Margin="491,0,0,0" VerticalAlignment="Top" Width="275">
+
+            <Grid.Background>
+
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF222222" Offset="0.01"/>
+                    <GradientStop Color="#74EEAB" Offset="1"/>
+
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Button Name="btnCerrar" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Red"  Margin="235,0,0,544" Click="btnCerrar_Click">
+                <materialDesign:PackIcon Kind="CloseCircleOutline" Height="30" Width="30" RenderTransformOrigin="0.352,0.42" />
+            </Button>
+
+            <RichTextBox Name = "rtxtIndicaciones" HorizontalAlignment="Left" Height="110" Margin="10,354,0,0" VerticalAlignment="Top" Width="255" Background="White">
+                <FlowDocument>
+                    <Paragraph>
+                        <Run Text=""/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+            <RichTextBox Name="rtxtDuracionTratamiento" HorizontalAlignment="Left" Height="75" Margin="10,216,0,0" VerticalAlignment="Top" Width="255" Background="White">
+                <FlowDocument>
+                    <Paragraph>
+                        <Run Text=""/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+            <ComboBox Name="cmbFarmacos" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top" Width="255" Height="30" Background="White"/>
+            <Label Background="#FF222222" Content="     Duración Tratamiento" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,162,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="275"/>
+            <Label Background="#FF222222" Content="           Farmacos" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,61,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="275" Height="30"/>
+            <Button Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="82,485,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="-0.242,0.544" Click="btnModificar_Click"/>
+        </Grid>
+        <DataGrid Name = "dgRecetas" HorizontalAlignment="Left" Height="306" Margin="10,99,0,0" VerticalAlignment="Top" Width="463" SelectionChanged="dgRecetas_SelectionChanged"/>
+        <Label Background="#FF222222" Content="           Indicaciónes" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="491,312,0,238" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="275" RenderTransformOrigin="0.612,0.375"/>
+        <Label Content="             Listado de Fármacos" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,62,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="463">
+            <Label.Background>
+
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF222222" Offset="0.06"/>
+
+
+                </LinearGradientBrush>
+
+            </Label.Background>
+        </Label>
+
+        <Button Name = "btnAñadir" Content="Añadir" HorizontalAlignment="Left" Margin="119,417,0,0" VerticalAlignment="Top" Width="110" Click="btnAñadir_Click">
+            <Button.Background>
+                <LinearGradientBrush>
+
+                    <GradientStop Color="#FF48C7A0" Offset="0.1"/>
+                    <GradientStop Color="#74EEAB" Offset="2"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Name = "btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="262,417,0,0" VerticalAlignment="Top" Width="109" Click="btnEliminar_Click">
+            <Button.Background>
+                <LinearGradientBrush>
+
+                    <GradientStop Color="#FF222222" Offset="1"/>
+                    <GradientStop Color="#C0392B" Offset="0.5"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <materialDesign:PackIcon Kind="SquareEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="119,417,0,0" />
+        <materialDesign:PackIcon Kind="BookEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="575,487,0,0" />
+        <materialDesign:PackIcon Kind="DeleteCircle" Height="32" Width="24" Foreground="#FFF" Margin="262,417,0,0" />
+
+    </Grid>
+</Window>

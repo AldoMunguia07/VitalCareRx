@@ -100,6 +100,10 @@
     <Compile Include="MiUsuario.xaml.cs">
       <DependentUpon>MiUsuario.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Receta.cs" />
+    <Compile Include="Recetas.xaml.cs">
+      <DependentUpon>Recetas.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RecetasConsultaPaciente.xaml.cs">
       <DependentUpon>RecetasConsultaPaciente.xaml</DependentUpon>
     </Compile>
@@ -158,6 +162,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pacientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Recetas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

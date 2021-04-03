@@ -31,9 +31,11 @@ namespace VitalCareRx
 
         SqlConnection sqlConnection;
         private Consulta consulta = new Consulta();
-        private int codigoEmpleado;
+        private int codigoEmpleado, idRecetaMedica;
         private string nombreEmpleado;
         private bool seleccionado = false;
+
+        private int idConsulta;
 
         public Consultas(int codigo, string empleado)
         {
@@ -106,6 +108,8 @@ namespace VitalCareRx
 
                     consulta.CrearConsulta(consulta);
 
+                   
+
                     LimpiarFormulario();
 
                     MessageBox.Show("La consulta se ha insertado con exito","CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -129,6 +133,35 @@ namespace VitalCareRx
 
             
         }
+
+        /// <summary>
+        ///  Se captura el Id de la receta medica que pertenece a la consulta
+        /// </summary>
+        /// <returns>El id de la receta medica</returns>
+        private int CapturarIdRecetaMedica()
+        {
+            string query = @"SELECT idRecetaMedica FROM[Consultas].[RecetaMedica] WHERE idConsulta = @idConsulta";
+
+            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+            using (sqlDataAdapter)
+            {
+                sqlCommand.Parameters.AddWithValue("@idConsulta", idConsulta);
+
+                DataTable dataTable = new DataTable();
+
+                sqlDataAdapter.Fill(dataTable);
+
+
+
+                return Convert.ToInt32(dataTable.Rows[0]["idRecetaMedica"]);
+
+
+            }
+        }
+
 
         /// <summary>
         /// Se encarga de validar que NO se dejen vacios los campos del formulario
@@ -198,6 +231,7 @@ namespace VitalCareRx
             txtPresionArterial.Text = string.Empty;
             cmbCodigoCitas.SelectedValue = null;
             seleccionado = false;
+            btnReceta.Content = "Receta";
         }
 
 
@@ -217,6 +251,8 @@ namespace VitalCareRx
                 TextRange MotivoConsulta = new TextRange(rtxtMotivoConsulta.Document.ContentStart, rtxtMotivoConsulta.Document.ContentEnd);
                 TextRange DiagnosticoConsulta = new TextRange(rtxtDiagnostico.Document.ContentStart, rtxtDiagnostico.Document.ContentEnd);
 
+                idConsulta = Convert.ToInt32(rowSelected.Row["Codigo de consulta"]);
+
                 MotivoConsulta.Text = rowSelected.Row["Motivo"].ToString();
                 DiagnosticoConsulta.Text = rowSelected.Row["Diagnostico"].ToString();
 
@@ -225,6 +261,19 @@ namespace VitalCareRx
                 cmbCodigoCitas.SelectedValue = rowSelected.Row["Codigo de cita"].ToString();
 
                 consulta.IdConsulta = Convert.ToInt32(rowSelected.Row["Codigo de consulta"]);
+
+                if (ValidarCrearRecetaMedica())
+                {
+                    btnReceta.Content = "Ver receta";
+                    idRecetaMedica = CapturarIdRecetaMedica();
+
+                }
+                else
+                {
+                    btnReceta.Content = " Crear receta";
+                }
+
+                
             }
 
             
@@ -303,12 +352,96 @@ namespace VitalCareRx
             }
         }
 
+        public bool ValidarCrearRecetaMedica()
+        {
+            try
+            {
+                
+                string query = @"SELECT idConsulta FROM[Consultas].[Consulta] WHERE idConsulta IN(SELECT idConsulta FROM[Consultas].[RecetaMedica]) and idConsulta = @idConsulta";
+
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    sqlCommand.Parameters.AddWithValue("@idConsulta", idConsulta);
+
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    
+
+                    if (dataTable.Rows.Count == 1)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+
+        }
+
+        public void RecetaMedica()
+        {
+            if (!ValidarCrearRecetaMedica())
+            {
+                try
+                {
+                    
+
+                    // Query de selección
+                    string query = @"INSERT INTO[Consultas].[RecetaMedica] VALUES(@idConsulta)";
+
+                    // Establecer la conexión
+                    sqlConnection.Open();
+
+                    // Crear el comando SQL
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                    // Establecer los valores de los parámetros
+                    sqlCommand.Parameters.AddWithValue("@idConsulta", idConsulta);
+
+                    sqlCommand.ExecuteNonQuery();
+
+                    idRecetaMedica = CapturarIdRecetaMedica();
+
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                finally
+                {
+                    // Cerrar la conexión
+                    sqlConnection.Close();
+                }
+            }
+            
+            
+        }
+
         private void btnReceta_Click(object sender, RoutedEventArgs e)
         {
-            
-           // Recetas recetas = new Recetas(int idConsulta);
-          //  recetas.show();
-          //  this.Close();
+            if (seleccionado)
+            {
+                RecetaMedica();
+                Recetas recetas = new Recetas(idConsulta,idRecetaMedica);
+                recetas.ShowDialog();
+                
+            }
+            else
+            {
+                MessageBox.Show("Por favor seleccione una celda", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             
         }
 
