@@ -1,7 +1,6 @@
 USE tempdb
 go
 
-
 -- Crear la base de datos
 CREATE DATABASE VitalCareRxDB
 GO
@@ -145,6 +144,7 @@ CREATE TABLE Consultas.DetalleRecetaMedica
 (
 	idRecetaMedica INT NOT NULL,
 	idFarmaco INT NOT NULL,
+	cantidad INT NOT NULL,
 	duracionTratamiento varchar(100) NOT NULL,
 	indicaciones varchar(200) NOT NULL,
 
@@ -156,7 +156,6 @@ CREATE TABLE Consultas.DetalleRecetaMedica
 		FOREIGN KEY (idFarmaco) REFERENCES Consultas.Farmaco(idFarmaco)
 
 )
-
 
 
 
@@ -206,7 +205,7 @@ GO
 -- Tabla Consultas.Cita
 ALTER TABLE Consultas.Cita WITH CHECK
 		ADD CONSTRAINT CHK_Consultas_Cita$VerificarFechaCita
-		CHECK (fechaCita >= GETDATE())
+		CHECK (fechaCita >= CONVERT (date, GETDATE()))
 GO
 
 ALTER TABLE Consultas.Cita WITH CHECK
@@ -219,6 +218,12 @@ GO
 ALTER TABLE Consultas.Consulta
 		ADD CONSTRAINT AK_Consultas_Consulta_idCita
 		UNIQUE NONCLUSTERED (idCita)
+GO
+
+--Tabla Consulta.DetalleReceta
+ALTER TABLE Consultas.DetalleRecetaMedica
+		ADD CONSTRAINT AK_Consultas_DetalleRecetaMedica_idRecetaMedica
+		UNIQUE NONCLUSTERED (idRecetaMedica)
 GO
 
 
