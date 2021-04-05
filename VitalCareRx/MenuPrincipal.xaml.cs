@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 
 
@@ -31,10 +32,20 @@ namespace VitalCareRx
 
             codigoEmpleado = codigo;
             nombreEmpleado = usuario;
-            lbUsuario.Content = usuario; 
-            
+            lbUsuario.Content = usuario;
+            DispatcherTimer LiveTime = new DispatcherTimer();
+            LiveTime.Interval = TimeSpan.FromSeconds(1);
+            LiveTime.Tick += timer_Tick;
+            LiveTime.Start();
+            lbDate.Content = DateTime.Now.ToShortDateString();
+
         }
 
+        void timer_Tick(object sender, EventArgs e)
+        {
+           
+            lbFecha.Content = DateTime.Now.ToLongTimeString();
+        }
 
         private void ButtonFechar_Click(object sender, RoutedEventArgs e)
         {
