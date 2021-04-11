@@ -164,7 +164,7 @@ namespace VitalCareRx
         {
             try
             {
-                //Query para modificar un paciente
+                //Query para modificar un empleado
                 string query = @"UPDATE [Personas].[Empleado]
                                 SET primerNombre = @primerNombre, segundoNombre = @segundoNombre, primerApellido = @primerApellido, segundoApellido = @segundoApellido,
                                 celular = @celular, idSexo = @idSexo, nombreUsuario = @usuario, contrasenia =  @pass
@@ -199,6 +199,29 @@ namespace VitalCareRx
             {
                 sqlConnection.Close();
             }
+        }
+
+        public int CodigoEmpleado()
+        {
+            string query = @"SELECT MAX(idEmpleado) idEmpleado FROM [Personas].[Empleado]";
+
+            try
+            {
+               SqlDataAdapter adapter = new SqlDataAdapter(query, sqlConnection);
+
+                using (adapter)
+                {
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+                    return Convert.ToInt32(dataTable.Rows[0]["idEmpleado"]);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
 
 
