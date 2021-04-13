@@ -39,7 +39,7 @@ namespace VitalCareRx
             string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
 
-            MostrarConsultas();
+            MostrarFarmaco();
         }
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
@@ -53,7 +53,7 @@ namespace VitalCareRx
         /// <summary>
         /// Trae todas las consultas de la base de datos al inicial el programa.
         /// </summary>
-        public void MostrarConsultas()
+        public void MostrarFarmaco()
         {
             string query = @"SELECT * FROM [Consultas].[Farmaco]";
 
@@ -114,7 +114,7 @@ namespace VitalCareRx
 
                         MessageBox.Show("El farmaco se ha insertado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                        MostrarConsultas();
+                        MostrarFarmaco();
 
                     }
                     catch (Exception)
@@ -177,7 +177,7 @@ namespace VitalCareRx
 
                         MessageBox.Show("El farmaco se ha modificado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                        MostrarConsultas();
+                        MostrarFarmaco();
 
 
 
@@ -256,6 +256,7 @@ namespace VitalCareRx
         {
 
             LimpiarFormulario();
+            MostrarFarmaco();
             
         }
     }

@@ -214,6 +214,7 @@ namespace VitalCareRx
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
             LimpiarFormulario();
+            CargarCitasPaciente();
         }
     }
 }

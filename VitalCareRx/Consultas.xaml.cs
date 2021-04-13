@@ -480,6 +480,8 @@ namespace VitalCareRx
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
             LimpiarFormulario();
+            MostrarConsultas();
+           
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
