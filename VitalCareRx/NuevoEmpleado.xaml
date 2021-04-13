@@ -25,7 +25,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <materialDesign:PackIcon Kind="AccountPlusOutline" Width="29" Height="28" VerticalAlignment="Center" Foreground="White" Margin="218,530,0,24"/>
+            <materialDesign:PackIcon Kind="AccountPlusOutline" Width="29" Height="28" VerticalAlignment="Center" Foreground="White" Margin="113,528,0,34"/>
             <Button Name="btnCerrar" Background="#a30000" HorizontalAlignment="Left" Margin="305,10,0,0" VerticalAlignment="Top" Width="58" Click="btnCerrar_Click" >
                 <materialDesign:PackIcon Kind="CloseCircleOutline" Width="29" Height="28" VerticalAlignment="Center" Foreground="White"/>
             </Button>

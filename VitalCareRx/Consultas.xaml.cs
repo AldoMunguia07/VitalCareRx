@@ -477,6 +477,11 @@ namespace VitalCareRx
             this.Close();
         }
 
+        private void btnLimpiar_Click(object sender, RoutedEventArgs e)
+        {
+            LimpiarFormulario();
+        }
+
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();

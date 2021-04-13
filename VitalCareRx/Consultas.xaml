@@ -87,8 +87,11 @@
 
 
 
-        <Label Content="       Codigo Citas" Foreground="White" HorizontalAlignment="Left" Margin="362,516,0,0" VerticalAlignment="Top" Background="Green" Height="30" Width="141" FontSize="14" FontWeight="Bold"/>
+        <Label Content="Codigo Citas" Foreground="White" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="362,516,0,0" VerticalAlignment="Top" Background="Green" Height="30" Width="141" FontSize="14" FontWeight="Bold"/>
         <ComboBox Name="cmbCodigoCitas" HorizontalAlignment="Left" Margin="362,486,0,0" VerticalAlignment="Top" Width="141"/>
+
+        <Button Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="836,558,0,0" VerticalAlignment="Top" Width="109" Click="btnLimpiar_Click">            <Button.Background>                <LinearGradientBrush>                    <GradientStop Color="#FF222222" Offset="1"/>                    <GradientStop Color="CadetBlue" Offset="0.5"/>                </LinearGradientBrush>            </Button.Background>        </Button>        <materialDesign:PackIcon Kind="TextBoxMinus" Height="32" Width="27" Foreground="#FFF" Margin="836,558,0,0" />
+
 
 
     </Grid>

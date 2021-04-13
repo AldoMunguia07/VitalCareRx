@@ -21,7 +21,7 @@
             </Button>
         </Grid>
         <Button Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="520,515,0,0" VerticalAlignment="Top" Width="137" Click="btnModificar_Click"/>
-        <materialDesign:PackIcon Kind="AccountEdit" Width="29" Height="28" VerticalAlignment="Center" Foreground="White" Margin="520,519,0,35"/>
+        <materialDesign:PackIcon Kind="AccountEdit" Width="29" Height="28" VerticalAlignment="Center" Foreground="White" Margin="522,517,0,45"/>
 
         <Grid HorizontalAlignment="Left" Height="582" VerticalAlignment="Top" Width="410" Background="White">
             <materialDesign:PackIcon Kind="Account" Width="202" Height="196" VerticalAlignment="Center" Margin="86,154,0,232" Foreground="#1274d0"/>

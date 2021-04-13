@@ -130,12 +130,15 @@
             <materialDesign:PackIcon Kind="AccountCheckOutline" Height="17" Width="25" Foreground="#FFF" />
         </Button>
 
-        <Button Name="btnCitas" Content="Citas" HorizontalAlignment="Left" VerticalAlignment="Top" Width="109" Margin="242,527,0,0" Click="btnCitas_Click"/>
-        <Button Name="btnConsultas" Content="  Consultas" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114" Margin="29,527,0,0" RenderTransformOrigin="0.4,0.594" Grid.Column="1" Click="btnConsultas_Click"/>
-        <materialDesign:PackIcon Kind="BookAccountOutline" Height="27" Width="48" Foreground="#FFF" Margin="24,527,0,0" Grid.Column="1" />
-        <materialDesign:PackIcon Kind="BookClockOutline" Height="27" Width="48" Foreground="#FFF" Margin="242,527,0,0" />
-        <ComboBox Name ="cmbEstado"  HorizontalAlignment="Left" Margin="10,546,0,0" VerticalAlignment="Top" Width="168" Background="White" SelectionChanged="cmbEstado_SelectionChanged" SelectedValue="1"/>
-        <Label Content="PACIENTES" HorizontalAlignment="Left" Margin="56,522,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Button Name="btnCitas" Content="Citas" HorizontalAlignment="Left" VerticalAlignment="Top" Width="109" Margin="242,544,0,0" Click="btnCitas_Click"/>
+        <Button Name="btnConsultas" Content="  Consultas" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114" Margin="29,544,0,0" RenderTransformOrigin="0.4,0.594" Grid.Column="1" Click="btnConsultas_Click"/>
+        <materialDesign:PackIcon Kind="BookAccountOutline" Height="27" Width="48" Foreground="#FFF" Margin="24,544,0,0" Grid.Column="1" />
+        <materialDesign:PackIcon Kind="BookClockOutline" Height="27" Width="48" Foreground="#FFF" Margin="242,544,0,0" />
+        <ComboBox Name ="cmbEstado"  HorizontalAlignment="Left" Margin="10,550,0,0" VerticalAlignment="Top" Width="168" Background="White" SelectionChanged="cmbEstado_SelectionChanged" SelectedValue="1"/>
+        <Label Content="PACIENTES" HorizontalAlignment="Left" Margin="56,526,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+
+        <Button Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="250,544,0,0" VerticalAlignment="Top" Width="110" Click="btnLimpiar_Click" Grid.Column="1">            <Button.Background>                <LinearGradientBrush>                    <GradientStop Color="#FF222222" Offset="1"/>                    <GradientStop Color="CadetBlue" Offset="0.5"/>                </LinearGradientBrush>            </Button.Background>        </Button>        <materialDesign:PackIcon Kind="TextBoxMinus" Height="32" Width="28" Foreground="#FFF" Margin="250,544,0,0" Grid.Column="1" />
+
 
     </Grid>
 </Window>
