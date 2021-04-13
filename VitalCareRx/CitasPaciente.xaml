@@ -37,9 +37,9 @@
             </RichTextBox>
         </Grid>
         <DataGrid Name="gridCitas" HorizontalAlignment="Left" Height="283" Margin="10,104,0,0" VerticalAlignment="Top" Width="470" SelectionChanged="gridCitas_SelectionChanged"/>
-        <Label Background="#FF222222" Content="Fecha Cita" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="491,104,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="275" HorizontalContentAlignment="Center"/>
+        <Label Background="#FF222222" Content="Fecha cita" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="491,104,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="275" HorizontalContentAlignment="Center"/>
         <Label Content="Notas" Background="#FF222222" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="491,252,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Height="34" Width="275" RenderTransformOrigin="0.612,0.375" HorizontalContentAlignment="Center"/>
-        <Label Content="Listado de Citas" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,62,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="491" HorizontalContentAlignment="Center">
+        <Label Content="Listado de citas" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,62,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="491" HorizontalContentAlignment="Center">
             <Label.Background>
 
                 <LinearGradientBrush>

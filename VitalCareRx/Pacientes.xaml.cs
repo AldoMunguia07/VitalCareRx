@@ -314,7 +314,7 @@ namespace VitalCareRx
             txtSegundoApellido.Clear();
             richTxtDireccion.Document.Blocks.Clear();
             txtCelular.Clear();
-            dtFechaNacimiento.Text = String.Empty;
+            dtFechaNacimiento.SelectedDate = null;
             txtPeso.Clear();
             txtEstatura.Clear();
             estado = 0;

@@ -99,7 +99,7 @@ namespace VitalCareRx
         {
             TextRange notas = new TextRange(richTextBoxNotas.Document.ContentStart, richTextBoxNotas.Document.ContentEnd);
 
-            if (dtFecha.Text != string.Empty && notas.Text != "\r\n")
+            if (dtFecha.SelectedDate != null && notas.Text != "\r\n")
             {
                 return true;
             }

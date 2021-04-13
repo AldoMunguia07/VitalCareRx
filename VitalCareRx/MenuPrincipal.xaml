@@ -70,7 +70,7 @@
                 <ListViewItem Name="ltUsuario" Height="60" Selected="ltUsuario_Selected">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="AccountCircleOutline" Height="30" Width="30" />
-                        <TextBlock Text="Mi Usuario" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                        <TextBlock Text="Mi usuario" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Name="ltInformacion" Height="60" Selected="ltInformacion_Selected">

@@ -33,9 +33,9 @@
             <TextBox Name="txtDescripcionFarmaco" Background="White" HorizontalAlignment="Left" Height="30" Margin="40,132,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="202" FontSize="18"/>
         </Grid>
         <DataGrid SelectionChanged="dgFarmacos_SelectionChanged" Name="dgFarmacos"  HorizontalAlignment="Left" Height="336" Margin="10,97,0,0" VerticalAlignment="Top" Width="721"/>
-        <Label Background="#FF222222" Content="Descripción Farmaco" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="731,75,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="285" Height="37"/>
-        <Label Background="#FF222222" Content="Indicación de Tratamiento" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="731,297,0,263" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="285" RenderTransformOrigin="0.612,0.375"/>
-        <Label Content="Listado de Fármacos" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,33,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="731" HorizontalContentAlignment="Center">
+        <Label Background="#FF222222" Content="Descripción farmaco" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="731,75,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="285" Height="37"/>
+        <Label Background="#FF222222" Content="Indicación de tratamiento" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="731,297,0,263" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="285" RenderTransformOrigin="0.612,0.375"/>
+        <Label Content="Listado de fármacos" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,33,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="731" HorizontalContentAlignment="Center">
             <Label.Background>
 
                 <LinearGradientBrush>

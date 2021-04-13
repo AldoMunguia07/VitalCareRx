@@ -33,10 +33,10 @@
 
         <Grid HorizontalAlignment="Left" Height="582" VerticalAlignment="Top" Width="410" Background="White">
 
-            <Label Content="Primer Nombre" HorizontalAlignment="Left" Margin="444,75,-159,0" VerticalAlignment="Top" Foreground="White" Height="28" Width="125" FontSize="14" FontWeight="Bold"/>
-            <Label Content="Segundo Nombre" HorizontalAlignment="Left" Margin="444,147,-159,0" VerticalAlignment="Top" Foreground="White" Width="125" FontSize="14" FontWeight="Bold"/>
-            <Label Content="Primer Apellido" HorizontalAlignment="Left" Margin="444,211,-159,0" VerticalAlignment="Top" Foreground="White" Width="125" FontWeight="Bold" FontSize="14"/>
-            <Label Content="Segundo Apellido" HorizontalAlignment="Left" Margin="444,275,-159,0" VerticalAlignment="Top" Foreground="White" Width="125" FontWeight="Bold" FontSize="14"/>
+            <Label Content="Primer nombre" HorizontalAlignment="Left" Margin="444,75,-159,0" VerticalAlignment="Top" Foreground="White" Height="28" Width="125" FontSize="14" FontWeight="Bold"/>
+            <Label Content="Segundo nombre" HorizontalAlignment="Left" Margin="444,147,-159,0" VerticalAlignment="Top" Foreground="White" Width="125" FontSize="14" FontWeight="Bold"/>
+            <Label Content="Primer apellido" HorizontalAlignment="Left" Margin="444,211,-159,0" VerticalAlignment="Top" Foreground="White" Width="125" FontWeight="Bold" FontSize="14"/>
+            <Label Content="Segundo apellido" HorizontalAlignment="Left" Margin="444,275,-159,0" VerticalAlignment="Top" Foreground="White" Width="125" FontWeight="Bold" FontSize="14"/>
             <Label Content="Celular" HorizontalAlignment="Left" Margin="444,345,-138,0" VerticalAlignment="Top" Foreground="White" Width="104" FontSize="14" FontWeight="Bold"/>
             <Label Content="Usuario" HorizontalAlignment="Left" Margin="24,395,0,0" VerticalAlignment="Top" Foreground="Gray" Width="104" FontSize="20" FontWeight="Bold"/>
             <Label Content="Contraseña" HorizontalAlignment="Left" Margin="24,478,0,0" VerticalAlignment="Top" Foreground="Gray" Width="119" FontSize="20" FontWeight="Bold"/>
