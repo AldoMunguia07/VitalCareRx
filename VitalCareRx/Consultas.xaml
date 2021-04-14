@@ -38,12 +38,12 @@
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
-            <Label Background="#FF222222" Content="Temperatura" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,348,0,202" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="283" RenderTransformOrigin="0.612,0.375" HorizontalContentAlignment="Center" />
+            <Label Background="#1c1c1c" Content="Temperatura" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,348,0,202" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="283" RenderTransformOrigin="0.612,0.375" HorizontalContentAlignment="Center" />
             <TextBox Name="txtTemperatura"  Background="White" HorizontalAlignment="Left" Height="37" Margin="10,394,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="255" FontSize="20"/>
-            <Label Background="#FF222222" Content="Presión arterial" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,452,0,98" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="283" RenderTransformOrigin="0.612,0.375" HorizontalContentAlignment="Center"/>
+            <Label Background="#1c1c1c" Content="Presión arterial" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,452,0,98" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="283" RenderTransformOrigin="0.612,0.375" HorizontalContentAlignment="Center"/>
             <TextBox Name="txtPresionArterial" Background="White" HorizontalAlignment="Left" Height="37" Margin="10,505,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="255" FontSize="20"/>
-            <Label Background="#FF222222" Content="Diagnostico de la consulta" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,191,0,359" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="283" RenderTransformOrigin="0.612,0.375"/>
-            <Label Background="#FF222222" Content="Motivo de la consulta" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,66,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="283" HorizontalContentAlignment="Center" />
+            <Label Background="#1c1c1c" Content="Diagnostico de la consulta" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,191,0,359" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="283" RenderTransformOrigin="0.612,0.375"/>
+            <Label Background="#1c1c1c" Content="Motivo de la consulta" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,66,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="283" HorizontalContentAlignment="Center" />
         </Grid>
         <DataGrid Name="dgConsultas" HorizontalAlignment="Left" Height="332" Margin="10,76,0,0" VerticalAlignment="Top" Width="710" SelectionChanged="dgConsultas_SelectionChanged" AutoGeneratingColumn="dgConsultas_AutoGeneratingColumn" />
         <Label Content="Listado de consultas" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,15,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="742" HorizontalContentAlignment="Center" >
@@ -90,7 +90,7 @@
         <Label Content="Codigo Citas" Foreground="White" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="362,516,0,0" VerticalAlignment="Top" Background="Green" Height="30" Width="141" FontSize="14" FontWeight="Bold"/>
         <ComboBox Name="cmbCodigoCitas" HorizontalAlignment="Left" Margin="362,486,0,0" VerticalAlignment="Top" Width="141"/>
 
-        <Button Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="836,558,0,0" VerticalAlignment="Top" Width="109" Click="btnLimpiar_Click">            <Button.Background>                <LinearGradientBrush>                    <GradientStop Color="#FF222222" Offset="1"/>                    <GradientStop Color="CadetBlue" Offset="0.5"/>                </LinearGradientBrush>            </Button.Background>        </Button>        <materialDesign:PackIcon Kind="TextBoxMinus" Height="32" Width="27" Foreground="#FFF" Margin="836,558,0,0" />
+        <Button Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="836,558,0,0" VerticalAlignment="Top" Width="109" Click="btnLimpiar_Click">            <Button.Background>                <LinearGradientBrush>                    <GradientStop Color="#1c1c1c" Offset="1"/>                    <GradientStop Color="CadetBlue" Offset="0.5"/>                </LinearGradientBrush>            </Button.Background>        </Button>        <materialDesign:PackIcon Kind="TextBoxMinus" Height="32" Width="27" Foreground="#FFF" Margin="836,558,0,0" />
 
 
 

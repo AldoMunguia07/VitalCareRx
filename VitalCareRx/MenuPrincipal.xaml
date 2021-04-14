@@ -9,7 +9,7 @@
         Title="MainWindow" Icon="IMAGENES/ImagendeIcono.png"  Height="600" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
     <Grid Background="#FFEEEEEE" MouseDown="Grid_MouseDown">
         <StackPanel VerticalAlignment="Top">
-            <Grid Background="#FF222222" Height="10"/>
+            <Grid Background="#1c1c1c" Height="10"/>
             <Grid Margin="5">
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
 
@@ -39,7 +39,7 @@
                 <LinearGradientBrush>
 
                     <GradientStop Color="#74EEAB" Offset="1"/>
-                    <GradientStop Color="#FF222222" Offset="0.3"/>
+                    <GradientStop Color="#1c1c1c" Offset="0.3"/>
                 </LinearGradientBrush>
             </Grid.Background>
             <materialDesign:PackIcon Kind="Account" Height="95" Width="86" Margin="0,0,0,505" VerticalAlignment="Bottom" Foreground="White" />

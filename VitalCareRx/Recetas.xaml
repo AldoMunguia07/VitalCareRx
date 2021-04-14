@@ -14,7 +14,7 @@
             <Grid.Background>
 
                 <LinearGradientBrush>
-                    <GradientStop Color="#FF222222" Offset="0.01"/>
+                    <GradientStop Color="#1c1c1c" Offset="0.01"/>
                     <GradientStop Color="#74EEAB" Offset="1"/>
 
                 </LinearGradientBrush>
@@ -38,19 +38,19 @@
                 </FlowDocument>
             </RichTextBox>
             <ComboBox Name="cmbFarmacos" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" Width="255" Height="30" Background="White"/>
-            <Label Background="#FF222222" Content="Duración tratamiento" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,215,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="275"/>
-            <Label Background="#FF222222" Content="Farmacos" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,42,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="275" Height="30"/>
+            <Label Background="#1c1c1c" Content="Duración tratamiento" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,215,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="283" Height="36"/>
+            <Label Background="#1c1c1c" Content="Farmacos" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,42,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="283" Height="34"/>
             <Button Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="82,485,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="-0.242,0.544" Click="btnModificar_Click"/>
-            <Label Background="#FF222222" Content="Cantidad de fármaco" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,127,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="275"/>
+            <Label Background="#1c1c1c" Content="Cantidad de fármaco" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,127,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="283" Height="38"/>
             <TextBox Name="txtCantidad" Background="White" FontSize="10" HorizontalAlignment="Left" Height="26" Margin="10,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="255"/>
         </Grid>
         <DataGrid Name = "dgRecetas" HorizontalAlignment="Left" Height="306" Margin="10,99,0,0" VerticalAlignment="Top" Width="463" SelectionChanged="dgRecetas_SelectionChanged"/>
-        <Label Background="#FF222222" Content="Indicaciónes" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="495,346,4,212" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="275" RenderTransformOrigin="0.612,0.375"/>
+        <Label Background="#1c1c1c" Content="Indicaciónes" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="495,346,0,212" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="279" RenderTransformOrigin="0.612,0.375"/>
         <Label Content="Listado de fármacos" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,62,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="463">
             <Label.Background>
 
                 <LinearGradientBrush>
-                    <GradientStop Color="#FF222222" Offset="0.06"/>
+                    <GradientStop Color="#1c1c1c" Offset="0.06"/>
 
 
                 </LinearGradientBrush>
@@ -71,7 +71,7 @@
             <Button.Background>
                 <LinearGradientBrush>
 
-                    <GradientStop Color="#FF222222" Offset="1"/>
+                    <GradientStop Color="#1c1c1c" Offset="1"/>
                     <GradientStop Color="#C0392B" Offset="0.5"/>
                 </LinearGradientBrush>
             </Button.Background>
@@ -80,7 +80,7 @@
         <materialDesign:PackIcon Kind="BookEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="575,487,0,0" />
         <materialDesign:PackIcon Kind="DeleteCircle" Height="32" Width="24" Foreground="#FFF" Margin="262,417,0,0" />
 
-        <Button Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="575,536,0,0" VerticalAlignment="Top" Width="109" Click="btnLimpiar_Click">            <Button.Background>                <LinearGradientBrush>                    <GradientStop Color="#FF222222" Offset="1"/>                    <GradientStop Color="CadetBlue" Offset="0.5"/>                </LinearGradientBrush>            </Button.Background>        </Button>        <materialDesign:PackIcon Kind="TextBoxMinus" Height="32" Width="27" Foreground="#FFF" Margin="575,536,0,0" />
+        <Button Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="575,536,0,0" VerticalAlignment="Top" Width="109" Click="btnLimpiar_Click">            <Button.Background>                <LinearGradientBrush>                    <GradientStop Color="#1c1c1c" Offset="1"/>                    <GradientStop Color="CadetBlue" Offset="0.5"/>                </LinearGradientBrush>            </Button.Background>        </Button>        <materialDesign:PackIcon Kind="TextBoxMinus" Height="32" Width="27" Foreground="#FFF" Margin="575,536,0,0" />
 
 
     </Grid>

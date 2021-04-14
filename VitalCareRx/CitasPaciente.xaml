@@ -18,7 +18,7 @@
             <Grid.Background>
 
                 <LinearGradientBrush>
-                    <GradientStop Color="#FF222222" Offset="0.01"/>
+                    <GradientStop Color="#1c1c1c" Offset="0.01"/>
                     <GradientStop Color="#74EEAB" Offset="1"/>
 
                 </LinearGradientBrush>
@@ -64,7 +64,7 @@
         <Button Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="250,12,0,0" VerticalAlignment="Top" Width="114" Grid.Row="1" Click="btnModificar_Click"/>
         <materialDesign:PackIcon Kind="SquareEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="250,12,0,0" Grid.Row="1" />
 
-        <Button Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="579,125,0,0" VerticalAlignment="Top" Width="109" Click="btnLimpiar_Click" Grid.Row="1">            <Button.Background>                <LinearGradientBrush>                    <GradientStop Color="#FF222222" Offset="1"/>                    <GradientStop Color="CadetBlue" Offset="0.5"/>                </LinearGradientBrush>            </Button.Background>        </Button>        <materialDesign:PackIcon Kind="TextBoxMinus" Height="32" Width="27" Foreground="#FFF" Margin="579,125,0,0" Grid.Row="1" />
+        <Button Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="579,125,0,0" VerticalAlignment="Top" Width="109" Click="btnLimpiar_Click" Grid.Row="1">            <Button.Background>                <LinearGradientBrush>                    <GradientStop Color="#1c1c1c" Offset="1"/>                    <GradientStop Color="CadetBlue" Offset="0.5"/>                </LinearGradientBrush>            </Button.Background>        </Button>        <materialDesign:PackIcon Kind="TextBoxMinus" Height="32" Width="27" Foreground="#FFF" Margin="579,125,0,0" Grid.Row="1" />
 
 
     </Grid>

@@ -34,7 +34,7 @@ namespace VitalCareRx
             InitializeComponent();
             usuarioActual = empleado;
             codigoEmpleado = codigo;
-            timer = new Timer(100);
+            timer = new Timer(35);
             timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
             timer.Start();
 
@@ -56,7 +56,6 @@ namespace VitalCareRx
                     a += 1;
                     str = a + "%";
                     lbLoad.Content = str;
-                    //lbPorciento.Visibility = Visibility;
                     BAR.Value += 0.3;
                     
                 }

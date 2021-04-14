@@ -26,6 +26,8 @@ namespace VitalCareRx
 
         private int codigoEmpleado;
         private string nombreEmpleado;
+        
+
         public MenuPrincipal(string usuario, int codigo)
         {
             InitializeComponent();
@@ -33,6 +35,7 @@ namespace VitalCareRx
             codigoEmpleado = codigo;
             nombreEmpleado = usuario;
             lbUsuario.Content = usuario;
+           
             DispatcherTimer LiveTime = new DispatcherTimer();
             LiveTime.Interval = TimeSpan.FromSeconds(1);
             LiveTime.Tick += timer_Tick;
@@ -61,6 +64,7 @@ namespace VitalCareRx
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
+
             DragMove();
         }
 

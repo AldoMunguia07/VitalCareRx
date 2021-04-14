@@ -8,10 +8,10 @@
         mc:Ignorable="d"
           Title="MainWindow" Icon="IMAGENES/ImagendeIcono.png"  Height="412" Width="658" WindowStyle="None" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" ResizeMode="NoResize">
     <Grid>
-        <Image Source="IMAGENES/PrimeroDios.png" Height="151" VerticalAlignment="Top" Margin="10,10,425,0" RenderTransformOrigin="0.5,0.5"/>
-        <Label Foreground="White" Content="Vital Care Rx 2021" HorizontalAlignment="Left" Margin="335,147,0,0" VerticalAlignment="Top" FontSize="35" FontFamily="Segoe UI Emoji"/>
-        <Label Foreground="White" Content="Version Beta" HorizontalAlignment="Left" Margin="415,202,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Label Foreground="#74EEAB" Content="copyright © 2021 Omega Soft-Evolution&#xD;&#xA;" HorizontalAlignment="Left" Margin="26,256,0,0" VerticalAlignment="Top" Width="294" FontSize="15" RenderTransformOrigin="0.5,0.5" FontWeight="Bold" Height="31">
+        <Image Source="IMAGENES/PrimeroDios.png" Height="131" VerticalAlignment="Top" Margin="10,10,431,0" RenderTransformOrigin="0.5,0.5"/>
+        <Label Foreground="White" Content="Vital Care Rx 2021" HorizontalAlignment="Left" Margin="333,59,0,0" VerticalAlignment="Top" FontSize="36" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
+        <Label Foreground="White" Content="Version Beta" HorizontalAlignment="Left" Margin="433,115,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Foreground="#74EEAB" Content="copyright © 2021 Omega Soft-Evolution&#xD;&#xA;" HorizontalAlignment="Left" Margin="25,258,0,0" VerticalAlignment="Top" Width="313" RenderTransformOrigin="0.5,0.5" FontWeight="Bold" Height="28" FontSize="16">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -24,6 +24,16 @@
         <Button Name="btnCerrar" Background="Red" HorizontalAlignment="Left" Margin="610,0,0,0" VerticalAlignment="Top" Width="48" Height="23" Click="btnCerrar_Click">
             <materialDesign:PackIcon Foreground="White" Kind="CloseCircle"/>
         </Button>
+        <Label Foreground="#2F4F4F" FontSize="24" Content="Developed By:&#xA;&#xA;Aldo  Josué  Munguía  Hernández&#xA;Angel  Gabriel  Pagoaga  Rodríguez&#xA;Jordy  Josue  Castillo  Núñez&#xA;Osman  David  Gómez  Campos" HorizontalAlignment="Left" Margin="278,224,0,0" VerticalAlignment="Top" Height="179" Width="370" FontFamily="Berlin Sans FB" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.042"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
 
         <Grid.Background>
             <LinearGradientBrush>
