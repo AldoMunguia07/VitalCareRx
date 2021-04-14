@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:VitalCareRx"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="CitasPaciente" Icon="IMAGENES/ImagendeIcono.png" Height="580" Width="766" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown">
+        Title="CitasPaciente" Icon="IMAGENES/ImagendeIcono.png" Height="580" Width="766" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" 
+        MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="196*"/>

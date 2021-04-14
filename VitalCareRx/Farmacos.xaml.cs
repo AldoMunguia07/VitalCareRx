@@ -55,7 +55,8 @@ namespace VitalCareRx
         /// </summary>
         public void MostrarFarmaco()
         {
-            string query = @"SELECT * FROM [Consultas].[Farmaco]";
+            string query = @"SELECT idFarmaco as 'Codigo Farmaco', descripcionFarmaco as 'Farmaco', informacionPrecaucion as 'Precaución' FROM [Consultas].[Farmaco]";
+            ;
 
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
 
@@ -223,7 +224,7 @@ namespace VitalCareRx
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string query = @"SELECT * FROM [Consultas].[Farmaco] WHERE descripcionFarmaco LIKE CONCAT('%', @nombreFarmaco, '%')";
+            string query = @"SELECT idFarmaco as 'Codigo Farmaco', descripcionFarmaco as 'Farmaco', informacionPrecaucion as 'Precaución' FROM [Consultas].[Farmaco] WHERE descripcionFarmaco LIKE CONCAT('%', @nombreFarmaco, '%')";
 
 
             SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
@@ -247,10 +248,7 @@ namespace VitalCareRx
 
 
 
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
+       
 
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
@@ -258,6 +256,27 @@ namespace VitalCareRx
             LimpiarFormulario();
             MostrarFarmaco();
             
+        }
+
+        bool right = false;
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!right)
+            {
+                DragMove();
+            }
+
+        }
+
+        private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            right = true;
+        }
+
+        private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            right = false;
         }
     }
 }

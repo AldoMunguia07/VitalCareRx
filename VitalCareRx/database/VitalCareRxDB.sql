@@ -227,3 +227,28 @@ ALTER TABLE Consultas.DetalleRecetaMedica
 GO
 
 
+
+-- Datos tabla sexo
+INSERT [Personas].[Sexo]  VALUES ('Femenino')
+
+INSERT [Personas].[Sexo]  VALUES ('Masculino')
+
+
+-- Datos tabla TipoSangre
+INSERT [Personas].[TipoSangre]  VALUES ( 'A+')
+
+INSERT [Personas].[TipoSangre] VALUES ( 'A-')
+
+INSERT [Personas].[TipoSangre]  VALUES ( 'AB-')
+
+INSERT [Personas].[TipoSangre]  VALUES ( 'AB+')
+
+INSERT [Personas].[TipoSangre]  VALUES ( 'B-')
+
+INSERT [Personas].[TipoSangre]  VALUES ( 'B+')
+
+INSERT [Personas].[TipoSangre]  VALUES ( 'O-')
+
+INSERT [Personas].[TipoSangre]  VALUES ( 'O+')
+
+

@@ -117,15 +117,33 @@ namespace VitalCareRx
 
         }
 
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
+        
 
         private void gridConsultas_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             if (e.PropertyType == typeof(System.Double))
                 (e.Column as DataGridTextColumn).Binding.StringFormat = "N2";
+        }
+
+        bool right = false;
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!right)
+            {
+                DragMove();
+            }
+
+        }
+
+        private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            right = true;
+        }
+
+        private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            right = false;
         }
     }
 }

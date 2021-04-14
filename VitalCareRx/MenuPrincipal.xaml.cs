@@ -62,10 +62,25 @@ namespace VitalCareRx
             }
         }
 
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
-        {
+        bool right = false;
 
-            DragMove();
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!right)
+            {
+                DragMove();
+            }
+
+        }
+
+        private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            right = true;
+        }
+
+        private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            right = false;
         }
 
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)

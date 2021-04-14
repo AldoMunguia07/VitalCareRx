@@ -206,10 +206,7 @@ namespace VitalCareRx
             }
         }
 
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
+        
 
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
@@ -221,6 +218,27 @@ namespace VitalCareRx
         {
             if (e.PropertyType == typeof(System.DateTime))
                 (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
+        }
+
+        bool right = false;
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!right)
+            {
+                DragMove();
+            }
+
+        }
+
+        private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            right = true;
+        }
+
+        private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            right = false;
         }
     }
 }

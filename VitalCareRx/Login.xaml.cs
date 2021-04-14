@@ -83,10 +83,7 @@ namespace VitalCareRx
             this.Close();
         }
 
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
+        
 
         
         private int i = 0;
@@ -111,6 +108,27 @@ namespace VitalCareRx
                 pwbPassword.Visibility = Visibility.Visible;
                 IconoBoton.Kind = MaterialDesignThemes.Wpf.PackIconKind.EyeOff;
             }
+        }
+
+        bool right = false;
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!right)
+            {
+                DragMove();
+            }
+
+        }
+
+        private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            right = true;
+        }
+
+        private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            right =false;
         }
     }
 }
