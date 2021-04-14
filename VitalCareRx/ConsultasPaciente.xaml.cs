@@ -121,5 +121,11 @@ namespace VitalCareRx
         {
             DragMove();
         }
+
+        private void gridConsultas_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyType == typeof(System.Double))
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "N2";
+        }
     }
 }

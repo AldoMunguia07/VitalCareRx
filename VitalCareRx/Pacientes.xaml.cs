@@ -63,7 +63,7 @@ namespace VitalCareRx
         {
             string query = @"SELECT P.numeroIdentidad Identidad,primerNombre,segundoNombre,PrimerApellido,segundoApellido, P.idTipoSangre, P.idSexo,
                             CONCAT(P.primerNombre, ' ', P.segundoNombre, ' ', P.primerApellido, ' ', P.segundoApellido) Paciente,
-                            P.direccion Direccion, P.celular Celular, P.fechaNacimiento 'Fecha de nacimiento', P.peso Peso, P.estatura Estatura, P.estado Estado,
+                            P.direccion Direccion, P.celular Celular, P.fechaNacimiento 'Fecha de nacimiento', P.peso 'Peso (lbs)', P.estatura 'Estatura (cm)', P.estado Estado,
                             T.descripcionTipoSangre 'Tipo de sangre', S.descripcionSexo Sexo
                             FROM [Personas].[Paciente] P INNER JOIN [Personas].[TipoSangre] T
                             ON P.idTipoSangre = T.idTipoSangre
@@ -107,7 +107,7 @@ namespace VitalCareRx
         {
             string query = @"SELECT P.numeroIdentidad Identidad,primerNombre,segundoNombre,PrimerApellido,segundoApellido, P.idTipoSangre, P.idSexo,
                             CONCAT(P.primerNombre, ' ', P.segundoNombre, ' ', P.primerApellido, ' ', P.segundoApellido) Paciente,
-                            P.direccion Direccion, P.celular Celular, P.fechaNacimiento 'Fecha de nacimiento', P.peso Peso, P.estatura Estatura, P.estado Estado,
+                            P.direccion Direccion, P.celular Celular, P.fechaNacimiento 'Fecha de nacimiento', P.peso 'Peso (lbs)', P.estatura 'Estatura (cm)', P.estado Estado,
                             T.descripcionTipoSangre 'Tipo de sangre', S.descripcionSexo Sexo
                             FROM [Personas].[Paciente] P INNER JOIN [Personas].[TipoSangre] T
                             ON P.idTipoSangre = T.idTipoSangre
@@ -280,8 +280,8 @@ namespace VitalCareRx
                  direccion.Text = rowSelected.Row["Direccion"].ToString();
                  txtCelular.Text = rowSelected.Row["Celular"].ToString();
                  dtFechaNacimiento.SelectedDate = Convert.ToDateTime(rowSelected.Row["Fecha de nacimiento"]);
-                 txtPeso.Text = rowSelected.Row["Peso"].ToString();
-                 txtEstatura.Text = rowSelected.Row["Estatura"].ToString();
+                 txtPeso.Text = rowSelected.Row["Peso (lbs)"].ToString();
+                 txtEstatura.Text = rowSelected.Row["Estatura (cm)"].ToString();
 
                  if (rowSelected.Row["Estado"].ToString() == "True")
                  {
@@ -446,21 +446,26 @@ namespace VitalCareRx
         {
             if (Validar())
             {
-                try
+                if (!seleccionado)
                 {
-                    ObtenerDatos();
+                    try
+                    {
+                        ObtenerDatos();
 
-                    paciente.CrearPaciente(paciente);
-                    MessageBox.Show("El paciente se ha insertado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
-                    MostrarPacientes();
-                    LimpiarFormulario();
-                    OcultarColumnas();
-                }
-                catch (Exception )
-                {
+                        paciente.CrearPaciente(paciente);
+                        MessageBox.Show("El paciente se ha insertado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MostrarPacientes();
+                        LimpiarFormulario();
+                        OcultarColumnas();
+                    }
+                    catch (Exception)
+                    {
 
-                    MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
+                else
+                    MessageBox.Show("¡No se puede agregar el mismo paciente!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
@@ -532,6 +537,16 @@ namespace VitalCareRx
             LimpiarFormulario();
             MostrarPacientes();
             OcultarColumnas();
+        }
+
+        private void gridPacientes_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyType == typeof(System.DateTime))
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
+
+            if (e.PropertyType == typeof(System.Double))
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "N2";
+
         }
     }
 }

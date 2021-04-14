@@ -43,7 +43,7 @@ namespace VitalCareRx
         /// </summary>
         private void CargarRecetasAConsulta()
         {
-            string query = @"SELECT DR.idRecetaMedica 'Codigo de receta', DR.idFarmaco 'Codigo de farmaco',F.descripcionFarmaco 'Farmaco', 
+            string query = @"SELECT DR.idRecetaMedica 'Codigo de receta', DR.idFarmaco 'Codigo de farmaco', DR.cantidad 'Cantidad',F.descripcionFarmaco 'Farmaco', 
                             DR.duracionTratamiento 'Duracion', DR.indicaciones 'Indicacion'
                             FROM [Consultas].[DetalleRecetaMedica] DR INNER JOIN [Consultas].[Farmaco] F
                             ON DR.idFarmaco = F.idFarmaco

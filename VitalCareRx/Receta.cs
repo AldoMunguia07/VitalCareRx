@@ -24,6 +24,8 @@ namespace VitalCareRx
 
         public int IdFarmaco { get; set; }
 
+        public int Cantidad { get; set; }
+
         public string DuracionTratamiento { get; set; }
 
         public string Indicaciones { get; set; }
@@ -34,11 +36,12 @@ namespace VitalCareRx
 
         public Receta() { }
 
-        public Receta(int idReceta, int idConsulta ,int idFarmaco, string duracionTratamiento, string indicaciones) 
+        public Receta(int idReceta, int idConsulta,int idFarmaco, int cantidad, string duracionTratamiento, string indicaciones) 
         {
             IdReceta = idReceta;
-            IdConsulta = IdConsulta;
+            IdConsulta = idConsulta;
             IdFarmaco = idFarmaco;
+            Cantidad = cantidad;
             DuracionTratamiento = duracionTratamiento;
             Indicaciones = indicaciones;
         }
@@ -54,7 +57,7 @@ namespace VitalCareRx
             try
             {
                 // Query de selección
-                string query = @"INSERT INTO [Consultas].[DetalleRecetaMedica] VALUES (@idRecetaMedica,@idFarmaco,@duracion, @indicacion)";
+                string query = @"INSERT INTO [Consultas].[DetalleRecetaMedica] VALUES (@idRecetaMedica,@idFarmaco,@cantidad,@duracion, @indicacion)";
 
                 // Establecer la conexión
                 sqlConnection.Open();
@@ -65,6 +68,7 @@ namespace VitalCareRx
                 // Establecer los valores de los parámetros
                 sqlCommand.Parameters.AddWithValue("@idRecetaMedica", receta.IdReceta);
                 sqlCommand.Parameters.AddWithValue("@idFarmaco", receta.IdFarmaco);
+                sqlCommand.Parameters.AddWithValue("@cantidad", receta.Cantidad);
                 sqlCommand.Parameters.AddWithValue("@duracion", receta.DuracionTratamiento);
                 sqlCommand.Parameters.AddWithValue("@indicacion", receta.Indicaciones);
 
@@ -118,7 +122,7 @@ namespace VitalCareRx
             try
             {
                 string query = @"UPDATE [Consultas].[DetalleRecetaMedica]
-                                SET idFarmaco = @idFarmaco , duracionTratamiento = @duracion, indicaciones = @indicacion
+                                SET idFarmaco = @idFarmaco, cantidad = @cantidad , duracionTratamiento = @duracion, indicaciones = @indicacion
                                 WHERE idRecetaMedica = @idRecetaMedica and idFarmaco = @idFarmaco
                                 ";
 
@@ -128,6 +132,7 @@ namespace VitalCareRx
 
                 sqlCommand.Parameters.AddWithValue("@idRecetaMedica", receta.IdReceta);
                 sqlCommand.Parameters.AddWithValue("@idFarmaco", receta.IdFarmaco);
+                sqlCommand.Parameters.AddWithValue("@cantidad", receta.Cantidad);
                 sqlCommand.Parameters.AddWithValue("@duracion", receta.DuracionTratamiento);
                 sqlCommand.Parameters.AddWithValue("@indicacion", receta.Indicaciones);
 

@@ -101,28 +101,32 @@ namespace VitalCareRx
             
             if (ValidarCampos())
             {
-                
-                try
+                if (!seleccionado)
                 {
-                    ObtenerValores();
+                    try
+                    {
+                        ObtenerValores();
 
-                    consulta.CrearConsulta(consulta);
+                        consulta.CrearConsulta(consulta);
 
-                   
 
-                    LimpiarFormulario();
 
-                    MessageBox.Show("La consulta se ha insertado con exito","CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
+                        LimpiarFormulario();
 
-                    MostrarConsultas();
+                        MessageBox.Show("La consulta se ha insertado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
 
+                        MostrarConsultas();
+
+                    }
+                    catch (Exception)
+                    {
+
+
+                        MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
-                catch (Exception)
-                {
-
-                    
-                    MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                else
+                    MessageBox.Show("¡No se puede agregar la misma consulta!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
@@ -461,6 +465,7 @@ namespace VitalCareRx
                 RecetaMedica();
                 Recetas recetas = new Recetas(idConsulta,idRecetaMedica);
                 recetas.ShowDialog();
+                btnReceta.Content = "Ver receta";
                 
             }
             else
@@ -482,6 +487,12 @@ namespace VitalCareRx
             LimpiarFormulario();
             MostrarConsultas();
            
+        }
+
+        private void dgConsultas_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyType == typeof(System.Double))
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "N2";
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

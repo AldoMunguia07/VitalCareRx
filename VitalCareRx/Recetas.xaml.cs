@@ -52,7 +52,7 @@ namespace VitalCareRx
         {
             try
             {
-                string query = @"SELECT DR.idRecetaMedica 'Receta Medica', DR.idFarmaco 'Codigo Farmaco',F.descripcionFarmaco 'Farmaco', DR.duracionTratamiento 'Duracion', DR.indicaciones 'Indicaciones'
+                string query = @"SELECT DR.idRecetaMedica 'Receta Medica', DR.idFarmaco 'Codigo Farmaco', DR.cantidad 'Cantidad',F.descripcionFarmaco 'Farmaco', DR.duracionTratamiento 'Duracion', DR.indicaciones 'Indicaciones'
                             FROM [Consultas].[DetalleRecetaMedica] DR INNER JOIN [Consultas].[Farmaco] F
                             ON DR.idFarmaco = F.idFarmaco
                             INNER JOIN [Consultas].[RecetaMedica] R
@@ -185,14 +185,16 @@ namespace VitalCareRx
             receta.IdConsulta = codigoConsulta;
             receta.Indicaciones = indicaciones.Text.Substring(0, indicaciones.Text.Length - 2);
             receta.DuracionTratamiento = duracionTratamiento.Text.Substring(0, duracionTratamiento.Text.Length - 2);
+            receta.Cantidad = Convert.ToInt32(txtCantidad.Text);
             receta.IdFarmaco = Convert.ToInt32(cmbFarmacos.SelectedValue);
             receta.IdReceta = codigoRecetaMedica;
+            
         }
         private bool ValidarCampos()
         {
             TextRange indicaciones = new TextRange(rtxtIndicaciones.Document.ContentStart, rtxtIndicaciones.Document.ContentEnd);
             TextRange durationTratamiento = new TextRange(rtxtDuracionTratamiento.Document.ContentStart, rtxtDuracionTratamiento.Document.ContentEnd);
-            if (cmbFarmacos.SelectedValue != null && indicaciones.Text != string.Empty && durationTratamiento.Text != string.Empty)
+            if (cmbFarmacos.SelectedValue != null && txtCantidad.Text != string.Empty && indicaciones.Text != string.Empty && durationTratamiento.Text != string.Empty)
             {
                 return true;
             }
@@ -208,7 +210,7 @@ namespace VitalCareRx
 
         private void LimpiarFormulario()
         {
-
+            txtCantidad.Text = string.Empty;
             rtxtIndicaciones.Document.Blocks.Clear();
             rtxtDuracionTratamiento.Document.Blocks.Clear();
             cmbFarmacos.SelectedValue = null;
@@ -228,9 +230,11 @@ namespace VitalCareRx
                 TextRange DuracionTratamiento = new TextRange(rtxtDuracionTratamiento.Document.ContentStart, rtxtDuracionTratamiento.Document.ContentEnd);
                 TextRange Indicaciones = new TextRange(rtxtIndicaciones.Document.ContentStart, rtxtIndicaciones.Document.ContentEnd);
 
+                cmbFarmacos.SelectedValue = rowSelected.Row["Codigo Farmaco"].ToString();
+                txtCantidad.Text = rowSelected.Row["Cantidad"].ToString();
                 DuracionTratamiento.Text = rowSelected.Row["Duracion"].ToString();
                 Indicaciones.Text = rowSelected.Row["Indicaciones"].ToString();
-                cmbFarmacos.SelectedValue = rowSelected.Row["Codigo Farmaco"].ToString();
+                
             }
 
         }

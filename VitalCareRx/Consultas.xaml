@@ -45,7 +45,7 @@
             <Label Background="#FF222222" Content="Diagnostico de la consulta" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,191,0,359" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="283" RenderTransformOrigin="0.612,0.375"/>
             <Label Background="#FF222222" Content="Motivo de la consulta" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,66,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="283" HorizontalContentAlignment="Center" />
         </Grid>
-        <DataGrid Name="dgConsultas" HorizontalAlignment="Left" Height="332" Margin="10,76,0,0" VerticalAlignment="Top" Width="710" SelectionChanged="dgConsultas_SelectionChanged" />
+        <DataGrid Name="dgConsultas" HorizontalAlignment="Left" Height="332" Margin="10,76,0,0" VerticalAlignment="Top" Width="710" SelectionChanged="dgConsultas_SelectionChanged" AutoGeneratingColumn="dgConsultas_AutoGeneratingColumn" />
         <Label Content="Listado de consultas" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,15,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="742" HorizontalContentAlignment="Center" >
             <Label.Background>
 
@@ -58,7 +58,7 @@
             </Label.Background>
         </Label>
         <TextBox Name="txtBuscar" HorizontalAlignment="Left" Height="25" Margin="185,486,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="128" RenderTransformOrigin="0.455,1.52"/>
-        <Button Name="btnAñadir" Content="Añadir" HorizontalAlignment="Left" Margin="131,424,0,0" VerticalAlignment="Top" Width="110" Click="btnAñadir_Click">
+        <Button Name="btnAñadir" Content="Añadir" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="131,424,0,0" VerticalAlignment="Top" Width="110" Click="btnAñadir_Click">
             <Button.Background>
                 <LinearGradientBrush>
 
