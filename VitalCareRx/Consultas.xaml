@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VitalCareRx"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown"
+        Title="MainWindow" Icon="IMAGENES/ImagendeIcono.png" Height="600" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown"
         >
     <Grid>
         <Image Source="IMAGENES/PrimeroDios.png" Height="66" VerticalAlignment="Top" Margin="621,516,304,0" RenderTransformOrigin="0.5,0.5"/>

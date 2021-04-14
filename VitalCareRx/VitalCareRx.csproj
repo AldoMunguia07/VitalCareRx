@@ -228,6 +228,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="database\VitalCareRxDB.sql" />
+    <Resource Include="IMAGENES\ImagendeIcono.png" />
     <Resource Include="IMAGENES\PrimeroDios.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

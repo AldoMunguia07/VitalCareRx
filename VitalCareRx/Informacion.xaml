@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VitalCareRx"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"  
         mc:Ignorable="d"
-          Title="MainWindow" Height="412" Width="658" WindowStyle="None" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" ResizeMode="NoResize">
+          Title="MainWindow" Icon="IMAGENES/ImagendeIcono.png"  Height="412" Width="658" WindowStyle="None" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" ResizeMode="NoResize">
     <Grid>
         <Image Source="IMAGENES/PrimeroDios.png" Height="151" VerticalAlignment="Top" Margin="10,10,425,0" RenderTransformOrigin="0.5,0.5"/>
         <Label Foreground="White" Content="Vital Care Rx 2021" HorizontalAlignment="Left" Margin="335,147,0,0" VerticalAlignment="Top" FontSize="35" FontFamily="Segoe UI Emoji"/>
