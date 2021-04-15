@@ -14,7 +14,7 @@
             <TextBox Name="txtSegundoNombre" HorizontalAlignment="Left" Height="28" Margin="25,184,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" Background="White" RenderTransformOrigin="0.5,0.5" />
             <TextBox Name="txtPrimerApellido" HorizontalAlignment="Left" Height="28" Margin="25,242,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" Background="White" RenderTransformOrigin="0.5,0.5" />
             <TextBox Name="txtSegundoApellido" HorizontalAlignment="Left" Height="28" Margin="25,307,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" Background="White" RenderTransformOrigin="0.5,0.5" />
-            <TextBox Name="txtCelular" HorizontalAlignment="Left" Height="28" Margin="25,377,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" Background="White" RenderTransformOrigin="0.5,0.5" />
+            <TextBox Name="txtCelular" HorizontalAlignment="Left" Height="28" Margin="25,377,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" Background="White" RenderTransformOrigin="0.5,0.5" MaxLength="8"/>
             <ComboBox Name="cmbSexo" HorizontalAlignment="Left" Margin="25,441,0,0" VerticalAlignment="Top" Width="303" Background="White"/>
 
             <Button Name="btnCerrar" Background="#a30000" HorizontalAlignment="Left" Margin="306,0,0,0" VerticalAlignment="Top" Width="58" Click="btnCerrar_Click">

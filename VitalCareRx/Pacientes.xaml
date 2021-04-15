@@ -97,7 +97,7 @@
         <Label Content="Estado" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="311,94,0,0" Foreground="White" FontWeight="Bold" Width="53" RenderTransformOrigin="1.604,0.083" Grid.Column="1"/>
         <Label Content="Tipo sangre" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="293,153,0,0" Foreground="White" FontWeight="Bold" Grid.Column="1"/>
         <Label Content="Sexo" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="329,206,0,0" Grid.Column="1" Foreground="White" FontWeight="Bold"/>
-        <TextBox Name="txtDni" Background="White" HorizontalAlignment="Left" Height="23" Margin="170,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox MaxLength="13" Name="txtDni" Background="White" HorizontalAlignment="Left" Height="23" Margin="170,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox Name="txtPrimerApellido" Background="White" HorizontalAlignment="Left" Height="23" Margin="170,153,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox Name="txtSegundoNombre"  Background="White" HorizontalAlignment="Left" Height="23" Margin="168,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="122"/>
         <TextBox Name="txtPeso" Background="White" HorizontalAlignment="Left" Height="23" Margin="41,206,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
@@ -111,7 +111,7 @@
         </RichTextBox>
         <TextBox Name="txtEstatura" Background="White" HorizontalAlignment="Left" Height="23" Margin="369,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
         <TextBox Name="txtSegundoApellido" Background="White" HorizontalAlignment="Left" Height="23" Margin="170,207,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name="txtCelular" Background="White" HorizontalAlignment="Left" Height="23" Margin="41,119,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="1" RenderTransformOrigin="0.825,0.739"/>
+        <TextBox Name="txtCelular" Background="White" HorizontalAlignment="Left" Height="23" Margin="41,119,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="1" RenderTransformOrigin="0.825,0.739" MaxLength="8" />
         <ComboBox Name="cmbTipoSangre" Background="White" HorizontalAlignment="Left" Margin="369,154,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
         <ComboBox Name="cmbSexo" Background="White" HorizontalAlignment="Left" Margin="369,205,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" RenderTransformOrigin="0.533,1"/>
         <DatePicker Name="dtFechaNacimiento"  HorizontalAlignment="Left" Margin="41,161,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" RenderTransformOrigin="0.65,-1.24"/>

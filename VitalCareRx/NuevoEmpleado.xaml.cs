@@ -40,29 +40,55 @@ namespace VitalCareRx
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
             
-            if (txtPrimerNombre.Text != String.Empty && txtSegundoNombre.Text != String.Empty && txtPrimerApellido.Text != 
-                String.Empty && txtSegundoApellido.Text != String.Empty && txtCelular.Text != String.Empty && txtUsuario.Text !=
-                String.Empty && txtContrasenia.Text != String.Empty && cmbSexo.SelectedValue != null)
-            {
-                try
+            
+                if (txtPrimerNombre.Text != String.Empty && txtSegundoNombre.Text != String.Empty && txtPrimerApellido.Text !=
+              String.Empty && txtSegundoApellido.Text != String.Empty && txtCelular.Text != String.Empty && txtUsuario.Text !=
+              String.Empty && txtContrasenia.Text != String.Empty && cmbSexo.SelectedValue != null)
                 {
-                    ObtenerValores();
-                    empleado.CrearNuevoEmpleado(empleado);                             
-                    empleado.IdEmpleado = empleado.CodigoEmpleado();  
-                    LimpiarFormulario();
-                    Loading loading = new Loading(String.Format("{0} {1}", empleado.PrimerNombre, empleado.PrimerApellido), empleado.IdEmpleado);
-                    loading.Show();
-                    this.Close();
+                    if (!ExisteUsuario())
+                    {
+                        if(txtCelular.Text.Length == 8)
+                        {
+                            if(txtContrasenia.Text.Length >= 8)
+                            {
+                                try
+                                {
+                                    ObtenerValores();
+                                    empleado.CrearNuevoEmpleado(empleado);
+                                    empleado.IdEmpleado = empleado.CodigoEmpleado();
+                                    LimpiarFormulario();
+                                    Loading loading = new Loading(String.Format("{0} {1}", empleado.PrimerNombre, empleado.PrimerApellido), empleado.IdEmpleado);
+                                    loading.Show();
+                                    this.Close();
+                                }
+                                catch (Exception)
+                                {
+                                    MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                }
+                            }else 
+                            {
+                                MessageBox.Show("¡La contraseña debe contener almenos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            }
+                        
+                        }else 
+                        {
+                            MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
+                    
+                    }
+                    else
+                    {
+                        MessageBox.Show("¡El nombre de usuario ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                        
                 }
-                catch (Exception)
+                else
                 {
-                    MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-            }else
-            {
-                MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-         
+
+
+
 
         }
         
@@ -127,6 +153,44 @@ namespace VitalCareRx
             txtSegundoNombre.Clear();
             txtUsuario.Clear();
             cmbSexo.SelectedValue = null;
+        }
+
+
+        public bool ExisteUsuario()
+        {
+            try
+            {
+
+                string query = @"SELECT nombreUsuario FROM [Personas].[Empleado] WHERE [nombreUsuario] = @user";
+
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    sqlCommand.Parameters.AddWithValue("@user", txtUsuario.Text);
+
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+
+
+                    if (dataTable.Rows.Count == 1)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+
         }
 
         bool right = false;
