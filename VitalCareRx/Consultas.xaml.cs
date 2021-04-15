@@ -103,26 +103,33 @@ namespace VitalCareRx
             {
                 if (!seleccionado)
                 {
-                    try
+                    if (float.Parse(txtTemperatura.Text) > 0)
                     {
-                        ObtenerValores();
+                        try
+                        {
+                            ObtenerValores();
 
-                        consulta.CrearConsulta(consulta);
+                            consulta.CrearConsulta(consulta);
 
 
 
-                        LimpiarFormulario();
+                            LimpiarFormulario();
 
-                        MessageBox.Show("La consulta se ha insertado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
+                            MessageBox.Show("La consulta se ha insertado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                        MostrarConsultas();
+                            MostrarConsultas();
 
+                        }
+                        catch (Exception)
+                        {
+
+
+                            MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
-                    catch (Exception)
+                    else
                     {
-
-
-                        MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("¡La temperatura no puede ser menor o igual que 0 C°!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
                 else
@@ -260,6 +267,7 @@ namespace VitalCareRx
             seleccionado = false;
             btnReceta.Content = "Receta";
             CargarCodigoCita();
+            txtBuscar.Clear();
         }
 
 
@@ -315,24 +323,30 @@ namespace VitalCareRx
             {
                 if (ValidarCampos())
                 {
-
-                    try
+                    if (float.Parse(txtTemperatura.Text) > 0)
                     {
-                        ObtenerValores();
+                        try
+                        {
+                            ObtenerValores();
 
-                        consulta.ModificarConsulta(consulta);
+                            consulta.ModificarConsulta(consulta);
 
-                        LimpiarFormulario();
+                            LimpiarFormulario();
 
-                        MessageBox.Show("La consulta se ha modificado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
+                            MessageBox.Show("La consulta se ha modificado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                        MostrarConsultas();
+                            MostrarConsultas();
 
+                        }
+                        catch (Exception)
+                        {
+
+                            MessageBox.Show("Ha ocurrido un error al momento de realizar la modificacion... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
-                    catch (Exception)
+                    else
                     {
-
-                        MessageBox.Show("Ha ocurrido un error al momento de realizar la modificacion... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("¡La temperatura no puede ser menor o igual que 0 C°!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
 
                 }

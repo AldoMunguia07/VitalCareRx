@@ -29,6 +29,8 @@ namespace VitalCareRx
         private int codigoConsulta;
         private bool validarSeleccionado;
         private int codigoRecetaMedica;
+        private int codigoFarmaco;
+        
 
         private Receta receta = new Receta();
 
@@ -46,13 +48,14 @@ namespace VitalCareRx
             MostrarFarmacos();
 
             validarSeleccionado = false;
+            
         }
 
         private void MostrarFarmacos()
         {
             try
             {
-                string query = @"SELECT DR.idRecetaMedica 'Receta Medica', DR.idFarmaco 'Codigo Farmaco', DR.cantidad 'Cantidad',F.descripcionFarmaco 'Farmaco', DR.duracionTratamiento 'Duracion', DR.indicaciones 'Indicaciones'
+                string query = @"SELECT DR.idRecetaMedica 'Receta Medica', DR.idFarmaco 'Codigo Farmaco', F.descripcionFarmaco 'Farmaco', DR.cantidad 'Cantidad', DR.duracionTratamiento 'Duracion', DR.indicaciones 'Indicaciones'
                             FROM [Consultas].[DetalleRecetaMedica] DR INNER JOIN [Consultas].[Farmaco] F
                             ON DR.idFarmaco = F.idFarmaco
                             INNER JOIN [Consultas].[RecetaMedica] R
@@ -106,42 +109,53 @@ namespace VitalCareRx
 
         private void btnAñadir_Click(object sender, RoutedEventArgs e)
         {
-            try
+            
+            if (ValidarCampos())
             {
-                if (ValidarCampos())
+                if (!validarSeleccionado)
                 {
-                    if (!validarSeleccionado)
+                    if (!ValidarFarmacoEnReceta())
                     {
-                        ObtenerValores();
+                        if (int.Parse(txtCantidad.Text) > 0)
+                        {
+                            try
+                            {
+                                ObtenerValores();
 
-                        receta.AgregarFarmacoAReceta(receta);
+                                receta.AgregarFarmacoAReceta(receta);
 
-                        LimpiarFormulario();
+                                LimpiarFormulario();
 
-                        MostrarFarmacos();
+                                MostrarFarmacos();
 
-                        MessageBox.Show("Farmaco agreado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
+                                MessageBox.Show("Farmaco agreado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                                MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("¡No puede recetar 0 o una cantidad menor de farmacos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
                     }
                     else
                     {
                         MessageBox.Show("El farmaco ya a sido agregado a la receta medica de la consulta.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-
-
-
+                        
                 }
                 else
                 {
-                    MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("El farmaco ya a sido agregado a la receta medica de la consulta.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-
             }
-            catch (Exception)
+            else
             {
-
-                MessageBox.Show("Ha ocurrido un error al momento de realizar la insercion... Favor intentelo de nuevo mas tarde", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
@@ -156,11 +170,11 @@ namespace VitalCareRx
 
                     receta.EliminarFarmacoReceta(receta);
 
-                    MessageBox.Show("Farmaco eliminado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
-
                     LimpiarFormulario();
 
                     MostrarFarmacos();
+
+                    MessageBox.Show("Farmaco eliminado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 }
                 else
@@ -234,54 +248,64 @@ namespace VitalCareRx
                 txtCantidad.Text = rowSelected.Row["Cantidad"].ToString();
                 DuracionTratamiento.Text = rowSelected.Row["Duracion"].ToString();
                 Indicaciones.Text = rowSelected.Row["Indicaciones"].ToString();
-                
+
+                codigoFarmaco = Convert.ToInt32(rowSelected.Row["Codigo Farmaco"].ToString());
+
             }
 
         }
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-
-            try
+            if (validarSeleccionado)
             {
-                if (validarSeleccionado)
+                if (ValidarCampos())
                 {
-                    if (ValidarCampos())
+                    if (!ValidarFarmacoEnReceta() || codigoFarmaco == Convert.ToInt32(cmbFarmacos.SelectedValue))
                     {
+                        if (int.Parse(txtCantidad.Text) > 0)
+                        {
+                            try
+                            {
+                                ObtenerValores();
 
+                                receta.ModificarFarmacoReceta(receta);
 
-                        ObtenerValores();
+                                LimpiarFormulario();
 
-                        receta.ModificarFarmacoReceta(receta);
+                                MostrarFarmacos();
 
+                                MessageBox.Show("Farmaco modificado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }
+                            catch (Exception)
+                            {
 
+                                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("¡No puede recetar 0 o una cantidad menor de farmacos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
 
-                        MessageBox.Show("Farmaco modificado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                        LimpiarFormulario();
-
-                        MostrarFarmacos();
                     }
                     else
                     {
-                        MessageBox.Show("Debe llenar todos los campus", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-
-
-
+                        MessageBox.Show("El farmaco ya a sido agregado a la receta medica de la consulta.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }    
                 }
                 else
                 {
-                    MessageBox.Show("¡Es requerido que seleccione un farmaco!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Debe llenar todos los campus", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
+
+
             }
-            catch (Exception)
+            else
             {
-
-                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificacion... Favor intentelo de nuevo mas tarde", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("¡Es requerido que seleccione un farmaco!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
 
         bool right = false;
@@ -309,6 +333,39 @@ namespace VitalCareRx
         {
             LimpiarFormulario();
             MostrarFarmacos();
+        }
+
+        private bool ValidarFarmacoEnReceta()
+        {
+            try
+            {
+                string query = @"SELECT idFarmaco FROM [Consultas].[DetalleRecetaMedica] WHERE idFarmaco = @idFarmaco";
+
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    sqlCommand.Parameters.AddWithValue("@idFarmaco", cmbFarmacos.SelectedValue);
+                    DataTable dataTable = new DataTable();
+                    sqlDataAdapter.Fill(dataTable);
+
+                    if (dataTable.Rows.Count == 1)
+
+                        return true;
+
+                    return false;
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
     }  
 }

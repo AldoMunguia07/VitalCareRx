@@ -55,7 +55,7 @@ namespace VitalCareRx
         /// </summary>
         public void MostrarFarmaco()
         {
-            string query = @"SELECT idFarmaco as 'Codigo Farmaco', descripcionFarmaco as 'Farmaco', informacionPrecaucion as 'Precaución' FROM [Consultas].[Farmaco]";
+            string query = @"SELECT idFarmaco as 'Codigo Farmaco', descripcionFarmaco as 'Farmaco', informacionPrecaucion as 'Información del farmaco' FROM [Consultas].[Farmaco]";
             ;
 
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
@@ -156,6 +156,7 @@ namespace VitalCareRx
 
             rtxtIndicaciones.Document.Blocks.Clear();
             txtDescripcionFarmaco.Text = string.Empty;
+            txtBuscarFarmaco.Text = string.Empty;
             seleccionado = false;
 
 
@@ -213,9 +214,9 @@ namespace VitalCareRx
             {
                 seleccionado = true;
                 TextRange IndicacionesFarmaco = new TextRange(rtxtIndicaciones.Document.ContentStart, rtxtIndicaciones.Document.ContentEnd);
-                txtDescripcionFarmaco.Text = rowSelected.Row["descripcionFarmaco"].ToString();
-                IndicacionesFarmaco.Text = rowSelected.Row["informacionPrecaucion"].ToString();
-                farmaco.IdFarmaco = Convert.ToInt32(rowSelected.Row["idFarmaco"]);
+                txtDescripcionFarmaco.Text = rowSelected.Row["Farmaco"].ToString();
+                IndicacionesFarmaco.Text = rowSelected.Row["Información del farmaco"].ToString();
+                farmaco.IdFarmaco = Convert.ToInt32(rowSelected.Row["Codigo Farmaco"]);
 
 
             }
@@ -224,7 +225,7 @@ namespace VitalCareRx
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string query = @"SELECT idFarmaco as 'Codigo Farmaco', descripcionFarmaco as 'Farmaco', informacionPrecaucion as 'Precaución' FROM [Consultas].[Farmaco] WHERE descripcionFarmaco LIKE CONCAT('%', @nombreFarmaco, '%')";
+            string query = @"SELECT idFarmaco as 'Codigo Farmaco', descripcionFarmaco as 'Farmaco', informacionPrecaucion as 'Información del farmaco' FROM [Consultas].[Farmaco] WHERE descripcionFarmaco LIKE CONCAT('%', @nombreFarmaco, '%')";
 
 
             SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);

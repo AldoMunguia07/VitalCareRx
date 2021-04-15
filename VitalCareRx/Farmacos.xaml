@@ -35,7 +35,7 @@
         </Grid>
         <DataGrid SelectionChanged="dgFarmacos_SelectionChanged" Name="dgFarmacos"  HorizontalAlignment="Left" Height="336" Margin="10,97,0,0" VerticalAlignment="Top" Width="721"/>
         <Label Background="#1c1c1c" Content="Descripción farmaco" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="731,75,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="285" Height="37"/>
-        <Label Background="#1c1c1c" Content="Indicación de tratamiento" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="731,297,0,263" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="285" RenderTransformOrigin="0.612,0.375"/>
+        <Label Background="#1c1c1c" Content="Información del farmaco" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="731,297,0,263" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="285" RenderTransformOrigin="0.612,0.375"/>
         <Label Content="Listado de fármacos" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,33,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="731" HorizontalContentAlignment="Center">
             <Label.Background>
 

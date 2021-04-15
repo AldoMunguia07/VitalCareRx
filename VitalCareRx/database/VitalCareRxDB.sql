@@ -220,13 +220,6 @@ ALTER TABLE Consultas.Consulta
 		UNIQUE NONCLUSTERED (idCita)
 GO
 
---Tabla Consulta.DetalleReceta
-ALTER TABLE Consultas.DetalleRecetaMedica
-		ADD CONSTRAINT AK_Consultas_DetalleRecetaMedica_idRecetaMedica
-		UNIQUE NONCLUSTERED (idRecetaMedica)
-GO
-
-
 
 -- Datos tabla sexo
 INSERT [Personas].[Sexo]  VALUES ('Femenino')

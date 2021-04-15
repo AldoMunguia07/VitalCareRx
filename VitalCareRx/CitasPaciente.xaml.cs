@@ -130,18 +130,25 @@ namespace VitalCareRx
                 
                 if (!selecionado)
                 {
-                    try
+                    if (dtFecha.SelectedDate > DateTime.Now.Date)
                     {
-                        ObtenerValoresCita();
-                        cita.AgregarCita(cita);
-                        LimpiarFormulario();
-                        CargarCitasPaciente();
-                        MessageBox.Show("¡La cita se ha agregado con exito!", "CITA", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    catch (Exception)
-                    {
+                        try
+                        {
+                            ObtenerValoresCita();
+                            cita.AgregarCita(cita);
+                            LimpiarFormulario();
+                            CargarCitasPaciente();
+                            MessageBox.Show("¡La cita se ha agregado con exito!", "CITA", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        catch (Exception)
+                        {
 
-                        MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("¡La fecha de la proxima cita debe ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
                 else
@@ -163,18 +170,25 @@ namespace VitalCareRx
             {
                 if (selecionado)
                 {
-                    try
+                    if (dtFecha.SelectedDate > DateTime.Now.Date)
                     {
-                        ObtenerValoresCita();
-                        cita.ModificarCita(cita);
-                        LimpiarFormulario();
-                        CargarCitasPaciente();
-                        MessageBox.Show("¡La cita se ha modificado con exito!", "CITA", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    catch (Exception)
-                    {
+                        try
+                        {
+                            ObtenerValoresCita();
+                            cita.ModificarCita(cita);
+                            LimpiarFormulario();
+                            CargarCitasPaciente();
+                            MessageBox.Show("¡La cita se ha modificado con exito!", "CITA", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        catch (Exception)
+                        {
 
-                        MessageBox.Show("Ha ocurrido un error al momento de realizar la modificacion... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("Ha ocurrido un error al momento de realizar la modificacion... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("¡La fecha de la proxima cita debe ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
                 else
