@@ -30,6 +30,7 @@ namespace VitalCareRx
         private string NameEmpleado;
 
         Empleado miUsuario = new Empleado();
+        private string usuario; 
 
         public MiUsuario(int empleado)
         {
@@ -39,6 +40,7 @@ namespace VitalCareRx
             codigoEmpleado = empleado;            
             CargarTextBox();
             LlenarComboBoxSexo();
+            usuario = txtUsuario.Text;
         }
 
         /// <summary>
@@ -158,26 +160,98 @@ namespace VitalCareRx
             }
             return false;
         }
+
+
+        public bool ExisteUsuario()
+        {
+            try
+            {
+
+                string query = @"SELECT nombreUsuario FROM [Personas].[Empleado] WHERE [nombreUsuario] = @user";
+
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    sqlCommand.Parameters.AddWithValue("@user", txtUsuario.Text);
+
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+
+
+                    if (dataTable.Rows.Count == 1)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+
+        }
+
+
+
+
+
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
             if (Validar())
             {
-                try
+                if(!ExisteUsuario() || usuario == txtUsuario.Text)
                 {
-                    ObtenerDatos();
-                    miUsuario.ModificarEmpleado(miUsuario);                    
-                    MessageBox.Show("¡Datos actualizados correctamente!", "USUARIO", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    if (txtCelular.Text.Length == 8)
+                    {
+                        if (txtPassword.Text.Length >= 8)
+                        {
+                            try
+                            {
+                                ObtenerDatos();
+                                miUsuario.ModificarEmpleado(miUsuario);
+                                MessageBox.Show("¡Datos actualizados correctamente!", "USUARIO", MessageBoxButton.OK, MessageBoxImage.Information);
+                                usuario = txtUsuario.Text;
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("¡La contraseña debe contener almenos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+
                 }
-                catch (Exception)
+                else
                 {
-                    MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                   
+                    MessageBox.Show("¡El nombre de usuario ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
+                
+
             }
             else
             {
                 MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+
+
     }
 }

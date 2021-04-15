@@ -28,7 +28,7 @@ namespace VitalCareRx
         private int codigoEmpleado;
 
         private int estado = 0;
-        bool cargado = false;        
+        bool cargado = false;
         bool seleccionado = false;
         private string dni;
 
@@ -170,7 +170,7 @@ namespace VitalCareRx
                 cmbEstado.DisplayMemberPath = "estado";
                 cmbEstado.SelectedValuePath = "id";
                 cmbEstado.ItemsSource = dataTable.DefaultView;
-                
+
             }
         }
 
@@ -233,7 +233,7 @@ namespace VitalCareRx
             gridPacientes.Columns[4].Visibility = Visibility.Hidden;
             gridPacientes.Columns[5].Visibility = Visibility.Hidden;
             gridPacientes.Columns[6].Visibility = Visibility.Hidden;
-            
+
         }
 
         private void gridPacientes_Loaded(object sender, RoutedEventArgs e)
@@ -242,7 +242,7 @@ namespace VitalCareRx
             cargado = true;
         }
 
-       
+
 
         private void cmbEstado_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -259,7 +259,7 @@ namespace VitalCareRx
             {
                 btnEliminar.IsEnabled = true;
             }
-           
+
         }
 
         private void gridPacientes_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -267,33 +267,33 @@ namespace VitalCareRx
             DataGrid dataGrid = (DataGrid)sender;
             DataRowView rowSelected = dataGrid.SelectedItem as DataRowView;
             TextRange direccion = new TextRange(richTxtDireccion.Document.ContentStart, richTxtDireccion.Document.ContentEnd);
-            
-           if (rowSelected != null)
+
+            if (rowSelected != null)
             {
                 seleccionado = true;
                 dni = rowSelected.Row["Identidad"].ToString(); ;
                 txtDni.Text = rowSelected.Row["Identidad"].ToString();
-                 txtPrimerNombre.Text = rowSelected.Row["primerNombre"].ToString();
-                 txtSegundoNombre.Text = rowSelected.Row["segundoNombre"].ToString();
-                 txtPrimerApellido.Text = rowSelected.Row["primerApellido"].ToString();
-                 txtSegundoApellido.Text = rowSelected.Row["segundoApellido"].ToString();
-                 direccion.Text = rowSelected.Row["Direccion"].ToString();
-                 txtCelular.Text = rowSelected.Row["Celular"].ToString();
-                 dtFechaNacimiento.SelectedDate = Convert.ToDateTime(rowSelected.Row["Fecha de nacimiento"]);
-                 txtPeso.Text = rowSelected.Row["Peso (lbs)"].ToString();
-                 txtEstatura.Text = rowSelected.Row["Estatura (cm)"].ToString();
+                txtPrimerNombre.Text = rowSelected.Row["primerNombre"].ToString();
+                txtSegundoNombre.Text = rowSelected.Row["segundoNombre"].ToString();
+                txtPrimerApellido.Text = rowSelected.Row["primerApellido"].ToString();
+                txtSegundoApellido.Text = rowSelected.Row["segundoApellido"].ToString();
+                direccion.Text = rowSelected.Row["Direccion"].ToString();
+                txtCelular.Text = rowSelected.Row["Celular"].ToString();
+                dtFechaNacimiento.SelectedDate = Convert.ToDateTime(rowSelected.Row["Fecha de nacimiento"]);
+                txtPeso.Text = rowSelected.Row["Peso (lbs)"].ToString();
+                txtEstatura.Text = rowSelected.Row["Estatura (cm)"].ToString();
 
-                 if (rowSelected.Row["Estado"].ToString() == "True")
-                 {
-                     
-                     estado = 1;
-                 }
-                 else if (rowSelected.Row["Estado"].ToString() == "False")
-                 {
-                     
-                     estado = 0;
-                 }
-                
+                if (rowSelected.Row["Estado"].ToString() == "True")
+                {
+
+                    estado = 1;
+                }
+                else if (rowSelected.Row["Estado"].ToString() == "False")
+                {
+
+                    estado = 0;
+                }
+
 
                 CargarColorBoton();
                 cmbTipoSangre.SelectedValue = rowSelected.Row["idTipoSangre"].ToString();
@@ -322,7 +322,7 @@ namespace VitalCareRx
             cmbTipoSangre.SelectedValue = null;
             cmbSexo.SelectedValue = null;
             seleccionado = false;
-           
+            dni = string.Empty;
 
 
         }
@@ -344,7 +344,7 @@ namespace VitalCareRx
 
         private void btnEstado_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if (estado == 0)
             {
                 btnEstado.Background = new SolidColorBrush(Color.FromArgb(165, 42, 165, 42));
@@ -352,7 +352,7 @@ namespace VitalCareRx
             }
             else
             {
-                
+
                 btnEstado.Background = new SolidColorBrush(Color.FromArgb(140, 255, 0, 0));
                 estado = 0;
             }
@@ -363,35 +363,82 @@ namespace VitalCareRx
         {
             if (seleccionado)
             {
+                
                 if (Validar())
                 {
-                    try
-                    {
-                        ObtenerDatos();
 
-                        paciente.ActualizarPaciente(paciente);
-                        MostrarPacientes();
-                        LimpiarFormulario();
-                        OcultarColumnas();
-                        MessageBox.Show("El paciente se ha modificado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    catch (Exception )
+                    if (!ExistePaciente() || dni == txtDni.Text)
                     {
+                        if(txtCelular.Text.Length == 8)
+                        {
+                            if(txtDni.Text.Length == 13)
+                            {
+                                if (dtFechaNacimiento.SelectedDate <= DateTime.Now.Date)
+                                {
+                                    if (float.Parse(txtEstatura.Text) > 0)
+                                    {
+                                        if (float.Parse(txtPeso.Text) > 0)
+                                        {
+                                            try
+                                            {
+                                                ObtenerDatos();
 
-                        MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                                paciente.ActualizarPaciente(paciente);
+                                                MostrarPacientes();
+                                                LimpiarFormulario();
+                                                OcultarColumnas();
+                                                MessageBox.Show("El paciente se ha modificado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
+                                            }
+                                            catch (Exception)
+                                            {
+
+                                                MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("¡No puede tener una peso menor o igual a 0 libras!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("¡No puede tener una estatura menor o igual a 0 centimetros!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("¡La fecha de nacimiento no puede ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("¡Numero de identidad incompleto, debe de contener 13 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
                     }
+                    else
+                    {
+                        MessageBox.Show("¡Numero de identidad existente!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+
+                
                 }
                 else
                 {
-                    MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
             else
             {
                 MessageBox.Show("¡Debe seleccionar un paciente!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
-            
+
+
         }
 
         /// <summary>
@@ -404,7 +451,7 @@ namespace VitalCareRx
 
             if (txtDni.Text != String.Empty && txtPrimerNombre.Text != String.Empty && txtSegundoNombre.Text != String.Empty && txtPrimerApellido.Text !=
                 String.Empty && txtSegundoApellido.Text != String.Empty && direccion.Text != "\r\n" && txtCelular.Text != String.Empty && dtFechaNacimiento.SelectedDate != null
-                && txtPeso.Text != String.Empty && txtEstatura.Text != String.Empty && cmbSexo.SelectedValue != null && cmbTipoSangre.SelectedValue != null )
+                && txtPeso.Text != String.Empty && txtEstatura.Text != String.Empty && cmbSexo.SelectedValue != null && cmbTipoSangre.SelectedValue != null)
             {
                 return true;
             }
@@ -439,7 +486,7 @@ namespace VitalCareRx
             paciente.Estado = status;
             paciente.IdTipoSangre = Convert.ToInt32(cmbTipoSangre.SelectedValue);
             paciente.IdSexo = Convert.ToInt32(cmbSexo.SelectedValue);
-            
+
         }
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
@@ -448,24 +495,77 @@ namespace VitalCareRx
             {
                 if (!seleccionado)
                 {
-                    try
+                    if (!ExistePaciente())
                     {
-                        ObtenerDatos();
+                        if (txtCelular.Text.Length == 8)
+                        {
+                            if (txtDni.Text.Length == 13)
+                            {
+                                if (dtFechaNacimiento.SelectedDate <= DateTime.Now.Date)
+                                {
+                                    if (float.Parse(txtEstatura.Text) > 0)
+                                    {
+                                        if (float.Parse(txtPeso.Text) > 0)
+                                        {
 
-                        paciente.CrearPaciente(paciente);
-                        MessageBox.Show("El paciente se ha insertado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
-                        MostrarPacientes();
-                        LimpiarFormulario();
-                        OcultarColumnas();
+                                            try
+                                            {
+                                                ObtenerDatos();
+
+                                                paciente.CrearPaciente(paciente);
+                                                MessageBox.Show("El paciente se ha insertado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
+                                                MostrarPacientes();
+                                                LimpiarFormulario();
+                                                OcultarColumnas();
+                                            }
+                                            catch (Exception)
+                                            {
+
+                                                MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("¡No puede tener una peso menor o igual a 0 libras!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                        }
+
+
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("¡No puede tener una estatura menor o igual a 0 centimetros!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                    }
+
+                                }
+                                else
+                                {
+                                    MessageBox.Show("¡La fecha de nacimiento no puede ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                }
+
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("¡Numero de identidad incompleto, debe de contener 13 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
+
                     }
-                    catch (Exception)
+                    else
                     {
-
-                        MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("¡El numero de identidad ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
                 else
-                    MessageBox.Show("¡No se puede agregar el mismo paciente!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                {
+                    MessageBox.Show("¡Numero de identidad existente!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+
             }
             else
             {
@@ -509,7 +609,7 @@ namespace VitalCareRx
             {
                 MessageBox.Show("¡Para ver las citas debes seleccionar un paciente!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-           
+
         }
 
         private void btnConsultas_Click(object sender, RoutedEventArgs e)
@@ -523,8 +623,8 @@ namespace VitalCareRx
             {
                 MessageBox.Show("¡Para ver las consultas debes seleccionar un paciente!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
-            
+
+
         }
 
         bool right = false;
@@ -562,6 +662,43 @@ namespace VitalCareRx
 
             if (e.PropertyType == typeof(System.Double))
                 (e.Column as DataGridTextColumn).Binding.StringFormat = "N2";
+
+        }
+
+        public bool ExistePaciente()
+        {
+            try
+            {
+
+                string query = @"SELECT numeroIdentidad FROM [Personas].[Paciente] WHERE [numeroIdentidad] = @identidad";
+
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    sqlCommand.Parameters.AddWithValue("@identidad", txtDni.Text);
+
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+
+
+                    if (dataTable.Rows.Count == 1)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
 
         }
     }
