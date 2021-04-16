@@ -235,7 +235,10 @@ namespace VitalCareRx
         /// </summary>
         private void CargarCodigoCitaSeleccionar(int idConsulta)
         {
-            string query = @"SELECT idCita FROM [Consultas].[Consulta] WHERE idConsulta = @idConsulta";
+            string query = @"SELECT CI.idCita 
+                            FROM [Consultas].[Consulta] C RIGHT JOIN [Consultas].[Cita] CI
+                            ON  C.idCita = CI.idCita
+                            WHERE CI.fechaCita >= CONVERT (date, GETDATE())";
 
             SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
@@ -307,7 +310,7 @@ namespace VitalCareRx
                 }
                 else
                 {
-                    btnReceta.Content = " Crear receta";
+                    btnReceta.Content = "   Crear receta";
                 }
 
                 

@@ -82,7 +82,7 @@
         <materialDesign:PackIcon Kind="BookEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="280,424,0,0" />
         <materialDesign:PackIcon Kind="FeatureSearchOutline" Height="32" Width="24" Foreground="#FFF" Margin="204,516,0,0" />
 
-        <Button Name="btnReceta" Background="#406fb3" Content="Receta" HorizontalAlignment="Left" Margin="437,424,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="-0.242,0.544" Click="btnReceta_Click"/>
+        <Button Name="btnReceta" Background="#406fb3" Content="Receta" HorizontalAlignment="Left" Margin="437,424,0,0" VerticalAlignment="Top" Width="134" RenderTransformOrigin="-0.242,0.544" Click="btnReceta_Click"/>
         <materialDesign:PackIcon Kind="BriefcaseAccount" Height="32" Width="24" Foreground="#FFF" Margin="437,424,0,0" />
 
 

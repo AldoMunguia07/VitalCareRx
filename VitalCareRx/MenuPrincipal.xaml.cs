@@ -40,6 +40,7 @@ namespace VitalCareRx
             LiveTime.Interval = TimeSpan.FromSeconds(1);
             LiveTime.Tick += timer_Tick;
             LiveTime.Start();
+            lbFecha.Content = DateTime.Now.ToLongTimeString();
             lbDate.Content = DateTime.Now.ToShortDateString();
 
         }
