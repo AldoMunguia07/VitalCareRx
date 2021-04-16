@@ -44,7 +44,7 @@ namespace VitalCareRx
             string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
 
-            btnEstado.Background = new SolidColorBrush(Color.FromArgb(140, 255, 0, 0));
+            btnEstado.Background = new SolidColorBrush(Color.FromArgb(140, 255, 0, 0)); // Por defecto el botón de estado se inicializa en color rojo
             nombreEmpleado = empleado;
             codigoEmpleado = codigo;
 
@@ -86,7 +86,7 @@ namespace VitalCareRx
 
                     gridPacientes.ItemsSource = dataTable.DefaultView;
 
-                    gridPacientes.IsReadOnly = true;
+                    gridPacientes.IsReadOnly = true; // El grid es de solo lectura.
 
 
                 }
@@ -120,7 +120,7 @@ namespace VitalCareRx
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
 
             sqlCommand.Parameters.AddWithValue("@estado", cmbEstado.SelectedValue);
-            sqlCommand.Parameters.AddWithValue("@nombrePaciente", txtBuscar.Text);
+            sqlCommand.Parameters.AddWithValue("@nombrePaciente", txtBuscar.Text); // Filtro de nombre del paciente
 
             try
             {
@@ -132,7 +132,7 @@ namespace VitalCareRx
 
                     gridPacientes.ItemsSource = dataTable.DefaultView;
 
-                    gridPacientes.IsReadOnly = true;
+                    gridPacientes.IsReadOnly = true; //El grid es de solo lectura, el usuario no podrá modificar lo que este contenga.
 
 
                 }
@@ -262,16 +262,18 @@ namespace VitalCareRx
 
         }
 
+        //Enviar información del grid a las textBox
         private void gridPacientes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DataGrid dataGrid = (DataGrid)sender;
+            DataGrid dataGrid = (DataGrid)sender; // Instancia de objeto tipo DataaGrid
             DataRowView rowSelected = dataGrid.SelectedItem as DataRowView;
             TextRange direccion = new TextRange(richTxtDireccion.Document.ContentStart, richTxtDireccion.Document.ContentEnd);
 
-            if (rowSelected != null)
+            if (rowSelected != null) // Si no esta seleccionado que no envie la información a las textBox
             {
+                //Asiganamos contenido a todas las textBox segun la columna en base a la fila seleccionada
                 seleccionado = true;
-                dni = rowSelected.Row["Identidad"].ToString(); ;
+                dni = rowSelected.Row["Identidad"].ToString(); 
                 txtDni.Text = rowSelected.Row["Identidad"].ToString();
                 txtPrimerNombre.Text = rowSelected.Row["primerNombre"].ToString();
                 txtSegundoNombre.Text = rowSelected.Row["segundoNombre"].ToString();
@@ -295,7 +297,7 @@ namespace VitalCareRx
                 }
 
 
-                CargarColorBoton();
+                CargarColorBoton(); //Cambiar color del botón de estado dependiendo del estado en que se encuentra el paciente seleccionado
                 cmbTipoSangre.SelectedValue = rowSelected.Row["idTipoSangre"].ToString();
                 cmbSexo.SelectedValue = rowSelected.Row["idSexo"].ToString();
 
@@ -332,11 +334,11 @@ namespace VitalCareRx
         /// </summary>
         private void CargarColorBoton()
         {
-            if (estado == 1)
+            if (estado == 1) // Si el estado es un que lo pase a color verde
             {
                 btnEstado.Background = new SolidColorBrush(Color.FromArgb(165, 42, 165, 42));
             }
-            else
+            else // Sino que lo pase a color rojo.
             {
                 btnEstado.Background = new SolidColorBrush(Color.FromArgb(140, 255, 0, 0));
             }
@@ -345,12 +347,12 @@ namespace VitalCareRx
         private void btnEstado_Click(object sender, RoutedEventArgs e)
         {
 
-            if (estado == 0)
+            if (estado == 0) // Si estado es  0(quiere decir que dio click estando el estado en 0), que cambie el botón estado a color verde.
             {
                 btnEstado.Background = new SolidColorBrush(Color.FromArgb(165, 42, 165, 42));
                 estado = 1;
             }
-            else
+            else // Sino que lo pase a color rojo.
             {
 
                 btnEstado.Background = new SolidColorBrush(Color.FromArgb(140, 255, 0, 0));
@@ -361,23 +363,23 @@ namespace VitalCareRx
 
         private void btnModificarr_Click(object sender, RoutedEventArgs e)
         {
-            if (seleccionado)
+            if (seleccionado) // Para modificar un paciente primero debe seleccionarlo
             {
                 
-                if (Validar())
+                if (Validar()) // Los campos no deben estar vacios
                 {
 
-                    if (!ExistePaciente() || dni == txtDni.Text)
+                    if (!ExistePaciente() || dni == txtDni.Text) // No puede asignar el DNI o identidad de un paciente ya registrado
                     {
-                        if(txtCelular.Text.Length == 8)
+                        if(txtCelular.Text.Length == 8) // El numero de telefno debe contener 8 dígitos.
                         {
-                            if(txtDni.Text.Length == 13)
+                            if(txtDni.Text.Length == 13) // El DNI debe contener 13  dígitos.
                             {
-                                if (dtFechaNacimiento.SelectedDate <= DateTime.Now.Date)
+                                if (dtFechaNacimiento.SelectedDate <= DateTime.Now.Date) // La fecha de nacimiento debe ser mayor o igual a la fecha actual.
                                 {
-                                    if (float.Parse(txtEstatura.Text) > 0)
+                                    if (float.Parse(txtEstatura.Text) > 0) // La estatura debe ser mayor 0.
                                     {
-                                        if (float.Parse(txtPeso.Text) > 0)
+                                        if (float.Parse(txtPeso.Text) > 0) // El peso debe ser mayor a 0.
                                         {
                                             try
                                             {
@@ -448,7 +450,7 @@ namespace VitalCareRx
         private bool Validar()
         {
             TextRange direccion = new TextRange(richTxtDireccion.Document.ContentStart, richTxtDireccion.Document.ContentEnd);
-
+            //Validación que no permita campos vacíos.
             if (txtDni.Text != String.Empty && txtPrimerNombre.Text != String.Empty && txtSegundoNombre.Text != String.Empty && txtPrimerApellido.Text !=
                 String.Empty && txtSegundoApellido.Text != String.Empty && direccion.Text != "\r\n" && txtCelular.Text != String.Empty && dtFechaNacimiento.SelectedDate != null
                 && txtPeso.Text != String.Empty && txtEstatura.Text != String.Empty && cmbSexo.SelectedValue != null && cmbTipoSangre.SelectedValue != null)
@@ -491,21 +493,21 @@ namespace VitalCareRx
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
-            if (Validar())
+            if (Validar()) // Los campos no deben estar vacios
             {
-                if (!seleccionado)
+                if (!seleccionado) // No puede agregar a un paciente existente.
                 {
-                    if (!ExistePaciente())
+                    if (!ExistePaciente()) // No puede asignar el DNI o identidad de un paciente ya registrado
                     {
-                        if (txtCelular.Text.Length == 8)
+                        if (txtCelular.Text.Length == 8) // El numero de telefno debe contener 8 dígitos.
                         {
-                            if (txtDni.Text.Length == 13)
+                            if (txtDni.Text.Length == 13) // El DNI debe contener 13  dígitos.
                             {
-                                if (dtFechaNacimiento.SelectedDate <= DateTime.Now.Date)
+                                if (dtFechaNacimiento.SelectedDate <= DateTime.Now.Date) // La fecha de nacimiento debe ser mayor o igual a la fecha actual.
                                 {
-                                    if (float.Parse(txtEstatura.Text) > 0)
+                                    if (float.Parse(txtEstatura.Text) > 0) // La estatura debe ser mayor 0.
                                     {
-                                        if (float.Parse(txtPeso.Text) > 0)
+                                        if (float.Parse(txtPeso.Text) > 0) // El peso debe ser mayor a 0.
                                         {
 
                                             try
@@ -576,7 +578,7 @@ namespace VitalCareRx
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
-            if (seleccionado)
+            if (seleccionado) //Para poder eliminar un paciente de seleccinarlo primero.
             {
                 ObtenerDatos();
                 paciente.EliminarPaciente(paciente);
@@ -600,10 +602,10 @@ namespace VitalCareRx
 
         private void btnCitas_Click(object sender, RoutedEventArgs e)
         {
-            if (seleccionado)
+            if (seleccionado) //Para ver las citas de un paciente de seleccinarlo primero.
             {
-                CitasPaciente citasPaciente = new CitasPaciente(dni);
-                citasPaciente.ShowDialog();
+                CitasPaciente citasPaciente = new CitasPaciente(dni); //Se envia el DNI del paciente para visualizar las citas correspondientes a dicho paciente.
+                citasPaciente.ShowDialog(); //ShowDialog perimte volver a ventana de paciente una vez se cierre la ventana de CitasPaciente.
             }
             else
             {
@@ -614,10 +616,10 @@ namespace VitalCareRx
 
         private void btnConsultas_Click(object sender, RoutedEventArgs e)
         {
-            if (seleccionado)
+            if (seleccionado) //Para ver las consultas de un paciente de seleccinarlo primero.
             {
-                ConsultasPaciente consultasPaciente = new ConsultasPaciente(dni);
-                consultasPaciente.ShowDialog();
+                ConsultasPaciente consultasPaciente = new ConsultasPaciente(dni); //Se envia el DNI del paciente para visualizar las consultas correspondientes a dicho paciente.
+                consultasPaciente.ShowDialog(); //ShowDialog perimte volver a ventana de paciente una vez se cierre la ventana de ConsultasPaciente.
             }
             else
             {
@@ -631,6 +633,7 @@ namespace VitalCareRx
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // Si se le da click derecho que no permita mover la ventana
             if (!right)
             {
                 DragMove();
@@ -638,16 +641,20 @@ namespace VitalCareRx
 
         }
 
+        //cuando se mantiene presionado click derecho
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+
             right = true;
         }
 
+        //cuando se suelta el click derecho
         private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             right = false;
         }
 
+        //Al darle click que reestablesca el formulario como en un inició.
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
             LimpiarFormulario();
@@ -655,16 +662,21 @@ namespace VitalCareRx
             OcultarColumnas();
         }
 
+        //Darle formato al data grid view
         private void gridPacientes_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            if (e.PropertyType == typeof(System.DateTime))
+            if (e.PropertyType == typeof(System.DateTime)) //Si la columna es de tipo DateTime que le cambie el formato a fecha corta.
                 (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
 
-            if (e.PropertyType == typeof(System.Double))
+            if (e.PropertyType == typeof(System.Double)) //Si la columna es de tipo Double o float que le cambie el formato o redondear a 2 cifras.
                 (e.Column as DataGridTextColumn).Binding.StringFormat = "N2";
 
         }
 
+        /// <summary>
+        /// Metodo para verificar si existe o no un paciente.
+        /// </summary>
+        /// <returns>Boolean</returns>
         public bool ExistePaciente()
         {
             try
@@ -686,7 +698,7 @@ namespace VitalCareRx
 
 
 
-                    if (dataTable.Rows.Count == 1)
+                    if (dataTable.Rows.Count == 1)  //Si existe que devuelva un true
                     {
                         return true;
                     }

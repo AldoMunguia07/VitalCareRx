@@ -29,7 +29,7 @@ namespace VitalCareRx
     {
         SqlConnection sqlConnection;
         private int consulta;
-        public RecetasConsultaPaciente(int codigoConsulta)
+        public RecetasConsultaPaciente(int codigoConsulta) //Se recibe por paramtero el codigo de la consulta para ver la receta que le corresponde.
         {
             InitializeComponent();
             string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
@@ -67,7 +67,7 @@ namespace VitalCareRx
                     sqlDataAdapter.Fill(dataTable);
 
                     gridRecetas.ItemsSource = dataTable.DefaultView;
-                    gridRecetas.IsReadOnly = true;
+                    gridRecetas.IsReadOnly = true; // El grid es de solo lectura.
 
 
                 }
@@ -89,6 +89,7 @@ namespace VitalCareRx
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // Si se le da click derecho que no permita mover la ventana
             if (!right)
             {
                 DragMove();
@@ -96,11 +97,14 @@ namespace VitalCareRx
 
         }
 
+        //cuando se mantiene presionado click derecho
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+
             right = true;
         }
 
+        //cuando se suelta el click derecho
         private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             right = false;

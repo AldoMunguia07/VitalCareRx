@@ -36,16 +36,16 @@ namespace VitalCareRx
             nombreEmpleado = usuario;
             lbUsuario.Content = usuario;
            
-            DispatcherTimer LiveTime = new DispatcherTimer();
+            DispatcherTimer LiveTime = new DispatcherTimer(); //Instanciación de objeto de tipo DispatcherTimer.
             LiveTime.Interval = TimeSpan.FromSeconds(1);
             LiveTime.Tick += timer_Tick;
             LiveTime.Start();
-            lbFecha.Content = DateTime.Now.ToLongTimeString();
-            lbDate.Content = DateTime.Now.ToShortDateString();
+            lbFecha.Content = DateTime.Now.ToLongTimeString(); //Inicializa la fecha y hora
+            lbDate.Content = DateTime.Now.ToShortDateString(); //Inicializa la fecha
 
         }
 
-        void timer_Tick(object sender, EventArgs e)
+        void timer_Tick(object sender, EventArgs e) //Evento para mostrar la fecha y hora en tiempo real
         {
            
             lbFecha.Content = DateTime.Now.ToLongTimeString();
@@ -67,6 +67,7 @@ namespace VitalCareRx
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // Si se le da click derecho que no permita mover la ventana
             if (!right)
             {
                 DragMove();
@@ -74,16 +75,20 @@ namespace VitalCareRx
 
         }
 
+        //cuando se mantiene presionado click derecho
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+
             right = true;
         }
 
+        //cuando se suelta el click derecho
         private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             right = false;
         }
 
+        //Valores de listViewItem (Opciones de menu principal)
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -102,12 +107,14 @@ namespace VitalCareRx
 
         }
 
+        //Efecto de "seleccion" en determinado indíce de la ListView (Opciones de menu principal)
         private void MoveCursorMenu(int index)
         {
             TrainsitionigContentSlide.OnApplyTemplate();
             GridCursor.Margin = new Thickness(0, (100 + (60 * index)), 0, 0);
         }
 
+        //Opcion de pacientes
         private void ltPacientes_Selected(object sender, RoutedEventArgs e)
         {
             Pacientes pacientes = new Pacientes(codigoEmpleado, nombreEmpleado);
@@ -115,6 +122,7 @@ namespace VitalCareRx
             this.Close();
         }
 
+        //Opcion de consultas
         private void ltConsultas_Selected(object sender, RoutedEventArgs e)
         {
             Consultas consultas = new Consultas(codigoEmpleado, nombreEmpleado);
@@ -122,6 +130,7 @@ namespace VitalCareRx
             this.Close();
         }
 
+        //Opcion de farmacos
         private void ltFarmacos_Selected(object sender, RoutedEventArgs e)
         {
             Farmacos farmacos= new Farmacos(codigoEmpleado, nombreEmpleado);
@@ -129,6 +138,7 @@ namespace VitalCareRx
             this.Close();
         }
 
+        //Opcion de "Mi usuario"
         private void ltUsuario_Selected(object sender, RoutedEventArgs e)
         {
             MiUsuario miusuario = new MiUsuario(codigoEmpleado);
@@ -136,6 +146,7 @@ namespace VitalCareRx
             this.Close();
         }
 
+        //Opcion de salir
         private void ltSalida_Selected(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("¿Desea cerrar sesión?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
@@ -150,6 +161,7 @@ namespace VitalCareRx
          
         }
 
+        //Opcion de informacion del sistema
         private void ltInformacion_Selected(object sender, RoutedEventArgs e)
         {
            Informacion informacion= new Informacion(codigoEmpleado, nombreEmpleado);

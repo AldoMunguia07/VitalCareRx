@@ -31,7 +31,7 @@ namespace VitalCareRx
         private bool selecionado = false;
         private int codigoCita;
 
-        public CitasPaciente(string paciente)
+        public CitasPaciente(string paciente) //Se le pasa por parametro el id del paciente para ver las citas correspondientes a dicho paciente.
         {
             
             InitializeComponent();
@@ -66,7 +66,7 @@ namespace VitalCareRx
                     sqlDataAdapter.Fill(dataTable);
 
                     gridCitas.ItemsSource = dataTable.DefaultView;
-                    gridCitas.IsReadOnly = true;
+                    gridCitas.IsReadOnly = true; // El grid es de solo lectura.
 
 
                 }
@@ -98,7 +98,7 @@ namespace VitalCareRx
         private bool Validar()
         {
             TextRange notas = new TextRange(richTextBoxNotas.Document.ContentStart, richTextBoxNotas.Document.ContentEnd);
-
+            //Validar que se llenen todos los campos.
             if (dtFecha.SelectedDate != null && notas.Text != "\r\n")
             {
                 return true;
@@ -125,12 +125,12 @@ namespace VitalCareRx
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
-            if (Validar())
+            if (Validar()) //Si hay campos vacios que o deje insertar la cita.
             {
                 
-                if (!selecionado)
+                if (!selecionado) //El usuario no puede agregar una cita que haya seleccionado. 
                 {
-                    if (dtFecha.SelectedDate > DateTime.Now.Date)
+                    if (dtFecha.SelectedDate > DateTime.Now.Date) //La fecha de la cita debe ser mayor a la fecha actual.
                     {
                         try
                         {
@@ -166,11 +166,11 @@ namespace VitalCareRx
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            if (Validar())
+            if (selecionado) // El usuario para modificar una cita primero debe seleccionarla.
             {
-                if (selecionado)
+                if (Validar()) //Para modificar una cita no debe dejar campos en blanco
                 {
-                    if (dtFecha.SelectedDate > DateTime.Now.Date)
+                    if (dtFecha.SelectedDate > DateTime.Now.Date) //La fecha de la cita debe ser mayor a la fecha actual.
                     {
                         try
                         {
@@ -193,25 +193,28 @@ namespace VitalCareRx
                 }
                 else
                 {
-                    MessageBox.Show("¡Debe seleccionar una cita!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                
 
             }
             else
             {
-                MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("¡Debe seleccionar una cita!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
+        //Evento para enviar la información del grid a las textBox
         private void gridCitas_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DataGrid dataGrid = (DataGrid)sender;
             DataRowView rowSelected = dataGrid.SelectedItem as DataRowView;
             TextRange notas = new TextRange(richTextBoxNotas.Document.ContentStart, richTextBoxNotas.Document.ContentEnd);
             
-            if (rowSelected != null)
+            if (rowSelected != null) // Si no esta seleccionado que no envie la información a las textBox
             {
+                //Asiganamos contenido a todas las textBox segun la columna en base a la fila seleccionada
+
                 selecionado = true;
                 codigoCita = Convert.ToInt32(rowSelected.Row["Codigo de cita"]);
                 dtFecha.SelectedDate = Convert.ToDateTime(rowSelected.Row["Fecha de la cita"]);
@@ -220,24 +223,26 @@ namespace VitalCareRx
             }
         }
 
-        
 
+        //Al darle click que reestablesca el formulario como en un inició.
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
             LimpiarFormulario();
             CargarCitasPaciente();
         }
 
+        //Darle formato al data grid view
         private void gridCitas_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             if (e.PropertyType == typeof(System.DateTime))
-                (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy"; //Si la columna es de tipo DateTime que le cambie el formato a fecha corta.
         }
 
         bool right = false;
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // Si se le da click derecho que no permita mover la ventana
             if (!right)
             {
                 DragMove();
@@ -245,11 +250,14 @@ namespace VitalCareRx
 
         }
 
+        //cuando se mantiene presionado click derecho
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+
             right = true;
         }
 
+        //cuando se suelta el click derecho
         private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             right = false;
