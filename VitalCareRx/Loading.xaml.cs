@@ -37,6 +37,13 @@ namespace VitalCareRx
             timer = new Timer(35);
             timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
             timer.Start();
+            /*             
+             Para el funcionamiento correcto de nuestra ProgressBar Utilizamos la librería “System.Timers” esta nos permitió aplicar un tiempo determinado de carga en la ProgressBar, 
+            la cual al llegar a 100% finaliza la ejecución del programa. Gracias a la librería anteriormente mencionada se creó el evento Timer_Elapsed, el cual nos permitió aplicar 
+            la funcionalidad anteriormente mencionada a la ProgressBar            
+             
+             */
+            // https://docs.microsoft.com/en-us/dotnet/api/system.windows.threading.dispatcher.invoke?view=net-5.0
 
 
         }
@@ -49,7 +56,13 @@ namespace VitalCareRx
 
         void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, (Action)(() =>
+            /*
+              invocamos el método this.Dispatcher.Invoke el cual nos permitió aplicar dichas condiciones dentro de este, y realizar dichas acciones con ayuda del timer, el cual tendrá
+            un contador que finalizara hasta llegar al valor máximo establecido en  “Loading.xaml”, en caso de que termine la primera condición se procede a parar el timer, y se abrirá 
+            la siguiente interfaz.             
+             */
+
+            this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, (Action)(() => //Invocación de metodo dispatcher 
             {
                 if (BAR.Value < 30)
                 {
@@ -74,6 +87,7 @@ namespace VitalCareRx
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // Si se le da click derecho que no permita mover la ventana
             if (!right)
             {
                 DragMove();
@@ -81,11 +95,14 @@ namespace VitalCareRx
 
         }
 
+        //cuando se mantiene presionado click derecho
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+
             right = true;
         }
 
+        //cuando se suelta el click derecho
         private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             right = false;

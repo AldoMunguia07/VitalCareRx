@@ -28,6 +28,7 @@ namespace VitalCareRx
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            // Validar que txtPassword sea distinto de vacio para que el psbPassword tome su valor
             if (txtPassword.Text != String.Empty)
             {
                 pwbPassword.Password = txtPassword.Text;
@@ -85,8 +86,8 @@ namespace VitalCareRx
 
         
 
-        
-        private int i = 0;
+        //Proceso para ocultar y mostrar la contraseña
+        private int i = 0; // variable miembro que sirve como bandera
         private void btnMostrarContrasenia_Click(object sender, RoutedEventArgs e)
         {
             i++;
@@ -111,9 +112,10 @@ namespace VitalCareRx
         }
 
         bool right = false;
-
+       
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // Si se le da click derecho que no permita mover la ventana
             if (!right)
             {
                 DragMove();
@@ -121,14 +123,17 @@ namespace VitalCareRx
 
         }
 
+        //cuando se mantiene presionado click derecho
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+
             right = true;
         }
 
+        //cuando se suelta el click derecho
         private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            right =false;
+            right = false;
         }
     }
 }

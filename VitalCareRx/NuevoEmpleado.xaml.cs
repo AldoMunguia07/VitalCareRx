@@ -40,21 +40,21 @@ namespace VitalCareRx
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
             
-            
+                // Validación para que no deje los campos vacios
                 if (txtPrimerNombre.Text != String.Empty && txtSegundoNombre.Text != String.Empty && txtPrimerApellido.Text !=
               String.Empty && txtSegundoApellido.Text != String.Empty && txtCelular.Text != String.Empty && txtUsuario.Text !=
               String.Empty && txtContrasenia.Text != String.Empty && cmbSexo.SelectedValue != null)
                 {
-                    if (!ExisteUsuario())
+                    if (!ExisteUsuario()) // Si el usuario ya existe que no perimita pasar a la siguiente condición
                     {
-                        if(txtCelular.Text.Length == 8)
+                        if(txtCelular.Text.Length == 8) // el campo celular debe tener 8 caracteres
                         {
-                            if(txtContrasenia.Text.Length >= 8)
-                            {
+                            if(txtContrasenia.Text.Length >= 8) // el campo contraseña debe tener 8 o más caracteres
+                        {
                                 try
                                 {
                                     ObtenerValores();
-                                    empleado.CrearNuevoEmpleado(empleado);
+                                    empleado.CrearNuevoEmpleado(empleado); //Insertar empleado
                                     empleado.IdEmpleado = empleado.CodigoEmpleado();
                                     LimpiarFormulario();
                                     Loading loading = new Loading(String.Format("{0} {1}", empleado.PrimerNombre, empleado.PrimerApellido), empleado.IdEmpleado);
@@ -92,6 +92,7 @@ namespace VitalCareRx
 
         }
         
+        // Al cerrar el formulario que regrese a el Login.
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
         {
             Login login = new Login();
@@ -156,6 +157,10 @@ namespace VitalCareRx
         }
 
 
+        /// <summary>
+        /// Metodo que verifica si el usuario ya existe.
+        /// </summary>
+        /// <returns>boolean</returns>
         public bool ExisteUsuario()
         {
             try
@@ -169,7 +174,7 @@ namespace VitalCareRx
 
                 using (sqlDataAdapter)
                 {
-                    sqlCommand.Parameters.AddWithValue("@user", txtUsuario.Text);
+                    sqlCommand.Parameters.AddWithValue("@user", txtUsuario.Text); //Se pasa por parametro la txtUsuario
 
                     DataTable dataTable = new DataTable();
 
@@ -177,7 +182,7 @@ namespace VitalCareRx
 
 
 
-                    if (dataTable.Rows.Count == 1)
+                    if (dataTable.Rows.Count == 1) //Si devuelve q fila es que existe un usuarui
                     {
                         return true;
                     }
@@ -197,6 +202,7 @@ namespace VitalCareRx
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // Si se le da click derecho que no permita mover la ventana
             if (!right)
             {
                 DragMove();
@@ -204,13 +210,17 @@ namespace VitalCareRx
 
         }
 
+        //cuando se mantiene presionado click derecho
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+            
             right = true;
         }
 
+        //cuando se suelta el click derecho
         private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
+            
             right = false;
         }
     }
