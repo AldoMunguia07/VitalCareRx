@@ -201,6 +201,10 @@ namespace VitalCareRx
             }
         }
 
+        /// <summary>
+        /// Metodo de obtención del codigo del último empleado ingresado.
+        /// </summary>
+        /// <returns>Codigo de empleado</returns>
         public int CodigoEmpleado()
         {
             string query = @"SELECT MAX(idEmpleado) idEmpleado FROM [Personas].[Empleado]";

@@ -63,6 +63,7 @@ namespace VitalCareRx
                     DataTable Empleado = new DataTable();
                     sqlDataAdapter.Fill(Empleado);
 
+                    //Del objeto DataTable se le asigna el valor correspondiente a cada TextBox.
                     txtUsuario.Text = Empleado.Rows[0]["nombreUsuario"].ToString();
                     txtPassword.Text = Empleado.Rows[0]["contrasenia"].ToString();
                     txtPrimerNombre.Text = Empleado.Rows[0]["primerNombre"].ToString();

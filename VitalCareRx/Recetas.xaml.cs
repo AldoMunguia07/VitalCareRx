@@ -225,7 +225,7 @@ namespace VitalCareRx
         {
             TextRange indicaciones = new TextRange(rtxtIndicaciones.Document.ContentStart, rtxtIndicaciones.Document.ContentEnd);
             TextRange durationTratamiento = new TextRange(rtxtDuracionTratamiento.Document.ContentStart, rtxtDuracionTratamiento.Document.ContentEnd);
-            if (cmbFarmacos.SelectedValue != null && txtCantidad.Text != string.Empty && indicaciones.Text != string.Empty && durationTratamiento.Text != string.Empty)
+            if (cmbFarmacos.SelectedValue != null && txtCantidad.Text != string.Empty && indicaciones.Text != "\r\n" && durationTratamiento.Text != "\r\n")
             {
                 return true;
             }

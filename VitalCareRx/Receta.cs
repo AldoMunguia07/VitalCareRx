@@ -88,6 +88,10 @@ namespace VitalCareRx
             }
         }
 
+        /// <summary>
+        /// Eliminar un farmaco de una receta.
+        /// </summary>
+        /// <param name="receta"></param>
         public void EliminarFarmacoReceta(Receta receta)
         {
             try
@@ -117,6 +121,10 @@ namespace VitalCareRx
 
         }
 
+        /// <summary>
+        /// Metodo para modificar un farmaco de una receta.
+        /// </summary>
+        /// <param name="receta"></param>
         public void ModificarFarmacoReceta(Receta receta)
         {
             try

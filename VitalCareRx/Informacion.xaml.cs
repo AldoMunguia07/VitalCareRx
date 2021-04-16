@@ -22,7 +22,8 @@ namespace VitalCareRx
         private int IdEmpleado;
         private string nombreCompletoEmpleado;
 
-        public Informacion(int codigoEmpleado,  string nombreEmpleado)
+        public Informacion(int codigoEmpleado,  string nombreEmpleado)// se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
+                                                                      //y nombre del empleado(Se usa para volver al menu principal).
         {
             InitializeComponent();
             IdEmpleado = codigoEmpleado;
@@ -31,7 +32,7 @@ namespace VitalCareRx
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
         {
-            MenuPrincipal menuprincipal = new MenuPrincipal(nombreCompletoEmpleado, IdEmpleado);
+            MenuPrincipal menuprincipal = new MenuPrincipal(nombreCompletoEmpleado, IdEmpleado); // Se regresa al menu principal con los datos del usuario actual.
             menuprincipal.Show();
             this.Close();
             
@@ -41,6 +42,7 @@ namespace VitalCareRx
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // Si se le da click derecho que no permita mover la ventana
             if (!right)
             {
                 DragMove();
@@ -48,11 +50,14 @@ namespace VitalCareRx
 
         }
 
+        //cuando se mantiene presionado click derecho
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+
             right = true;
         }
 
+        //cuando se suelta el click derecho
         private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             right = false;

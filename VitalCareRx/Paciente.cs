@@ -118,6 +118,10 @@ namespace VitalCareRx
 
         }
 
+        /// <summary>
+        /// Metodo para actualizar un paciente.
+        /// </summary>
+        /// <param name="paciente"></param>
         public void ActualizarPaciente(Paciente paciente)
         {
             try
@@ -164,6 +168,10 @@ namespace VitalCareRx
             }
         }
 
+        /// <summary>
+        /// Metodo para eliminar un paciente(Cambiar estado).
+        /// </summary>
+        /// <param name="paciente"></param>
         public void EliminarPaciente(Paciente paciente)
         {
             try

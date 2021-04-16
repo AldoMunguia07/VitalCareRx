@@ -38,6 +38,10 @@ namespace VitalCareRx
 
         }
 
+        /// <summary>
+        /// Metodo para crear una consulta.
+        /// </summary>
+        /// <param name="consulta"></param>
         public void CrearConsulta(Consulta consulta)
         {
 
@@ -71,6 +75,10 @@ namespace VitalCareRx
             }
         }
 
+        /// <summary>
+        /// Metodo para modificar una consulta.
+        /// </summary>
+        /// <param name="consulta"></param>
         public void ModificarConsulta(Consulta consulta)
         {
 

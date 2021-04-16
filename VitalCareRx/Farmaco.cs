@@ -31,7 +31,10 @@ namespace VitalCareRx
             InformacionPrecaucion = informacionFarmaco;
         }
 
-
+        /// <summary>
+        /// Metodo para crear un farmaco.
+        /// </summary>
+        /// <param name="farmaco"></param>
         public void CrearFarmaco(Farmaco farmaco)
         {
 
@@ -61,6 +64,10 @@ namespace VitalCareRx
             }
         }
 
+        /// <summary>
+        /// Metodo para modificar un farmaco.
+        /// </summary>
+        /// <param name="farmaco"></param>
         public void ModificarFarmaco(Farmaco farmaco)
         {
 
@@ -95,6 +102,11 @@ namespace VitalCareRx
             }
         }
 
+        /// <summary>
+        /// Metodo para buscar un farmaco.
+        /// </summary>
+        /// <param name="nombreFarmacos"></param>
+        /// <returns></returns>
         public Farmaco BuscarFarmaco(string nombreFarmacos)
         {
             Farmaco farmacos = new Farmaco();
