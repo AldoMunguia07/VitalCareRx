@@ -37,7 +37,8 @@ namespace VitalCareRx
 
         Paciente paciente = new Paciente();
 
-        public Pacientes(int codigo, string empleado)
+        public Pacientes(int codigo, string empleado)// se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
+                                                     //y nombre del empleado(Se usa para volver al menu principal).
         {
             InitializeComponent();
 
@@ -371,7 +372,7 @@ namespace VitalCareRx
 
                     if (!ExistePaciente() || dni == txtDni.Text) // No puede asignar el DNI o identidad de un paciente ya registrado
                     {
-                        if(txtCelular.Text.Length == 8) // El numero de telefno debe contener 8 dígitos.
+                        if(txtCelular.Text.Length == 8) // El numero de telefono debe contener 8 dígitos.
                         {
                             if(txtDni.Text.Length == 13) // El DNI debe contener 13  dígitos.
                             {

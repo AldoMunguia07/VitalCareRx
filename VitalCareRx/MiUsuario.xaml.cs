@@ -32,7 +32,8 @@ namespace VitalCareRx
         Empleado miUsuario = new Empleado();
         private string usuario; 
 
-        public MiUsuario(int empleado)
+        public MiUsuario(int empleado)// se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
+                                      
         {
             InitializeComponent();
             string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
@@ -40,7 +41,7 @@ namespace VitalCareRx
             codigoEmpleado = empleado;            
             CargarTextBox();
             LlenarComboBoxSexo();
-            usuario = txtUsuario.Text;
+            usuario = txtUsuario.Text; // se asigna el valor de la txtUsuario para la posteiror validacion (Que no permita ingresar un usuario existente).
         }
 
         /// <summary>
@@ -124,6 +125,7 @@ namespace VitalCareRx
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // Si se le da click derecho que no permita mover la ventana
             if (!right)
             {
                 DragMove();
@@ -131,11 +133,14 @@ namespace VitalCareRx
 
         }
 
+        //cuando se mantiene presionado click derecho
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+
             right = true;
         }
 
+        //cuando se suelta el click derecho
         private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             right = false;
@@ -144,12 +149,16 @@ namespace VitalCareRx
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
         {
             ObtenerDatos();
-            NameEmpleado = String.Format("{0} {1}", miUsuario.PrimerNombre, miUsuario.PrimerApellido);
-            MenuPrincipal menu = new MenuPrincipal(NameEmpleado, codigoEmpleado);
+            NameEmpleado = String.Format("{0} {1}", miUsuario.PrimerNombre, miUsuario.PrimerApellido); // Se pasa por parametro el nuevo nombre de usuario actualizado o se queda con el actual en caso de
+            MenuPrincipal menu = new MenuPrincipal(NameEmpleado, codigoEmpleado);                      // que no los haya actualizado
             menu.Show();
             this.Close();
         }
 
+        /// <summary>
+        /// Metodo para validar que no se dejen campos en blancos.
+        /// </summary>
+        /// <returns>Boolean</returns>
         private bool Validar()
         {
             if(txtPrimerNombre.Text != String.Empty && txtSegundoNombre.Text != String.Empty && txtPrimerApellido.Text !=
@@ -162,6 +171,10 @@ namespace VitalCareRx
         }
 
 
+        /// <summary>
+        /// Metodo para validar si existe o no un usuario.
+        /// </summary>
+        /// <returns></returns>
         public bool ExisteUsuario()
         {
             try
@@ -183,7 +196,7 @@ namespace VitalCareRx
 
 
 
-                    if (dataTable.Rows.Count == 1)
+                    if (dataTable.Rows.Count == 1) //Si el usuario existe retorna un true
                     {
                         return true;
                     }
@@ -205,14 +218,14 @@ namespace VitalCareRx
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            if (Validar())
+            if (Validar()) //El usuario no debe dejar los campos en blanco.
             {
-                if(!ExisteUsuario() || usuario == txtUsuario.Text)
+                if(!ExisteUsuario() || usuario == txtUsuario.Text) // Valida si el nombre usuario no existe y si es el nombre de usurio es del empleado actual, con esa condición pasa a la siguiente validación
                 {
 
-                    if (txtCelular.Text.Length == 8)
+                    if (txtCelular.Text.Length == 8) // El numero de telefono debe contener 8 dígitos.
                     {
-                        if (txtPassword.Text.Length >= 8)
+                        if (txtPassword.Text.Length >= 8) // el campo contraseña debe tener 8 o más caracteres
                         {
                             try
                             {

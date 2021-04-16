@@ -29,7 +29,8 @@ namespace VitalCareRx
         private string nombreEmpleado;
         private bool seleccionado = false;
 
-        public Farmacos(int codigo, string empleado)
+        public Farmacos(int codigo, string empleado)// se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
+                                                    //y nombre del empleado(Se usa para volver al menu principal).
         {
             InitializeComponent();
             //Variables miembro
@@ -44,7 +45,7 @@ namespace VitalCareRx
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
         {
-            MenuPrincipal menu = new MenuPrincipal(nombreEmpleado, codigoEmpleado);
+            MenuPrincipal menu = new MenuPrincipal(nombreEmpleado, codigoEmpleado); // Se regresa al menu principal con los datos del usuario actual.
             menu.Show();
             this.Close();
         }
@@ -70,7 +71,7 @@ namespace VitalCareRx
 
                     dgFarmacos.ItemsSource = dataTable.DefaultView;
 
-                    dgFarmacos.IsReadOnly = true;
+                    dgFarmacos.IsReadOnly = true; // El grid es de solo lectura.
 
 
                 }
@@ -84,11 +85,16 @@ namespace VitalCareRx
         }
 
 
+        /// <summary>
+        /// Metodo para validar que los campos no esten vacíos.
+        /// </summary>
+        /// <returns></returns>
         private bool ValidarCampos()
         {
 
             TextRange IndicacionesFarmaco = new TextRange(rtxtIndicaciones.Document.ContentStart, rtxtIndicaciones.Document.ContentEnd);
 
+            //Validación para que el usuario no deje los campos vacíos
             if (txtDescripcionFarmaco.Text != string.Empty && IndicacionesFarmaco.Text != "\r\n")
             {
                 return true;
@@ -100,9 +106,9 @@ namespace VitalCareRx
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
-            if (!seleccionado)
+            if (!seleccionado) // El usuario no puede añadir un farmaco mientras está seleccionando otro farmaco.
             {
-                if (ValidarCampos())
+                if (ValidarCampos()) // El usuario no puede dejar los campos en blanco.
                 {
 
                     try
@@ -139,6 +145,9 @@ namespace VitalCareRx
 
         }
 
+        /// <summary>
+        /// Metodo para obtener los valores de las TextBox.
+        /// </summary>
         private void ObtenerValores()
         {
             //Error guarda sin necesidad de tener datos en el RichBox
@@ -151,6 +160,9 @@ namespace VitalCareRx
 
         }
 
+        /// <summary>
+        /// Metodo para limpiar el formulario.
+        /// </summary>
         private void LimpiarFormulario()
         {
 
@@ -164,9 +176,9 @@ namespace VitalCareRx
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            if (seleccionado)
+            if (seleccionado) //El usuario primero tiene que seleccionar un farmac para poder modificarlo.
             {
-                if (ValidarCampos())
+                if (ValidarCampos()) // El usuario no puede dejar los campos en blanco.
                 {
 
                     try
@@ -204,14 +216,16 @@ namespace VitalCareRx
 
         }
 
+        //Enviar información del grid a las textBox
         private void dgFarmacos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            DataGrid dataGrid = (DataGrid)sender;
+            DataGrid dataGrid = (DataGrid)sender; // Instancia de objeto tipo DataaGrid
             DataRowView rowSelected = dataGrid.SelectedItem as DataRowView;
 
-            if (rowSelected != null)
+            if (rowSelected != null)// Si no esta seleccionado que no envie la información a las textBox.
             {
+                //Asiganamos contenido a todas las textBox segun la columna en base a la fila seleccionada.
                 seleccionado = true;
                 TextRange IndicacionesFarmaco = new TextRange(rtxtIndicaciones.Document.ContentStart, rtxtIndicaciones.Document.ContentEnd);
                 txtDescripcionFarmaco.Text = rowSelected.Row["Farmaco"].ToString();
@@ -242,7 +256,7 @@ namespace VitalCareRx
 
                 dgFarmacos.ItemsSource = dataTable.DefaultView;
 
-                dgFarmacos.IsReadOnly = true;
+                dgFarmacos.IsReadOnly = true; // El grid es de solo lectura.
 
             }
         }
@@ -263,6 +277,7 @@ namespace VitalCareRx
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // Si se le da click derecho que no permita mover la ventana
             if (!right)
             {
                 DragMove();
@@ -270,11 +285,14 @@ namespace VitalCareRx
 
         }
 
+        //cuando se mantiene presionado click derecho
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+
             right = true;
         }
 
+        //cuando se suelta el click derecho
         private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             right = false;
