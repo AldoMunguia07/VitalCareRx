@@ -175,15 +175,45 @@ ALTER TABLE Personas.Paciente WITH CHECK
 		CHECK (len(celular) = 8)
 GO
 
+ALTER TABLE Personas.Paciente WITH CHECK
+		ADD CONSTRAINT CHK_Personas_Paciente$VerificarFechaNacimiento
+		CHECK (fechaNacimiento <= CONVERT (date, GETDATE()))
+GO
+
+ALTER TABLE Personas.Paciente WITH CHECK
+		ADD CONSTRAINT CHK_Personas_Paciente$VerificarPeso
+		CHECK (peso > 0)
+GO
+
+ALTER TABLE Personas.Paciente WITH CHECK
+		ADD CONSTRAINT CHK_Personas_Paciente$VerificarEstatura
+		CHECK (estatura > 0)
+GO
+
+ALTER TABLE Personas.Paciente
+	ADD CONSTRAINT CHK_Personas_Paciente$EstadoPaciente
+	CHECK (estado IN(0, 1))
+GO
+
 -- Tabla Personas.Sexo
 ALTER TABLE Personas.Sexo
 		ADD CONSTRAINT AK_Personas_Sexo_descripcionSexo
 		UNIQUE NONCLUSTERED (descripcionSexo)
 GO
+
+ALTER TABLE Personas.Sexo
+	ADD CONSTRAINT CHK_Personas_Sexo$SexoPersonas
+	CHECK (descripcionSexo IN('Masculino', 'Femenino'))
+GO
 -- TABLA Personas.TipoSangre
 ALTER TABLE Personas.TipoSangre
 		ADD CONSTRAINT AK_Personas_TipoSexo_descripcionTipoSangre
 		UNIQUE NONCLUSTERED (descripcionTipoSangre)
+GO
+
+ALTER TABLE Personas.TipoSangre
+	ADD CONSTRAINT CHK_Personas_TipoSangre$TipoSangrePersonas
+	CHECK (descripcionTipoSangre IN('A+', 'A-', 'AB-', 'AB+','B-','B+', 'O-', 'O+'))
 GO
 -- TABLA Personas.Empleado
 
@@ -220,6 +250,17 @@ ALTER TABLE Consultas.Consulta
 		UNIQUE NONCLUSTERED (idCita)
 GO
 
+ALTER TABLE Consultas.Consulta WITH CHECK
+		ADD CONSTRAINT CHK_Consultas_Consulta$VerificarTemperatura
+		CHECK (temperatura > 0)
+GO
+
+-- Tabla Consultas.DetalleRecetaMedica
+ALTER TABLE Consultas.DetalleRecetaMedica WITH CHECK
+		ADD CONSTRAINT CHK_Consultas_DetalleRecetaMedica$VerificarCantidadFarmacos
+		CHECK (cantidad > 0)
+GO
+
 
 -- Datos tabla sexo
 INSERT [Personas].[Sexo]  VALUES ('Femenino')
@@ -244,4 +285,8 @@ INSERT [Personas].[TipoSangre]  VALUES ( 'O-')
 
 INSERT [Personas].[TipoSangre]  VALUES ( 'O+')
 
+
+-- Datos tabla Farmaco
+
+INSERT [Consultas].[Farmaco]  VALUES ('Simvastatina', 'Para controlar el colesterol')INSERT [Consultas].[Farmaco] VALUES ('Aspirina', ' Casi para todo')INSERT [Consultas].[Farmaco]  VALUES ('Omeprazol', 'Para la acidez de estómago')INSERT [Consultas].[Farmaco]  VALUES ('Lexotiroxina sódica', 'Para reemplazar la tiroxina')INSERT [Consultas].[Farmaco]  VALUES ('Ramipril', 'Para la hipertensión')INSERT [Consultas].[Farmaco] VALUES ('Amlodipina', 'Para la hipertensión y la angina')INSERT [Consultas].[Farmaco] VALUES ('Paracetamol ', 'Para aliviar el dolor')INSERT [Consultas].[Farmaco]  VALUES ('Salbutamol', 'Para el asma')
 
