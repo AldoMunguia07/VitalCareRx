@@ -147,7 +147,7 @@ namespace VitalCareRx
 
         private void btnSalir_Click(object sender, RoutedEventArgs e)
         {
-            MenuPrincipal menu = new MenuPrincipal(nombreEmpleado, codigoEmpleado);
+            MenuPrincipal menu = new MenuPrincipal(nombreEmpleado, codigoEmpleado); // Se regresa al menu principal con los datos del usuario actual.
             menu.Show();
             this.Close();
         }

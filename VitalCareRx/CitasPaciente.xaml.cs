@@ -207,7 +207,7 @@ namespace VitalCareRx
         //Evento para enviar la información del grid a las textBox
         private void gridCitas_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DataGrid dataGrid = (DataGrid)sender;
+            DataGrid dataGrid = (DataGrid)sender; // Instancia de objeto tipo DataaGrid.
             DataRowView rowSelected = dataGrid.SelectedItem as DataRowView;
             TextRange notas = new TextRange(richTextBoxNotas.Document.ContentStart, richTextBoxNotas.Document.ContentEnd);
             

@@ -37,7 +37,8 @@ namespace VitalCareRx
 
         private int idConsulta;
 
-        public Consultas(int codigo, string empleado)
+        public Consultas(int codigo, string empleado) // se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
+            //y nombre del empleado(Se usa para volver al menu principal).
         {
             InitializeComponent();
 
@@ -82,7 +83,7 @@ namespace VitalCareRx
 
                     dgConsultas.ItemsSource = dataTable.DefaultView;
 
-                    dgConsultas.IsReadOnly = true;
+                    dgConsultas.IsReadOnly = true; // El grid es de solo lectura.
 
 
                 }
@@ -99,11 +100,11 @@ namespace VitalCareRx
         private void btnAñadir_Click(object sender, RoutedEventArgs e)
         {
             
-            if (ValidarCampos())
+            if (ValidarCampos()) //El usuario no puede dejar campos vacios.
             {
-                if (!seleccionado)
+                if (!seleccionado)// El usuario no puede agregar una consulta que este seleccionando.
                 {
-                    if (float.Parse(txtTemperatura.Text) > 0)
+                    if (float.Parse(txtTemperatura.Text) > 0) //La temperatura tiene que ser mayor a 0.
                     {
                         try
                         {
@@ -167,7 +168,7 @@ namespace VitalCareRx
 
 
 
-                return Convert.ToInt32(dataTable.Rows[0]["idRecetaMedica"]);
+                return Convert.ToInt32(dataTable.Rows[0]["idRecetaMedica"]); //Retorna el id de la receta medica.
 
 
             }
@@ -180,6 +181,7 @@ namespace VitalCareRx
         /// <returns></returns>
         private bool ValidarCampos()
         {
+            //Validar que todos los campos esten llenos.
             TextRange MotivoConsulta = new TextRange(rtxtMotivoConsulta.Document.ContentStart, rtxtMotivoConsulta.Document.ContentEnd);
             TextRange DiagnosticoConsulta = new TextRange(rtxtDiagnostico.Document.ContentStart, rtxtDiagnostico.Document.ContentEnd);
 
@@ -279,18 +281,19 @@ namespace VitalCareRx
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgConsultas_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void dgConsultas_SelectionChanged(object sender, SelectionChangedEventArgs e) //Enviar información del grid a las textBox
         {
             DataGrid dataGrid = (DataGrid)sender;
             DataRowView rowSelected = dataGrid.SelectedItem as DataRowView;
 
-            if (rowSelected != null)
+            if (rowSelected != null)// Si no esta seleccionado que no envie la información a las textBox
             {
+                //Asiganamos contenido a todas las textBox segun la columna en base a la fila seleccionada
                 seleccionado = true;
                 TextRange MotivoConsulta = new TextRange(rtxtMotivoConsulta.Document.ContentStart, rtxtMotivoConsulta.Document.ContentEnd);
                 TextRange DiagnosticoConsulta = new TextRange(rtxtDiagnostico.Document.ContentStart, rtxtDiagnostico.Document.ContentEnd);
 
-                idConsulta = Convert.ToInt32(rowSelected.Row["Codigo de consulta"]);
+                idConsulta = Convert.ToInt32(rowSelected.Row["Codigo de consulta"]); //Capturamos el id de la consulta para pasarlo por parametro al ver o crear una receta.
 
                 MotivoConsulta.Text = rowSelected.Row["Motivo"].ToString();
                 DiagnosticoConsulta.Text = rowSelected.Row["Diagnostico"].ToString();
@@ -302,7 +305,7 @@ namespace VitalCareRx
 
                 consulta.IdConsulta = Convert.ToInt32(rowSelected.Row["Codigo de consulta"]);
 
-                if (ValidarCrearRecetaMedica())
+                if (ValidarCrearRecetaMedica()) // si la consulta ya tiene una receta que capture el id de esa receta para posteriormente poder visualizar la receta de dicha consulta.
                 {
                     btnReceta.Content = "Ver receta";
                     idRecetaMedica = CapturarIdRecetaMedica();
@@ -322,11 +325,11 @@ namespace VitalCareRx
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            if (seleccionado)
+            if (seleccionado) // El usuario tiene que seleccionar una consulta para poder modificarla.
             {
-                if (ValidarCampos())
+                if (ValidarCampos()) //El usuario no puede dejar campos vacios.
                 {
-                    if (float.Parse(txtTemperatura.Text) > 0)
+                    if (float.Parse(txtTemperatura.Text) > 0) //La temperatura tiene que ser mayor a 0.
                     {
                         try
                         {
@@ -365,6 +368,7 @@ namespace VitalCareRx
             
         }
 
+        //Buscar una consulta por nombre del paciente
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {
             string query = @"SELECT CO.idConsulta 'Codigo de consulta',CONCAT(P.primerNombre, ' ', P.segundoNombre, ' ', P.primerApellido, ' ', P.segundoApellido)
@@ -398,6 +402,10 @@ namespace VitalCareRx
             }
         }
 
+        /// <summary>
+        ///Metodo que valida si la consulta tiene o no una receta.
+        /// </summary>
+        /// <returns>Boolean</returns>
         public bool ValidarCrearRecetaMedica()
         {
             try
@@ -419,7 +427,7 @@ namespace VitalCareRx
 
                     
 
-                    if (dataTable.Rows.Count == 1)
+                    if (dataTable.Rows.Count == 1) //Si devuelve una fila, es decir tiene una receta que retorne un true.
                     {
                         return true;
                     }
@@ -435,9 +443,12 @@ namespace VitalCareRx
 
         }
 
+        /// <summary>
+        /// Metodo para
+        /// </summary>
         public void RecetaMedica()
         {
-            if (!ValidarCrearRecetaMedica())
+            if (!ValidarCrearRecetaMedica()) //Si la consulta no tiene una receta procede a crearle una.
             {
                 try
                 {
@@ -481,7 +492,7 @@ namespace VitalCareRx
             {
                 RecetaMedica();
                 Recetas recetas = new Recetas(idConsulta,idRecetaMedica);
-                recetas.ShowDialog();
+                recetas.ShowDialog(); //ShowDialog perimte volver a ventana de consulta una vez se cierre la ventana de Recetas.
                 btnReceta.Content = "Ver receta";
                 
             }
@@ -494,7 +505,7 @@ namespace VitalCareRx
 
         private void ButtonFechar_Click(object sender, RoutedEventArgs e)
         {
-            MenuPrincipal menu = new MenuPrincipal(nombreEmpleado, codigoEmpleado);
+            MenuPrincipal menu = new MenuPrincipal(nombreEmpleado, codigoEmpleado); // Se regresa al menu principal con los datos del usuario actual.
             menu.Show();
             this.Close();
         }
@@ -506,9 +517,10 @@ namespace VitalCareRx
            
         }
 
+        //Darle formato al data grid view
         private void dgConsultas_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            if (e.PropertyType == typeof(System.Double))
+            if (e.PropertyType == typeof(System.Double)) //Si la columna es de tipo Double o float que le cambie el formato o redondear a 2 cifras.
                 (e.Column as DataGridTextColumn).Binding.StringFormat = "N2";
         }
 
@@ -516,6 +528,7 @@ namespace VitalCareRx
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // Si se le da click derecho que no permita mover la ventana
             if (!right)
             {
                 DragMove();
@@ -523,11 +536,14 @@ namespace VitalCareRx
 
         }
 
+        //cuando se mantiene presionado click derecho
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+
             right = true;
         }
 
+        //cuando se suelta el click derecho
         private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             right = false;

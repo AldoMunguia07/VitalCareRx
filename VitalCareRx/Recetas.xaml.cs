@@ -34,7 +34,7 @@ namespace VitalCareRx
 
         private Receta receta = new Receta();
 
-        public Recetas(int idConsulta, int idRecetaMedica)
+        public Recetas(int idConsulta, int idRecetaMedica) // Recibe como paramtero el id de la consulta y el id de la receta (La informacion de este formulario se guarda en una tabla detalle)
         {
             InitializeComponent();
             codigoConsulta = idConsulta;
@@ -51,6 +51,9 @@ namespace VitalCareRx
             
         }
 
+        /// <summary>
+        /// Metodo para ver los farmacos de la consulta actual.
+        /// </summary>
         private void MostrarFarmacos()
         {
             try
@@ -78,7 +81,7 @@ namespace VitalCareRx
                     sqlDataAdapter.Fill(dataTable);
 
                     dgRecetas.ItemsSource = dataTable.DefaultView;
-                    dgRecetas.IsReadOnly = true;
+                    dgRecetas.IsReadOnly = true; // El grid es de solo lectura.
 
 
                 }
@@ -90,6 +93,10 @@ namespace VitalCareRx
                 throw;
             }
         }
+
+        /// <summary>
+        /// Metodo para cargar el ComboBox farmacos con información.
+        /// </summary>
         private void CargarFarmacos()
         {
             string query = @"SELECT * FROM [Consultas].[Farmaco]";
@@ -110,13 +117,13 @@ namespace VitalCareRx
         private void btnAñadir_Click(object sender, RoutedEventArgs e)
         {
             
-            if (ValidarCampos())
+            if (ValidarCampos()) // El usuario no tiene que dejar los campos vacios.
             {
-                if (!validarSeleccionado)
+                if (!validarSeleccionado) // El usuario no tiene que agregar un farmaco que este seleccionando.
                 {
-                    if (!ValidarFarmacoEnReceta())
+                    if (!ValidarFarmacoEnReceta()) // El usuario no tiene que añadir un farmaco 2 veces a la receta
                     {
-                        if (int.Parse(txtCantidad.Text) > 0)
+                        if (int.Parse(txtCantidad.Text) > 0) // La cantidad de farmacos debe ser mayor a 0
                         {
                             try
                             {
@@ -158,12 +165,14 @@ namespace VitalCareRx
             }
         }
 
+        //Evento click del botón eliminar para eliminar un farmaco de la receta.
+        //Cabe recalcar que aquí si es posible eliminar porque un farmaco erroneo en una receta no es de mucha utilidad como historico.
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
 
             try
             {
-                if (validarSeleccionado)
+                if (validarSeleccionado) // Para eliminar un farmaco de una receta, primero el usuario debe seleccionar dicha receta.
                 {
                     
                     ObtenerValores();
@@ -191,6 +200,9 @@ namespace VitalCareRx
 
         }
 
+        /// <summary>
+        /// Metodo para obtener los valores de receta.
+        /// </summary>
         private void ObtenerValores()
         {
             TextRange indicaciones = new TextRange(rtxtIndicaciones.Document.ContentStart, rtxtIndicaciones.Document.ContentEnd);
@@ -204,6 +216,11 @@ namespace VitalCareRx
             receta.IdReceta = codigoRecetaMedica;
             
         }
+
+        /// <summary>
+        /// Metodo para validar que llene todos los campos.
+        /// </summary>
+        /// <returns></returns>
         private bool ValidarCampos()
         {
             TextRange indicaciones = new TextRange(rtxtIndicaciones.Document.ContentStart, rtxtIndicaciones.Document.ContentEnd);
@@ -216,12 +233,16 @@ namespace VitalCareRx
             return false;
         }
 
+
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
         {
 
             this.Close();
         }
 
+        /// <summary>
+        /// Metedo para limpiar el formulario.
+        /// </summary>
         private void LimpiarFormulario()
         {
             txtCantidad.Text = string.Empty;
@@ -231,15 +252,18 @@ namespace VitalCareRx
             validarSeleccionado = false;
         }
 
+        //Evento para enviar la información del grid a las textBox
         private void dgRecetas_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DataGrid dataGrid = (DataGrid)sender;
             DataRowView rowSelected = dataGrid.SelectedItem as DataRowView;
 
 
-            if (rowSelected != null)
+            if (rowSelected != null) // Si no esta seleccionado que no capture el id
             {
                 validarSeleccionado = true;
+
+                //Asiganamos contenido a todas las textBox segun la columna en base a la fila seleccionada
 
                 TextRange DuracionTratamiento = new TextRange(rtxtDuracionTratamiento.Document.ContentStart, rtxtDuracionTratamiento.Document.ContentEnd);
                 TextRange Indicaciones = new TextRange(rtxtIndicaciones.Document.ContentStart, rtxtIndicaciones.Document.ContentEnd);
@@ -249,7 +273,7 @@ namespace VitalCareRx
                 DuracionTratamiento.Text = rowSelected.Row["Duracion"].ToString();
                 Indicaciones.Text = rowSelected.Row["Indicaciones"].ToString();
 
-                codigoFarmaco = Convert.ToInt32(rowSelected.Row["Codigo Farmaco"].ToString());
+                codigoFarmaco = Convert.ToInt32(rowSelected.Row["Codigo Farmaco"].ToString()); // Se pasa id de farmaco para la correspondinete validacion en el proceso de modificar un farmaco.
 
             }
 
@@ -257,13 +281,13 @@ namespace VitalCareRx
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            if (validarSeleccionado)
+            if (validarSeleccionado) // El usuario no puede modificar un farmaco en a receta si antes no lo ha seleccionado.
             {
-                if (ValidarCampos())
+                if (ValidarCampos()) // El usuario no tiene que dejar los campos vacios.
                 {
-                    if (!ValidarFarmacoEnReceta() || codigoFarmaco == Convert.ToInt32(cmbFarmacos.SelectedValue))
-                    {
-                        if (int.Parse(txtCantidad.Text) > 0)
+                    if (!ValidarFarmacoEnReceta() || codigoFarmaco == Convert.ToInt32(cmbFarmacos.SelectedValue)) // Valida si el farmaco no esta en la receta actual y si es el codigo de farmaco seleccionado, con esa
+                    {                                                                                             // condición pasara a la siguiente validación
+                        if (int.Parse(txtCantidad.Text) > 0) // La cantidad de farmacos debe ser mayor a 0
                         {
                             try
                             {
@@ -312,6 +336,7 @@ namespace VitalCareRx
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // Si se le da click derecho que no permita mover la ventana
             if (!right)
             {
                 DragMove();
@@ -319,11 +344,14 @@ namespace VitalCareRx
 
         }
 
+        //cuando se mantiene presionado click derecho
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+
             right = true;
         }
 
+        //cuando se suelta el click derecho
         private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             right = false;
@@ -335,6 +363,10 @@ namespace VitalCareRx
             MostrarFarmacos();
         }
 
+        /// <summary>
+        /// Metodo para validar si el farmaco ya esta en la receta.
+        /// </summary>
+        /// <returns>Boolean</returns>
         private bool ValidarFarmacoEnReceta()
         {
             try
@@ -351,7 +383,7 @@ namespace VitalCareRx
                     DataTable dataTable = new DataTable();
                     sqlDataAdapter.Fill(dataTable);
 
-                    if (dataTable.Rows.Count == 1)
+                    if (dataTable.Rows.Count == 1) //Si el farmaco existe en la receta actual, devuelve un true
 
                         return true;
 
