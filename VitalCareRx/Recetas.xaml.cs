@@ -384,8 +384,11 @@ namespace VitalCareRx
                     sqlDataAdapter.Fill(dataTable);
 
                     if (dataTable.Rows.Count == 1) //Si el farmaco existe en la receta actual, devuelve un true
-
+                    {
                         return true;
+                    }
+
+                        
 
                     return false;
 
