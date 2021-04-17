@@ -99,47 +99,55 @@ namespace VitalCareRx
 
         private void btnAñadir_Click(object sender, RoutedEventArgs e)
         {
-            
-            if (ValidarCampos()) //El usuario no puede dejar campos vacios.
+            try
             {
-                if (!seleccionado)// El usuario no puede agregar una consulta que este seleccionando.
+                if (ValidarCampos()) //El usuario no puede dejar campos vacios.
                 {
-                    if (float.Parse(txtTemperatura.Text) > 0) //La temperatura tiene que ser mayor a 0.
+                    if (!seleccionado)// El usuario no puede agregar una consulta que este seleccionando.
                     {
-                        try
+                        if (float.Parse(txtTemperatura.Text) > 0) //La temperatura tiene que ser mayor a 0.
                         {
-                            ObtenerValores();
+                            try
+                            {
+                                ObtenerValores();
 
-                            consulta.CrearConsulta(consulta);
+                                consulta.CrearConsulta(consulta);
 
 
 
-                            LimpiarFormulario();
+                                LimpiarFormulario();
 
-                            MessageBox.Show("La consulta se ha insertado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
+                                MessageBox.Show("La consulta se ha insertado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                            MostrarConsultas();
+                                MostrarConsultas();
 
+                            }
+                            catch (Exception)
+                            {
+
+
+                                MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
                         }
-                        catch (Exception)
+                        else
                         {
-
-
-                            MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("¡La temperatura no puede ser menor o igual que 0 C°!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
                     }
                     else
-                    {
-                        MessageBox.Show("¡La temperatura no puede ser menor o igual que 0 C°!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
+                        MessageBox.Show("¡No se puede agregar la misma consulta!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
-                    MessageBox.Show("¡No se puede agregar la misma consulta!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                {
+                    MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+
+
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }        
 
             
 
@@ -325,14 +333,15 @@ namespace VitalCareRx
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            if (seleccionado) // El usuario tiene que seleccionar una consulta para poder modificarla.
+            try
             {
-                if (ValidarCampos()) //El usuario no puede dejar campos vacios.
+                if (seleccionado) // El usuario tiene que seleccionar una consulta para poder modificarla.
                 {
-                    if (float.Parse(txtTemperatura.Text) > 0) //La temperatura tiene que ser mayor a 0.
+                    if (ValidarCampos()) //El usuario no puede dejar campos vacios.
                     {
-                        try
+                        if (float.Parse(txtTemperatura.Text) > 0) //La temperatura tiene que ser mayor a 0.
                         {
+                            
                             ObtenerValores();
 
                             consulta.ModificarConsulta(consulta);
@@ -343,28 +352,30 @@ namespace VitalCareRx
 
                             MostrarConsultas();
 
+                            
                         }
-                        catch (Exception)
+                        else
                         {
-
-                            MessageBox.Show("Ha ocurrido un error al momento de realizar la modificacion... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("¡La temperatura no puede ser menor o igual que 0 C°!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
+
                     }
                     else
                     {
-                        MessageBox.Show("¡La temperatura no puede ser menor o igual que 0 C°!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-
                 }
                 else
                 {
-                    MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("¡Debe seleccionar una consulta!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("¡Debe seleccionar una consulta!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificacion... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+           
             
         }
 

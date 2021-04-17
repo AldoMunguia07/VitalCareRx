@@ -106,13 +106,14 @@ namespace VitalCareRx
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
-            if (!seleccionado) // El usuario no puede añadir un farmaco mientras está seleccionando otro farmaco.
+            try
             {
-                if (ValidarCampos()) // El usuario no puede dejar los campos en blanco.
+                if (!seleccionado) // El usuario no puede añadir un farmaco mientras está seleccionando otro farmaco.
                 {
-
-                    try
+                    if (ValidarCampos()) // El usuario no puede dejar los campos en blanco.
                     {
+
+                      
                         ObtenerValores();
 
                         farmaco.CrearFarmaco(farmaco);
@@ -123,24 +124,27 @@ namespace VitalCareRx
 
                         MostrarFarmaco();
 
+                        
+                        
                     }
-                    catch (Exception)
+                    else
                     {
-
-
-                        MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
+
                 }
                 else
                 {
-                    MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("¡El Farmaco ya se encuentra ingresado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("¡El Farmaco ya se encuentra ingresado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            
 
 
         }
@@ -176,43 +180,53 @@ namespace VitalCareRx
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            if (seleccionado) //El usuario primero tiene que seleccionar un farmac para poder modificarlo.
+            try
             {
-                if (ValidarCampos()) // El usuario no puede dejar los campos en blanco.
+                if (seleccionado) //El usuario primero tiene que seleccionar un farmac para poder modificarlo.
                 {
-
-                    try
-                    {
-                        ObtenerValores();
-
-                        farmaco.ModificarFarmaco(farmaco);
-
-                        LimpiarFormulario();
-
-                        MessageBox.Show("El farmaco se ha modificado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                        MostrarFarmaco();
-
-
-
-                    }
-                    catch (Exception)
+                    if (ValidarCampos()) // El usuario no puede dejar los campos en blanco.
                     {
 
+                        try
+                        {
+                            ObtenerValores();
 
-                        MessageBox.Show("Ha ocurrido un error al momento de realizar la modificacion... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            farmaco.ModificarFarmaco(farmaco);
+
+                            LimpiarFormulario();
+
+                            MessageBox.Show("El farmaco se ha modificado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                            MostrarFarmaco();
+
+
+
+                        }
+                        catch (Exception)
+                        {
+
+
+                            MessageBox.Show("Ha ocurrido un error al momento de realizar la modificacion... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+
                     }
-
+                    else
+                    {
+                        MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("¡Debe seleccionar un Farmaco!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("¡Debe seleccionar un Farmaco!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificacion... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            
 
         }
 

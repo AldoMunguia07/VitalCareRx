@@ -116,53 +116,59 @@ namespace VitalCareRx
 
         private void btnAñadir_Click(object sender, RoutedEventArgs e)
         {
-            
-            if (ValidarCampos()) // El usuario no tiene que dejar los campos vacios.
+            try
             {
-                if (!validarSeleccionado) // El usuario no tiene que agregar un farmaco que este seleccionando.
+                if (ValidarCampos()) // El usuario no tiene que dejar los campos vacios.
                 {
-                    if (!ValidarFarmacoEnReceta()) // El usuario no tiene que añadir un farmaco 2 veces a la receta
+                    if (!validarSeleccionado) // El usuario no tiene que agregar un farmaco que este seleccionando.
                     {
-                        if (int.Parse(txtCantidad.Text) > 0) // La cantidad de farmacos debe ser mayor a 0
+                        if (!ValidarFarmacoEnReceta()) // El usuario no tiene que añadir un farmaco 2 veces a la receta
                         {
-                            try
+                            if (int.Parse(txtCantidad.Text) > 0) // La cantidad de farmacos debe ser mayor a 0
                             {
-                                ObtenerValores();
+                                try
+                                {
+                                    ObtenerValores();
 
-                                receta.AgregarFarmacoAReceta(receta);
+                                    receta.AgregarFarmacoAReceta(receta);
 
-                                LimpiarFormulario();
+                                    LimpiarFormulario();
 
-                                MostrarFarmacos();
+                                    MostrarFarmacos();
 
-                                MessageBox.Show("Farmaco agreado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    MessageBox.Show("Farmaco agreado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
+                                }
+                                catch (Exception)
+                                {
+                                    MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                }
                             }
-                            catch (Exception ex)
+                            else
                             {
-                                MessageBox.Show(ex.Message);
-                                MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                MessageBox.Show("¡No puede recetar 0 o una cantidad menor de farmacos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                             }
                         }
                         else
                         {
-                            MessageBox.Show("¡No puede recetar 0 o una cantidad menor de farmacos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show("El farmaco ya a sido agregado a la receta medica de la consulta.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
+
                     }
                     else
                     {
                         MessageBox.Show("El farmaco ya a sido agregado a la receta medica de la consulta.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                        
                 }
                 else
                 {
-                    MessageBox.Show("El farmaco ya a sido agregado a la receta medica de la consulta.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            
         }
 
         //Evento click del botón eliminar para eliminar un farmaco de la receta.
@@ -281,16 +287,17 @@ namespace VitalCareRx
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            if (validarSeleccionado) // El usuario no puede modificar un farmaco en a receta si antes no lo ha seleccionado.
+            try
             {
-                if (ValidarCampos()) // El usuario no tiene que dejar los campos vacios.
+                if (validarSeleccionado) // El usuario no puede modificar un farmaco en a receta si antes no lo ha seleccionado.
                 {
-                    if (!ValidarFarmacoEnReceta() || codigoFarmaco == Convert.ToInt32(cmbFarmacos.SelectedValue)) // Valida si el farmaco no esta en la receta actual y si es el codigo de farmaco seleccionado, con esa
-                    {                                                                                             // condición pasara a la siguiente validación
-                        if (int.Parse(txtCantidad.Text) > 0) // La cantidad de farmacos debe ser mayor a 0
-                        {
-                            try
+                    if (ValidarCampos()) // El usuario no tiene que dejar los campos vacios.
+                    {
+                        if (!ValidarFarmacoEnReceta() || codigoFarmaco == Convert.ToInt32(cmbFarmacos.SelectedValue)) // Valida si el farmaco no esta en la receta actual y si es el codigo de farmaco seleccionado, con esa
+                        {                                                                                             // condición pasara a la siguiente validación
+                            if (int.Parse(txtCantidad.Text) > 0) // La cantidad de farmacos debe ser mayor a 0
                             {
+                                
                                 ObtenerValores();
 
                                 receta.ModificarFarmacoReceta(receta);
@@ -300,36 +307,38 @@ namespace VitalCareRx
                                 MostrarFarmacos();
 
                                 MessageBox.Show("Farmaco modificado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
+                                
                             }
-                            catch (Exception)
+                            else
                             {
-
-                                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                MessageBox.Show("¡No puede recetar 0 o una cantidad menor de farmacos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                             }
+
                         }
                         else
                         {
-                            MessageBox.Show("¡No puede recetar 0 o una cantidad menor de farmacos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show("El farmaco ya a sido agregado a la receta medica de la consulta.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
-
                     }
                     else
                     {
-                        MessageBox.Show("El farmaco ya a sido agregado a la receta medica de la consulta.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }    
+                        MessageBox.Show("Debe llenar todos los campus", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+
+
+
                 }
                 else
                 {
-                    MessageBox.Show("Debe llenar todos los campus", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("¡Es requerido que seleccione un farmaco!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-
-
-
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("¡Es requerido que seleccione un farmaco!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
         }
 
         bool right = false;

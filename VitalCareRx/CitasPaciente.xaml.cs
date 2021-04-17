@@ -125,83 +125,89 @@ namespace VitalCareRx
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
-            if (Validar()) //Si hay campos vacios que o deje insertar la cita.
+            try
             {
-                
-                if (!selecionado) //El usuario no puede agregar una cita que haya seleccionado. 
+                if (Validar()) //Si hay campos vacios que o deje insertar la cita.
                 {
-                    if (dtFecha.SelectedDate > DateTime.Now.Date) //La fecha de la cita debe ser mayor a la fecha actual.
+
+                    if (!selecionado) //El usuario no puede agregar una cita que haya seleccionado. 
                     {
-                        try
+                        if (dtFecha.SelectedDate > DateTime.Now.Date) //La fecha de la cita debe ser mayor a la fecha actual.
                         {
+                            
                             ObtenerValoresCita();
                             cita.AgregarCita(cita);
                             LimpiarFormulario();
                             CargarCitasPaciente();
                             MessageBox.Show("¡La cita se ha agregado con exito!", "CITA", MessageBoxButton.OK, MessageBoxImage.Information);
+                            
                         }
-                        catch (Exception)
+                        else
                         {
-
-                            MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("¡La fecha de la proxima cita debe ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("¡La fecha de la proxima cita debe ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show("¡No se puede agregar la misma cita!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                }
-                else
-                {
-                    MessageBox.Show("¡No se puede agregar la misma cita!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                
-                
-            }
-            else
-            {
-                MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
 
-        private void btnModificar_Click(object sender, RoutedEventArgs e)
-        {
-            if (selecionado) // El usuario para modificar una cita primero debe seleccionarla.
-            {
-                if (Validar()) //Para modificar una cita no debe dejar campos en blanco
-                {
-                    if (dtFecha.SelectedDate > DateTime.Now.Date) //La fecha de la cita debe ser mayor a la fecha actual.
-                    {
-                        try
-                        {
-                            ObtenerValoresCita();
-                            cita.ModificarCita(cita);
-                            LimpiarFormulario();
-                            CargarCitasPaciente();
-                            MessageBox.Show("¡La cita se ha modificado con exito!", "CITA", MessageBoxButton.OK, MessageBoxImage.Information);
-                        }
-                        catch (Exception)
-                        {
 
-                            MessageBox.Show("Ha ocurrido un error al momento de realizar la modificacion... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("¡La fecha de la proxima cita debe ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
                 }
                 else
                 {
                     MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-               
-
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("¡Debe seleccionar una cita!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+        }
+
+        private void btnModificar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (selecionado) // El usuario para modificar una cita primero debe seleccionarla.
+                {
+                    if (Validar()) //Para modificar una cita no debe dejar campos en blanco
+                    {
+                        if (dtFecha.SelectedDate > DateTime.Now.Date) //La fecha de la cita debe ser mayor a la fecha actual.
+                        {
+                            
+                            ObtenerValoresCita();
+                            cita.ModificarCita(cita);
+                            LimpiarFormulario();
+                            CargarCitasPaciente();
+                            MessageBox.Show("¡La cita se ha modificado con exito!", "CITA", MessageBoxButton.OK, MessageBoxImage.Information);
+                           
+                        }
+                        else
+                        {
+                            MessageBox.Show("¡La fecha de la proxima cita debe ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+
+
+                }
+                else
+                {
+                    MessageBox.Show("¡Debe seleccionar una cita!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificacion... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+           
         }
 
         //Evento para enviar la información del grid a las textBox

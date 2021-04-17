@@ -39,56 +39,56 @@ namespace VitalCareRx
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
-            
+            try
+            {
                 // Validación para que no deje los campos vacios
                 if (txtPrimerNombre.Text != String.Empty && txtSegundoNombre.Text != String.Empty && txtPrimerApellido.Text !=
-              String.Empty && txtSegundoApellido.Text != String.Empty && txtCelular.Text != String.Empty && txtUsuario.Text !=
-              String.Empty && txtContrasenia.Text != String.Empty && cmbSexo.SelectedValue != null)
+                  String.Empty && txtSegundoApellido.Text != String.Empty && txtCelular.Text != String.Empty && txtUsuario.Text !=
+                  String.Empty && txtContrasenia.Text != String.Empty && cmbSexo.SelectedValue != null)
                 {
                     if (!ExisteUsuario()) // Si el usuario ya existe que no perimita pasar a la siguiente condición
                     {
-                        if(txtCelular.Text.Length == 8) // el campo celular debe tener 8 caracteres
+                        if (txtCelular.Text.Length == 8) // el campo celular debe tener 8 caracteres
                         {
-                            if(txtContrasenia.Text.Length >= 8) // el campo contraseña debe tener 8 o más caracteres
-                        {
-                                try
-                                {
-                                    ObtenerValores();
-                                    empleado.CrearNuevoEmpleado(empleado); //Insertar empleado
-                                    empleado.IdEmpleado = empleado.CodigoEmpleado();
-                                    LimpiarFormulario();
-                                    Loading loading = new Loading(String.Format("{0} {1}", empleado.PrimerNombre, empleado.PrimerApellido), empleado.IdEmpleado);
-                                    loading.Show();
-                                    this.Close();
-                                }
-                                catch (Exception)
-                                {
-                                    MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                                }
-                            }else 
+                            if (txtContrasenia.Text.Length >= 8) // el campo contraseña debe tener 8 o más caracteres
+                            {
+                                
+                                ObtenerValores();
+                                empleado.CrearNuevoEmpleado(empleado); //Insertar empleado
+                                empleado.IdEmpleado = empleado.CodigoEmpleado();
+                                LimpiarFormulario();
+                                Loading loading = new Loading(String.Format("{0} {1}", empleado.PrimerNombre, empleado.PrimerApellido), empleado.IdEmpleado);
+                                loading.Show();
+                                this.Close();
+                                
+                            }
+                            else
                             {
                                 MessageBox.Show("¡La contraseña debe contener almenos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                             }
-                        
-                        }else 
+
+                        }
+                        else
                         {
                             MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
-                    
+
                     }
                     else
                     {
                         MessageBox.Show("¡El nombre de usuario ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
-                        
+
                 }
                 else
                 {
                     MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-
-
-
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
         

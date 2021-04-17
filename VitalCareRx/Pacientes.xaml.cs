@@ -364,26 +364,27 @@ namespace VitalCareRx
 
         private void btnModificarr_Click(object sender, RoutedEventArgs e)
         {
-            if (seleccionado) // Para modificar un paciente primero debe seleccionarlo
+            try
             {
-                
-                if (Validar()) // Los campos no deben estar vacios
+                if (seleccionado) // Para modificar un paciente primero debe seleccionarlo
                 {
 
-                    if (!ExistePaciente() || dni == txtDni.Text) // No puede asignar el DNI o identidad de un paciente ya registrado
+                    if (Validar()) // Los campos no deben estar vacios
                     {
-                        if(txtCelular.Text.Length == 8) // El numero de telefono debe contener 8 dígitos.
+
+                        if (!ExistePaciente() || dni == txtDni.Text) // No puede asignar el DNI o identidad de un paciente ya registrado
                         {
-                            if(txtDni.Text.Length == 13) // El DNI debe contener 13  dígitos.
+                            if (txtCelular.Text.Length == 8) // El numero de telefono debe contener 8 dígitos.
                             {
-                                if (dtFechaNacimiento.SelectedDate <= DateTime.Now.Date) // La fecha de nacimiento debe ser mayor o igual a la fecha actual.
+                                if (txtDni.Text.Length == 13) // El DNI debe contener 13  dígitos.
                                 {
-                                    if (float.Parse(txtEstatura.Text) > 0) // La estatura debe ser mayor 0.
+                                    if (dtFechaNacimiento.SelectedDate <= DateTime.Now.Date) // La fecha de nacimiento debe ser mayor o igual a la fecha actual.
                                     {
-                                        if (float.Parse(txtPeso.Text) > 0) // El peso debe ser mayor a 0.
+                                        if (float.Parse(txtEstatura.Text) > 0) // La estatura debe ser mayor 0.
                                         {
-                                            try
+                                            if (float.Parse(txtPeso.Text) > 0) // El peso debe ser mayor a 0.
                                             {
+                                                
                                                 ObtenerDatos();
 
                                                 paciente.ActualizarPaciente(paciente);
@@ -391,55 +392,57 @@ namespace VitalCareRx
                                                 LimpiarFormulario();
                                                 OcultarColumnas();
                                                 MessageBox.Show("El paciente se ha modificado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
+                                                
                                             }
-                                            catch (Exception)
+                                            else
                                             {
-
-                                                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                                MessageBox.Show("¡No puede tener una peso menor o igual a 0 libras!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                                             }
                                         }
                                         else
                                         {
-                                            MessageBox.Show("¡No puede tener una peso menor o igual a 0 libras!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                            MessageBox.Show("¡No puede tener una estatura menor o igual a 0 centimetros!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                                         }
                                     }
                                     else
                                     {
-                                        MessageBox.Show("¡No puede tener una estatura menor o igual a 0 centimetros!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                        MessageBox.Show("¡La fecha de nacimiento no puede ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+
                                     }
                                 }
                                 else
                                 {
-                                    MessageBox.Show("¡La fecha de nacimiento no puede ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-
+                                    MessageBox.Show("¡Numero de identidad incompleto, debe de contener 13 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("¡Numero de identidad incompleto, debe de contener 13 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                             }
                         }
                         else
                         {
-                            MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show("¡Numero de identidad existente!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
+
+
                     }
                     else
                     {
-                        MessageBox.Show("¡Numero de identidad existente!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
-
-                
                 }
                 else
                 {
-                    MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("¡Debe seleccionar un paciente!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("¡Debe seleccionar un paciente!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+           
 
 
         }
@@ -494,25 +497,26 @@ namespace VitalCareRx
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
-            if (Validar()) // Los campos no deben estar vacios
+            try
             {
-                if (!seleccionado) // No puede agregar a un paciente existente.
+                if (Validar()) // Los campos no deben estar vacios
                 {
-                    if (!ExistePaciente()) // No puede asignar el DNI o identidad de un paciente ya registrado
+                    if (!seleccionado) // No puede agregar a un paciente existente.
                     {
-                        if (txtCelular.Text.Length == 8) // El numero de telefno debe contener 8 dígitos.
+                        if (!ExistePaciente()) // No puede asignar el DNI o identidad de un paciente ya registrado
                         {
-                            if (txtDni.Text.Length == 13) // El DNI debe contener 13  dígitos.
+                            if (txtCelular.Text.Length == 8) // El numero de telefno debe contener 8 dígitos.
                             {
-                                if (dtFechaNacimiento.SelectedDate <= DateTime.Now.Date) // La fecha de nacimiento debe ser mayor o igual a la fecha actual.
+                                if (txtDni.Text.Length == 13) // El DNI debe contener 13  dígitos.
                                 {
-                                    if (float.Parse(txtEstatura.Text) > 0) // La estatura debe ser mayor 0.
+                                    if (dtFechaNacimiento.SelectedDate <= DateTime.Now.Date) // La fecha de nacimiento debe ser mayor o igual a la fecha actual.
                                     {
-                                        if (float.Parse(txtPeso.Text) > 0) // El peso debe ser mayor a 0.
+                                        if (float.Parse(txtEstatura.Text) > 0) // La estatura debe ser mayor 0.
                                         {
-
-                                            try
+                                            if (float.Parse(txtPeso.Text) > 0) // El peso debe ser mayor a 0.
                                             {
+
+                                                
                                                 ObtenerDatos();
 
                                                 paciente.CrearPaciente(paciente);
@@ -520,60 +524,63 @@ namespace VitalCareRx
                                                 MostrarPacientes();
                                                 LimpiarFormulario();
                                                 OcultarColumnas();
-                                            }
-                                            catch (Exception)
-                                            {
+                                                
+                                                
 
-                                                MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                             }
+                                            else
+                                            {
+                                                MessageBox.Show("¡No puede tener una peso menor o igual a 0 libras!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                            }
+
 
                                         }
                                         else
                                         {
-                                            MessageBox.Show("¡No puede tener una peso menor o igual a 0 libras!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                            MessageBox.Show("¡No puede tener una estatura menor o igual a 0 centimetros!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                                         }
-
 
                                     }
                                     else
                                     {
-                                        MessageBox.Show("¡No puede tener una estatura menor o igual a 0 centimetros!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                        MessageBox.Show("¡La fecha de nacimiento no puede ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                                     }
+
 
                                 }
                                 else
                                 {
-                                    MessageBox.Show("¡La fecha de nacimiento no puede ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                    MessageBox.Show("¡Numero de identidad incompleto, debe de contener 13 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                                 }
-
-
                             }
                             else
                             {
-                                MessageBox.Show("¡Numero de identidad incompleto, debe de contener 13 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                             }
+
                         }
                         else
                         {
-                            MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show("¡El numero de identidad ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
-
                     }
                     else
                     {
-                        MessageBox.Show("¡El numero de identidad ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show("¡No se puede agregar al mismo paciente!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
+
                 }
                 else
                 {
-                    MessageBox.Show("¡Numero de identidad existente!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            
 
         }
 

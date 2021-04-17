@@ -219,50 +219,54 @@ namespace VitalCareRx
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            if (Validar()) //El usuario no debe dejar los campos en blanco.
+            try
             {
-                if(!ExisteUsuario() || usuario == txtUsuario.Text) // Valida si el nombre usuario no existe y si es el nombre de usurio es del empleado actual, con esa condición pasa a la siguiente validación
+                if (Validar()) //El usuario no debe dejar los campos en blanco.
                 {
-
-                    if (txtCelular.Text.Length == 8) // El numero de telefono debe contener 8 dígitos.
+                    if (!ExisteUsuario() || usuario == txtUsuario.Text) // Valida si el nombre usuario no existe y si es el nombre de usurio es del empleado actual, con esa condición pasa a la siguiente validación
                     {
-                        if (txtPassword.Text.Length >= 8) // el campo contraseña debe tener 8 o más caracteres
+
+                        if (txtCelular.Text.Length == 8) // El numero de telefono debe contener 8 dígitos.
                         {
-                            try
+                            if (txtPassword.Text.Length >= 8) // el campo contraseña debe tener 8 o más caracteres
                             {
+
                                 ObtenerDatos();
                                 miUsuario.ModificarEmpleado(miUsuario);
                                 MessageBox.Show("¡Datos actualizados correctamente!", "USUARIO", MessageBoxButton.OK, MessageBoxImage.Information);
                                 usuario = txtUsuario.Text;
-                            }
-                            catch (Exception)
-                            {
-                                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
+                            }
+                            else
+                            {
+                                MessageBox.Show("¡La contraseña debe contener almenos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                             }
                         }
                         else
                         {
-                            MessageBox.Show("¡La contraseña debe contener almenos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
+
                     }
                     else
                     {
-                        MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show("¡El nombre de usuario ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        txtUsuario.Text = usuario;
                     }
+
 
                 }
                 else
                 {
-                    MessageBox.Show("¡El nombre de usuario ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
-            else
-            {
-                MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            
         }
 
 
