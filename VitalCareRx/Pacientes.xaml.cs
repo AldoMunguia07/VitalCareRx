@@ -396,7 +396,7 @@ namespace VitalCareRx
                                             }
                                             else
                                             {
-                                                MessageBox.Show("¡No puede tener una peso menor o igual a 0 libras!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                                MessageBox.Show("¡No puede tener un peso menor o igual a 0 libras!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                                             }
                                         }
                                         else
@@ -530,7 +530,7 @@ namespace VitalCareRx
                                             }
                                             else
                                             {
-                                                MessageBox.Show("¡No puede tener una peso menor o igual a 0 libras!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                                MessageBox.Show("¡No puede tener un peso menor o igual a 0 libras!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                                             }
 
 
