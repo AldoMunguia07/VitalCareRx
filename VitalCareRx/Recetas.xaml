@@ -23,14 +23,9 @@
             <Button Name="btnCerrar" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Red"  Margin="235,0,0,544" Click="btnCerrar_Click">
                 <materialDesign:PackIcon Kind="CloseCircleOutline" Height="30" Width="30" RenderTransformOrigin="0.352,0.42" />
             </Button>
+            <ComboBox Name="cmbFarmacos" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" Width="255" Height="30" Background="White"/>
+            <TextBox Name="txtCantidad" Background="White" FontSize="10" HorizontalAlignment="Left" Height="26" Margin="10,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="255"/>
 
-            <RichTextBox Name = "rtxtIndicaciones" HorizontalAlignment="Left" Height="84" Margin="10,384,0,0" VerticalAlignment="Top" Width="255" Background="White">
-                <FlowDocument>
-                    <Paragraph>
-                        <Run Text=""/>
-                    </Paragraph>
-                </FlowDocument>
-            </RichTextBox>
             <RichTextBox Name="rtxtDuracionTratamiento" HorizontalAlignment="Left" Height="75" Margin="10,256,0,0" VerticalAlignment="Top" Width="255" Background="White">
                 <FlowDocument>
                     <Paragraph>
@@ -38,12 +33,18 @@
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
-            <ComboBox Name="cmbFarmacos" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" Width="255" Height="30" Background="White"/>
+            <RichTextBox Name = "rtxtIndicaciones" HorizontalAlignment="Left" Height="84" Margin="10,384,0,0" VerticalAlignment="Top" Width="255" Background="White">
+                <FlowDocument>
+                    <Paragraph>
+                        <Run Text=""/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+
             <Label Background="#1c1c1c" Content="Duración tratamiento" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,215,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="283" Height="36"/>
             <Label Background="#1c1c1c" Content="Farmacos" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,42,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="283" Height="34"/>
             <Button Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="82,485,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="-0.242,0.544" Click="btnModificar_Click"/>
             <Label Background="#1c1c1c" Content="Cantidad de fármaco" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,127,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="283" Height="38"/>
-            <TextBox Name="txtCantidad" Background="White" FontSize="10" HorizontalAlignment="Left" Height="26" Margin="10,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="255"/>
         </Grid>
         <DataGrid Name = "dgRecetas" HorizontalAlignment="Left" Height="306" Margin="10,99,0,0" VerticalAlignment="Top" Width="463" SelectionChanged="dgRecetas_SelectionChanged"/>
         <Label Background="#1c1c1c" Content="Indicaciónes" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="495,346,0,212" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="279" RenderTransformOrigin="0.612,0.375"/>

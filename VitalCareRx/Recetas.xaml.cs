@@ -371,7 +371,7 @@ namespace VitalCareRx
         {
             try
             {
-                string query = @"SELECT idFarmaco FROM [Consultas].[DetalleRecetaMedica] WHERE idFarmaco = @idFarmaco";
+                string query = @"SELECT idFarmaco FROM [Consultas].[DetalleRecetaMedica] WHERE idRecetaMedica = @idReceta and idFarmaco = @idFarmaco";
 
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
@@ -380,6 +380,8 @@ namespace VitalCareRx
                 using (sqlDataAdapter)
                 {
                     sqlCommand.Parameters.AddWithValue("@idFarmaco", cmbFarmacos.SelectedValue);
+                    sqlCommand.Parameters.AddWithValue("@idReceta", codigoRecetaMedica);
+
                     DataTable dataTable = new DataTable();
                     sqlDataAdapter.Fill(dataTable);
 

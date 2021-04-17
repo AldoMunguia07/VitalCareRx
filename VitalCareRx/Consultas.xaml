@@ -25,14 +25,15 @@
                 <materialDesign:PackIcon Kind="CloseCircleOutline" Height="28" Width="30" RenderTransformOrigin="0.352,0.42" />
             </Button>
 
-            <RichTextBox Name="rtxtDiagnostico" HorizontalAlignment="Left" Height="74" Margin="10,237,0,0" VerticalAlignment="Top" Width="255" Background="White">
+            
+            <RichTextBox Name="rtxtMotivoConsulta"  HorizontalAlignment="Left" Height="68" Margin="10,103,0,0" VerticalAlignment="Top" Width="255" Background="White">
                 <FlowDocument>
                     <Paragraph>
                         <Run Text=""/>
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
-            <RichTextBox Name="rtxtMotivoConsulta"  HorizontalAlignment="Left" Height="68" Margin="10,103,0,0" VerticalAlignment="Top" Width="255" Background="White">
+            <RichTextBox Name="rtxtDiagnostico" HorizontalAlignment="Left" Height="74" Margin="10,237,0,0" VerticalAlignment="Top" Width="255" Background="White">
                 <FlowDocument>
                     <Paragraph>
                         <Run Text=""/>
