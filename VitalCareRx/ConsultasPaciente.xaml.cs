@@ -27,15 +27,15 @@ namespace VitalCareRx
     public partial class ConsultasPaciente : Window
     {
         private int codigoConsulta;
-        private string paciente;
+        private int idPaciente;
         SqlConnection sqlConnection;
         private bool seleccionado = false;
-        public ConsultasPaciente(string codigoPaciente) //Se le pasa por parametro el id del paciente para ver las consultas correspondientes a dicho paciente.
+        public ConsultasPaciente(int codigoPaciente) //Se le pasa por parametro el id del paciente para ver las consultas correspondientes a dicho paciente.
         {
             InitializeComponent();
             string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
-            paciente = codigoPaciente;
+            idPaciente = codigoPaciente;
             CargarCitasPaciente();
         }
 
@@ -50,15 +50,15 @@ namespace VitalCareRx
                             FROM [Consultas].[Consulta] CO INNER JOIN [Consultas].[Cita] C
                             ON CO.idCita = C.idCita
                             INNER JOIN [Personas].[Paciente] P
-                            ON C.numeroIdentidad = P.numeroIdentidad
+                            ON C.idPaciente = P.idPaciente
                             INNER JOIN [Personas].[Empleado] E
                             ON CO.idEmpleado = e.idEmpleado
-                            WHERE P.numeroIdentidad = @numeroIdentidad";
+                            WHERE P.idPaciente = @idPaciente";
 
             SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
 
-            sqlCommand.Parameters.AddWithValue("@numeroIdentidad", paciente);
+            sqlCommand.Parameters.AddWithValue("@idPaciente", idPaciente);
 
             try
             {

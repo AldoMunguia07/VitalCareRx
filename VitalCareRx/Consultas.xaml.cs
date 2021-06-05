@@ -66,7 +66,7 @@ namespace VitalCareRx
                             FROM[Consultas].[Consulta] CO INNER JOIN[Consultas].[Cita] C
                             ON CO.idCita = C.idCita
                             INNER JOIN[Personas].[Paciente] P
-                            ON C.numeroIdentidad = P.numeroIdentidad
+                            ON C.idPaciente = P.idPaciente
                             INNER JOIN[Personas].[Empleado] E
                             ON CO.idEmpleado = e.idEmpleado
                             ";

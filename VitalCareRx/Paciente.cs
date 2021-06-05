@@ -19,6 +19,7 @@ namespace VitalCareRx
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         //Propiedades
+        public int IdPaciente { get; set; }
         public string NumeroIdentidad { get; set; }
 
         public string PrimerNombre { get; set; }
@@ -49,9 +50,10 @@ namespace VitalCareRx
         // Constructores
         public Paciente() { }
 
-        public Paciente(string identidad, string primerNombre, string segundoNombre, string primerApellido, string segundoApellido, string direccion, string celular,
+        public Paciente(int idPaciente,string identidad, string primerNombre, string segundoNombre, string primerApellido, string segundoApellido, string direccion, string celular,
                         DateTime fechaNacimeiento, float peso, float estatura, bool estado, int idTipoSangre, int idSexo)
         {
+            IdPaciente = idPaciente;
             NumeroIdentidad = identidad;
             PrimerNombre = primerNombre;
             SegundoNombre = segundoNombre;
@@ -131,7 +133,7 @@ namespace VitalCareRx
                                 SET numeroIdentidad = @numeroIdentidad, primerNombre = @primerNombre, segundoNombre = @segundoNombre, primerApellido = @primerApellido,
                                 segundoApellido = @segundoApellido, direccion = @direccion, celular = @celular, fechaNacimiento = @fechaNacimiento, peso = @peso,
                                 estatura = @estatura, idTipoSangre = @idTipoSangre, idSexo = @idSexo, estado = @estado
-                                WHERE numeroIdentidad = @numeroIdentidad";
+                                WHERE idPaciente = @idPaciente";
 
                 // Abrir la conexión
                 sqlConnection.Open();
@@ -140,6 +142,7 @@ namespace VitalCareRx
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 // Establecer los valores de los parámetros
+                sqlCommand.Parameters.AddWithValue("@idPaciente", paciente.IdPaciente);
                 sqlCommand.Parameters.AddWithValue("@numeroIdentidad", paciente.NumeroIdentidad);
                 sqlCommand.Parameters.AddWithValue("@primerNombre", paciente.PrimerNombre);
                 sqlCommand.Parameters.AddWithValue("@segundoNombre", paciente.SegundoNombre);

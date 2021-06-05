@@ -21,16 +21,16 @@ namespace VitalCareRx
         public int IdCita { get; set; }
         public DateTime FechaCita { get; set; }
         public string Notas { get; set; }
-        public string NumeroIdentidad { get; set; }
+        public int IdPaciente { get; set; }
 
         // Constructores
         public Cita() { }
-        public Cita(int idCita, DateTime fechaCita, string notas, string numeroIdentidad)
+        public Cita(int idCita, DateTime fechaCita, string notas, int idPaciente)
         {
             IdCita = idCita;
             FechaCita = fechaCita;
             Notas = notas;
-            NumeroIdentidad = numeroIdentidad;     
+            IdPaciente = IdPaciente;     
         }
 
         // Metodos
@@ -43,7 +43,7 @@ namespace VitalCareRx
             try
             {
                 //Query para añadir una cita al paciente
-                string query = @"INSERT INTO [Consultas].[Cita] VALUES (@fecha,@notas,@numeroIdentidad)";
+                string query = @"INSERT INTO [Consultas].[Cita] VALUES (@fecha,@notas,@idPaciente)";
 
                 // Abrir la conexión
                 sqlConnection.Open();
@@ -54,7 +54,7 @@ namespace VitalCareRx
                 // Establecer los valores de los parámetros
                 sqlCommand.Parameters.AddWithValue("@fecha", cita.FechaCita);
                 sqlCommand.Parameters.AddWithValue("@notas", cita.Notas);
-                sqlCommand.Parameters.AddWithValue("@numeroIdentidad", cita.NumeroIdentidad);
+                sqlCommand.Parameters.AddWithValue("@idPaciente", cita.IdPaciente);
 
 
 

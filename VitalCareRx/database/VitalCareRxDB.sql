@@ -36,23 +36,24 @@ CREATE TABLE Personas.TipoSangre
 
 CREATE TABLE Personas.Paciente 
 (
-	numeroIdentidad varchar(16) NOT NULL,
-	primerNombre varchar(25) NOT NULL,
-	segundoNombre varchar(25) NOT NULL,
-	primerApellido varchar(25) NOT NULL,
-	segundoApellido varchar(25) NOT NULL,
-	direccion varchar(200) NOT NULL,
+	idPaciente INT NOT NULL IDENTITY,
+	numeroIdentidad VARCHAR(16) NOT NULL,
+	primerNombre VARCHAR(25) NOT NULL,
+	segundoNombre VARCHAR(25) NOT NULL,
+	primerApellido VARCHAR(25) NOT NULL,
+	segundoApellido VARCHAR(25) NOT NULL,
+	direccion VARCHAR(200) NOT NULL,
 	celular VARCHAR(8),
-	fechaNacimiento date NOT NULL,
-	peso float NOT NULL,
-	estatura float NOT NULL,
+	fechaNacimiento DATE NOT NULL,
+	peso FLOAT NOT NULL,
+	estatura FLOAT NOT NULL,
 	estado BIT NOT NULL,
-	idTipoSangre int NOT NULL,
-	idSexo int NOT NULL,
+	idTipoSangre INT NOT NULL,
+	idSexo INT NOT NULL,
 	
 
-	CONSTRAINT PK_Paciente_numeroIdentidad
-		PRIMARY KEY CLUSTERED (numeroIdentidad),
+	CONSTRAINT PK_Paciente_idIdentidad
+		PRIMARY KEY CLUSTERED (idPaciente),
 	CONSTRAINT FK_Paciente$Existe$TipoSangre
 		FOREIGN KEY (idTipoSangre) REFERENCES Personas.TipoSangre(idTipoSangre),
 	CONSTRAINT FK_Paciente$Existe$Sexo
@@ -85,14 +86,14 @@ CREATE TABLE Consultas.Cita
 (
 	idCita INT NOT NULL IDENTITY,
 	fechaCita DATE NOT NULL,
-	notas varchar(200) NULL,
-	numeroIdentidad varchar(16) NOT NULL, 
+	notas VARCHAR(200) NULL,
+	idPaciente INT NOT NULL, 
 
 	CONSTRAINT PK_Cita_idCita
 		PRIMARY KEY CLUSTERED (idCita),
 
 	CONSTRAINT FK_Cita$Existe$Paciente
-		FOREIGN KEY (numeroIdentidad) REFERENCES Personas.Paciente(numeroIdentidad)
+		FOREIGN KEY (idPaciente) REFERENCES Personas.Paciente(idPaciente)
 )	
 
 CREATE TABLE Consultas.Consulta
@@ -195,6 +196,12 @@ ALTER TABLE Personas.Paciente
 	CHECK (estado IN(0, 1))
 GO
 
+ALTER TABLE Personas.Paciente
+		ADD CONSTRAINT AK_Personas_numeroIdentidad
+		UNIQUE NONCLUSTERED (numeroIdentidad)
+GO
+
+
 -- Tabla Personas.Sexo
 ALTER TABLE Personas.Sexo
 		ADD CONSTRAINT AK_Personas_Sexo_descripcionSexo
@@ -236,11 +243,6 @@ GO
 ALTER TABLE Consultas.Cita WITH CHECK
 		ADD CONSTRAINT CHK_Consultas_Cita$VerificarFechaCita
 		CHECK (fechaCita >= CONVERT (date, GETDATE()))
-GO
-
-ALTER TABLE Consultas.Cita WITH CHECK
-		ADD CONSTRAINT CHK_Consultas_Citas$VerificarLongitudDNI
-		CHECK (len(numeroIdentidad) = 13)
 GO
 
 
@@ -288,5 +290,5 @@ INSERT [Personas].[TipoSangre]  VALUES ( 'O+')
 
 -- Datos tabla Farmaco
 
-INSERT [Consultas].[Farmaco]  VALUES ('Simvastatina', 'Para controlar el colesterol')INSERT [Consultas].[Farmaco] VALUES ('Aspirina', ' Casi para todo')INSERT [Consultas].[Farmaco]  VALUES ('Omeprazol', 'Para la acidez de estómago')INSERT [Consultas].[Farmaco]  VALUES ('Lexotiroxina sódica', 'Para reemplazar la tiroxina')INSERT [Consultas].[Farmaco]  VALUES ('Ramipril', 'Para la hipertensión')INSERT [Consultas].[Farmaco] VALUES ('Amlodipina', 'Para la hipertensión y la angina')INSERT [Consultas].[Farmaco] VALUES ('Paracetamol ', 'Para aliviar el dolor')INSERT [Consultas].[Farmaco]  VALUES ('Salbutamol', 'Para el asma')
+INSERT [Consultas].[Farmaco]  VALUES ('Simvastatina', 'Para controlar el colesterol')INSERT [Consultas].[Farmaco] VALUES ('Aspirina', ' Casi para todo')INSERT [Consultas].[Farmaco]  VALUES ('Omeprazol', 'Para la acidez de estï¿½mago')INSERT [Consultas].[Farmaco]  VALUES ('Lexotiroxina sï¿½dica', 'Para reemplazar la tiroxina')INSERT [Consultas].[Farmaco]  VALUES ('Ramipril', 'Para la hipertensiï¿½n')INSERT [Consultas].[Farmaco] VALUES ('Amlodipina', 'Para la hipertensiï¿½n y la angina')INSERT [Consultas].[Farmaco] VALUES ('Paracetamol ', 'Para aliviar el dolor')INSERT [Consultas].[Farmaco]  VALUES ('Salbutamol', 'Para el asma')
 

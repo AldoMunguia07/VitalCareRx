@@ -26,12 +26,12 @@ namespace VitalCareRx
     {
         SqlConnection sqlConnection;
 
-        private string codigoPaciente;
+        private int codigoPaciente;
         Cita cita = new Cita();
         private bool selecionado = false;
         private int codigoCita;
 
-        public CitasPaciente(string paciente) //Se le pasa por parametro el id del paciente para ver las citas correspondientes a dicho paciente.
+        public CitasPaciente(int paciente) //Se le pasa por parametro el id del paciente para ver las citas correspondientes a dicho paciente.
         {
             
             InitializeComponent();
@@ -50,12 +50,12 @@ namespace VitalCareRx
         private void CargarCitasPaciente()
         {
             string query = @"SELECT idCita 'Codigo de cita', fechaCita 'Fecha de la cita', notas Notas
-                            FROM [Consultas].[Cita] WHERE numeroIdentidad = @numeroIdentidad
+                            FROM [Consultas].[Cita] WHERE idPaciente = @idPaciente
                             ";
             SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
 
-            sqlCommand.Parameters.AddWithValue("@numeroIdentidad", codigoPaciente);
+            sqlCommand.Parameters.AddWithValue("@idPaciente", codigoPaciente);
 
             try
             {
@@ -113,7 +113,7 @@ namespace VitalCareRx
         {
             cita.IdCita = codigoCita;
             TextRange notas = new TextRange(richTextBoxNotas.Document.ContentStart, richTextBoxNotas.Document.ContentEnd);
-            cita.NumeroIdentidad = codigoPaciente;
+            cita.IdPaciente = codigoPaciente;
             cita.FechaCita = Convert.ToDateTime(dtFecha.SelectedDate);
             cita.Notas = notas.Text.Substring(0, notas.Text.Length - 2);
         }

@@ -41,7 +41,9 @@ namespace VitalCareRx
             codigoEmpleado = empleado;            
             CargarTextBox();
             LlenarComboBoxSexo();
-            usuario = txtUsuario.Text; // se asigna el valor de la txtUsuario para la posteiror validacion (Que no permita ingresar un usuario existente).
+            miUsuario.PrimerNombre = txtPrimerNombre.Text;
+            miUsuario.PrimerApellido = txtPrimerApellido.Text;
+           usuario = txtUsuario.Text; // se asigna el valor de la txtUsuario para la posteiror validacion (Que no permita ingresar un usuario existente).
         }
 
         /// <summary>
@@ -149,7 +151,7 @@ namespace VitalCareRx
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
         {
-            ObtenerDatos();
+            
             NameEmpleado = String.Format("{0} {1}", miUsuario.PrimerNombre, miUsuario.PrimerApellido); // Se pasa por parametro el nuevo nombre de usuario actualizado o se queda con el actual en caso de
             MenuPrincipal menu = new MenuPrincipal(NameEmpleado, codigoEmpleado);                      // que no los haya actualizado
             menu.Show();

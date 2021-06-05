@@ -31,7 +31,7 @@ namespace VitalCareRx
         bool cargado = false;
         bool seleccionado = false;
         private string dni;
-
+        private int idPaciente;
 
         SqlConnection sqlConnection;
 
@@ -62,7 +62,7 @@ namespace VitalCareRx
         /// </summary>
         public void MostrarPacientes()
         {
-            string query = @"SELECT P.numeroIdentidad Identidad,primerNombre,segundoNombre,PrimerApellido,segundoApellido, P.idTipoSangre, P.idSexo,
+            string query = @"SELECT P.numeroIdentidad Identidad,primerNombre,segundoNombre,PrimerApellido,segundoApellido, P.idTipoSangre, P.idSexo, P.idPaciente,
                             CONCAT(P.primerNombre, ' ', P.segundoNombre, ' ', P.primerApellido, ' ', P.segundoApellido) Paciente,
                             P.direccion Direccion, P.celular Celular, P.fechaNacimiento 'Fecha de nacimiento', P.peso 'Peso (lbs)', P.estatura 'Estatura (cm)', P.estado Estado,
                             T.descripcionTipoSangre 'Tipo de sangre', S.descripcionSexo Sexo
@@ -106,7 +106,7 @@ namespace VitalCareRx
         /// </summary>
         public void MostrarUnPaciente()
         {
-            string query = @"SELECT P.numeroIdentidad Identidad,primerNombre,segundoNombre,PrimerApellido,segundoApellido, P.idTipoSangre, P.idSexo,
+            string query = @"SELECT P.numeroIdentidad Identidad,primerNombre,segundoNombre,PrimerApellido,segundoApellido, P.idTipoSangre, P.idSexo, P.idPaciente,
                             CONCAT(P.primerNombre, ' ', P.segundoNombre, ' ', P.primerApellido, ' ', P.segundoApellido) Paciente,
                             P.direccion Direccion, P.celular Celular, P.fechaNacimiento 'Fecha de nacimiento', P.peso 'Peso (lbs)', P.estatura 'Estatura (cm)', P.estado Estado,
                             T.descripcionTipoSangre 'Tipo de sangre', S.descripcionSexo Sexo
@@ -234,6 +234,7 @@ namespace VitalCareRx
             gridPacientes.Columns[4].Visibility = Visibility.Hidden;
             gridPacientes.Columns[5].Visibility = Visibility.Hidden;
             gridPacientes.Columns[6].Visibility = Visibility.Hidden;
+            gridPacientes.Columns[7].Visibility = Visibility.Hidden;
 
         }
 
@@ -276,6 +277,7 @@ namespace VitalCareRx
                 seleccionado = true;
                 dni = rowSelected.Row["Identidad"].ToString(); 
                 txtDni.Text = rowSelected.Row["Identidad"].ToString();
+                idPaciente = Convert.ToInt32(rowSelected.Row["idPaciente"].ToString());
                 txtPrimerNombre.Text = rowSelected.Row["primerNombre"].ToString();
                 txtSegundoNombre.Text = rowSelected.Row["segundoNombre"].ToString();
                 txtPrimerApellido.Text = rowSelected.Row["primerApellido"].ToString();
@@ -327,6 +329,7 @@ namespace VitalCareRx
             seleccionado = false;
             dni = string.Empty;
             txtBuscar.Clear();
+            idPaciente = 0;
 
         }
 
@@ -471,6 +474,7 @@ namespace VitalCareRx
         {
             TextRange direccion = new TextRange(richTxtDireccion.Document.ContentStart, richTxtDireccion.Document.ContentEnd);
             bool status;
+            paciente.IdPaciente = idPaciente;
             paciente.NumeroIdentidad = txtDni.Text;
             paciente.PrimerNombre = txtPrimerNombre.Text;
             paciente.SegundoNombre = txtSegundoNombre.Text;
@@ -612,7 +616,7 @@ namespace VitalCareRx
         {
             if (seleccionado) //Para ver las citas de un paciente de seleccinarlo primero.
             {
-                CitasPaciente citasPaciente = new CitasPaciente(dni); //Se envia el DNI del paciente para visualizar las citas correspondientes a dicho paciente.
+                CitasPaciente citasPaciente = new CitasPaciente(idPaciente); //Se envia el DNI del paciente para visualizar las citas correspondientes a dicho paciente.
                 citasPaciente.ShowDialog(); //ShowDialog perimte volver a ventana de paciente una vez se cierre la ventana de CitasPaciente.
             }
             else
@@ -626,7 +630,7 @@ namespace VitalCareRx
         {
             if (seleccionado) //Para ver las consultas de un paciente de seleccinarlo primero.
             {
-                ConsultasPaciente consultasPaciente = new ConsultasPaciente(dni); //Se envia el DNI del paciente para visualizar las consultas correspondientes a dicho paciente.
+                ConsultasPaciente consultasPaciente = new ConsultasPaciente(idPaciente); //Se envia el DNI del paciente para visualizar las consultas correspondientes a dicho paciente.
                 consultasPaciente.ShowDialog(); //ShowDialog perimte volver a ventana de paciente una vez se cierre la ventana de ConsultasPaciente.
             }
             else
