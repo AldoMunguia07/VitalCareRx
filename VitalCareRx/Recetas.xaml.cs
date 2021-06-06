@@ -416,12 +416,21 @@ namespace VitalCareRx
 
         private void rtxtDuracionTratamiento_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+            try
+            {
+                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
 
-            if (caracter == 45) // Codigo ASCII 
-                e.Handled = true;  // Permite 
-            else
-                e.Handled = false; // Bloquea
+                if (caracter == 45) // Codigo ASCII 
+                    e.Handled = true;  // Permite 
+                else
+                    e.Handled = false; // Bloquea
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+           
         }
 
        

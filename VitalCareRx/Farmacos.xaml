@@ -24,14 +24,14 @@
                 <materialDesign:PackIcon Kind="CloseCircleOutline" Height="30" Width="30" RenderTransformOrigin="0.352,0.42" />
             </Button>
 
-            <RichTextBox Name="rtxtIndicaciones" HorizontalAlignment="Left" Height="156" Margin="20,346,0,0" VerticalAlignment="Top" Width="255" Background="White" FontSize="20">
+            <RichTextBox PreviewTextInput="rtxtIndicaciones_PreviewTextInput" Name="rtxtIndicaciones" HorizontalAlignment="Left" Height="156" Margin="20,346,0,0" VerticalAlignment="Top" Width="255" Background="White" FontSize="20">
                 <FlowDocument>
                     <Paragraph>
                         <Run Text=""/>
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
-            <TextBox Name="txtDescripcionFarmaco" Background="White" HorizontalAlignment="Left" Height="30" Margin="40,132,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="202" FontSize="18"/>
+            <TextBox PreviewTextInput="txtDescripcionFarmaco_PreviewTextInput" Name="txtDescripcionFarmaco" Background="White" HorizontalAlignment="Left" Height="30" Margin="40,132,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="202" FontSize="18"/>
         </Grid>
         <DataGrid SelectionChanged="dgFarmacos_SelectionChanged" Name="dgFarmacos"  HorizontalAlignment="Left" Height="336" Margin="10,97,0,0" VerticalAlignment="Top" Width="721"/>
         <Label Background="#1c1c1c" Content="Descripción farmaco" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="731,75,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="285" Height="37"/>

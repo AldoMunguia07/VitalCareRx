@@ -311,5 +311,40 @@ namespace VitalCareRx
         {
             right = false;
         }
+
+        private void txtDescripcionFarmaco_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            try
+            {
+                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+                if (caracter >= 33 && caracter <= 47 || caracter == 64)
+                {
+                    e.Handled = true;
+                }
+
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
+        }
+
+        private void rtxtIndicaciones_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            try
+            {
+                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+                if (caracter >= 33 && caracter <= 47 || caracter == 64)
+                {
+                    e.Handled = true;
+                }
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

@@ -278,13 +278,23 @@ namespace VitalCareRx
 
         private void txtPrimerNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
 
-            if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
-                || (caracter == 164 || caracter == 165)) // Codigo ASCII 
-                e.Handled = false;  // Permite 
-            else
-                e.Handled = true; // Bloquea
+            try
+            {
+                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+
+                if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
+                    || (caracter == 164 || caracter == 165)) // Codigo ASCII 
+                    e.Handled = false;  // Permite 
+                else
+                    e.Handled = true; // Bloquea
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+          
         }
 
         private void txtPrimerNombre_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -296,13 +306,21 @@ namespace VitalCareRx
 
         private void txtSegundoNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+            try
+            {
+                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
 
-            if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
-                || (caracter == 164 || caracter == 165)) // Codigo ASCII 
-                e.Handled = false;  // Permite 
-            else
-                e.Handled = true; // Bloquea
+                if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
+                    || (caracter == 164 || caracter == 165)) // Codigo ASCII 
+                    e.Handled = false;  // Permite 
+                else
+                    e.Handled = true; // Bloquea
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void txtSegundoNombre_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -314,13 +332,21 @@ namespace VitalCareRx
 
         private void txtPrimerApellido_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+            try
+            {
+                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
 
-            if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
-                || (caracter == 164 || caracter == 165)) // Codigo ASCII 
-                e.Handled = false;  // Permite 
-            else
-                e.Handled = true; // Bloquea
+                if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
+                    || (caracter == 164 || caracter == 165)) // Codigo ASCII 
+                    e.Handled = false;  // Permite 
+                else
+                    e.Handled = true; // Bloquea
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void txtPrimerApellido_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -332,13 +358,21 @@ namespace VitalCareRx
 
         private void txtSegundoApellido_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+            try
+            {
+                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
 
-            if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
-                || (caracter == 164 || caracter == 165)) // Codigo ASCII 
-                e.Handled = false;  // Permite 
-            else
-                e.Handled = true; // Bloquea
+                if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
+                    || (caracter == 164 || caracter == 165)) // Codigo ASCII 
+                    e.Handled = false;  // Permite 
+                else
+                    e.Handled = true; // Bloquea
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void txtSegundoApellido_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -350,12 +384,21 @@ namespace VitalCareRx
 
         private void txtCelular_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+            try
+            {
+                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
 
-            if (caracter >= 48 && caracter <= 57) // Codigo ASCII 
-                e.Handled = false;  // Permite 
-            else
-                e.Handled = true; // Bloquea
+                if (caracter >= 48 && caracter <= 57) // Codigo ASCII 
+                    e.Handled = false;  // Permite 
+                else
+                    e.Handled = true; // Bloquea
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+          
         }
 
         private void txtCelular_PreviewKeyDown(object sender, KeyEventArgs e)

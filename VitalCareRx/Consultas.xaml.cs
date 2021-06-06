@@ -572,12 +572,21 @@ namespace VitalCareRx
 
         private void txtTemperatura_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+            try
+            {
+                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
 
-            if (caracter >= 48 && caracter <= 57 || caracter == 46) // Codigo ASCII 
-                e.Handled = false;  // Permite 
-            else
-                e.Handled = true; // Bloquea
+                if (caracter >= 48 && caracter <= 57 || caracter == 46) // Codigo ASCII 
+                    e.Handled = false;  // Permite 
+                else
+                    e.Handled = true; // Bloquea
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+         
         }
 
         private void txtTemperatura_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -597,33 +606,42 @@ namespace VitalCareRx
 
         private void txtPresionArterial_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+            try
+            {
+                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
 
-            if (txtPresionArterial.Text.Length >= 0 && txtPresionArterial.Text.Length < 3)
-            {
-                if (caracter >= 48 && caracter <= 57) // Codigo ASCII 
-                    e.Handled = false;  // Permite 
-                else
+                if (txtPresionArterial.Text.Length >= 0 && txtPresionArterial.Text.Length < 3)
+                {
+                    if (caracter >= 48 && caracter <= 57) // Codigo ASCII 
+                        e.Handled = false;  // Permite 
+                    else
+                        e.Handled = true; // Bloquea
+                }
+                else if (txtPresionArterial.Text.Length == 3)
+                {
+                    if (caracter == 47) // Codigo ASCII 
+                        e.Handled = false;  // Permite
+                    else
+                        e.Handled = true; // Bloquea
+                }
+                else if (txtPresionArterial.Text.Length >= 4 && txtPresionArterial.Text.Length < 7)
+                {
+                    if (caracter >= 48 && caracter <= 57) // Codigo ASCII 
+                        e.Handled = false;  // Permite 
+                    else
+                        e.Handled = true; // Bloquea
+                }
+                else if (txtPresionArterial.Text.Length == 7)
+                {
                     e.Handled = true; // Bloquea
+                }
             }
-            else if (txtPresionArterial.Text.Length == 3)
+            catch (Exception)
             {
-                if (caracter == 47) // Codigo ASCII 
-                    e.Handled = false;  // Permite
-                else
-                    e.Handled = true; // Bloquea
+
+                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else if (txtPresionArterial.Text.Length >= 4 && txtPresionArterial.Text.Length < 7)
-            {
-                if (caracter >= 48 && caracter <= 57) // Codigo ASCII 
-                    e.Handled = false;  // Permite 
-                else
-                    e.Handled = true; // Bloquea
-            }
-            else if (txtPresionArterial.Text.Length == 7)
-            {
-                e.Handled = true; // Bloquea
-            }
+            
 
         }
 
