@@ -383,9 +383,9 @@ namespace VitalCareRx
                                 {
                                     if (dtFechaNacimiento.SelectedDate <= DateTime.Now.Date) // La fecha de nacimiento debe ser mayor o igual a la fecha actual.
                                     {
-                                        if (float.Parse(txtEstatura.Text) > 0) // La estatura debe ser mayor 0.
+                                        if (float.Parse(txtEstatura.Text) >= 45 && float.Parse(txtEstatura.Text) <= 250)  // La estatura debe ser mayor o igual a 45, y menor o igual a 250.
                                         {
-                                            if (float.Parse(txtPeso.Text) > 0) // El peso debe ser mayor a 0.
+                                            if (float.Parse(txtPeso.Text) >= 5 && float.Parse(txtPeso.Text) <= 800) // El peso debe ser mayor o igual a 5, y menor o igual a 800.
                                             {
                                                 
                                                 ObtenerDatos();
@@ -399,12 +399,12 @@ namespace VitalCareRx
                                             }
                                             else
                                             {
-                                                MessageBox.Show("¡No puede tener un peso menor o igual a 0 libras!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                                MessageBox.Show("¡El peso debe estar dado entre 5 y 800 libras!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                                             }
                                         }
                                         else
                                         {
-                                            MessageBox.Show("¡No puede tener una estatura menor o igual a 0 centimetros!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                            MessageBox.Show("¡La estatura debe estar dada entre 45 y 250 centimetros!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                                         }
                                     }
                                     else
@@ -515,9 +515,9 @@ namespace VitalCareRx
                                 {
                                     if (dtFechaNacimiento.SelectedDate <= DateTime.Now.Date) // La fecha de nacimiento debe ser mayor o igual a la fecha actual.
                                     {
-                                        if (float.Parse(txtEstatura.Text) >= 45 && float.Parse(txtEstatura.Text) <= 250 ) // La estatura debe ser mayor 0.
+                                        if (float.Parse(txtEstatura.Text) >= 45 && float.Parse(txtEstatura.Text) <= 250 ) // La estatura debe ser mayor o igual a 45, y menor o igual a 250.
                                         {
-                                            if (float.Parse(txtPeso.Text) >= 5 && float.Parse(txtPeso.Text) <= 800) // El peso debe ser mayor a 0.
+                                            if (float.Parse(txtPeso.Text) >= 5 && float.Parse(txtPeso.Text) <= 800) // El peso debe ser mayor o igual a 5, y menor o igual a 800.
                                             {
 
                                                 
