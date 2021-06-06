@@ -30,6 +30,7 @@ namespace VitalCareRx
         Cita cita = new Cita();
         private bool selecionado = false;
         private int codigoCita;
+        private DateTime? fechaCita;
 
         public CitasPaciente(int paciente) //Se le pasa por parametro el id del paciente para ver las citas correspondientes a dicho paciente.
         {
@@ -85,9 +86,10 @@ namespace VitalCareRx
         private void LimpiarFormulario()
         {
             richTextBoxNotas.Document.Blocks.Clear();
-            dtFecha.Text = String.Empty;
+            dtFecha.SelectedDate = null;
             selecionado = false;
             codigoCita = 0;
+            fechaCita = null;
         
         }
 
@@ -123,6 +125,43 @@ namespace VitalCareRx
             this.Close();
         }        
 
+
+        private bool ComprobarFechaCita()
+        {
+            try
+            {
+                string query = @"SELECT *
+                            FROM [Consultas].[Cita] 
+                            WHERE idPaciente = @idPaciente and fechaCita = @fechaCita";
+
+
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    sqlCommand.Parameters.AddWithValue("@idPaciente", codigoPaciente);
+                    sqlCommand.Parameters.AddWithValue("@fechaCita", Convert.ToDateTime(dtFecha.SelectedDate).Date);
+
+                    DataTable tablitaFecha = new DataTable();
+
+                    sqlDataAdapter.Fill(tablitaFecha);
+
+                    if (tablitaFecha.Rows.Count >= 1)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+        }
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -134,13 +173,20 @@ namespace VitalCareRx
                     {
                         if (dtFecha.SelectedDate > DateTime.Now.Date) //La fecha de la cita debe ser mayor a la fecha actual.
                         {
-                            
-                            ObtenerValoresCita();
-                            cita.AgregarCita(cita);
-                            LimpiarFormulario();
-                            CargarCitasPaciente();
-                            MessageBox.Show("¡La cita se ha agregado con exito!", "CITA", MessageBoxButton.OK, MessageBoxImage.Information);
-                            
+                            if (!ComprobarFechaCita())
+                            {
+                                ObtenerValoresCita();
+                                cita.AgregarCita(cita);
+                                LimpiarFormulario();
+                                CargarCitasPaciente();
+                                MessageBox.Show("¡La cita se ha agregado con exito!", "CITA", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("¡El paciente ya tiene una cita para esa fecha!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            }
+
                         }
                         else
                         {
@@ -177,12 +223,21 @@ namespace VitalCareRx
                     {
                         if (dtFecha.SelectedDate > DateTime.Now.Date) //La fecha de la cita debe ser mayor a la fecha actual.
                         {
+                            if (!ComprobarFechaCita() || fechaCita == dtFecha.SelectedDate)
+                            {
+                                
+                                ObtenerValoresCita();
+                                cita.ModificarCita(cita);
+                                LimpiarFormulario();
+                                CargarCitasPaciente();                                
+                                MessageBox.Show("¡La cita se ha modificado con exito!", "CITA", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }
+                            else
+                            {
+                                MessageBox.Show("¡El paciente ya tiene una cita para esa fecha!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            }
                             
-                            ObtenerValoresCita();
-                            cita.ModificarCita(cita);
-                            LimpiarFormulario();
-                            CargarCitasPaciente();
-                            MessageBox.Show("¡La cita se ha modificado con exito!", "CITA", MessageBoxButton.OK, MessageBoxImage.Information);
+                            
                            
                         }
                         else
@@ -222,6 +277,7 @@ namespace VitalCareRx
                 //Asiganamos contenido a todas las textBox segun la columna en base a la fila seleccionada
 
                 selecionado = true;
+                fechaCita = Convert.ToDateTime(rowSelected.Row["Fecha de la cita"]);
                 codigoCita = Convert.ToInt32(rowSelected.Row["Codigo de cita"]);
                 dtFecha.SelectedDate = Convert.ToDateTime(rowSelected.Row["Fecha de la cita"]);
                 notas.Text = rowSelected.Row["Notas"].ToString();
