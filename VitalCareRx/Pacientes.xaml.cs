@@ -27,7 +27,7 @@ namespace VitalCareRx
         private string nombreEmpleado;
         private int codigoEmpleado;
 
-        private int estado = 0;
+        private int estado = 1;
         bool cargado = false;
         bool seleccionado = false;
         private string dni;
@@ -45,7 +45,7 @@ namespace VitalCareRx
             string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
 
-            btnEstado.Background = new SolidColorBrush(Color.FromArgb(140, 255, 0, 0)); // Por defecto el botón de estado se inicializa en color rojo
+            btnEstado.Background = new SolidColorBrush(Color.FromArgb(165, 42, 165, 42)); // Por defecto el botón de estado se inicializa en color verde
             nombreEmpleado = empleado;
             codigoEmpleado = codigo;
 
@@ -322,7 +322,7 @@ namespace VitalCareRx
             dtFechaNacimiento.SelectedDate = null;
             txtPeso.Clear();
             txtEstatura.Clear();
-            estado = 0;
+            estado = 1;
             CargarColorBoton();
             cmbTipoSangre.SelectedValue = null;
             cmbSexo.SelectedValue = null;
@@ -458,8 +458,8 @@ namespace VitalCareRx
         {
             TextRange direccion = new TextRange(richTxtDireccion.Document.ContentStart, richTxtDireccion.Document.ContentEnd);
             //Validación que no permita campos vacíos.
-            if (txtDni.Text != String.Empty && txtPrimerNombre.Text != String.Empty && txtSegundoNombre.Text != String.Empty && txtPrimerApellido.Text !=
-                String.Empty && txtSegundoApellido.Text != String.Empty && direccion.Text != "\r\n" && txtCelular.Text != String.Empty && dtFechaNacimiento.SelectedDate != null
+            if (txtDni.Text != String.Empty && txtPrimerNombre.Text != String.Empty && txtPrimerApellido.Text != String.Empty 
+                && direccion.Text != "\r\n" && txtCelular.Text != String.Empty && dtFechaNacimiento.SelectedDate != null
                 && txtPeso.Text != String.Empty && txtEstatura.Text != String.Empty && cmbSexo.SelectedValue != null && cmbTipoSangre.SelectedValue != null)
             {
                 return true;
@@ -515,9 +515,9 @@ namespace VitalCareRx
                                 {
                                     if (dtFechaNacimiento.SelectedDate <= DateTime.Now.Date) // La fecha de nacimiento debe ser mayor o igual a la fecha actual.
                                     {
-                                        if (float.Parse(txtEstatura.Text) > 0) // La estatura debe ser mayor 0.
+                                        if (float.Parse(txtEstatura.Text) >= 45 && float.Parse(txtEstatura.Text) <= 250 ) // La estatura debe ser mayor 0.
                                         {
-                                            if (float.Parse(txtPeso.Text) > 0) // El peso debe ser mayor a 0.
+                                            if (float.Parse(txtPeso.Text) >= 5 && float.Parse(txtPeso.Text) <= 800) // El peso debe ser mayor a 0.
                                             {
 
                                                 
@@ -534,14 +534,14 @@ namespace VitalCareRx
                                             }
                                             else
                                             {
-                                                MessageBox.Show("¡No puede tener un peso menor o igual a 0 libras!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                                MessageBox.Show("¡El peso debe estar dado entre 5 y 800 libras!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                                             }
 
 
                                         }
                                         else
                                         {
-                                            MessageBox.Show("¡No puede tener una estatura menor o igual a 0 centimetros!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                            MessageBox.Show("¡La estatura debe estar dada entre 45 y 250 centimetros!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                                         }
 
                                     }
@@ -724,6 +724,148 @@ namespace VitalCareRx
             }
 
 
+        }
+
+        private void txtDni_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
+        }
+
+        private void txtDni_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if (caracter >= 48 && caracter <= 57) // Codigo ASCII 
+                e.Handled = false;  // Permite 
+            else
+                e.Handled = true; // Bloquea
+        }
+
+        private void txtPrimerNombre_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
+        }
+
+        private void txtPrimerNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
+               || (caracter == 164 || caracter == 165)) // Codigo ASCII
+                e.Handled = false;  // Permite 
+            else
+                e.Handled = true; // Bloquea
+        }
+
+        private void txtSegundoNombre_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
+        }
+
+        private void txtSegundoNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
+               || (caracter == 164 || caracter == 165)) // Codigo ASCII 
+                e.Handled = false;  // Permite 
+            else
+                e.Handled = true; // Bloquea
+        }
+
+        private void txtPrimerApellido_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
+        }
+
+        private void txtPrimerApellido_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
+                || (caracter == 164 || caracter == 165)) // Codigo ASCII 
+                e.Handled = false;  // Permite 
+            else
+                e.Handled = true; // Bloquea
+        }
+
+        private void txtSegundoApellido_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
+        }
+
+        private void txtSegundoApellido_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
+               || (caracter == 164 || caracter == 165)) // Codigo ASCII 
+                e.Handled = false;  // Permite 
+            else
+                e.Handled = true; // Bloquea
+        }
+
+        private void txtCelular_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if (caracter >= 48 && caracter <= 57) // Codigo ASCII 
+                e.Handled = false;  // Permite 
+            else
+                e.Handled = true; // Bloquea
+        }
+
+        private void txtCelular_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
+        }
+
+  
+
+        private void txtPeso_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if (caracter >= 48 && caracter <= 57 || caracter == 46) // Codigo ASCII 
+                e.Handled = false;  // Permite 
+            else
+                e.Handled = true; // Bloquea
+        }
+
+        private void txtEstatura_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
+        }
+
+        private void txtEstatura_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if (caracter >= 48 && caracter <= 57 || caracter == 46) // Codigo ASCII 
+                e.Handled = false;  // Permite 
+            else
+                e.Handled = true; // Bloquea
+        }
+
+        private void txtPeso_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
         }
     }
 }
