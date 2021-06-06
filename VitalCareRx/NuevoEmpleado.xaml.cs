@@ -42,35 +42,42 @@ namespace VitalCareRx
             try
             {
                 // Validación para que no deje los campos vacios
-                if (txtPrimerNombre.Text != String.Empty && txtSegundoNombre.Text != String.Empty && txtPrimerApellido.Text !=
-                  String.Empty && txtSegundoApellido.Text != String.Empty && txtCelular.Text != String.Empty && txtUsuario.Text !=
+                if (txtPrimerNombre.Text != String.Empty && txtPrimerApellido.Text !=
+                  String.Empty && txtCelular.Text != String.Empty && txtUsuario.Text !=
                   String.Empty && txtContrasenia.Text != String.Empty && cmbSexo.SelectedValue != null)
                 {
                     if (!ExisteUsuario()) // Si el usuario ya existe que no perimita pasar a la siguiente condición
                     {
-                        if (txtCelular.Text.Length == 8) // el campo celular debe tener 8 caracteres
+                        if (txtUsuario.Text.Length >= 5)
                         {
-                            if (txtContrasenia.Text.Length >= 8) // el campo contraseña debe tener 8 o más caracteres
+                            if (txtCelular.Text.Length == 8) // el campo celular debe tener 8 caracteres
                             {
-                                
-                                ObtenerValores();
-                                empleado.CrearNuevoEmpleado(empleado); //Insertar empleado
-                                empleado.IdEmpleado = empleado.CodigoEmpleado();
-                                LimpiarFormulario();
-                                Loading loading = new Loading(String.Format("{0} {1}", empleado.PrimerNombre, empleado.PrimerApellido), empleado.IdEmpleado);
-                                loading.Show();
-                                this.Close();
-                                
+                                if (txtContrasenia.Text.Length >= 8) // el campo contraseña debe tener 8 o más caracteres
+                                {
+
+                                    ObtenerValores();
+                                    empleado.CrearNuevoEmpleado(empleado); //Insertar empleado
+                                    empleado.IdEmpleado = empleado.CodigoEmpleado();
+                                    LimpiarFormulario();
+                                    Loading loading = new Loading(String.Format("{0} {1}", empleado.PrimerNombre, empleado.PrimerApellido), empleado.IdEmpleado);
+                                    loading.Show();
+                                    this.Close();
+
+                                }
+                                else
+                                {
+                                    MessageBox.Show("¡La contraseña debe contener almenos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                }
+
                             }
                             else
                             {
-                                MessageBox.Show("¡La contraseña debe contener almenos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                             }
-
                         }
                         else
                         {
-                            MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show("¡El nombre de usuario debe contener almenos 5 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
 
                     }
@@ -213,15 +220,110 @@ namespace VitalCareRx
         //cuando se mantiene presionado click derecho
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            
             right = true;
         }
 
         //cuando se suelta el click derecho
         private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            
             right = false;
+        }
+
+        private void txtPrimerNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
+                || (caracter == 164 || caracter == 165)) // Codigo ASCII 
+                e.Handled = false;  // Permite 
+            else
+                e.Handled = true; // Bloquea
+        }
+
+        private void txtPrimerNombre_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
+        }
+
+        private void txtCelular_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if (caracter >= 48 && caracter <= 57) // Codigo ASCII 
+                e.Handled = false;  // Permite 
+            else
+                e.Handled = true; // Bloquea
+        }
+
+        private void txtCelular_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
+        }
+
+        private void txtSegundoNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
+                || (caracter == 164 || caracter == 165)) // Codigo ASCII 
+                e.Handled = false;  // Permite 
+            else
+                e.Handled = true; // Bloquea
+        }
+
+        private void txtSegundoNombre_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
+        }
+
+        private void txtPrimerApellido_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
+                || (caracter == 164 || caracter == 165)) // Codigo ASCII 
+                e.Handled = false;  // Permite 
+            else
+                e.Handled = true; // Bloquea
+        }
+
+        private void txtPrimerApellido_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
+        }
+
+        private void txtSegundoApellido_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
+                || (caracter == 164 || caracter == 165)) // Codigo ASCII 
+                e.Handled = false;  // Permite 
+            else
+                e.Handled = true; // Bloquea
+        }
+
+        private void txtSegundoApellido_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
+        }
+
+        
+        private void txtUsuario_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
         }
     }
 }

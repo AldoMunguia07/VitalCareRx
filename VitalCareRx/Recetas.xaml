@@ -26,7 +26,7 @@
             <ComboBox Name="cmbFarmacos" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" Width="255" Height="30" Background="White"/>
             <TextBox Name="txtCantidad" Background="White" FontSize="10" HorizontalAlignment="Left" Height="26" Margin="10,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="255"/>
 
-            <RichTextBox Name="rtxtDuracionTratamiento" HorizontalAlignment="Left" Height="75" Margin="10,256,0,0" VerticalAlignment="Top" Width="255" Background="White">
+            <RichTextBox Name="rtxtDuracionTratamiento" PreviewTextInput="rtxtDuracionTratamiento_PreviewTextInput" HorizontalAlignment="Left" Height="75" Margin="10,256,0,0" VerticalAlignment="Top" Width="255" Background="White">
                 <FlowDocument>
                     <Paragraph>
                         <Run Text=""/>

@@ -164,8 +164,8 @@ namespace VitalCareRx
         /// <returns>Boolean</returns>
         private bool Validar()
         {
-            if(txtPrimerNombre.Text != String.Empty && txtSegundoNombre.Text != String.Empty && txtPrimerApellido.Text !=
-                String.Empty && txtSegundoApellido.Text != String.Empty && txtCelular.Text != String.Empty && txtUsuario.Text !=
+            if(txtPrimerNombre.Text != String.Empty &&  txtPrimerApellido.Text !=
+                String.Empty && txtCelular.Text != String.Empty && txtUsuario.Text !=
                 String.Empty && txtPassword.Text != String.Empty && cmbSexo.SelectedValue != null)
             {
                 return true;
@@ -227,28 +227,33 @@ namespace VitalCareRx
                 {
                     if (!ExisteUsuario() || usuario == txtUsuario.Text) // Valida si el nombre usuario no existe y si es el nombre de usurio es del empleado actual, con esa condición pasa a la siguiente validación
                     {
-
-                        if (txtCelular.Text.Length == 8) // El numero de telefono debe contener 8 dígitos.
+                        if (txtUsuario.Text.Length >= 5)
                         {
-                            if (txtPassword.Text.Length >= 8) // el campo contraseña debe tener 8 o más caracteres
+                            if (txtCelular.Text.Length == 8) // El numero de telefono debe contener 8 dígitos.
                             {
+                                if (txtPassword.Text.Length >= 8) // el campo contraseña debe tener 8 o más caracteres
+                                {
 
-                                ObtenerDatos();
-                                miUsuario.ModificarEmpleado(miUsuario);
-                                MessageBox.Show("¡Datos actualizados correctamente!", "USUARIO", MessageBoxButton.OK, MessageBoxImage.Information);
-                                usuario = txtUsuario.Text;
+                                    ObtenerDatos();
+                                    miUsuario.ModificarEmpleado(miUsuario);
+                                    MessageBox.Show("¡Datos actualizados correctamente!", "USUARIO", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    usuario = txtUsuario.Text;
 
+                                }
+                                else
+                                {
+                                    MessageBox.Show("¡La contraseña debe contener almenos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("¡La contraseña debe contener almenos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                             }
                         }
                         else
                         {
-                            MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show("¡El nombre de usuario debe contener almenos 5 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
-
                     }
                     else
                     {
@@ -271,7 +276,100 @@ namespace VitalCareRx
             
         }
 
+        private void txtPrimerNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
 
+            if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
+                || (caracter == 164 || caracter == 165)) // Codigo ASCII 
+                e.Handled = false;  // Permite 
+            else
+                e.Handled = true; // Bloquea
+        }
 
+        private void txtPrimerNombre_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
+        }
+
+        private void txtSegundoNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
+                || (caracter == 164 || caracter == 165)) // Codigo ASCII 
+                e.Handled = false;  // Permite 
+            else
+                e.Handled = true; // Bloquea
+        }
+
+        private void txtSegundoNombre_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
+        }
+
+        private void txtPrimerApellido_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
+                || (caracter == 164 || caracter == 165)) // Codigo ASCII 
+                e.Handled = false;  // Permite 
+            else
+                e.Handled = true; // Bloquea
+        }
+
+        private void txtPrimerApellido_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
+        }
+
+        private void txtSegundoApellido_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
+                || (caracter == 164 || caracter == 165)) // Codigo ASCII 
+                e.Handled = false;  // Permite 
+            else
+                e.Handled = true; // Bloquea
+        }
+
+        private void txtSegundoApellido_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
+        }
+
+        private void txtCelular_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if (caracter >= 48 && caracter <= 57) // Codigo ASCII 
+                e.Handled = false;  // Permite 
+            else
+                e.Handled = true; // Bloquea
+        }
+
+        private void txtCelular_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
+        }
+
+        private void txtUsuario_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
+        }
     }
 }

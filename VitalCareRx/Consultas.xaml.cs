@@ -105,7 +105,7 @@ namespace VitalCareRx
                 {
                     if (!seleccionado)// El usuario no puede agregar una consulta que este seleccionando.
                     {
-                        if (float.Parse(txtTemperatura.Text) > 0) //La temperatura tiene que ser mayor a 0.
+                        if (float.Parse(txtTemperatura.Text) >= 35 && float.Parse(txtTemperatura.Text) <= 40) //La temperatura tiene que ser mayor a 0.
                         {
                             try
                             {
@@ -131,7 +131,7 @@ namespace VitalCareRx
                         }
                         else
                         {
-                            MessageBox.Show("¡La temperatura no puede ser menor o igual que 0 C°!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show("¡La temperatura debe estar entre 35-40 C°!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
                     }
                     else
@@ -339,7 +339,7 @@ namespace VitalCareRx
                 {
                     if (ValidarCampos()) //El usuario no puede dejar campos vacios.
                     {
-                        if (float.Parse(txtTemperatura.Text) > 0) //La temperatura tiene que ser mayor a 0.
+                        if (float.Parse(txtTemperatura.Text) >= 35 && float.Parse(txtTemperatura.Text) <= 40 ) //La temperatura tiene que estar entre 35-40 grados.
                         {
                             
                             ObtenerValores();
@@ -356,7 +356,7 @@ namespace VitalCareRx
                         }
                         else
                         {
-                            MessageBox.Show("¡La temperatura no puede ser menor o igual que 0 C°!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show("¡La temperatura debe estar entre 35-40 C°!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
 
                     }
@@ -552,6 +552,63 @@ namespace VitalCareRx
         {
 
             right = true;
+        }
+
+        private void txtTemperatura_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if (caracter >= 48 && caracter <= 57 || caracter == 46) // Codigo ASCII 
+                e.Handled = false;  // Permite 
+            else
+                e.Handled = true; // Bloquea
+        }
+
+        private void txtTemperatura_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
+        }
+
+        private void txtPresionArterial_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
+
+        }
+
+        private void txtPresionArterial_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if (txtPresionArterial.Text.Substring(0).Length == 0)
+            {
+                if (caracter >= 48 && caracter <= 57) // Codigo ASCII 
+                    e.Handled = false;  // Permite 
+                else
+                    e.Handled = true; // Bloquea
+            }
+            else if (txtPresionArterial.Text.Substring(0).Length == 3)
+            {
+                if (caracter == 47) // Codigo ASCII 
+                    e.Handled = false;  // Permite
+                else
+                    e.Handled = true; // Bloquea
+            }
+            else if (txtPresionArterial.Text.Substring(0).Length > 4 && txtPresionArterial.Text.Substring(0).Length < 7)
+            {
+                if (caracter >= 48 && caracter <= 57) // Codigo ASCII 
+                    e.Handled = false;  // Permite 
+                else
+                    e.Handled = true; // Bloquea
+            }
+            else if (txtPresionArterial.Text.Substring(0).Length == 7)
+            {
+                e.Handled = true; // Bloquea
+            }
+
         }
 
         //cuando se suelta el click derecho

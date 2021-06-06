@@ -413,5 +413,17 @@ namespace VitalCareRx
             }
             
         }
+
+        private void rtxtDuracionTratamiento_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if (caracter == 45) // Codigo ASCII 
+                e.Handled = true;  // Permite 
+            else
+                e.Handled = false; // Bloquea
+        }
+
+       
     }  
 }
