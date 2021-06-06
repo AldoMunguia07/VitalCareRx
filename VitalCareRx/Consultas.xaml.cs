@@ -335,22 +335,31 @@ namespace VitalCareRx
         {
             try
             {
-                if (seleccionado) // El usuario tiene que seleccionar una consulta para poder modificarla.
+                if (seleccionado) // El usuario tiene que seleccionar una consulta para poder modificarla.  120/80
                 {
                     if (ValidarCampos()) //El usuario no puede dejar campos vacios.
                     {
                         if (float.Parse(txtTemperatura.Text) >= 35 && float.Parse(txtTemperatura.Text) <= 40 ) //La temperatura tiene que estar entre 35-40 grados.
                         {
-                            
-                            ObtenerValores();
+                            if ( (Convert.ToInt32(txtPresionArterial.Text.Substring(0, 3)) >= 100 && Convert.ToInt32(txtPresionArterial.Text.Substring(0,3)) <= 250 )
+                               && (Convert.ToInt32(txtPresionArterial.Text.Substring(4)) >= 40 && Convert.ToInt32(txtPresionArterial.Text.Substring(4)) <= 150))
+                            {
+                                
+                                ObtenerValores();
 
-                            consulta.ModificarConsulta(consulta);
+                                consulta.ModificarConsulta(consulta);
 
-                            LimpiarFormulario();
+                                LimpiarFormulario();
 
-                            MessageBox.Show("La consulta se ha modificado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
+                                MessageBox.Show("La consulta se ha modificado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                            MostrarConsultas();
+                                MostrarConsultas();
+                            }
+                            else
+                            {
+                                MessageBox.Show("El valor maximo de la presion sistolica es 250 y el valor minimo es 100\nEl valor maximo de la presion diastolica es 150 y el valor minimo es 40", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            }
+                           
 
                             
                         }
@@ -583,28 +592,28 @@ namespace VitalCareRx
         {
             int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
 
-            if (txtPresionArterial.Text.Substring(0).Length == 0)
+            if (txtPresionArterial.Text.Length >= 0 && txtPresionArterial.Text.Length < 3)
             {
                 if (caracter >= 48 && caracter <= 57) // Codigo ASCII 
                     e.Handled = false;  // Permite 
                 else
                     e.Handled = true; // Bloquea
             }
-            else if (txtPresionArterial.Text.Substring(0).Length == 3)
+            else if (txtPresionArterial.Text.Length == 3)
             {
                 if (caracter == 47) // Codigo ASCII 
                     e.Handled = false;  // Permite
                 else
                     e.Handled = true; // Bloquea
             }
-            else if (txtPresionArterial.Text.Substring(0).Length > 4 && txtPresionArterial.Text.Substring(0).Length < 7)
+            else if (txtPresionArterial.Text.Length >= 4 && txtPresionArterial.Text.Length < 7)
             {
                 if (caracter >= 48 && caracter <= 57) // Codigo ASCII 
                     e.Handled = false;  // Permite 
                 else
                     e.Handled = true; // Bloquea
             }
-            else if (txtPresionArterial.Text.Substring(0).Length == 7)
+            else if (txtPresionArterial.Text.Length == 7)
             {
                 e.Handled = true; // Bloquea
             }
