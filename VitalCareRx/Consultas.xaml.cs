@@ -107,27 +107,34 @@ namespace VitalCareRx
                     {
                         if (float.Parse(txtTemperatura.Text) >= 35 && float.Parse(txtTemperatura.Text) <= 40) //La temperatura tiene que ser mayor a 0.
                         {
-                            try
+                            if ((Convert.ToInt32(txtPresionArterial.Text.Substring(0, 3)) >= 100 && Convert.ToInt32(txtPresionArterial.Text.Substring(0, 3)) <= 250)
+                               && (Convert.ToInt32(txtPresionArterial.Text.Substring(4)) >= 40 && Convert.ToInt32(txtPresionArterial.Text.Substring(4)) <= 150))
                             {
-                                ObtenerValores();
+                                try
+                                {
+                                    ObtenerValores();
 
-                                consulta.CrearConsulta(consulta);
+                                    consulta.CrearConsulta(consulta);
+
+                                    LimpiarFormulario();
+
+                                    MessageBox.Show("La consulta se ha insertado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                                    MostrarConsultas();
+
+                                }
+                                catch (Exception)
+                                {
 
 
-
-                                LimpiarFormulario();
-
-                                MessageBox.Show("La consulta se ha insertado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                                MostrarConsultas();
-
+                                    MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                }
                             }
-                            catch (Exception)
+                            else
                             {
-
-
-                                MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                MessageBox.Show("El valor maximo de la presion sistolica es 250 y el valor minimo es 100\nEl valor maximo de la presion diastolica es 150 y el valor minimo es 40", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                             }
+
                         }
                         else
                         {
