@@ -295,7 +295,7 @@ namespace VitalCareRx
                     {
                         if (!ValidarFarmacoEnReceta() || codigoFarmaco == Convert.ToInt32(cmbFarmacos.SelectedValue)) // Valida si el farmaco no esta en la receta actual y si es el codigo de farmaco seleccionado, con esa
                         {                                                                                             // condición pasara a la siguiente validación
-                            if (int.Parse(txtCantidad.Text) > 0) // La cantidad de farmacos debe ser mayor a 0
+                            if (int.Parse(txtCantidad.Text) > 0 && int.Parse(txtCantidad.Text) <= 25) // La cantidad de farmacos debe ser mayor a 0 y menor a 25
                             {
                                 
                                 ObtenerValores();
@@ -311,7 +311,7 @@ namespace VitalCareRx
                             }
                             else
                             {
-                                MessageBox.Show("¡No puede recetar 0 o una cantidad menor de farmacos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                MessageBox.Show("¡La cantidad del farmaco debe estar entre 1 y 25!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                             }
 
                         }
