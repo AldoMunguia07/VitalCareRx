@@ -124,7 +124,7 @@ namespace VitalCareRx
                     {
                         if (!ValidarFarmacoEnReceta()) // El usuario no tiene que añadir un farmaco 2 veces a la receta
                         {
-                            if (int.Parse(txtCantidad.Text) > 0) // La cantidad de farmacos debe ser mayor a 0
+                            if (int.Parse(txtCantidad.Text) > 0 && int.Parse(txtCantidad.Text) <= 25) // La cantidad de farmacos debe ser mayor a 0 y menor a 25
                             {
                                 try
                                 {
@@ -145,7 +145,7 @@ namespace VitalCareRx
                             }
                             else
                             {
-                                MessageBox.Show("¡No puede recetar 0 o una cantidad menor de farmacos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                MessageBox.Show("¡La cantidad del farmaco debe estar entre 1 y 25!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                             }
                         }
                         else
