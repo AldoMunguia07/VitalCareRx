@@ -236,7 +236,7 @@ namespace VitalCareRx
                 int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
 
                 if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
-                    || (caracter == 164 || caracter == 165)) // Codigo ASCII 
+                    || (caracter == 241 || caracter == 209)) // Codigo ASCII 
                     e.Handled = false;  // Permite 
                 else
                     e.Handled = true; // Bloquea
@@ -289,7 +289,7 @@ namespace VitalCareRx
                 int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
 
                 if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
-                    || (caracter == 164 || caracter == 165)) // Codigo ASCII 
+                    || (caracter == 241 || caracter == 209)) // Codigo ASCII 
                     e.Handled = false;  // Permite 
                 else
                     e.Handled = true; // Bloquea
@@ -316,7 +316,7 @@ namespace VitalCareRx
                 int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
 
                 if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
-                    || (caracter == 164 || caracter == 165)) // Codigo ASCII 
+                    || (caracter == 241 || caracter == 209)) // Codigo ASCII 
                     e.Handled = false;  // Permite 
                 else
                     e.Handled = true; // Bloquea
@@ -342,7 +342,7 @@ namespace VitalCareRx
                 int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
 
                 if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
-                    || (caracter == 164 || caracter == 165)) // Codigo ASCII 
+                    || (caracter == 241 || caracter == 209)) // Codigo ASCII 
                     e.Handled = false;  // Permite 
                 else
                     e.Handled = true; // Bloquea

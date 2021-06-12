@@ -433,6 +433,28 @@ namespace VitalCareRx
            
         }
 
-       
+        private void txtCantidad_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            try
+            {
+                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
+
+                if (caracter >= 48 && caracter <= 57) // Codigo ASCII 
+                    e.Handled = false;  // Permite 
+                else
+                    e.Handled = true; // Bloquea
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void txtCantidad_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) // No permite espacios
+                e.Handled = true; // Bloquea
+            base.OnPreviewKeyDown(e);
+        }
     }  
 }
