@@ -40,7 +40,7 @@ namespace VitalCareRx
             string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
 
-            MostrarFarmaco();
+            farmaco.MostrarFarmaco(dgFarmacos);
         }
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
@@ -50,7 +50,7 @@ namespace VitalCareRx
             this.Close();
         }
 
-
+        /*
         /// <summary>
         /// Trae todas las consultas de la base de datos al inicial el programa.
         /// </summary>
@@ -83,6 +83,7 @@ namespace VitalCareRx
                 throw;
             }
         }
+        */
 
 
         /// <summary>
@@ -122,10 +123,10 @@ namespace VitalCareRx
 
                         MessageBox.Show("El farmaco se ha insertado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                        MostrarFarmaco();
+                        farmaco.MostrarFarmaco(dgFarmacos);
 
-                        
-                        
+
+
                     }
                     else
                     {
@@ -138,10 +139,10 @@ namespace VitalCareRx
                     MessageBox.Show("¡El Farmaco ya se encuentra ingresado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-
+                MessageBox.Show(ex.Message);
                 MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
@@ -197,7 +198,7 @@ namespace VitalCareRx
 
                             MessageBox.Show("El farmaco se ha modificado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                            MostrarFarmaco();
+                            farmaco.MostrarFarmaco(dgFarmacos);
 
 
 
@@ -253,7 +254,7 @@ namespace VitalCareRx
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string query = @"SELECT idFarmaco as 'Codigo Farmaco', descripcionFarmaco as 'Farmaco', informacionPrecaucion as 'Información del farmaco' FROM [Consultas].[Farmaco] WHERE descripcionFarmaco LIKE CONCAT('%', @nombreFarmaco, '%')";
+            /*string query = @"SELECT idFarmaco as 'Codigo Farmaco', descripcionFarmaco as 'Farmaco', informacionPrecaucion as 'Información del farmaco' FROM [Consultas].[Farmaco] WHERE descripcionFarmaco LIKE CONCAT('%', @nombreFarmaco, '%')";
 
 
             SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
@@ -272,7 +273,9 @@ namespace VitalCareRx
 
                 dgFarmacos.IsReadOnly = true; // El grid es de solo lectura.
 
-            }
+            } */
+
+            farmaco.BuscarFarmaco(txtBuscarFarmaco.Text, dgFarmacos);
         }
 
 
@@ -283,8 +286,8 @@ namespace VitalCareRx
         {
 
             LimpiarFormulario();
-            MostrarFarmaco();
-            
+            farmaco.MostrarFarmaco(dgFarmacos);
+
         }
 
         bool right = false;

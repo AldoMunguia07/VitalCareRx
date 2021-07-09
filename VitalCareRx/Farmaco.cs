@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 // Agregar los namespaces requeridos
 using System.Configuration;
 using System.Data.SqlClient;
-
+using System.Data;
+using System.Windows.Controls;
 
 namespace VitalCareRx
 {
@@ -29,6 +30,51 @@ namespace VitalCareRx
             InformacionPrecaucion = informacionFarmaco;
         }
 
+
+
+        /// <summary>
+        /// Trae todas las consultas de la base de datos al inicial el programa.
+        /// </summary>
+        public void MostrarFarmaco(DataGrid dataGrid)
+        {
+
+            try
+            {
+                conexion.sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand("sp_Farmacos", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                sqlCommand.Parameters.AddWithValue("@accion", "Mostrar");
+
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    dataGrid.ItemsSource = dataTable.DefaultView;
+
+                    dataGrid.IsReadOnly = true; // El grid es de solo lectura.
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+            }
+        }
+
+
+
         /// <summary>
         /// Metodo para crear un farmaco.
         /// </summary>
@@ -38,15 +84,15 @@ namespace VitalCareRx
 
             try
             {
-
-                string query = @"INSERT INTO [Consultas].[Farmaco] VALUES (@descripcionFarmaco, @informacionPrecaucion)";
-
                 conexion.sqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("sp_Farmacos", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 sqlCommand.Parameters.AddWithValue("@descripcionFarmaco", farmaco.DescripcionFarmaco);
                 sqlCommand.Parameters.AddWithValue("@informacionPrecaucion", farmaco.InformacionPrecaucion);
+                sqlCommand.Parameters.AddWithValue("@accion", "Insertar");
                 sqlCommand.ExecuteNonQuery();
             }
             catch (Exception e)
@@ -72,19 +118,17 @@ namespace VitalCareRx
             try
             {
 
-                string query = @"UPDATE [Consultas].[Farmaco]
-                                SET descripcionFarmaco = @descripcionFarmaco, informacionPrecaucion = @informacionPrecaucion
-                                where idFarmaco = @idFarmaco";
-
                 conexion.sqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("sp_Farmacos", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
 
 
                 sqlCommand.Parameters.AddWithValue("@descripcionFarmaco", farmaco.DescripcionFarmaco);
                 sqlCommand.Parameters.AddWithValue("@informacionPrecaucion", farmaco.InformacionPrecaucion);
                 sqlCommand.Parameters.AddWithValue("@idFarmaco", farmaco.IdFarmaco);
-
+                sqlCommand.Parameters.AddWithValue("@accion", "Modificar");
 
                 sqlCommand.ExecuteNonQuery();
             }
@@ -105,36 +149,34 @@ namespace VitalCareRx
         /// </summary>
         /// <param name="nombreFarmacos"></param>
         /// <returns></returns>
-        public Farmaco BuscarFarmaco(string nombreFarmacos)
+        public Farmaco BuscarFarmaco(string nombreFarmacos, DataGrid datagrid)
         {
             Farmaco farmacos = new Farmaco();
             try
             {
-                // Query de selección
-                string query = @"SELECT * FROM [Consultas].[Farmaco] WHERE descripcionFarmaco LIKE CONCAT('%', @nombreFarmaco, '%')";
 
-
-                // Establecer la conexión
                 conexion.sqlConnection.Open();
 
-                // Crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("sp_Farmacos", conexion.sqlConnection);
 
-                // Establecer los valores de los parámetros
-                sqlCommand.Parameters.AddWithValue("@nombreFarmaco", nombreFarmacos);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                sqlCommand.Parameters.AddWithValue("@descripcionFarmaco", nombreFarmacos);
+                sqlCommand.Parameters.AddWithValue("@accion", "Buscar");
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
                 {
-                    while (rdr.Read())
-                    {
-                        // Obtener los valores del empleado si la consulta retorna valores
-                        farmacos.IdFarmaco = Convert.ToInt32(rdr["idFarmaco"]);
-                        farmacos.DescripcionFarmaco = rdr["descripcionFarmaco"].ToString();
-                        farmacos.InformacionPrecaucion = rdr["informacionPrecaucion"].ToString();
 
+                    DataTable dataTable = new DataTable();
 
+                    sqlDataAdapter.Fill(dataTable);
 
-                    }
+                    datagrid.ItemsSource = dataTable.DefaultView;
+
+                    datagrid.IsReadOnly = true; // El grid es de solo lectura.
+
                 }
 
                 // Retornar el usuario con los valores
