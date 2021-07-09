@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using System.Windows.Controls;
 
 namespace VitalCareRx
 {
@@ -43,6 +44,9 @@ namespace VitalCareRx
 
         public int IdSexo { get; set; }
 
+        
+   
+
 
         // Constructores
         public Paciente() { }
@@ -62,8 +66,9 @@ namespace VitalCareRx
             Estatura = estatura;
             Estado = estado;
             IdTipoSangre = idTipoSangre;
-            IdSexo = idSexo;       
-        
+            IdSexo = idSexo;
+            
+           
         }
 
         // Metodos
@@ -72,15 +77,11 @@ namespace VitalCareRx
 
             try
             {
-                //Query para añadir un paciente
-                string query = @"INSERT INTO [Personas].[Paciente] VALUES (@numeroIdentidad,@primerNombre,@segundoNombre,@primerApellido,@segundoApellido,@direccion, @celular,@fechaNacimiento,
-						@peso,@estatura,@estado, @idTipoSangre,@idSexo)";
-
-                // Abrir la conexión
                 conexion.sqlConnection.Open();
+                //Query para añadir un paciente
+                SqlCommand sqlCommand = new SqlCommand("sp_Pacientes", conexion.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;             
 
-                // Crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
 
 
                 // Establecer los valores de los parámetros
@@ -98,7 +99,8 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@idTipoSangre", paciente.IdTipoSangre);
                 sqlCommand.Parameters.AddWithValue("@idSexo", paciente.IdSexo);
                 sqlCommand.Parameters.AddWithValue("@estado", paciente.Estado);
-
+                sqlCommand.Parameters.AddWithValue("@accion", "insertar");
+              
 
 
                 sqlCommand.ExecuteNonQuery();
@@ -125,18 +127,14 @@ namespace VitalCareRx
         {
             try
             {
-                //Query para modificar un paciente
-                string query = @"UPDATE [Personas].[Paciente] 
-                                SET numeroIdentidad = @numeroIdentidad, primerNombre = @primerNombre, segundoNombre = @segundoNombre, primerApellido = @primerApellido,
-                                segundoApellido = @segundoApellido, direccion = @direccion, celular = @celular, fechaNacimiento = @fechaNacimiento, peso = @peso,
-                                estatura = @estatura, idTipoSangre = @idTipoSangre, idSexo = @idSexo, estado = @estado
-                                WHERE idPaciente = @idPaciente";
-
-                // Abrir la conexión
                 conexion.sqlConnection.Open();
+                //Query para modificar un paciente
+                SqlCommand sqlCommand = new SqlCommand("sp_Pacientes", conexion.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                // Crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
+              
+
+               
 
                 // Establecer los valores de los parámetros
                 sqlCommand.Parameters.AddWithValue("@idPaciente", paciente.IdPaciente);
@@ -153,6 +151,7 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@idTipoSangre", paciente.IdTipoSangre);
                 sqlCommand.Parameters.AddWithValue("@idSexo", paciente.IdSexo);
                 sqlCommand.Parameters.AddWithValue("@estado", paciente.Estado);
+                sqlCommand.Parameters.AddWithValue("@accion", "modificar");
 
                 sqlCommand.ExecuteNonQuery();
 
@@ -176,20 +175,17 @@ namespace VitalCareRx
         {
             try
             {
+                 conexion.sqlConnection.Open();
                 //Query para modificar un paciente
-                string query = @"UPDATE [Personas].[Paciente] 
-                                SET estado = 0
-                                WHERE numeroIdentidad = @numeroIdentidad";
+                SqlCommand sqlCommand = new SqlCommand("sp_Pacientes", conexion.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                // Abrir la conexión
-                conexion.sqlConnection.Open();
-
-                // Crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
+                       
 
                 // Establecer los valores de los parámetros
-                sqlCommand.Parameters.AddWithValue("@numeroIdentidad", paciente.NumeroIdentidad);
-               
+                sqlCommand.Parameters.AddWithValue("@idPaciente", paciente.IdPaciente);
+                sqlCommand.Parameters.AddWithValue("@accion", "banear");
+
                 sqlCommand.ExecuteNonQuery();
             }
             catch (Exception)
@@ -201,6 +197,131 @@ namespace VitalCareRx
             {
                 conexion.sqlConnection.Close();
             }
+        }
+
+        public void VerPacientes(Paciente paciente, DataGrid grid, int estado)
+        {
+            
+
+            try
+            {
+                conexion.sqlConnection.Open();
+                //Query para modificar un paciente
+                SqlCommand sqlCommand = new SqlCommand("sp_Pacientes", conexion.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                // Establecer los valores de los parámetros
+                sqlCommand.Parameters.AddWithValue("@estado", estado);
+                sqlCommand.Parameters.AddWithValue("@accion", "VerPaciente");
+
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    grid.ItemsSource = dataTable.DefaultView;
+
+                    grid.IsReadOnly = true; // El grid es de solo lectura.
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+            }
+        }
+
+        public void VerUnPaciente(Paciente paciente, DataGrid grid, int estado, TextBox textBox)
+        {
+
+            try
+            {
+                conexion.sqlConnection.Open();
+                //Query para modificar un paciente
+                SqlCommand sqlCommand = new SqlCommand("sp_Pacientes", conexion.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                // Establecer los valores de los parámetros
+                sqlCommand.Parameters.AddWithValue("@estado", estado);
+                sqlCommand.Parameters.AddWithValue("@nombrePaciente", textBox.Text);
+                sqlCommand.Parameters.AddWithValue("@accion", "VerUnPaciente");
+
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    grid.ItemsSource = dataTable.DefaultView;
+
+                    grid.IsReadOnly = true; // El grid es de solo lectura.
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+            }
+        }
+
+        public bool ExistePaciente(Paciente paciente, string dni)
+        {
+            try
+            {
+                conexion.sqlConnection.Open();
+                //Query para modificar un paciente
+                SqlCommand sqlCommand = new SqlCommand("sp_Pacientes", conexion.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    sqlCommand.Parameters.AddWithValue("@numeroIdentidad", dni);
+                    sqlCommand.Parameters.AddWithValue("@accion", "existeID");
+
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+
+                    if (dataTable.Rows.Count == 1)  //Si existe que devuelva un true
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+            }
+            
+           
         }
 
     }

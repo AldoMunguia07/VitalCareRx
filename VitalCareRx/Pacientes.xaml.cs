@@ -49,102 +49,17 @@ namespace VitalCareRx
             nombreEmpleado = empleado;
             codigoEmpleado = codigo;
 
-            MostrarPacientes();
             CargarComboBoxSexo();
             CargarComboBoxEstado();
             CargarComboBoxTipoSangre();
+            paciente.VerPacientes(paciente, gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
+            
         }
 
 
 
-        /// <summary>
-        /// Trae todos los clientes de la base de datos al iniciar el programa.
-        /// </summary>
-        public void MostrarPacientes()
-        {
-            string query = @"SELECT P.numeroIdentidad Identidad,primerNombre,segundoNombre,PrimerApellido,segundoApellido, P.idTipoSangre, P.idSexo, P.idPaciente,
-                            CONCAT(P.primerNombre, ' ', P.segundoNombre, ' ', P.primerApellido, ' ', P.segundoApellido) Paciente,
-                            P.direccion Direccion, P.celular Celular, P.fechaNacimiento 'Fecha de nacimiento', P.peso 'Peso (lbs)', P.estatura 'Estatura (cm)', P.estado Estado,
-                            T.descripcionTipoSangre 'Tipo de sangre', S.descripcionSexo Sexo
-                            FROM [Personas].[Paciente] P INNER JOIN [Personas].[TipoSangre] T
-                            ON P.idTipoSangre = T.idTipoSangre
-                            INNER JOIN [Personas].[Sexo] S
-                            ON P.idSexo = S.idSexo
-                            WHERE P.estado = @estado
-                            ";
-            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
-            sqlCommand.Parameters.AddWithValue("@estado", cmbEstado.SelectedValue);
-
-            try
-            {
-                using (sqlDataAdapter)
-                {
-                    DataTable dataTable = new DataTable();
-
-                    sqlDataAdapter.Fill(dataTable);
-
-                    gridPacientes.ItemsSource = dataTable.DefaultView;
-
-                    gridPacientes.IsReadOnly = true; // El grid es de solo lectura.
-
-
-                }
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-
-        /// <summary>
-        /// Metodo para buscar un paciente
-        /// </summary>
-        public void MostrarUnPaciente()
-        {
-            string query = @"SELECT P.numeroIdentidad Identidad,primerNombre,segundoNombre,PrimerApellido,segundoApellido, P.idTipoSangre, P.idSexo, P.idPaciente,
-                            CONCAT(P.primerNombre, ' ', P.segundoNombre, ' ', P.primerApellido, ' ', P.segundoApellido) Paciente,
-                            P.direccion Direccion, P.celular Celular, P.fechaNacimiento 'Fecha de nacimiento', P.peso 'Peso (lbs)', P.estatura 'Estatura (cm)', P.estado Estado,
-                            T.descripcionTipoSangre 'Tipo de sangre', S.descripcionSexo Sexo
-                            FROM [Personas].[Paciente] P INNER JOIN [Personas].[TipoSangre] T
-                            ON P.idTipoSangre = T.idTipoSangre
-                            INNER JOIN [Personas].[Sexo] S
-                            ON P.idSexo = S.idSexo
-                            WHERE P.estado = @estado and CONCAT(P.primerNombre, ' ', P.segundoNombre, ' ', P.primerApellido, ' ', P.segundoApellido) LIKE CONCAT('%', @nombrePaciente,'%')
-                           
-                            ";
-            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
-            sqlCommand.Parameters.AddWithValue("@estado", cmbEstado.SelectedValue);
-            sqlCommand.Parameters.AddWithValue("@nombrePaciente", txtBuscar.Text); // Filtro de nombre del paciente
-
-            try
-            {
-                using (sqlDataAdapter)
-                {
-                    DataTable dataTable = new DataTable();
-
-                    sqlDataAdapter.Fill(dataTable);
-
-                    gridPacientes.ItemsSource = dataTable.DefaultView;
-
-                    gridPacientes.IsReadOnly = true; //El grid es de solo lectura, el usuario no podrá modificar lo que este contenga.
-
-
-                }
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
+      
+        
 
         private void btnSalir_Click(object sender, RoutedEventArgs e)
         {
@@ -248,7 +163,7 @@ namespace VitalCareRx
 
         private void cmbEstado_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MostrarPacientes();
+            paciente.VerPacientes(paciente, gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
             if (cargado)
             {
                 OcultarColumnas();
@@ -375,7 +290,7 @@ namespace VitalCareRx
                     if (Validar()) // Los campos no deben estar vacios
                     {
 
-                        if (!ExistePaciente() || dni == txtDni.Text) // No puede asignar el DNI o identidad de un paciente ya registrado
+                        if (!paciente.ExistePaciente(paciente, txtDni.Text) || dni == txtDni.Text) // No puede asignar el DNI o identidad de un paciente ya registrado
                         {
                             if (txtCelular.Text.Length == 8) // El numero de telefono debe contener 8 dígitos.
                             {
@@ -389,9 +304,9 @@ namespace VitalCareRx
                                             {
                                                 
                                                 ObtenerDatos();
-
+                                                
                                                 paciente.ActualizarPaciente(paciente);
-                                                MostrarPacientes();
+                                                paciente.VerPacientes(paciente, gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
                                                 LimpiarFormulario();
                                                 OcultarColumnas();
                                                 MessageBox.Show("El paciente se ha modificado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -440,7 +355,7 @@ namespace VitalCareRx
                     MessageBox.Show("¡Debe seleccionar un paciente!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -507,7 +422,7 @@ namespace VitalCareRx
                 {
                     if (!seleccionado) // No puede agregar a un paciente existente.
                     {
-                        if (!ExistePaciente()) // No puede asignar el DNI o identidad de un paciente ya registrado
+                        if (!paciente.ExistePaciente(paciente, txtDni.Text)) // No puede asignar el DNI o identidad de un paciente ya registrado
                         {
                             if (txtCelular.Text.Length == 8) // El numero de telefno debe contener 8 dígitos.
                             {
@@ -522,10 +437,10 @@ namespace VitalCareRx
 
                                                 
                                                 ObtenerDatos();
-
+                                                
                                                 paciente.CrearPaciente(paciente);
                                                 MessageBox.Show("El paciente se ha insertado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
-                                                MostrarPacientes();
+                                                paciente.VerPacientes(paciente, gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
                                                 LimpiarFormulario();
                                                 OcultarColumnas();
                                                 
@@ -593,8 +508,9 @@ namespace VitalCareRx
             if (seleccionado) //Para poder eliminar un paciente de seleccinarlo primero.
             {
                 ObtenerDatos();
+                
                 paciente.EliminarPaciente(paciente);
-                MostrarPacientes();
+                paciente.VerPacientes(paciente, gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
                 LimpiarFormulario();
                 OcultarColumnas();
                 MessageBox.Show("El paciente se ha eliminado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -608,7 +524,7 @@ namespace VitalCareRx
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MostrarUnPaciente();
+            paciente.VerUnPaciente(paciente, gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue), txtBuscar);
             OcultarColumnas();
         }
 
@@ -670,7 +586,7 @@ namespace VitalCareRx
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
             LimpiarFormulario();
-            MostrarPacientes();
+            paciente.VerPacientes(paciente, gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
             OcultarColumnas();
         }
 
@@ -685,46 +601,7 @@ namespace VitalCareRx
 
         }
 
-        /// <summary>
-        /// Metodo para verificar si existe o no un paciente.
-        /// </summary>
-        /// <returns>Boolean</returns>
-        public bool ExistePaciente()
-        {
-            try
-            {
-
-                string query = @"SELECT numeroIdentidad FROM [Personas].[Paciente] WHERE [numeroIdentidad] = @identidad";
-
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
-                using (sqlDataAdapter)
-                {
-                    sqlCommand.Parameters.AddWithValue("@identidad", txtDni.Text);
-
-                    DataTable dataTable = new DataTable();
-
-                    sqlDataAdapter.Fill(dataTable);
-
-
-
-                    if (dataTable.Rows.Count == 1)  //Si existe que devuelva un true
-                    {
-                        return true;
-                    }
-
-                    return false;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-
-        }
+     
 
         private void txtDni_PreviewKeyDown(object sender, KeyEventArgs e)
         {
