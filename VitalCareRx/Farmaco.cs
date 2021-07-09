@@ -13,9 +13,7 @@ namespace VitalCareRx
     class Farmaco
     {
         //Variables miembro
-        private static string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
-
-        private SqlConnection sqlConnection = new SqlConnection(connectionString);
+        Conexion conexion = new Conexion();
 
         public int IdFarmaco { get; set; }
         public string DescripcionFarmaco { get; set; }
@@ -43,9 +41,9 @@ namespace VitalCareRx
 
                 string query = @"INSERT INTO [Consultas].[Farmaco] VALUES (@descripcionFarmaco, @informacionPrecaucion)";
 
-                sqlConnection.Open();
+                conexion.sqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
 
                 sqlCommand.Parameters.AddWithValue("@descripcionFarmaco", farmaco.DescripcionFarmaco);
                 sqlCommand.Parameters.AddWithValue("@informacionPrecaucion", farmaco.InformacionPrecaucion);
@@ -58,7 +56,7 @@ namespace VitalCareRx
             }
             finally
             {
-                sqlConnection.Close();
+                conexion.sqlConnection.Close();
 
 
             }
@@ -78,9 +76,9 @@ namespace VitalCareRx
                                 SET descripcionFarmaco = @descripcionFarmaco, informacionPrecaucion = @informacionPrecaucion
                                 where idFarmaco = @idFarmaco";
 
-                sqlConnection.Open();
+                conexion.sqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
 
 
                 sqlCommand.Parameters.AddWithValue("@descripcionFarmaco", farmaco.DescripcionFarmaco);
@@ -97,7 +95,7 @@ namespace VitalCareRx
             }
             finally
             {
-                sqlConnection.Close();
+                conexion.sqlConnection.Close();
 
             }
         }
@@ -117,10 +115,10 @@ namespace VitalCareRx
 
 
                 // Establecer la conexión
-                sqlConnection.Open();
+                conexion.sqlConnection.Open();
 
                 // Crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
 
                 // Establecer los valores de los parámetros
                 sqlCommand.Parameters.AddWithValue("@nombreFarmaco", nombreFarmacos);
@@ -151,7 +149,7 @@ namespace VitalCareRx
             finally
             {
                 // Cerrar la conexión
-                sqlConnection.Close();
+                conexion.sqlConnection.Close();
             }
         }
 

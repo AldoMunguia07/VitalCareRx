@@ -16,9 +16,7 @@ namespace VitalCareRx
 
         //Variables miembro
 
-        private static string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
-
-        private SqlConnection sqlConnection = new SqlConnection(connectionString);
+        Conexion conexion = new Conexion();
 
         public int IdEmpleado { get; set; }
 
@@ -69,10 +67,10 @@ namespace VitalCareRx
 
 
                 // Establecer la conexión
-                sqlConnection.Open();
+                conexion.sqlConnection.Open();
 
                 // Crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
 
                 // Establecer los valores de los parámetros
                 sqlCommand.Parameters.AddWithValue("@user", nombreUsuario);
@@ -108,7 +106,7 @@ namespace VitalCareRx
             finally
             {
                 // Cerrar la conexión
-                sqlConnection.Close();
+                conexion.sqlConnection.Close();
             }
         }
         
@@ -125,10 +123,10 @@ namespace VitalCareRx
                                 (@primerNombre,@segundoNombre,@primerApellido,
                                 @segundoApellido,@celular,@idSexo,@usuario,@pass)";
                 // Establecer la conexión
-                sqlConnection.Open();
+                conexion.sqlConnection.Open();
 
                 // Crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
 
                 // Establecer los valores de los parámetros
                 sqlCommand.Parameters.AddWithValue("@primerNombre", empleado.PrimerNombre);
@@ -151,7 +149,7 @@ namespace VitalCareRx
             finally
             {
                 // Cerrar la conexión
-                sqlConnection.Close();
+                conexion.sqlConnection.Close();
             }
 
         }
@@ -171,10 +169,10 @@ namespace VitalCareRx
                                 WHERE idEmpleado = @idEmpleado";
 
                 // Abrir la conexión
-                sqlConnection.Open();
+                conexion.sqlConnection.Open();
                 
                 // Crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
 
                 // Establecer los valores de los parámetros
                 sqlCommand.Parameters.AddWithValue("@idEmpleado", empleado.IdEmpleado);
@@ -197,7 +195,7 @@ namespace VitalCareRx
             }
             finally
             {
-                sqlConnection.Close();
+                conexion.sqlConnection.Close();
             }
         }
 
@@ -211,7 +209,7 @@ namespace VitalCareRx
 
             try
             {
-               SqlDataAdapter adapter = new SqlDataAdapter(query, sqlConnection);
+               SqlDataAdapter adapter = new SqlDataAdapter(query, conexion.sqlConnection);
 
                 using (adapter)
                 {

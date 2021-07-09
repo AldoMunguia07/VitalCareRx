@@ -14,8 +14,7 @@ namespace VitalCareRx
     {
         //Variables miembro
 
-        private static string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
-        private SqlConnection sqlConnection = new SqlConnection(connectionString);
+        Conexion conexion = new Conexion();
 
 
         public int IdReceta {get; set;}
@@ -60,10 +59,10 @@ namespace VitalCareRx
                 string query = @"INSERT INTO [Consultas].[DetalleRecetaMedica] VALUES (@idRecetaMedica,@idFarmaco,@cantidad,@duracion, @indicacion)";
 
                 // Establecer la conexión
-                sqlConnection.Open();
+                conexion.sqlConnection.Open();
 
                 // Crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
 
                 // Establecer los valores de los parámetros
                 sqlCommand.Parameters.AddWithValue("@idRecetaMedica", receta.IdReceta);
@@ -84,7 +83,7 @@ namespace VitalCareRx
             finally
             {
                 // Cerrar la conexión
-                sqlConnection.Close();
+                conexion.sqlConnection.Close();
             }
         }
 
@@ -98,9 +97,9 @@ namespace VitalCareRx
             {
                 string query = @"DELETE [Consultas].[DetalleRecetaMedica] WHERE idRecetaMedica = @idRecetaMedica AND idFarmaco = @idFarmaco";
 
-                sqlConnection.Open();
+                conexion.sqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
 
                 sqlCommand.Parameters.AddWithValue("@idRecetaMedica", receta.IdReceta);
                 sqlCommand.Parameters.AddWithValue("@idFarmaco", receta.IdFarmaco);
@@ -114,7 +113,7 @@ namespace VitalCareRx
             }
             finally
             {
-                sqlConnection.Close();
+                conexion.sqlConnection.Close();
             }
             
 
@@ -134,9 +133,9 @@ namespace VitalCareRx
                                 WHERE idRecetaMedica = @idRecetaMedica and idFarmaco = @idFarmaco
                                 ";
 
-                sqlConnection.Open();
+                conexion.sqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
 
                 sqlCommand.Parameters.AddWithValue("@idRecetaMedica", receta.IdReceta);
                 sqlCommand.Parameters.AddWithValue("@idFarmaco", receta.IdFarmaco);
@@ -153,7 +152,7 @@ namespace VitalCareRx
             }
             finally
             {
-                sqlConnection.Close();
+                conexion.sqlConnection.Close();
             }
 
 

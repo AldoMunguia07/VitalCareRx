@@ -13,9 +13,7 @@ namespace VitalCareRx
     {
         //Variables miembro
 
-        private static string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
-
-        private SqlConnection sqlConnection = new SqlConnection(connectionString);
+        Conexion conexion = new Conexion();
 
         public int IdConsulta {get; set;}
         public string MotivoConsulta { get; set; }
@@ -50,9 +48,9 @@ namespace VitalCareRx
 
                 string query = @"INSERT INTO [Consultas].[Consulta] VALUES (@motivoConsulta,@diagnosticoConsulta,@temperatura,@presionArterial,@idEmpleado,@idCita)";
 
-                sqlConnection.Open();
+                conexion.sqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(query,sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
 
                 sqlCommand.Parameters.AddWithValue("@motivoConsulta", consulta.MotivoConsulta);
                 sqlCommand.Parameters.AddWithValue("@diagnosticoConsulta", consulta.DiagnosticoConsulta);
@@ -69,7 +67,7 @@ namespace VitalCareRx
             }
             finally
             {
-                sqlConnection.Close();
+                conexion.sqlConnection.Close();
 
                 
             }
@@ -90,9 +88,9 @@ namespace VitalCareRx
                                 presionArterial = @presionArterial, idEmpleado = @idEmpleado, idCita = @idCita
                                 WHERE idConsulta = @idConsulta";
 
-                sqlConnection.Open();
+                conexion.sqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(query,sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
 
                 sqlCommand.Parameters.AddWithValue("@motivoConsulta", consulta.MotivoConsulta);
                 sqlCommand.Parameters.AddWithValue("@diagnosticoConsulta", consulta.DiagnosticoConsulta);
@@ -111,7 +109,7 @@ namespace VitalCareRx
             }
             finally
             {
-                sqlConnection.Close();
+                conexion.sqlConnection.Close();
 
             }
         }

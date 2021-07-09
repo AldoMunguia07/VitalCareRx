@@ -13,10 +13,7 @@ namespace VitalCareRx
 {
     class Paciente
     {
-        //Variables miembro
-
-        private static string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
-        private SqlConnection sqlConnection = new SqlConnection(connectionString);
+        Conexion conexion = new Conexion();
 
         //Propiedades
         public int IdPaciente { get; set; }
@@ -80,10 +77,10 @@ namespace VitalCareRx
 						@peso,@estatura,@estado, @idTipoSangre,@idSexo)";
 
                 // Abrir la conexión
-                sqlConnection.Open();
+                conexion.sqlConnection.Open();
 
                 // Crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
 
 
                 // Establecer los valores de los parámetros
@@ -115,7 +112,7 @@ namespace VitalCareRx
             }
             finally
             {
-                sqlConnection.Close();
+                conexion.sqlConnection.Close();
             }
 
         }
@@ -136,10 +133,10 @@ namespace VitalCareRx
                                 WHERE idPaciente = @idPaciente";
 
                 // Abrir la conexión
-                sqlConnection.Open();
+                conexion.sqlConnection.Open();
 
                 // Crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
 
                 // Establecer los valores de los parámetros
                 sqlCommand.Parameters.AddWithValue("@idPaciente", paciente.IdPaciente);
@@ -167,7 +164,7 @@ namespace VitalCareRx
             }
             finally
             {
-                sqlConnection.Close();
+                conexion.sqlConnection.Close();
             }
         }
 
@@ -185,10 +182,10 @@ namespace VitalCareRx
                                 WHERE numeroIdentidad = @numeroIdentidad";
 
                 // Abrir la conexión
-                sqlConnection.Open();
+                conexion.sqlConnection.Open();
 
                 // Crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
 
                 // Establecer los valores de los parámetros
                 sqlCommand.Parameters.AddWithValue("@numeroIdentidad", paciente.NumeroIdentidad);
@@ -202,7 +199,7 @@ namespace VitalCareRx
             }
             finally
             {
-                sqlConnection.Close();
+                conexion.sqlConnection.Close();
             }
         }
 
