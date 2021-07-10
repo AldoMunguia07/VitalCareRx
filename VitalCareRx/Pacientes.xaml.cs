@@ -33,7 +33,7 @@ namespace VitalCareRx
         private string dni;
         private int idPaciente;
 
-        SqlConnection sqlConnection;
+        
 
         Paciente paciente = new Paciente();
         Validaciones validaciones = new Validaciones();
@@ -43,18 +43,16 @@ namespace VitalCareRx
         {
             InitializeComponent();
 
-            string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
-            sqlConnection = new SqlConnection(connectionString);
-
             btnEstado.Background = new SolidColorBrush(Color.FromArgb(165, 42, 165, 42)); // Por defecto el botón de estado se inicializa en color verde
             nombreEmpleado = empleado;
             codigoEmpleado = codigo;
-
-            CargarComboBoxSexo();
-            CargarComboBoxEstado();
-            CargarComboBoxTipoSangre();
-            paciente.VerPacientes(gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
             
+            paciente.CargarComboBoxSexo(cmbSexo);
+            paciente.CargarComboBoxEstado(cmbEstado);
+            paciente.CargarComboBoxTipoSangre(cmbTipoSangre);
+            paciente.VerPacientes(gridPacientes, 1);
+            cmbEstado.SelectedValue = 1;
+
         }
 
 
@@ -69,76 +67,7 @@ namespace VitalCareRx
             this.Close();
         }
 
-        /// <summary>
-        /// Carga el ComboBox de estado
-        /// </summary>
-        private void CargarComboBoxEstado()
-        {
-            string query = @"SELECT '1' id, 'Activos' estado
-                            UNION
-                            SELECT '0', 'Inactivos'";
-
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
-
-            using (sqlDataAdapter)
-            {
-                DataTable dataTable = new DataTable();
-                sqlDataAdapter.Fill(dataTable);
-                cmbEstado.DisplayMemberPath = "estado";
-                cmbEstado.SelectedValuePath = "id";
-                cmbEstado.ItemsSource = dataTable.DefaultView;
-
-            }
-        }
-
-        /// <summary>
-        /// Obtener los datos de la tabla Sexo.
-        /// </summary>
-        public void CargarComboBoxSexo()
-        {
-
-            // Query de selección
-            string query = @"SELECT * FROM [Personas].[Sexo]";
-
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
-
-            using (sqlDataAdapter)
-            {
-                DataTable dataTable = new DataTable();
-                sqlDataAdapter.Fill(dataTable);
-                cmbSexo.DisplayMemberPath = "descripcionSexo";
-                cmbSexo.SelectedValuePath = "idSexo";
-                cmbSexo.ItemsSource = dataTable.DefaultView;
-            }
-
-
-
-        }
-
-        /// <summary>
-        /// Obtener los datos de la tabla TipoSangre.
-        /// </summary>
-        public void CargarComboBoxTipoSangre()
-        {
-
-            // Query de selección
-            string query = @"SELECT * FROM [Personas].[TipoSangre]";
-
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
-
-            using (sqlDataAdapter)
-            {
-                DataTable dataTable = new DataTable();
-                sqlDataAdapter.Fill(dataTable);
-                cmbTipoSangre.DisplayMemberPath = "descripcionTipoSangre";
-                cmbTipoSangre.SelectedValuePath = "idTipoSangre";
-                cmbTipoSangre.ItemsSource = dataTable.DefaultView;
-            }
-
-
-
-        }
-
+     
         /// <summary>
         /// Ocultar columnas del DataGridView
         /// </summary>
@@ -614,8 +543,6 @@ namespace VitalCareRx
            
             validaciones.SoloNumeros(e);
             
-            
-           
         }
 
         private void txtPrimerNombre_PreviewKeyDown(object sender, KeyEventArgs e)

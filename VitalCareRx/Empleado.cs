@@ -62,18 +62,15 @@ namespace VitalCareRx
             Empleado empleado = new Empleado();
             try
             {
-                // Query de selección
-                string query = @"SELECT * FROM [Personas].[Empleado] WHERE nombreUsuario = @user";
-
-
-                // Establecer la conexión
                 conexion.sqlConnection.Open();
 
-                // Crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("sp_Empleados", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 // Establecer los valores de los parámetros
-                sqlCommand.Parameters.AddWithValue("@user", nombreUsuario);
+                sqlCommand.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
+                sqlCommand.Parameters.AddWithValue("@accion", "buscarUsuario");
 
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {

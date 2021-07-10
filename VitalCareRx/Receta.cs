@@ -288,19 +288,39 @@ namespace VitalCareRx
         /// </summary>
         public void CargarFarmacos(ComboBox comboBox)
         {
-            string query = @"SELECT * FROM [Consultas].[Farmaco]";
-
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, conexion.sqlConnection);
-
-            using (sqlDataAdapter)
+            try
             {
-                DataTable dataTable = new DataTable();
-                sqlDataAdapter.Fill(dataTable);
-                comboBox.DisplayMemberPath = "descripcionFarmaco";
-                comboBox.SelectedValuePath = "idFarmaco";
-                comboBox.ItemsSource = dataTable.DefaultView;
-                ;
+                conexion.sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand("sp_LlenarComboBox", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.AddWithValue("@accion", "CargarFarmacos");
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+                    sqlDataAdapter.Fill(dataTable);
+                    comboBox.DisplayMemberPath = "descripcionFarmaco";
+                    comboBox.SelectedValuePath = "idFarmaco";
+                    comboBox.ItemsSource = dataTable.DefaultView;
+                    
+                }
             }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                // Cerrar la conexión
+                conexion.sqlConnection.Close();
+            }
+
         }
 
         /// <summary>

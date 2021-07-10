@@ -25,7 +25,7 @@ namespace VitalCareRx
     /// </summary>
     public partial class Recetas : Window
     {
-        SqlConnection sqlConnection;
+       
         private int codigoConsulta;
         private bool validarSeleccionado;
         private int codigoRecetaMedica;
@@ -47,72 +47,7 @@ namespace VitalCareRx
             
         }
 
-        /*
-        /// <summary>
-        /// Metodo para ver los farmacos de la consulta actual.
-        /// </summary>
-        private void MostrarFarmacos()
-        {
-            try
-            {
-                string query = @"SELECT DR.idRecetaMedica 'Receta Medica', DR.idFarmaco 'Codigo Farmaco', F.descripcionFarmaco 'Farmaco', DR.cantidad 'Cantidad', DR.duracionTratamiento 'Duracion', DR.indicaciones 'Indicaciones'
-                            FROM [Consultas].[DetalleRecetaMedica] DR INNER JOIN [Consultas].[Farmaco] F
-                            ON DR.idFarmaco = F.idFarmaco
-                            INNER JOIN [Consultas].[RecetaMedica] R
-                            ON DR.idRecetaMedica = R.idRecetaMedica
-                            INNER JOIN [Consultas].[Consulta] C
-                            ON R.idConsulta = C.idConsulta
-                            WHERE C.idConsulta = @idConsulta";
-
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
-                sqlCommand.Parameters.AddWithValue("@idConsulta", codigoConsulta);
-
-
-
-                using (sqlDataAdapter)
-                {
-                    DataTable dataTable = new DataTable();
-
-                    sqlDataAdapter.Fill(dataTable);
-
-                    dgRecetas.ItemsSource = dataTable.DefaultView;
-                    dgRecetas.IsReadOnly = true; // El grid es de solo lectura.
-
-
-                }
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        */
-
-        /*
-        /// <summary>
-        /// Metodo para cargar el ComboBox farmacos con información.
-        /// </summary>
-        private void CargarFarmacos()
-        {
-            string query = @"SELECT * FROM [Consultas].[Farmaco]";
-
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
-
-            using (sqlDataAdapter)
-            {
-                DataTable dataTable = new DataTable();
-                sqlDataAdapter.Fill(dataTable);
-                cmbFarmacos.DisplayMemberPath = "descripcionFarmaco";
-                cmbFarmacos.SelectedValuePath = "idFarmaco";
-                cmbFarmacos.ItemsSource = dataTable.DefaultView;
-                ;
-            }
-        }
-        */
+        
 
         private void btnAñadir_Click(object sender, RoutedEventArgs e)
         {
@@ -373,50 +308,7 @@ namespace VitalCareRx
             receta.MostrarFarmacos(dgRecetas, codigoConsulta);
         }
 
-        /*
-
-        /// <summary>
-        /// Metodo para validar si el farmaco ya esta en la receta.
-        /// </summary>
-        /// <returns>Boolean</returns>
-        private bool ValidarFarmacoEnReceta()
-        {
-            try
-            {
-                string query = @"SELECT idFarmaco FROM [Consultas].[DetalleRecetaMedica] WHERE idRecetaMedica = @idReceta and idFarmaco = @idFarmaco";
-
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
-                using (sqlDataAdapter)
-                {
-                    sqlCommand.Parameters.AddWithValue("@idFarmaco", cmbFarmacos.SelectedValue);
-                    sqlCommand.Parameters.AddWithValue("@idReceta", codigoRecetaMedica);
-
-                    DataTable dataTable = new DataTable();
-                    sqlDataAdapter.Fill(dataTable);
-
-                    if (dataTable.Rows.Count == 1) //Si el farmaco existe en la receta actual, devuelve un true
-                    {
-                        return true;
-                    }
-
-                        
-
-                    return false;
-
-                }
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            
-        }
-        */
+   
 
         private void rtxtDuracionTratamiento_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {

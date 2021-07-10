@@ -54,9 +54,6 @@ namespace VitalCareRx
                         Loading loading = new Loading(String.Format("{0} {1}", unEmpleado.PrimerNombre, unEmpleado.PrimerApellido), unEmpleado.IdEmpleado);
                         loading.Show();
                         this.Close();
-
-                        
-
               
                     }
 
