@@ -97,6 +97,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="LlenarComboBox.cs" />
     <Compile Include="Conexion.cs" />
     <Compile Include="Farmaco.cs" />
     <Compile Include="Farmacos.xaml.cs">

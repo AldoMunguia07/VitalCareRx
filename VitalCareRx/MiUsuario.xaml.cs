@@ -32,6 +32,7 @@ namespace VitalCareRx
         Empleado miUsuario = new Empleado();
         private string usuario;
         Validaciones validaciones = new Validaciones();
+        LlenarComboBox LlenarComboBox = new LlenarComboBox();
 
         public MiUsuario(int empleado)// se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
                                       
@@ -39,75 +40,14 @@ namespace VitalCareRx
             InitializeComponent();
             string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
-            codigoEmpleado = empleado;            
-            CargarTextBox();
-            LlenarComboBoxSexo();
+            codigoEmpleado = empleado;
+            miUsuario.CargarTextBox(codigoEmpleado, txtUsuario, txtPassword, txtPrimerNombre, txtSegundoNombre, txtPrimerApellido, txtSegundoApellido, txtCelular, cmbSexo);
+            LlenarComboBox.CargarComboBoxSexo(cmbSexo);
             miUsuario.PrimerNombre = txtPrimerNombre.Text;
             miUsuario.PrimerApellido = txtPrimerApellido.Text;
-           usuario = txtUsuario.Text; // se asigna el valor de la txtUsuario para la posteiror validacion (Que no permita ingresar un usuario existente).
+            usuario = txtUsuario.Text; // se asigna el valor de la txtUsuario para la posteiror validacion (Que no permita ingresar un usuario existente).
         }
 
-        /// <summary>
-        /// Cargar las TextBox con la información del empleado actual.
-        /// </summary>
-        private void CargarTextBox()
-        {
-            try                
-            {
-                //Query para mostrar informacion del empleado
-                string query = @"SELECT * FROM [Personas].[Empleado] WHERE idEmpleado = @idEmpleado";
-
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@idEmpleado", codigoEmpleado);
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
-                using (sqlDataAdapter)
-                {
-                    DataTable Empleado = new DataTable();
-                    sqlDataAdapter.Fill(Empleado);
-
-                    //Del objeto DataTable se le asigna el valor correspondiente a cada TextBox.
-                    txtUsuario.Text = Empleado.Rows[0]["nombreUsuario"].ToString();
-                    txtPassword.Text = Empleado.Rows[0]["contrasenia"].ToString();
-                    txtPrimerNombre.Text = Empleado.Rows[0]["primerNombre"].ToString();
-                    txtSegundoNombre.Text = Empleado.Rows[0]["segundoNombre"].ToString();
-                    txtPrimerApellido.Text = Empleado.Rows[0]["primerApellido"].ToString();
-                    txtSegundoApellido.Text = Empleado.Rows[0]["segundoApellido"].ToString();
-                    txtCelular.Text = Empleado.Rows[0]["celular"].ToString();
-                    cmbSexo.SelectedValue = Empleado.Rows[0]["idSexo"].ToString();
-
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Obtener los datos de la tabla Sexo.
-        /// </summary>
-        public void LlenarComboBoxSexo()
-        {
-
-            // Query de selección
-            string query = @"SELECT * FROM [Personas].[Sexo]";
-
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
-
-            using (sqlDataAdapter)
-            {
-                DataTable dataTable = new DataTable();
-                sqlDataAdapter.Fill(dataTable);
-                cmbSexo.DisplayMemberPath = "descripcionSexo";
-                cmbSexo.SelectedValuePath = "idSexo";
-                cmbSexo.ItemsSource = dataTable.DefaultView;
-            }
-
-
-
-        }
 
         /// <summary>
         /// Metodo para obtener valores del formulario
@@ -179,7 +119,7 @@ namespace VitalCareRx
         /// Metodo para validar si existe o no un usuario.
         /// </summary>
         /// <returns></returns>
-        public bool ExisteUsuario()
+       /* public bool ExisteUsuario()
         {
             try
             {
@@ -214,7 +154,7 @@ namespace VitalCareRx
             }
 
 
-        }
+        }*/
 
 
 
@@ -226,7 +166,7 @@ namespace VitalCareRx
             {
                 if (Validar()) //El usuario no debe dejar los campos en blanco.
                 {
-                    if (!ExisteUsuario() || usuario == txtUsuario.Text) // Valida si el nombre usuario no existe y si es el nombre de usurio es del empleado actual, con esa condición pasa a la siguiente validación
+                    if (!miUsuario.ExisteUsuario(txtUsuario.Text) || usuario == txtUsuario.Text) // Valida si el nombre usuario no existe y si es el nombre de usurio es del empleado actual, con esa condición pasa a la siguiente validación
                     {
                         if (txtUsuario.Text.Length >= 5)
                         {

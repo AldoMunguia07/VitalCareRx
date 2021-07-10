@@ -36,6 +36,7 @@ namespace VitalCareRx
         private string nombreEmpleado;
         private bool seleccionado = false;
         Validaciones validaciones = new Validaciones();
+        LlenarComboBox LlenarComboBox = new LlenarComboBox();
         private int idConsulta;
 
         public Consultas(int codigo, string empleado) // se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
@@ -52,7 +53,7 @@ namespace VitalCareRx
             sqlConnection = new SqlConnection(connectionString);
 
             consulta.MostrarConsultas(dgConsultas);
-            consulta.CargarCodigoCita(cmbCodigoCitas);
+            LlenarComboBox.CargarCodigoCita(cmbCodigoCitas);
 
         }
 
@@ -172,7 +173,7 @@ namespace VitalCareRx
             cmbCodigoCitas.SelectedValue = null;
             seleccionado = false;
             btnReceta.Content = "Receta";
-            consulta.CargarCodigoCita(cmbCodigoCitas);
+            LlenarComboBox.CargarCodigoCita(cmbCodigoCitas);
             txtBuscar.Clear();
         }
 
@@ -201,7 +202,7 @@ namespace VitalCareRx
 
                 txtTemperatura.Text = rowSelected.Row["Temperatura"].ToString();
                 txtPresionArterial.Text = rowSelected.Row["Presion arterial"].ToString();
-                consulta.CargarCodigoCitaSeleccionar(Convert.ToInt32(rowSelected.Row["Codigo de consulta"]),cmbCodigoCitas);
+                LlenarComboBox.CargarCodigoCitaSeleccionar(Convert.ToInt32(rowSelected.Row["Codigo de consulta"]),cmbCodigoCitas);
                 cmbCodigoCitas.SelectedValue = rowSelected.Row["Codigo de cita"].ToString();
 
                 consulta.IdConsulta = Convert.ToInt32(rowSelected.Row["Codigo de consulta"]);

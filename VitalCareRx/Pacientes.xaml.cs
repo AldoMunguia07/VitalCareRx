@@ -36,6 +36,7 @@ namespace VitalCareRx
         
 
         Paciente paciente = new Paciente();
+        LlenarComboBox LlenarComboBox = new LlenarComboBox();
         Validaciones validaciones = new Validaciones();
 
         public Pacientes(int codigo, string empleado)// se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
@@ -46,10 +47,10 @@ namespace VitalCareRx
             btnEstado.Background = new SolidColorBrush(Color.FromArgb(165, 42, 165, 42)); // Por defecto el botón de estado se inicializa en color verde
             nombreEmpleado = empleado;
             codigoEmpleado = codigo;
-            
-            paciente.CargarComboBoxSexo(cmbSexo);
-            paciente.CargarComboBoxEstado(cmbEstado);
-            paciente.CargarComboBoxTipoSangre(cmbTipoSangre);
+
+            LlenarComboBox.CargarComboBoxSexo(cmbSexo);
+            LlenarComboBox.CargarComboBoxEstado(cmbEstado);
+            LlenarComboBox.CargarComboBoxTipoSangre(cmbTipoSangre);
             paciente.VerPacientes(gridPacientes, 1);
             cmbEstado.SelectedValue = 1;
 

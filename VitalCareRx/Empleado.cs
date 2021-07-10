@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using System.Windows.Controls;
 
 namespace VitalCareRx
 {
@@ -115,15 +116,10 @@ namespace VitalCareRx
            
             try
             {
-                // Query de selección
-                string query = @"INSERT INTO [Personas].[Empleado] VALUES 
-                                (@primerNombre,@segundoNombre,@primerApellido,
-                                @segundoApellido,@celular,@idSexo,@usuario,@pass)";
-                // Establecer la conexión
                 conexion.sqlConnection.Open();
-
-                // Crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
+                //Query para añadir un paciente
+                SqlCommand sqlCommand = new SqlCommand("sp_Empleados", conexion.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 // Establecer los valores de los parámetros
                 sqlCommand.Parameters.AddWithValue("@primerNombre", empleado.PrimerNombre);
@@ -132,8 +128,9 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@segundoApellido", empleado.SegundoApellido);
                 sqlCommand.Parameters.AddWithValue("@celular", empleado.Celular);
                 sqlCommand.Parameters.AddWithValue("@idSexo", empleado.IdSexo);
-                sqlCommand.Parameters.AddWithValue("@usuario", empleado.NombreUsuario);
-                sqlCommand.Parameters.AddWithValue("@pass", empleado.Contrasenia);
+                sqlCommand.Parameters.AddWithValue("@nombreUsuario", empleado.NombreUsuario);
+                sqlCommand.Parameters.AddWithValue("@contrasenia", empleado.Contrasenia);
+                sqlCommand.Parameters.AddWithValue("@accion", "insertar");
 
                 sqlCommand.ExecuteNonQuery();
 
@@ -159,17 +156,10 @@ namespace VitalCareRx
         {
             try
             {
-                //Query para modificar un empleado
-                string query = @"UPDATE [Personas].[Empleado]
-                                SET primerNombre = @primerNombre, segundoNombre = @segundoNombre, primerApellido = @primerApellido, segundoApellido = @segundoApellido,
-                                celular = @celular, idSexo = @idSexo, nombreUsuario = @usuario, contrasenia =  @pass
-                                WHERE idEmpleado = @idEmpleado";
-
-                // Abrir la conexión
                 conexion.sqlConnection.Open();
-                
-                // Crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
+                //Query para añadir un paciente
+                SqlCommand sqlCommand = new SqlCommand("sp_Empleados", conexion.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 // Establecer los valores de los parámetros
                 sqlCommand.Parameters.AddWithValue("@idEmpleado", empleado.IdEmpleado);
@@ -179,8 +169,9 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@segundoApellido", empleado.SegundoApellido);
                 sqlCommand.Parameters.AddWithValue("@celular", empleado.Celular);
                 sqlCommand.Parameters.AddWithValue("@idSexo", empleado.IdSexo);
-                sqlCommand.Parameters.AddWithValue("@usuario", empleado.NombreUsuario);
-                sqlCommand.Parameters.AddWithValue("@pass", empleado.Contrasenia);
+                sqlCommand.Parameters.AddWithValue("@nombreUsuario", empleado.NombreUsuario);
+                sqlCommand.Parameters.AddWithValue("@contrasenia", empleado.Contrasenia);
+                sqlCommand.Parameters.AddWithValue("@accion", "modificar");
 
                 sqlCommand.ExecuteNonQuery();
 
@@ -202,11 +193,18 @@ namespace VitalCareRx
         /// <returns>Codigo de empleado</returns>
         public int CodigoEmpleado()
         {
-            string query = @"SELECT MAX(idEmpleado) idEmpleado FROM [Personas].[Empleado]";
+            
 
             try
             {
-               SqlDataAdapter adapter = new SqlDataAdapter(query, conexion.sqlConnection);
+                conexion.sqlConnection.Open();
+                //Query para añadir un paciente
+                SqlCommand sqlCommand = new SqlCommand("sp_Empleados", conexion.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.AddWithValue("@accion", "codigoMayor");
+
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
 
                 using (adapter)
                 {
@@ -220,7 +218,99 @@ namespace VitalCareRx
 
                 throw;
             }
-            
+            finally
+            {
+                conexion.sqlConnection.Close();
+            }
+
+
+        }
+
+        public void CargarTextBox(int codigoEmpleado, TextBox txtUsuario, TextBox txtPassword, TextBox txtPrimerNombre, TextBox txtSegundoNombre, TextBox txtPrimerApellido, TextBox txtSegundoApellido,
+            TextBox txtCelular, ComboBox cmbSexo)
+        {
+            try
+            {
+                conexion.sqlConnection.Open();
+                //Query para añadir un paciente
+                SqlCommand sqlCommand = new SqlCommand("sp_Empleados", conexion.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.AddWithValue("@accion", "buscarUsuarioID");
+                sqlCommand.Parameters.AddWithValue("@idEmpleado", codigoEmpleado);
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    DataTable Empleado = new DataTable();
+                    sqlDataAdapter.Fill(Empleado);
+
+                    //Del objeto DataTable se le asigna el valor correspondiente a cada TextBox.
+                    txtUsuario.Text = Empleado.Rows[0]["nombreUsuario"].ToString();
+                    txtPassword.Text = Empleado.Rows[0]["contrasenia"].ToString();
+                    txtPrimerNombre.Text = Empleado.Rows[0]["primerNombre"].ToString();
+                    txtSegundoNombre.Text = Empleado.Rows[0]["segundoNombre"].ToString();
+                    txtPrimerApellido.Text = Empleado.Rows[0]["primerApellido"].ToString();
+                    txtSegundoApellido.Text = Empleado.Rows[0]["segundoApellido"].ToString();
+                    txtCelular.Text = Empleado.Rows[0]["celular"].ToString();
+                    cmbSexo.SelectedValue = Empleado.Rows[0]["idSexo"].ToString();
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+            }
+
+        }
+
+        public bool ExisteUsuario(string user)
+        {
+            try
+            {
+
+                conexion.sqlConnection.Open();
+                //Query para añadir un paciente
+                SqlCommand sqlCommand = new SqlCommand("sp_Empleados", conexion.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    sqlCommand.Parameters.AddWithValue("@nombreUsuario", user);
+                    sqlCommand.Parameters.AddWithValue("@accion", "existeUsuario");
+
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+
+
+                    if (dataTable.Rows.Count == 1) //Si el usuario existe retorna un true
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+            }
+
+
         }
 
 

@@ -74,7 +74,6 @@ namespace VitalCareRx
         }
 
 
-
         /// <summary>
         /// Metodo para crear un farmaco.
         /// </summary>

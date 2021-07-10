@@ -283,45 +283,7 @@ namespace VitalCareRx
             }
         }
 
-        /// <summary>
-        /// Metodo para cargar el ComboBox farmacos con información.
-        /// </summary>
-        public void CargarFarmacos(ComboBox comboBox)
-        {
-            try
-            {
-                conexion.sqlConnection.Open();
-
-                SqlCommand sqlCommand = new SqlCommand("sp_LlenarComboBox", conexion.sqlConnection);
-
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-
-                sqlCommand.Parameters.AddWithValue("@accion", "CargarFarmacos");
-
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
-                using (sqlDataAdapter)
-                {
-                    DataTable dataTable = new DataTable();
-                    sqlDataAdapter.Fill(dataTable);
-                    comboBox.DisplayMemberPath = "descripcionFarmaco";
-                    comboBox.SelectedValuePath = "idFarmaco";
-                    comboBox.ItemsSource = dataTable.DefaultView;
-                    
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
-                // Cerrar la conexión
-                conexion.sqlConnection.Close();
-            }
-
-        }
+        
 
         /// <summary>
         /// Metodo para validar si el farmaco ya esta en la receta.

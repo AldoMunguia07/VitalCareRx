@@ -31,6 +31,7 @@ namespace VitalCareRx
         private int codigoRecetaMedica;
         private int codigoFarmaco;
         Validaciones validaciones = new Validaciones();
+        LlenarComboBox LlenarComboBox = new LlenarComboBox();
 
         private Receta receta = new Receta();
 
@@ -40,7 +41,7 @@ namespace VitalCareRx
             codigoConsulta = idConsulta;
             codigoRecetaMedica = idRecetaMedica;
 
-            receta.CargarFarmacos(cmbFarmacos);
+            LlenarComboBox.CargarFarmacos(cmbFarmacos);
             receta.MostrarFarmacos(dgRecetas, codigoConsulta);
 
             validarSeleccionado = false;

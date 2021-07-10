@@ -27,14 +27,14 @@ namespace VitalCareRx
         SqlConnection sqlConnection;
 
         Validaciones validaciones = new Validaciones();
-      
+        LlenarComboBox LlenarComboBox = new LlenarComboBox();
         public NuevoEmpleado()
         {
 
             InitializeComponent();
             string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
-            LlenarComboBoxSexo();
+            LlenarComboBox.CargarComboBoxSexo(cmbSexo);
             
         }
 
@@ -48,7 +48,7 @@ namespace VitalCareRx
                   String.Empty && txtCelular.Text != String.Empty && txtUsuario.Text !=
                   String.Empty && txtContrasenia.Text != String.Empty && cmbSexo.SelectedValue != null)
                 {
-                    if (!ExisteUsuario()) // Si el usuario ya existe que no perimita pasar a la siguiente condición
+                    if (!empleado.ExisteUsuario(txtUsuario.Text)) // Si el usuario ya existe que no perimita pasar a la siguiente condición
                     {
                         if (txtUsuario.Text.Length >= 5)
                         {
@@ -94,9 +94,9 @@ namespace VitalCareRx
                     MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
@@ -125,30 +125,6 @@ namespace VitalCareRx
         }
 
 
-        /// <summary>
-        /// Obtener los datos de la tabla Sexo.
-        /// </summary>
-        public void LlenarComboBoxSexo()
-        {
-
-            // Query de selección
-            string query = @"SELECT * FROM [Personas].[Sexo]";
-
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
-
-            using (sqlDataAdapter)
-            {
-                DataTable dataTable = new DataTable();
-                sqlDataAdapter.Fill(dataTable);
-                cmbSexo.DisplayMemberPath = "descripcionSexo";
-                cmbSexo.SelectedValuePath = "idSexo";
-                cmbSexo.ItemsSource = dataTable.DefaultView;
-            }
-
-
-
-        }
-
 
         /// <summary>
         /// método para limpiar el formulario.
@@ -166,46 +142,7 @@ namespace VitalCareRx
         }
 
 
-        /// <summary>
-        /// Metodo que verifica si el usuario ya existe.
-        /// </summary>
-        /// <returns>boolean</returns>
-        public bool ExisteUsuario()
-        {
-            try
-            {
-
-                string query = @"SELECT nombreUsuario FROM [Personas].[Empleado] WHERE [nombreUsuario] = @user";
-
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
-                using (sqlDataAdapter)
-                {
-                    sqlCommand.Parameters.AddWithValue("@user", txtUsuario.Text); //Se pasa por parametro la txtUsuario
-
-                    DataTable dataTable = new DataTable();
-
-                    sqlDataAdapter.Fill(dataTable);
-
-
-
-                    if (dataTable.Rows.Count == 1) //Si devuelve q fila es que existe un usuarui
-                    {
-                        return true;
-                    }
-
-                    return false;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-
-        }
+     
 
         bool right = false;
 
