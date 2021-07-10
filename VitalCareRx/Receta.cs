@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using System.Windows.Controls;
+
 namespace VitalCareRx
 {
     class Receta
@@ -45,7 +47,49 @@ namespace VitalCareRx
             Indicaciones = indicaciones;
         }
 
-        
+
+        /// <summary>
+        /// Metodo para ver los farmacos de la consulta actual.
+        /// </summary>
+        public void MostrarFarmacos(DataGrid dataGrid, int codigoConsulta)
+        {
+            try
+            {
+                conexion.sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand("sp_RecetasMedicas", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.AddWithValue("@idConsulta", codigoConsulta);
+
+                sqlCommand.Parameters.AddWithValue("@accion", "MostrarFarmacos");
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    dataGrid.ItemsSource = dataTable.DefaultView;
+                    dataGrid.IsReadOnly = true; // El grid es de solo lectura.
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                // Cerrar la conexión
+                conexion.sqlConnection.Close();
+            }
+        }
+
 
         /// <summary>
         /// Inserta farmacos a una receta medica
@@ -55,14 +99,11 @@ namespace VitalCareRx
         {
             try
             {
-                // Query de selección
-                string query = @"INSERT INTO [Consultas].[DetalleRecetaMedica] VALUES (@idRecetaMedica,@idFarmaco,@cantidad,@duracion, @indicacion)";
-
-                // Establecer la conexión
                 conexion.sqlConnection.Open();
 
-                // Crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("sp_RecetasMedicas", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 // Establecer los valores de los parámetros
                 sqlCommand.Parameters.AddWithValue("@idRecetaMedica", receta.IdReceta);
@@ -70,6 +111,7 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@cantidad", receta.Cantidad);
                 sqlCommand.Parameters.AddWithValue("@duracion", receta.DuracionTratamiento);
                 sqlCommand.Parameters.AddWithValue("@indicacion", receta.Indicaciones);
+                sqlCommand.Parameters.AddWithValue("@accion", "InsertarFarmaco");
 
 
                 sqlCommand.ExecuteNonQuery();
@@ -95,14 +137,15 @@ namespace VitalCareRx
         {
             try
             {
-                string query = @"DELETE [Consultas].[DetalleRecetaMedica] WHERE idRecetaMedica = @idRecetaMedica AND idFarmaco = @idFarmaco";
-
                 conexion.sqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("sp_RecetasMedicas", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 sqlCommand.Parameters.AddWithValue("@idRecetaMedica", receta.IdReceta);
                 sqlCommand.Parameters.AddWithValue("@idFarmaco", receta.IdFarmaco);
+                sqlCommand.Parameters.AddWithValue("@accion", "EliminarFarmaco");
 
                 sqlCommand.ExecuteNonQuery();
             }
@@ -128,20 +171,18 @@ namespace VitalCareRx
         {
             try
             {
-                string query = @"UPDATE [Consultas].[DetalleRecetaMedica]
-                                SET idFarmaco = @idFarmaco, cantidad = @cantidad , duracionTratamiento = @duracion, indicaciones = @indicacion
-                                WHERE idRecetaMedica = @idRecetaMedica and idFarmaco = @idFarmaco
-                                ";
-
                 conexion.sqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(query, conexion.sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("sp_RecetasMedicas", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 sqlCommand.Parameters.AddWithValue("@idRecetaMedica", receta.IdReceta);
                 sqlCommand.Parameters.AddWithValue("@idFarmaco", receta.IdFarmaco);
                 sqlCommand.Parameters.AddWithValue("@cantidad", receta.Cantidad);
                 sqlCommand.Parameters.AddWithValue("@duracion", receta.DuracionTratamiento);
                 sqlCommand.Parameters.AddWithValue("@indicacion", receta.Indicaciones);
+                sqlCommand.Parameters.AddWithValue("@accion", "ModificarFarmaco");
 
                 sqlCommand.ExecuteNonQuery();
             }
@@ -240,7 +281,72 @@ namespace VitalCareRx
                     conexion.sqlConnection.Close();
                 }
             }
+        }
 
+        /// <summary>
+        /// Metodo para cargar el ComboBox farmacos con información.
+        /// </summary>
+        public void CargarFarmacos(ComboBox comboBox)
+        {
+            string query = @"SELECT * FROM [Consultas].[Farmaco]";
+
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, conexion.sqlConnection);
+
+            using (sqlDataAdapter)
+            {
+                DataTable dataTable = new DataTable();
+                sqlDataAdapter.Fill(dataTable);
+                comboBox.DisplayMemberPath = "descripcionFarmaco";
+                comboBox.SelectedValuePath = "idFarmaco";
+                comboBox.ItemsSource = dataTable.DefaultView;
+                ;
+            }
+        }
+
+        /// <summary>
+        /// Metodo para validar si el farmaco ya esta en la receta.
+        /// </summary>
+        /// <returns>Boolean</returns>
+        public bool ValidarFarmacoEnReceta(ComboBox comboBox, int codigoRecetaMedica)
+        {
+            try
+            {
+                conexion.sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand("sp_RecetasMedicas", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    sqlCommand.Parameters.AddWithValue("@idFarmaco", comboBox.SelectedValue);
+                    sqlCommand.Parameters.AddWithValue("@idRecetaMedica", codigoRecetaMedica);
+                    sqlCommand.Parameters.AddWithValue("@accion", "ValidarFarmacoEnReceta");
+
+                    DataTable dataTable = new DataTable();
+                    sqlDataAdapter.Fill(dataTable);
+
+                    if (dataTable.Rows.Count == 1) //Si el farmaco existe en la receta actual, devuelve un true
+                    {
+                        return true;
+                    }
+                    return false;
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                // Cerrar la conexión
+                conexion.sqlConnection.Close();
+            }
 
         }
     }

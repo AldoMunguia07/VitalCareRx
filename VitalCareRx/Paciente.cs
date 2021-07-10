@@ -199,7 +199,7 @@ namespace VitalCareRx
             }
         }
 
-        public void VerPacientes(Paciente paciente, DataGrid grid, int estado)
+        public void VerPacientes(DataGrid grid, int estado)
         {
             
 

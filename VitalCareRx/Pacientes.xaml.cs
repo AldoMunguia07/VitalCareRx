@@ -53,7 +53,7 @@ namespace VitalCareRx
             CargarComboBoxSexo();
             CargarComboBoxEstado();
             CargarComboBoxTipoSangre();
-            paciente.VerPacientes(paciente, gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
+            paciente.VerPacientes(gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
             
         }
 
@@ -164,7 +164,7 @@ namespace VitalCareRx
 
         private void cmbEstado_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            paciente.VerPacientes(paciente, gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
+            paciente.VerPacientes(gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
             if (cargado)
             {
                 OcultarColumnas();
@@ -307,7 +307,7 @@ namespace VitalCareRx
                                                 ObtenerDatos();
                                                 
                                                 paciente.ActualizarPaciente(paciente);
-                                                paciente.VerPacientes(paciente, gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
+                                                paciente.VerPacientes(gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
                                                 LimpiarFormulario();
                                                 OcultarColumnas();
                                                 MessageBox.Show("El paciente se ha modificado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -441,7 +441,7 @@ namespace VitalCareRx
                                                 
                                                 paciente.CrearPaciente(paciente);
                                                 MessageBox.Show("El paciente se ha insertado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
-                                                paciente.VerPacientes(paciente, gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
+                                                paciente.VerPacientes(gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
                                                 LimpiarFormulario();
                                                 OcultarColumnas();
                                                 
@@ -511,7 +511,7 @@ namespace VitalCareRx
                 ObtenerDatos();
                 
                 paciente.EliminarPaciente(paciente);
-                paciente.VerPacientes(paciente, gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
+                paciente.VerPacientes(gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
                 LimpiarFormulario();
                 OcultarColumnas();
                 MessageBox.Show("El paciente se ha eliminado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -587,7 +587,7 @@ namespace VitalCareRx
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
             LimpiarFormulario();
-            paciente.VerPacientes(paciente, gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
+            paciente.VerPacientes(gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
             OcultarColumnas();
         }
 

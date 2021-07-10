@@ -40,17 +40,14 @@ namespace VitalCareRx
             codigoConsulta = idConsulta;
             codigoRecetaMedica = idRecetaMedica;
 
-            string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
-
-            sqlConnection = new SqlConnection(connectionString);
-
-            CargarFarmacos();
-            MostrarFarmacos();
+            receta.CargarFarmacos(cmbFarmacos);
+            receta.MostrarFarmacos(dgRecetas, codigoConsulta);
 
             validarSeleccionado = false;
             
         }
 
+        /*
         /// <summary>
         /// Metodo para ver los farmacos de la consulta actual.
         /// </summary>
@@ -93,7 +90,9 @@ namespace VitalCareRx
                 throw;
             }
         }
+        */
 
+        /*
         /// <summary>
         /// Metodo para cargar el ComboBox farmacos con información.
         /// </summary>
@@ -113,6 +112,7 @@ namespace VitalCareRx
                 ;
             }
         }
+        */
 
         private void btnAñadir_Click(object sender, RoutedEventArgs e)
         {
@@ -122,7 +122,7 @@ namespace VitalCareRx
                 {
                     if (!validarSeleccionado) // El usuario no tiene que agregar un farmaco que este seleccionando.
                     {
-                        if (!ValidarFarmacoEnReceta()) // El usuario no tiene que añadir un farmaco 2 veces a la receta
+                        if (!receta.ValidarFarmacoEnReceta(cmbFarmacos,codigoRecetaMedica)) // El usuario no tiene que añadir un farmaco 2 veces a la receta
                         {
                             if (int.Parse(txtCantidad.Text) > 0 && int.Parse(txtCantidad.Text) <= 25) // La cantidad de farmacos debe ser mayor a 0 y menor a 25
                             {
@@ -134,7 +134,7 @@ namespace VitalCareRx
 
                                     LimpiarFormulario();
 
-                                    MostrarFarmacos();
+                                    receta.MostrarFarmacos(dgRecetas, codigoConsulta);
 
                                     MessageBox.Show("Farmaco agreado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
                                 }
@@ -164,8 +164,9 @@ namespace VitalCareRx
                     MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
@@ -187,7 +188,7 @@ namespace VitalCareRx
 
                     LimpiarFormulario();
 
-                    MostrarFarmacos();
+                    receta.MostrarFarmacos(dgRecetas, codigoConsulta);
 
                     MessageBox.Show("Farmaco eliminado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -293,7 +294,7 @@ namespace VitalCareRx
                 {
                     if (ValidarCampos()) // El usuario no tiene que dejar los campos vacios.
                     {
-                        if (!ValidarFarmacoEnReceta() || codigoFarmaco == Convert.ToInt32(cmbFarmacos.SelectedValue)) // Valida si el farmaco no esta en la receta actual y si es el codigo de farmaco seleccionado, con esa
+                        if (!receta.ValidarFarmacoEnReceta(cmbFarmacos, codigoRecetaMedica) || codigoFarmaco == Convert.ToInt32(cmbFarmacos.SelectedValue)) // Valida si el farmaco no esta en la receta actual y si es el codigo de farmaco seleccionado, con esa
                         {                                                                                             // condición pasara a la siguiente validación
                             if (int.Parse(txtCantidad.Text) > 0 && int.Parse(txtCantidad.Text) <= 25) // La cantidad de farmacos debe ser mayor a 0 y menor a 25
                             {
@@ -304,7 +305,7 @@ namespace VitalCareRx
 
                                 LimpiarFormulario();
 
-                                MostrarFarmacos();
+                                receta.MostrarFarmacos(dgRecetas, codigoConsulta);
 
                                 MessageBox.Show("Farmaco modificado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
                                 
@@ -369,8 +370,10 @@ namespace VitalCareRx
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
             LimpiarFormulario();
-            MostrarFarmacos();
+            receta.MostrarFarmacos(dgRecetas, codigoConsulta);
         }
+
+        /*
 
         /// <summary>
         /// Metodo para validar si el farmaco ya esta en la receta.
@@ -413,6 +416,7 @@ namespace VitalCareRx
             }
             
         }
+        */
 
         private void rtxtDuracionTratamiento_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
