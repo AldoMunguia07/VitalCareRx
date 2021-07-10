@@ -31,6 +31,7 @@ namespace VitalCareRx
 
         SqlConnection sqlConnection;
         private Consulta consulta = new Consulta();
+        private Receta receta = new Receta();
         private int codigoEmpleado, idRecetaMedica;
         private string nombreEmpleado;
         private bool seleccionado = false;
@@ -50,50 +51,9 @@ namespace VitalCareRx
 
             sqlConnection = new SqlConnection(connectionString);
 
-            MostrarConsultas();
-            CargarCodigoCita();
+            consulta.MostrarConsultas(dgConsultas);
+            consulta.CargarCodigoCita(cmbCodigoCitas);
 
-        }
-
-        /// <summary>
-        /// Trae todas las consultas de la base de datos al inicial el programa.
-        /// </summary>
-        public void MostrarConsultas()
-        {
-            string query = @"SELECT CO.idConsulta 'Codigo de consulta',CONCAT(P.primerNombre, ' ', P.segundoNombre, ' ', P.primerApellido, ' ', P.segundoApellido)
-                            Paciente, CO.motivoConsulta Motivo, CO.diagnosticoConsulta Diagnostico, CO.temperatura Temperatura, CO.presionArterial AS 'Presion arterial',
-                            CONCAT(E.primerNombre, ' ', E.segundoNombre, ' ', E.primerApellido, ' ', E.segundoApellido) Empleado, CO.idCita 'Codigo de cita'
-                            FROM[Consultas].[Consulta] CO INNER JOIN[Consultas].[Cita] C
-                            ON CO.idCita = C.idCita
-                            INNER JOIN[Personas].[Paciente] P
-                            ON C.idPaciente = P.idPaciente
-                            INNER JOIN[Personas].[Empleado] E
-                            ON CO.idEmpleado = e.idEmpleado
-                            ";
-
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
-
-            try
-            {
-                using (sqlDataAdapter)
-                {
-                    DataTable dataTable = new DataTable();
-
-                    sqlDataAdapter.Fill(dataTable);
-
-                    dgConsultas.ItemsSource = dataTable.DefaultView;
-
-                    dgConsultas.IsReadOnly = true; // El grid es de solo lectura.
-
-
-                }
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
         }
 
 
@@ -120,7 +80,7 @@ namespace VitalCareRx
 
                                     MessageBox.Show("La consulta se ha insertado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                                    MostrarConsultas();
+                                    consulta.MostrarConsultas(dgConsultas);
 
                                 }
                                 catch (Exception)
@@ -159,34 +119,6 @@ namespace VitalCareRx
             
 
             
-        }
-
-        /// <summary>
-        ///  Se captura el Id de la receta medica que pertenece a la consulta
-        /// </summary>
-        /// <returns>El id de la receta medica</returns>
-        private int CapturarIdRecetaMedica()
-        {
-            string query = @"SELECT idRecetaMedica FROM[Consultas].[RecetaMedica] WHERE idConsulta = @idConsulta";
-
-            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
-            using (sqlDataAdapter)
-            {
-                sqlCommand.Parameters.AddWithValue("@idConsulta", idConsulta);
-
-                DataTable dataTable = new DataTable();
-
-                sqlDataAdapter.Fill(dataTable);
-
-
-
-                return Convert.ToInt32(dataTable.Rows[0]["idRecetaMedica"]); //Retorna el id de la receta medica.
-
-
-            }
         }
 
 
@@ -228,52 +160,6 @@ namespace VitalCareRx
         }
 
         /// <summary>
-        /// Carga los codigos de las citas del dia de hoy.
-        /// </summary>
-        private void CargarCodigoCita()
-        {
-            string query = @"SELECT idCita FROM [Consultas].[Cita] WHERE idCita not in(SELECT IdCita from [Consultas].[Consulta])";
-
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
-
-            using (sqlDataAdapter)
-            {
-                DataTable dataTable = new DataTable();
-                sqlDataAdapter.Fill(dataTable);
-                cmbCodigoCitas.DisplayMemberPath = "idCita";
-                cmbCodigoCitas.SelectedValuePath = "idCita";
-                cmbCodigoCitas.ItemsSource = dataTable.DefaultView;
-                ;
-            }
-        }
-
-        /// <summary>
-        /// Cargar el codigode la cita en el comboBox al seleccionar una consulta.
-        /// </summary>
-        private void CargarCodigoCitaSeleccionar(int idConsulta)
-        {
-            string query = @"SELECT CI.idCita 
-                            FROM [Consultas].[Consulta] C RIGHT JOIN [Consultas].[Cita] CI
-                            ON  C.idCita = CI.idCita
-                            WHERE CI.fechaCita >= CONVERT (date, GETDATE())";
-
-            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
-            sqlCommand.Parameters.AddWithValue("@idConsulta", idConsulta);
-
-            using (sqlDataAdapter)
-            {
-                DataTable dataTable = new DataTable();
-                sqlDataAdapter.Fill(dataTable);
-                cmbCodigoCitas.DisplayMemberPath = "idCita";
-                cmbCodigoCitas.SelectedValuePath = "idCita";
-                cmbCodigoCitas.ItemsSource = dataTable.DefaultView;
-                ;
-            }
-        }
-
-        /// <summary>
         /// Limpia todos los campos del formulario
         /// </summary>
         private void LimpiarFormulario()
@@ -286,7 +172,7 @@ namespace VitalCareRx
             cmbCodigoCitas.SelectedValue = null;
             seleccionado = false;
             btnReceta.Content = "Receta";
-            CargarCodigoCita();
+            consulta.CargarCodigoCita(cmbCodigoCitas);
             txtBuscar.Clear();
         }
 
@@ -315,15 +201,15 @@ namespace VitalCareRx
 
                 txtTemperatura.Text = rowSelected.Row["Temperatura"].ToString();
                 txtPresionArterial.Text = rowSelected.Row["Presion arterial"].ToString();
-                CargarCodigoCitaSeleccionar(Convert.ToInt32(rowSelected.Row["Codigo de consulta"]));
+                consulta.CargarCodigoCitaSeleccionar(Convert.ToInt32(rowSelected.Row["Codigo de consulta"]),cmbCodigoCitas);
                 cmbCodigoCitas.SelectedValue = rowSelected.Row["Codigo de cita"].ToString();
 
                 consulta.IdConsulta = Convert.ToInt32(rowSelected.Row["Codigo de consulta"]);
 
-                if (ValidarCrearRecetaMedica()) // si la consulta ya tiene una receta que capture el id de esa receta para posteriormente poder visualizar la receta de dicha consulta.
+                if (receta.ValidarCrearRecetaMedica(idConsulta)) // si la consulta ya tiene una receta que capture el id de esa receta para posteriormente poder visualizar la receta de dicha consulta.
                 {
                     btnReceta.Content = "Ver receta";
-                    idRecetaMedica = CapturarIdRecetaMedica();
+                    idRecetaMedica = consulta.CapturarIdRecetaMedica(idConsulta);
 
                 }
                 else
@@ -332,6 +218,7 @@ namespace VitalCareRx
                 }
 
                 
+
             }
 
             
@@ -360,7 +247,7 @@ namespace VitalCareRx
 
                                 MessageBox.Show("La consulta se ha modificado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                                MostrarConsultas();
+                                consulta.MostrarConsultas(dgConsultas);
                             }
                             else
                             {
@@ -398,126 +285,16 @@ namespace VitalCareRx
         //Buscar una consulta por nombre del paciente
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {
-            string query = @"SELECT CO.idConsulta 'Codigo de consulta',CONCAT(P.primerNombre, ' ', P.segundoNombre, ' ', P.primerApellido, ' ', P.segundoApellido)
-                            Paciente, CO.motivoConsulta Motivo, CO.diagnosticoConsulta Diagnostico, CO.temperatura Temperatura, CO.presionArterial AS 'Presion arterial',
-                            CONCAT(E.primerNombre, ' ', E.segundoNombre, ' ', E.primerApellido, ' ', E.segundoApellido) Empleado, CO.idCita 'Codigo de cita'
-                            FROM[Consultas].[Consulta] CO INNER JOIN[Consultas].[Cita] C
-                            ON CO.idCita = C.idCita
-                            INNER JOIN[Personas].[Paciente] P
-                            ON C.numeroIdentidad = P.numeroIdentidad
-                            INNER JOIN[Personas].[Empleado] E
-                            ON CO.idEmpleado = e.idEmpleado
-                            WHERE CONCAT(P.primerNombre, ' ', P.segundoApellido, ' ', P.primerApellido, ' ', P.segundoApellido) LIKE CONCAT('%', @nombrePaciente,'%')";
-
-
-            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
-            using (sqlDataAdapter)
-            {
-                sqlCommand.Parameters.AddWithValue("@nombrePaciente", txtBuscar.Text);
-
-                DataTable dataTable = new DataTable();
-
-                sqlDataAdapter.Fill(dataTable);
-
-                dgConsultas.ItemsSource = dataTable.DefaultView;
-
-                dgConsultas.IsReadOnly = true;
-
-            }
+            consulta.Buscar(txtBuscar.Text, dgConsultas);
         }
 
-        /// <summary>
-        ///Metodo que valida si la consulta tiene o no una receta.
-        /// </summary>
-        /// <returns>Boolean</returns>
-        public bool ValidarCrearRecetaMedica()
-        {
-            try
-            {
-                
-                string query = @"SELECT idConsulta FROM[Consultas].[Consulta] WHERE idConsulta IN(SELECT idConsulta FROM[Consultas].[RecetaMedica]) and idConsulta = @idConsulta";
-
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
-                using (sqlDataAdapter)
-                {
-                    sqlCommand.Parameters.AddWithValue("@idConsulta", idConsulta);
-
-                    DataTable dataTable = new DataTable();
-
-                    sqlDataAdapter.Fill(dataTable);
-
-                    
-
-                    if (dataTable.Rows.Count == 1) //Si devuelve una fila, es decir tiene una receta que retorne un true.
-                    {
-                        return true;
-                    }
-
-                    return false;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-
-        }
-
-        /// <summary>
-        /// Metodo para
-        /// </summary>
-        public void RecetaMedica()
-        {
-            if (!ValidarCrearRecetaMedica()) //Si la consulta no tiene una receta procede a crearle una.
-            {
-                try
-                {
-                    
-
-                    // Query de selección
-                    string query = @"INSERT INTO[Consultas].[RecetaMedica] VALUES(@idConsulta)";
-
-                    // Establecer la conexión
-                    sqlConnection.Open();
-
-                    // Crear el comando SQL
-                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-
-                    // Establecer los valores de los parámetros
-                    sqlCommand.Parameters.AddWithValue("@idConsulta", idConsulta);
-
-                    sqlCommand.ExecuteNonQuery();
-
-                    idRecetaMedica = CapturarIdRecetaMedica();
-
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
-                finally
-                {
-                    // Cerrar la conexión
-                    sqlConnection.Close();
-                }
-            }
-            
-            
-        }
-
+       
         private void btnReceta_Click(object sender, RoutedEventArgs e)
         {
             if (seleccionado)
             {
-                RecetaMedica();
+                receta.RecetaMedica(idConsulta,idRecetaMedica,consulta);
+                idRecetaMedica = consulta.CapturarIdRecetaMedica(idConsulta);
                 Recetas recetas = new Recetas(idConsulta,idRecetaMedica);
                 recetas.ShowDialog(); //ShowDialog perimte volver a ventana de consulta una vez se cierre la ventana de Recetas.
                 btnReceta.Content = "Ver receta";
@@ -540,8 +317,8 @@ namespace VitalCareRx
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
             LimpiarFormulario();
-            MostrarConsultas();
-           
+            consulta.MostrarConsultas(dgConsultas);
+
         }
 
         //Darle formato al data grid view

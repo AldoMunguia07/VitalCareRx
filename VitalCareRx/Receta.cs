@@ -158,5 +158,90 @@ namespace VitalCareRx
 
 
         }
+
+        /// <summary>
+        ///Metodo que valida si la consulta tiene o no una receta.
+        /// </summary>
+        /// <returns>Boolean</returns>
+        public bool ValidarCrearRecetaMedica(int idConsulta)
+        {
+            try
+            {
+
+                conexion.sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand("sp_RecetasMedicas", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    sqlCommand.Parameters.AddWithValue("@idConsulta", idConsulta);
+                    sqlCommand.Parameters.AddWithValue("@accion", "ValidarCrearRecetaMedica");
+
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    if (dataTable.Rows.Count == 1) //Si devuelve una fila, es decir tiene una receta que retorne un true.
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+            }
+
+        }
+
+        /// <summary>
+        /// Metodo para crear o visualizar una receta medica
+        /// </summary>
+        public void RecetaMedica(int idConsulta, int idRecetaMedica, Consulta consulta)
+        {
+            if (!ValidarCrearRecetaMedica(idConsulta)) //Si la consulta no tiene una receta procede a crearle una.
+            {
+                try
+                {
+
+
+                    conexion.sqlConnection.Open();
+
+                    SqlCommand sqlCommand = new SqlCommand("sp_RecetasMedicas", conexion.sqlConnection);
+
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                    // Establecer los valores de los parámetros
+                    sqlCommand.Parameters.AddWithValue("@idConsulta", idConsulta);
+                    sqlCommand.Parameters.AddWithValue("@accion", "InsertarReceta");
+                    sqlCommand.ExecuteNonQuery();
+
+                    idRecetaMedica = consulta.CapturarIdRecetaMedica(idConsulta);
+
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                finally
+                {
+                    // Cerrar la conexión
+                    conexion.sqlConnection.Close();
+                }
+            }
+
+
+        }
     }
 }
