@@ -35,7 +35,7 @@ namespace VitalCareRx
         private int codigoEmpleado, idRecetaMedica;
         private string nombreEmpleado;
         private bool seleccionado = false;
-
+        Validaciones validaciones = new Validaciones();
         private int idConsulta;
 
         public Consultas(int codigo, string empleado) // se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
@@ -349,35 +349,17 @@ namespace VitalCareRx
 
         private void txtTemperatura_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            try
-            {
-                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
-
-                if (caracter >= 48 && caracter <= 57 || caracter == 46) // Codigo ASCII 
-                    e.Handled = false;  // Permite 
-                else
-                    e.Handled = true; // Bloquea
-            }
-            catch (Exception)
-            {
-
-                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-         
+            validaciones.NumerosDecimales(e);
         }
 
         private void txtTemperatura_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Space) // No permite espacios
-                e.Handled = true; // Bloquea
-            base.OnPreviewKeyDown(e);
+            validaciones.ValidarEspacio(e);
         }
 
         private void txtPresionArterial_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Space) // No permite espacios
-                e.Handled = true; // Bloquea
-            base.OnPreviewKeyDown(e);
+            validaciones.ValidarEspacio(e);
 
         }
 
@@ -389,24 +371,15 @@ namespace VitalCareRx
 
                 if (txtPresionArterial.Text.Length >= 0 && txtPresionArterial.Text.Length < 3)
                 {
-                    if (caracter >= 48 && caracter <= 57) // Codigo ASCII 
-                        e.Handled = false;  // Permite 
-                    else
-                        e.Handled = true; // Bloquea
+                    validaciones.SoloNumeros(e);
                 }
                 else if (txtPresionArterial.Text.Length == 3)
                 {
-                    if (caracter == 47) // Codigo ASCII 
-                        e.Handled = false;  // Permite
-                    else
-                        e.Handled = true; // Bloquea
+                    validaciones.SoloPleca(e);
                 }
                 else if (txtPresionArterial.Text.Length >= 4 && txtPresionArterial.Text.Length < 7)
                 {
-                    if (caracter >= 48 && caracter <= 57) // Codigo ASCII 
-                        e.Handled = false;  // Permite 
-                    else
-                        e.Handled = true; // Bloquea
+                    validaciones.SoloNumeros(e);
                 }
                 else if (txtPresionArterial.Text.Length == 7)
                 {

@@ -30,7 +30,7 @@ namespace VitalCareRx
         private bool validarSeleccionado;
         private int codigoRecetaMedica;
         private int codigoFarmaco;
-        
+        Validaciones validaciones = new Validaciones();
 
         private Receta receta = new Receta();
 
@@ -416,45 +416,18 @@ namespace VitalCareRx
 
         private void rtxtDuracionTratamiento_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            try
-            {
-                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
-
-                if (caracter == 45) // Codigo ASCII 
-                    e.Handled = true;  // Permite 
-                else
-                    e.Handled = false; // Bloquea
-            }
-            catch (Exception)
-            {
-
-                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            validaciones.NoNegativo(e);
            
         }
 
         private void txtCantidad_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            try
-            {
-                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
-
-                if (caracter >= 48 && caracter <= 57) // Codigo ASCII 
-                    e.Handled = false;  // Permite 
-                else
-                    e.Handled = true; // Bloquea
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            validaciones.SoloNumeros(e);
         }
 
         private void txtCantidad_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Space) // No permite espacios
-                e.Handled = true; // Bloquea
-            base.OnPreviewKeyDown(e);
+            validaciones.ValidarEspacio(e);
         }
     }  
 }

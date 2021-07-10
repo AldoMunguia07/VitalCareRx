@@ -115,6 +115,7 @@
     <Compile Include="RecetasConsultaPaciente.xaml.cs">
       <DependentUpon>RecetasConsultaPaciente.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Validaciones.cs" />
     <Page Include="CitasPaciente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

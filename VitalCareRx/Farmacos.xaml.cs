@@ -28,6 +28,7 @@ namespace VitalCareRx
         private int codigoEmpleado;
         private string nombreEmpleado;
         private bool seleccionado = false;
+        Validaciones validaciones = new Validaciones();
 
         public Farmacos(int codigo, string empleado)// se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
                                                     //y nombre del empleado(Se usa para volver al menu principal).
@@ -317,37 +318,13 @@ namespace VitalCareRx
 
         private void txtDescripcionFarmaco_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            try
-            {
-                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
-                if (caracter >= 33 && caracter <= 47 || caracter == 64)
-                {
-                    e.Handled = true;
-                }
-
-            }
-            catch(Exception)
-            {
-                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            validaciones.CaracteresInecesarios(e);
             
         }
 
         private void rtxtIndicaciones_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            try
-            {
-                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
-                if (caracter >= 33 && caracter <= 47 || caracter == 64)
-                {
-                    e.Handled = true;
-                }
-
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            validaciones.CaracteresInecesarios(e);
         }
     }
 }

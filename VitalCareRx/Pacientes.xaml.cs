@@ -36,6 +36,7 @@ namespace VitalCareRx
         SqlConnection sqlConnection;
 
         Paciente paciente = new Paciente();
+        Validaciones validaciones = new Validaciones();
 
         public Pacientes(int codigo, string empleado)// se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
                                                      //y nombre del empleado(Se usa para volver al menu principal).
@@ -605,221 +606,95 @@ namespace VitalCareRx
 
         private void txtDni_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            try
-            {
-                if (e.Key == Key.Space) // No permite espacios
-                    e.Handled = true; // Bloquea
-                base.OnPreviewKeyDown(e);
-            }
-            catch
-            {
-                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-           
+            validaciones.ValidarEspacio(e);
         }
 
         private void txtDni_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            try
-            {
-                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
-
-                if (caracter >= 48 && caracter <= 57) // Codigo ASCII 
-                    e.Handled = false;  // Permite 
-                else
-                    e.Handled = true; // Bloquea
-            }
-            catch(Exception)
-            {
-                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+           
+            validaciones.SoloNumeros(e);
+            
+            
            
         }
 
         private void txtPrimerNombre_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Space) // No permite espacios
-                e.Handled = true; // Bloquea
-            base.OnPreviewKeyDown(e);
+            validaciones.ValidarEspacio(e);
         }
 
         private void txtPrimerNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
 
-            try
-            {
-                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
-
-                if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
-                   || (caracter == 241 || caracter == 209)) // Codigo ASCII
-                    e.Handled = false;  // Permite 
-                else
-                    e.Handled = true; // Bloquea
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            validaciones.Sololetras(e);
         
         }
 
         private void txtSegundoNombre_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Space) // No permite espacios
-                e.Handled = true; // Bloquea
-            base.OnPreviewKeyDown(e);
+            validaciones.ValidarEspacio(e);
         }
 
         private void txtSegundoNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            try
-            {
-                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
-
-                if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
-                   || (caracter == 241 || caracter == 209)) // Codigo ASCII 
-                    e.Handled = false;  // Permite 
-                else
-                    e.Handled = true; // Bloquea
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            validaciones.Sololetras(e);
         
         }
 
         private void txtPrimerApellido_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Space) // No permite espacios
-                e.Handled = true; // Bloquea
-            base.OnPreviewKeyDown(e);
+            validaciones.ValidarEspacio(e);
         }
 
         private void txtPrimerApellido_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            try
-            {
-                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
-
-                if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
-                    || (caracter == 241 || caracter == 209)) // Codigo ASCII 
-                    e.Handled = false;  // Permite 
-                else
-                    e.Handled = true; // Bloquea
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            
+            validaciones.Sololetras(e);
         }
 
         private void txtSegundoApellido_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Space) // No permite espacios
-                e.Handled = true; // Bloquea
-            base.OnPreviewKeyDown(e);
+            validaciones.ValidarEspacio(e);
         }
 
         private void txtSegundoApellido_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            try
-            {
-                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
-
-                if ((caracter >= 65 && caracter <= 90) || (caracter >= 97 && caracter <= 122)
-                    || (caracter == 241 || caracter == 209)) // Codigo ASCII 
-                    e.Handled = false;  // Permite 
-                else
-                    e.Handled = true; // Bloquea
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            validaciones.Sololetras(e);
         }
 
         private void txtCelular_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
 
-            try
-            {
-                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
-
-                if (caracter >= 48 && caracter <= 57) // Codigo ASCII 
-                    e.Handled = false;  // Permite 
-                else
-                    e.Handled = true; // Bloquea
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            validaciones.SoloNumeros(e);
           
         }
 
         private void txtCelular_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Space) // No permite espacios
-                e.Handled = true; // Bloquea
-            base.OnPreviewKeyDown(e);
+            validaciones.ValidarEspacio(e);
         }
 
   
 
         private void txtPeso_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            try
-            {
-                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
-
-                if (caracter >= 48 && caracter <= 57 || caracter == 46) // Codigo ASCII 
-                    e.Handled = false;  // Permite 
-                else
-                    e.Handled = true; // Bloquea
-            }
-            catch (Exception)
-            {
-
-                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
+            validaciones.NumerosDecimales(e);
          
         }
 
         private void txtEstatura_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Space) // No permite espacios
-                e.Handled = true; // Bloquea
-            base.OnPreviewKeyDown(e);
+            validaciones.ValidarEspacio(e);
         }
 
         private void txtEstatura_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
 
-            try
-            {
-                int caracter = Convert.ToInt32(Convert.ToChar(e.Text));
-
-                if (caracter >= 48 && caracter <= 57 || caracter == 46) // Codigo ASCII 
-                    e.Handled = false;  // Permite 
-                else
-                    e.Handled = true; // Bloquea
-            }
-            catch (Exception)
-            {
-
-                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-     
+            validaciones.NumerosDecimales(e);
         }
 
         private void txtPeso_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Space) // No permite espacios
-                e.Handled = true; // Bloquea
-            base.OnPreviewKeyDown(e);
+            validaciones.ValidarEspacio(e);
         }
     }
 }
