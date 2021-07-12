@@ -207,7 +207,7 @@ namespace VitalCareRx
                 seleccionado = true;
                 TextRange IndicacionesFarmaco = new TextRange(rtxtIndicaciones.Document.ContentStart, rtxtIndicaciones.Document.ContentEnd);
                 txtDescripcionFarmaco.Text = rowSelected.Row["Farmaco"].ToString();
-                IndicacionesFarmaco.Text = rowSelected.Row["Información del farmaco"].ToString();
+                IndicacionesFarmaco.Text = rowSelected.Row["Informacion del farmaco"].ToString();
                 farmaco.IdFarmaco = Convert.ToInt32(rowSelected.Row["Codigo Farmaco"]);
 
 
