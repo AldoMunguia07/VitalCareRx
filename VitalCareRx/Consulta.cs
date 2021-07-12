@@ -80,6 +80,45 @@ namespace VitalCareRx
             }
         }
 
+        public void MostrarConsultasPaciente(DataGrid dataGrid, int idPaciente)
+        {
+            conexion.sqlConnection.Open();
+
+            SqlCommand sqlCommand = new SqlCommand("sp_Consultas", conexion.sqlConnection);
+
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+
+            sqlCommand.Parameters.AddWithValue("@idPaciente", idPaciente);
+            sqlCommand.Parameters.AddWithValue("@accion", "MostrarConsultaPaciente");
+
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+            try
+            {
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    dataGrid.ItemsSource = dataTable.DefaultView;
+
+                    dataGrid.IsReadOnly = true; // El grid es de solo lectura.
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            finally
+            {
+                conexion.sqlConnection.Close();
+            }
+        }
+
 
         /// <summary>
         /// Metodo para crear una consulta.

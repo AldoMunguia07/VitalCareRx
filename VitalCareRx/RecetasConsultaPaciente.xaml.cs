@@ -27,58 +27,17 @@ namespace VitalCareRx
     /// </summary>
     public partial class RecetasConsultaPaciente : Window
     {
-        SqlConnection sqlConnection;
+
         private int consulta;
+        Receta receta = new Receta();
         public RecetasConsultaPaciente(int codigoConsulta) //Se recibe por paramtero el codigo de la consulta para ver la receta que le corresponde.
         {
             InitializeComponent();
-            string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
-            sqlConnection = new SqlConnection(connectionString);
+            
             consulta = codigoConsulta;
-            CargarRecetasAConsulta();
+            receta.MostrarFarmacos(gridRecetas,consulta);
         }
 
-        /// <summary>
-        /// Carga el data grid con las citas del paciente seleccionado.
-        /// </summary>
-        private void CargarRecetasAConsulta()
-        {
-            string query = @"SELECT DR.idRecetaMedica 'Codigo de receta', DR.idFarmaco 'Codigo de farmaco', DR.cantidad 'Cantidad',F.descripcionFarmaco 'Farmaco', 
-                            DR.duracionTratamiento 'Duracion', DR.indicaciones 'Indicacion'
-                            FROM [Consultas].[DetalleRecetaMedica] DR INNER JOIN [Consultas].[Farmaco] F
-                            ON DR.idFarmaco = F.idFarmaco
-                            INNER JOIN [Consultas].[RecetaMedica] R
-                            ON DR.idRecetaMedica = R.idRecetaMedica
-                            INNER JOIN [Consultas].[Consulta] C
-                            ON R.idConsulta = C.idConsulta
-                            WHERE C.idConsulta = @idConsulta";
-
-            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
-            sqlCommand.Parameters.AddWithValue("@idConsulta", consulta);
-
-            try
-            {
-                using (sqlDataAdapter)
-                {
-                    DataTable dataTable = new DataTable();
-
-                    sqlDataAdapter.Fill(dataTable);
-
-                    gridRecetas.ItemsSource = dataTable.DefaultView;
-                    gridRecetas.IsReadOnly = true; // El grid es de solo lectura.
-
-
-                }
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
         {

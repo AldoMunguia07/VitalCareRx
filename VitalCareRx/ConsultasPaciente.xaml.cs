@@ -27,60 +27,19 @@ namespace VitalCareRx
     public partial class ConsultasPaciente : Window
     {
         private int codigoConsulta;
-        private int idPaciente;
-        SqlConnection sqlConnection;
+        private int idPaciente;        
         private bool seleccionado = false;
+
+        Consulta consulta = new Consulta();
         public ConsultasPaciente(int codigoPaciente) //Se le pasa por parametro el id del paciente para ver las consultas correspondientes a dicho paciente.
         {
             InitializeComponent();
-            string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
-            sqlConnection = new SqlConnection(connectionString);
+            
             idPaciente = codigoPaciente;
-            CargarCitasPaciente();
+            consulta.MostrarConsultasPaciente(gridConsultas, idPaciente);
+            
         }
 
-        /// <summary>
-        /// Carga el data grid con las citas del paciente seleccionado.
-        /// </summary>
-        private void CargarCitasPaciente()
-        {
-            string query = @"SELECT CO.idConsulta 'Codigo de consulta', CO.motivoConsulta Motico, CO.diagnosticoConsulta Diagnostico, CO.temperatura Temperatura,
-                            CO.presionArterial AS 'Presion arterial',CONCAT(E.primerNombre, ' ', E.segundoNombre, ' ', E.primerApellido, ' ', E.segundoApellido) Empleado, 
-                            CO.idCita 'Codigo de cita'
-                            FROM [Consultas].[Consulta] CO INNER JOIN [Consultas].[Cita] C
-                            ON CO.idCita = C.idCita
-                            INNER JOIN [Personas].[Paciente] P
-                            ON C.idPaciente = P.idPaciente
-                            INNER JOIN [Personas].[Empleado] E
-                            ON CO.idEmpleado = e.idEmpleado
-                            WHERE P.idPaciente = @idPaciente";
-
-            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
-            sqlCommand.Parameters.AddWithValue("@idPaciente", idPaciente);
-
-            try
-            {
-                using (sqlDataAdapter)
-                {
-                    DataTable dataTable = new DataTable();
-
-                    sqlDataAdapter.Fill(dataTable);
-
-                    gridConsultas.ItemsSource = dataTable.DefaultView;
-                    gridConsultas.IsReadOnly = true; // El grid es de solo lectura.
-
-
-                }
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
         {

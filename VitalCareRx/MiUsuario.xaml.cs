@@ -25,7 +25,7 @@ namespace VitalCareRx
     /// </summary>
     public partial class MiUsuario : Window
     {
-        SqlConnection sqlConnection;
+        
         private int codigoEmpleado;
         private string NameEmpleado;
 
@@ -37,9 +37,7 @@ namespace VitalCareRx
         public MiUsuario(int empleado)// se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
                                       
         {
-            InitializeComponent();
-            string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
-            sqlConnection = new SqlConnection(connectionString);
+            InitializeComponent();           
             codigoEmpleado = empleado;
             miUsuario.CargarTextBox(codigoEmpleado, txtUsuario, txtPassword, txtPrimerNombre, txtSegundoNombre, txtPrimerApellido, txtSegundoApellido, txtCelular, cmbSexo);
             LlenarComboBox.CargarComboBoxSexo(cmbSexo);
@@ -113,52 +111,6 @@ namespace VitalCareRx
             }
             return false;
         }
-
-
-        /// <summary>
-        /// Metodo para validar si existe o no un usuario.
-        /// </summary>
-        /// <returns></returns>
-       /* public bool ExisteUsuario()
-        {
-            try
-            {
-
-                string query = @"SELECT nombreUsuario FROM [Personas].[Empleado] WHERE [nombreUsuario] = @user";
-
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
-                using (sqlDataAdapter)
-                {
-                    sqlCommand.Parameters.AddWithValue("@user", txtUsuario.Text);
-
-                    DataTable dataTable = new DataTable();
-
-                    sqlDataAdapter.Fill(dataTable);
-
-
-
-                    if (dataTable.Rows.Count == 1) //Si el usuario existe retorna un true
-                    {
-                        return true;
-                    }
-
-                    return false;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-
-        }*/
-
-
-
-
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {

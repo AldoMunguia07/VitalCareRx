@@ -23,7 +23,7 @@ namespace VitalCareRx
     /// </summary>
     public partial class Farmacos : Window
     {
-        SqlConnection sqlConnection;
+       
         private Farmaco farmaco = new Farmaco();
         private int codigoEmpleado;
         private string nombreEmpleado;
@@ -36,11 +36,7 @@ namespace VitalCareRx
             InitializeComponent();
             //Variables miembro
             codigoEmpleado = codigo;
-            nombreEmpleado = empleado;
-
-            string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
-            sqlConnection = new SqlConnection(connectionString);
-
+            nombreEmpleado = empleado;           
             farmaco.MostrarFarmaco(dgFarmacos);
         }
 
@@ -51,40 +47,6 @@ namespace VitalCareRx
             this.Close();
         }
 
-        /*
-        /// <summary>
-        /// Trae todas las consultas de la base de datos al inicial el programa.
-        /// </summary>
-        public void MostrarFarmaco()
-        {
-            string query = @"SELECT idFarmaco as 'Codigo Farmaco', descripcionFarmaco as 'Farmaco', informacionPrecaucion as 'Información del farmaco' FROM [Consultas].[Farmaco]";
-            ;
-
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
-
-            try
-            {
-                using (sqlDataAdapter)
-                {
-                    DataTable dataTable = new DataTable();
-
-                    sqlDataAdapter.Fill(dataTable);
-
-                    dgFarmacos.ItemsSource = dataTable.DefaultView;
-
-                    dgFarmacos.IsReadOnly = true; // El grid es de solo lectura.
-
-
-                }
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        */
 
 
         /// <summary>
@@ -255,33 +217,9 @@ namespace VitalCareRx
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            /*string query = @"SELECT idFarmaco as 'Codigo Farmaco', descripcionFarmaco as 'Farmaco', informacionPrecaucion as 'Información del farmaco' FROM [Consultas].[Farmaco] WHERE descripcionFarmaco LIKE CONCAT('%', @nombreFarmaco, '%')";
-
-
-            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
-            using (sqlDataAdapter)
-            {
-                sqlCommand.Parameters.AddWithValue("@nombreFarmaco", txtBuscarFarmaco.Text);
-
-                DataTable dataTable = new DataTable();
-
-                sqlDataAdapter.Fill(dataTable);
-
-                dgFarmacos.ItemsSource = dataTable.DefaultView;
-
-                dgFarmacos.IsReadOnly = true; // El grid es de solo lectura.
-
-            } */
-
             farmaco.BuscarFarmaco(txtBuscarFarmaco.Text, dgFarmacos);
         }
 
-
-
-       
 
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {

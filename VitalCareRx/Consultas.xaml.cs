@@ -29,7 +29,7 @@ namespace VitalCareRx
     public partial class Consultas : Window
     {
 
-        SqlConnection sqlConnection;
+        
         private Consulta consulta = new Consulta();
         private Receta receta = new Receta();
         private int codigoEmpleado, idRecetaMedica;
@@ -47,11 +47,7 @@ namespace VitalCareRx
             //Variables miembro
 
             codigoEmpleado = codigo;
-            nombreEmpleado = empleado;
-            string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
-
-            sqlConnection = new SqlConnection(connectionString);
-
+            nombreEmpleado = empleado;          
             consulta.MostrarConsultas(dgConsultas);
             LlenarComboBox.CargarCodigoCita(cmbCodigoCitas);
 

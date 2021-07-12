@@ -24,16 +24,14 @@ namespace VitalCareRx
     {
         //variables miembro
         private Empleado empleado = new Empleado();
-        SqlConnection sqlConnection;
+       
 
         Validaciones validaciones = new Validaciones();
         LlenarComboBox LlenarComboBox = new LlenarComboBox();
         public NuevoEmpleado()
         {
 
-            InitializeComponent();
-            string connectionString = ConfigurationManager.ConnectionStrings["VitalCareRx.Properties.Settings.VitalCareRxConnectionString"].ConnectionString;
-            sqlConnection = new SqlConnection(connectionString);
+            InitializeComponent();            
             LlenarComboBox.CargarComboBoxSexo(cmbSexo);
             
         }
