@@ -26,29 +26,29 @@
             </Button>
 
 
-            <RichTextBox Name="rtxtMotivoConsulta"  HorizontalAlignment="Left" Height="68" Margin="10,103,0,0" VerticalAlignment="Top" Width="255" Background="White">
+            <RichTextBox Name="rtxtMotivoConsulta"  HorizontalAlignment="Left" Height="68" Margin="14,107,0,0" VerticalAlignment="Top" Width="255" Background="White">
                 <FlowDocument>
                     <Paragraph>
                         <Run Text=""/>
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
-            <RichTextBox Name="rtxtDiagnostico" HorizontalAlignment="Left" Height="74" Margin="10,237,0,0" VerticalAlignment="Top" Width="255" Background="White">
+            <RichTextBox Name="rtxtDiagnostico" HorizontalAlignment="Left" Height="74" Margin="14,241,0,0" VerticalAlignment="Top" Width="255" Background="White">
                 <FlowDocument>
                     <Paragraph>
                         <Run Text=""/>
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
-            <Label Background="#1c1c1c" Content="Temperatura" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,339,0,229" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="282" RenderTransformOrigin="0.612,0.375" HorizontalContentAlignment="Center" />
-            <TextBox Name="txtTemperatura" PreviewKeyDown="txtTemperatura_PreviewKeyDown" PreviewTextInput="txtTemperatura_PreviewTextInput" Background="White" HorizontalAlignment="Left" Height="37" Margin="10,376,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="255" FontSize="20"/>
-            <Label Background="#1c1c1c" Content="Presión arterial" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-1,443,0,125" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="283" RenderTransformOrigin="0.612,0.375" HorizontalContentAlignment="Center"/>
-            <TextBox Name="txtPresionArterial" ToolTip="Ejemplo de entrada: 120/80" PreviewKeyDown="txtPresionArterial_PreviewKeyDown" PreviewTextInput="txtPresionArterial_PreviewTextInput" Background="White" HorizontalAlignment="Left" Height="37" Margin="12,484,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="255" FontSize="20"/>
-            <Label Background="#1c1c1c" Content="Diagnóstico de la consulta" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,191,0,359" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="283" RenderTransformOrigin="0.612,0.375"/>
-            <Label Background="#1c1c1c" Content="Motivo de la consulta" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,66,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="283" HorizontalContentAlignment="Center" />
+            <Label Background="#1c1c1c" Content="Temperatura" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,339,0,223" FontSize="20" Foreground="White" FontFamily="Verdana" Height="38" Width="285" RenderTransformOrigin="0.612,0.375" HorizontalContentAlignment="Center" />
+            <TextBox Name="txtTemperatura" PreviewKeyDown="txtTemperatura_PreviewKeyDown" PreviewTextInput="txtTemperatura_PreviewTextInput" Background="White" HorizontalAlignment="Left" Height="37" Margin="14,382,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="255" FontSize="20"/>
+            <Label Background="#1c1c1c" Content="Presión arterial" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,443,0,126" FontSize="20" Foreground="White" FontFamily="Verdana" Height="31" Width="285" RenderTransformOrigin="0.612,0.375" HorizontalContentAlignment="Center"/>
+            <TextBox Name="txtPresionArterial" ToolTip="Ejemplo de entrada: 120/80" PreviewKeyDown="txtPresionArterial_PreviewKeyDown" PreviewTextInput="txtPresionArterial_PreviewTextInput" Background="White" HorizontalAlignment="Left" Height="37" Margin="14,481,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="255" FontSize="20"/>
+            <Label Background="#1c1c1c" Content="Diagnóstico de la consulta" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,200,0,369" FontSize="20" Foreground="White" FontFamily="Verdana" Height="31" Width="285" RenderTransformOrigin="0.612,0.375"/>
+            <Label Background="#1c1c1c" Content="Motivo de la consulta" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,66,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="285" HorizontalContentAlignment="Center" />
         </Grid>
         <DataGrid Name="dgConsultas" HorizontalAlignment="Left" Height="324" Margin="10,76,0,0" VerticalAlignment="Top" Width="1100" SelectionChanged="dgConsultas_SelectionChanged" AutoGeneratingColumn="dgConsultas_AutoGeneratingColumn" />
-        <Label Content="Listado de consultas" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,15,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="1110" HorizontalContentAlignment="Center" Height="39" >
+        <Label Content="Listado de consultas" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,15,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="1115" HorizontalContentAlignment="Center" Height="39" >
             <Label.Background>
 
                 <LinearGradientBrush>
