@@ -65,7 +65,7 @@
                 <ListViewItem Name="ltFarmacos" Height="60" Selected="ltFarmacos_Selected" Width="258">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="BottleTonicPlus" Height="30" Width="30" />
-                        <TextBlock Text="Farmacos" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                        <TextBlock Text="Fármacos" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Name="ltUsuario" Height="60" Selected="ltUsuario_Selected">

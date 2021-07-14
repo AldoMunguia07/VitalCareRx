@@ -34,7 +34,7 @@
             <TextBox Name="txtPassword" Height="33" materialDesign:HintAssist.Hint="CONTRASEÑA"  RenderTransformOrigin="0.494,2.135" Margin="15,62,64,86" FontFamily="Champagne &amp; Limousines" FontSize="18" Visibility="Hidden" Grid.Row="1" />
 
         </Grid>
-        <Button Name="btnLogin" Width="150" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="116,0,92,65" Content="LOGIN" Grid.ColumnSpan="2" Click="Button_Click">
+        <Button Name="btnLogin" Width="150" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="116,0,92,65" Content="INGRESAR" Grid.ColumnSpan="2" Click="Button_Click">
             <Button.Background>
                 <LinearGradientBrush>
 

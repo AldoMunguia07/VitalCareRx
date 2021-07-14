@@ -38,7 +38,7 @@
          
         IsIndeterminate="True" Maximum="30" Name="BAR" Height="Auto" Margin="110,186,98,121" Width="Auto" />
         <Label FontFamily="Microsoft Sans Serif"  Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="153,242,0,0" Height="52" Width="92" FontSize="30" Name="lbLoad" />
-        <Label FontWeight="Black"  FontFamily="Microsoft Sans Serif" Content="Loading..."  Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="108,424,0,0" Height="48" Width="150" FontSize="30" />
+        <Label FontWeight="Black"  FontFamily="Microsoft Sans Serif" Content="Cargando..."  Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="108,424,0,0" Height="48" Width="181" FontSize="30" />
 
     </Grid>
 </Window>

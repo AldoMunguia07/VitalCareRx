@@ -6,11 +6,16 @@
         xmlns:local="clr-namespace:VitalCareRx"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Icon="IMAGENES/ImagendeIcono.png"  Height="590" Width="774" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown"
+        Title="MainWindow" Icon="IMAGENES/ImagendeIcono.png"  Height="590" Width="980
+        " WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown"
         MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp">
     <Grid>
-        <Image Source="IMAGENES/PrimeroDios.png" Height="121" VerticalAlignment="Top" Margin="0,461,586,0" RenderTransformOrigin="0.5,0.5"/>
-        <Grid HorizontalAlignment="Left" Height="590" Margin="491,0,0,0" VerticalAlignment="Top" Width="283">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="47*"/>
+            <ColumnDefinition Width="30*"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="IMAGENES/PrimeroDios.png" Height="122" VerticalAlignment="Top" Margin="215.5,460,174,0" RenderTransformOrigin="0.5,0.5" Grid.Column="1"/>
+        <Grid HorizontalAlignment="Left" Height="590" Margin="64,0,-8,0" VerticalAlignment="Top" Width="326" Grid.Column="1">
 
             <Grid.Background>
 
@@ -20,20 +25,20 @@
 
                 </LinearGradientBrush>
             </Grid.Background>
-            <Button Name="btnCerrar" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Red"  Margin="235,0,0,544" Click="btnCerrar_Click">
+            <Button Name="btnCerrar" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Red"  Margin="252,0,0,551" Click="btnCerrar_Click">
                 <materialDesign:PackIcon Kind="CloseCircleOutline" Height="30" Width="30" RenderTransformOrigin="0.352,0.42" />
             </Button>
-            <ComboBox Name="cmbFarmacos" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" Width="255" Height="30" Background="White"/>
-            <TextBox Name="txtCantidad" PreviewTextInput="txtCantidad_PreviewTextInput" PreviewKeyDown="txtCantidad_PreviewKeyDown" Background="White" FontSize="15" HorizontalAlignment="Left" Height="30" Margin="10,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="255"/>
+            <ComboBox Name="cmbFarmacos" HorizontalAlignment="Left" Margin="33,94,0,0" VerticalAlignment="Top" Width="255" Height="30" Background="White"/>
+            <TextBox Name="txtCantidad" PreviewTextInput="txtCantidad_PreviewTextInput" PreviewKeyDown="txtCantidad_PreviewKeyDown" Background="White" FontSize="15" HorizontalAlignment="Left" Height="30" Margin="33,196,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="255"/>
 
-            <RichTextBox Name="rtxtDuracionTratamiento" PreviewTextInput="rtxtDuracionTratamiento_PreviewTextInput" HorizontalAlignment="Left" Height="75" Margin="10,256,0,0" VerticalAlignment="Top" Width="255" Background="White">
+            <RichTextBox Name="rtxtDuracionTratamiento" PreviewTextInput="rtxtDuracionTratamiento_PreviewTextInput" HorizontalAlignment="Left" Height="75" Margin="33,294,0,0" VerticalAlignment="Top" Width="255" Background="White">
                 <FlowDocument>
                     <Paragraph>
                         <Run Text=""/>
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
-            <RichTextBox Name = "rtxtIndicaciones" HorizontalAlignment="Left" Height="84" Margin="10,384,0,0" VerticalAlignment="Top" Width="255" Background="White">
+            <RichTextBox Name = "rtxtIndicaciones" HorizontalAlignment="Left" Height="76" Margin="33,418,0,0" VerticalAlignment="Top" Width="255" Background="White">
                 <FlowDocument>
                     <Paragraph>
                         <Run Text=""/>
@@ -41,14 +46,22 @@
                 </FlowDocument>
             </RichTextBox>
 
-            <Label Background="#1c1c1c" Content="Duración tratamiento" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,215,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="283" Height="36"/>
-            <Label Background="#1c1c1c" Content="Farmacos" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,42,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="283" Height="34"/>
-            <Button Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="82,485,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="-0.242,0.544" Click="btnModificar_Click"/>
-            <Label Background="#1c1c1c" Content="Cantidad de fármaco" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,127,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="283" Height="38"/>
+            <Label Background="#1c1c1c" Content="Duración tratamiento" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,247,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="345" Height="36"/>
+            <Label Background="#1c1c1c" Content="Fármacos" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,44,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="326" Height="28"/>
+
+            <Label Background="#1c1c1c" Content="Cantidad de fármaco" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,145,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="326" Height="33"/>
         </Grid>
-        <DataGrid Name = "dgRecetas" HorizontalAlignment="Left" Height="306" Margin="10,99,0,0" VerticalAlignment="Top" Width="463" SelectionChanged="dgRecetas_SelectionChanged"/>
-        <Label Background="#1c1c1c" Content="Indicaciónes" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="495,346,0,212" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="279" RenderTransformOrigin="0.612,0.375"/>
-        <Label Content="Listado de fármacos" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,62,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="463">
+        <DataGrid Name = "dgRecetas" HorizontalAlignment="Left" Height="285" Margin="8,99,0,0" VerticalAlignment="Top" Width="644" SelectionChanged="dgRecetas_SelectionChanged" Grid.ColumnSpan="2"/>
+        <Label Background="#1c1c1c" Content="Indicaciones" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="64,379,-8,181" FontSize="20" Foreground="White" FontFamily="Verdana" Height="30" Width="326" RenderTransformOrigin="0.612,0.375" Grid.Column="1"/>
+        <Label Content="Listado de fármacos" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1,41,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="661" RenderTransformOrigin="0.5,0.5" Height="36" Grid.ColumnSpan="2">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.111"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
             <Label.Background>
 
                 <LinearGradientBrush>
@@ -59,8 +72,9 @@
 
             </Label.Background>
         </Label>
-
-        <Button Name = "btnAñadir" Content="Añadir" HorizontalAlignment="Left" Margin="119,417,0,0" VerticalAlignment="Top" Width="110" Click="btnAñadir_Click">
+        <Button Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="278,482,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="-0.242,0.544" Click="btnModificar_Click"/>
+        <materialDesign:PackIcon Kind="BookEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="278,482,0,0" />
+        <Button Name = "btnAñadir" Content="Añadir" HorizontalAlignment="Left" Margin="50,482,0,0" VerticalAlignment="Top" Width="110" Click="btnAñadir_Click">
             <Button.Background>
                 <LinearGradientBrush>
 
@@ -69,7 +83,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Name = "btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="262,417,0,0" VerticalAlignment="Top" Width="109" Click="btnEliminar_Click">
+        <Button Name = "btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="496,482,0,0" VerticalAlignment="Top" Width="110" Click="btnEliminar_Click" Grid.ColumnSpan="2">
             <Button.Background>
                 <LinearGradientBrush>
 
@@ -78,11 +92,10 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <materialDesign:PackIcon Kind="SquareEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="119,417,0,0" />
-        <materialDesign:PackIcon Kind="BookEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="575,487,0,0" />
-        <materialDesign:PackIcon Kind="DeleteCircle" Height="32" Width="24" Foreground="#FFF" Margin="262,417,0,0" />
+        <materialDesign:PackIcon Kind="SquareEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="50,482,0,0" />
+        <materialDesign:PackIcon Kind="DeleteCircle" Height="32" Width="24" Foreground="#FFF" Margin="496,482,0,0" />
 
-        <Button Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="575,536,0,0" VerticalAlignment="Top" Width="109" Click="btnLimpiar_Click">            <Button.Background>                <LinearGradientBrush>                    <GradientStop Color="#1c1c1c" Offset="1"/>                    <GradientStop Color="CadetBlue" Offset="0.5"/>                </LinearGradientBrush>            </Button.Background>        </Button>        <materialDesign:PackIcon Kind="TextBoxMinus" Height="32" Width="27" Foreground="#FFF" Margin="575,536,0,0" />
+        <Button Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="166,525,0,0" VerticalAlignment="Top" Width="108" Click="btnLimpiar_Click" Grid.Column="1"/>        <materialDesign:PackIcon Kind="TextBoxMinus" Height="32" Width="26" Foreground="#FFF" Margin="166,525,0,0" Grid.Column="1" />
 
 
     </Grid>
