@@ -115,7 +115,7 @@
         <TextBox Name="txtEstatura" PreviewKeyDown="txtEstatura_PreviewKeyDown" PreviewTextInput="txtEstatura_PreviewTextInput" Background="White" HorizontalAlignment="Left" Height="23" Margin="466,34,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Grid.Column="1"/>
         <ComboBox Name="cmbTipoSangre" Background="White" HorizontalAlignment="Left" Margin="466,153,0,0" VerticalAlignment="Top" Width="150" Grid.Column="1"/>
         <ComboBox Name="cmbSexo" Background="White" HorizontalAlignment="Left" Margin="466,215,0,0" VerticalAlignment="Top" Width="150" Grid.Column="1" RenderTransformOrigin="0.533,1"/>
-        <DataGrid Name="gridPacientes" HorizontalAlignment="Left" Height="196" Margin="0,326,0,0" VerticalAlignment="Top" Width="1415" Grid.ColumnSpan="2" Loaded="gridPacientes_Loaded" SelectionChanged="gridPacientes_SelectionChanged" AutoGeneratingColumn="gridPacientes_AutoGeneratingColumn"/>
+        <DataGrid Name="gridPacientes" HorizontalAlignment="Left" Height="196" Margin="10,326,0,0" VerticalAlignment="Top" Width="1395" Grid.ColumnSpan="2" Loaded="gridPacientes_Loaded" SelectionChanged="gridPacientes_SelectionChanged" AutoGeneratingColumn="gridPacientes_AutoGeneratingColumn"/>
         <TextBox Name="txtBuscar" HorizontalAlignment="Left" Height="34" Margin="140,266,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="249"/>
         <materialDesign:PackIcon Kind="AccountSearchOutline" Height="42" Width="30" Foreground="#FFF" Margin="25,261,0,0" RenderTransformOrigin="0.658,0.54" >
             <materialDesign:PackIcon.RenderTransform>

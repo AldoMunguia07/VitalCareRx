@@ -33,7 +33,7 @@
             </RichTextBox>
             <TextBox PreviewTextInput="txtDescripcionFarmaco_PreviewTextInput" Name="txtDescripcionFarmaco" Background="White" HorizontalAlignment="Left" Height="30" Margin="20,168,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="255" FontSize="18"/>
         </Grid>
-        <DataGrid SelectionChanged="dgFarmacos_SelectionChanged" Name="dgFarmacos" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="336" Margin="10,97,0,0" VerticalAlignment="Top" Width="721"/>
+        <DataGrid SelectionChanged="dgFarmacos_SelectionChanged" Name="dgFarmacos" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="336" Margin="8,97,0,0" VerticalAlignment="Top" Width="716"/>
         <Label Background="#1c1c1c" Content="Descripción fármaco" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="731,109,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="293" Height="39"/>
         <Label Background="#1c1c1c" Content="Información del fármaco" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="731,253,0,315" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="293" RenderTransformOrigin="0.612,0.375"/>
         <Label Content="Listado de fármacos" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,33,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="731" HorizontalContentAlignment="Center">
@@ -47,8 +47,8 @@
 
             </Label.Background>
         </Label>
-        <TextBox Name="txtBuscarFarmaco" HorizontalAlignment="Left" Height="33" Margin="266,496,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139" />
-        <Button Name="btnAgregar" Content="Añadir" HorizontalAlignment="Left" Margin="183,451,0,0" VerticalAlignment="Top" Width="110" Click="btnAgregar_Click">
+        <TextBox Name="txtBuscarFarmaco" HorizontalAlignment="Left" Height="33" Margin="274,504,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139" />
+        <Button Name="btnAgregar" Content="Añadir" HorizontalAlignment="Left" Margin="183,463,0,0" VerticalAlignment="Top" Width="110" Click="btnAgregar_Click">
             <Button.Background>
                 <LinearGradientBrush>
 
@@ -57,8 +57,8 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="398,449,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="-0.242,0.544" Click="btnModificar_Click"/>
-        <Button Name="btnBuscar" Content="Buscar" HorizontalAlignment="Left" Margin="285,534,0,0" VerticalAlignment="Top" Width="110" Click="Button_Click">
+        <Button Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="398,461,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="-0.242,0.544" Click="btnModificar_Click"/>
+        <Button Name="btnBuscar" Content="Buscar" HorizontalAlignment="Left" Margin="291,542,0,0" VerticalAlignment="Top" Width="110" Click="Button_Click">
             <Button.Background>
                 <LinearGradientBrush>
 
@@ -67,7 +67,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <materialDesign:PackIcon Kind="SquareEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="183,449,0,0" RenderTransformOrigin="0.5,0.5" >
+        <materialDesign:PackIcon Kind="SquareEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="183,461,0,0" RenderTransformOrigin="0.5,0.5" >
             <materialDesign:PackIcon.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -77,8 +77,8 @@
                 </TransformGroup>
             </materialDesign:PackIcon.RenderTransform>
         </materialDesign:PackIcon>
-        <materialDesign:PackIcon Kind="BookEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="398,451,0,0" />
-        <materialDesign:PackIcon Kind="FeatureSearchOutline" Height="32" Width="24" Foreground="#FFF" Margin="285,534,0,0" />
+        <materialDesign:PackIcon Kind="BookEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="398,463,0,0" />
+        <materialDesign:PackIcon Kind="FeatureSearchOutline" Height="32" Width="24" Foreground="#FFF" Margin="291,542,0,0" />
 
         <Button Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="828,494,0,0" VerticalAlignment="Top" Width="109" Click="btnLimpiar_Click"/>        <materialDesign:PackIcon Kind="TextBoxMinus" Height="32" Width="27" Foreground="#FFF" Margin="828,494,0,0" />
 

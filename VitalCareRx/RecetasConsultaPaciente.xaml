@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="RecetasConsultaPaciente" Icon="IMAGENES/ImagendeIcono.png" Height="557" Width="774" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="Manual" MouseDown="Window_MouseDown"
-        MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp"> 
+        MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp">
     <Grid Margin="0,0,0,2">
         <Image Source="IMAGENES/PrimeroDios.png" Height="104" VerticalAlignment="Top" Margin="272,428,334,0" RenderTransformOrigin="0.5,0.5"/>
 
@@ -39,7 +39,7 @@
 
 
         </Grid>
-        <DataGrid Name="gridRecetas" HorizontalAlignment="Left" Height="347" Margin="0,72,0,0" VerticalAlignment="Top" Width="697"/>
+        <DataGrid Name="gridRecetas" HorizontalAlignment="Left" Height="351" Margin="12,72,0,0" VerticalAlignment="Top" Width="687"/>
 
 
         <Label Content="Listado de recetas" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,30,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="712" HorizontalContentAlignment="Center">

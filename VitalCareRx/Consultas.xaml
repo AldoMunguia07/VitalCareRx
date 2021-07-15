@@ -40,7 +40,7 @@
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
-            <Label Background="#1c1c1c" Content="Temperatura" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,339,0,223" FontSize="20" Foreground="White" FontFamily="Verdana" Height="38" Width="285" RenderTransformOrigin="0.612,0.375" HorizontalContentAlignment="Center" />
+            <Label Background="#1c1c1c" Content="Temperatura" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,339,0,223" FontSize="20" Foreground="White" FontFamily="Verdana" Height="31" Width="285" RenderTransformOrigin="0.612,0.375" HorizontalContentAlignment="Center" />
             <TextBox Name="txtTemperatura" PreviewKeyDown="txtTemperatura_PreviewKeyDown" PreviewTextInput="txtTemperatura_PreviewTextInput" Background="White" HorizontalAlignment="Left" Height="37" Margin="14,382,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="255" FontSize="20"/>
             <Label Background="#1c1c1c" Content="Presión arterial" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,443,0,126" FontSize="20" Foreground="White" FontFamily="Verdana" Height="31" Width="285" RenderTransformOrigin="0.612,0.375" HorizontalContentAlignment="Center"/>
             <TextBox Name="txtPresionArterial" ToolTip="Ejemplo de entrada: 120/80" PreviewKeyDown="txtPresionArterial_PreviewKeyDown" PreviewTextInput="txtPresionArterial_PreviewTextInput" Background="White" HorizontalAlignment="Left" Height="37" Margin="14,481,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="255" FontSize="20"/>

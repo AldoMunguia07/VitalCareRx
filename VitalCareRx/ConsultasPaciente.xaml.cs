@@ -43,7 +43,12 @@ namespace VitalCareRx
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+
+            MessageBoxResult result = MessageBox.Show("¿Desea regresar al formulario anterior?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                this.Close();
+            }
         }
 
         //Evento para capturar el ide la consulta

@@ -102,9 +102,13 @@ namespace VitalCareRx
         // Al cerrar el formulario que regrese a el Login.
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
         {
-            Login login = new Login();
-            login.Show();
-            this.Close();
+            MessageBoxResult result = MessageBox.Show("¿Desea regresar al inicio de sesión?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                Login login = new Login();
+                login.Show();
+                this.Close();
+            }
         }
 
         /// <summary>
