@@ -90,11 +90,15 @@ namespace VitalCareRx
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBox.Show("¿Desea regresar al menú principal?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                NameEmpleado = String.Format("{0} {1}", miUsuario.PrimerNombre, miUsuario.PrimerApellido); // Se pasa por parametro el nuevo nombre de usuario actualizado o se queda con el actual en caso de
+                MenuPrincipal menu = new MenuPrincipal(NameEmpleado, codigoEmpleado);                      // que no los haya actualizado
+                menu.Show();
+                this.Close();
+            }
             
-            NameEmpleado = String.Format("{0} {1}", miUsuario.PrimerNombre, miUsuario.PrimerApellido); // Se pasa por parametro el nuevo nombre de usuario actualizado o se queda con el actual en caso de
-            MenuPrincipal menu = new MenuPrincipal(NameEmpleado, codigoEmpleado);                      // que no los haya actualizado
-            menu.Show();
-            this.Close();
         }
 
         /// <summary>

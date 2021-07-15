@@ -306,9 +306,14 @@ namespace VitalCareRx
 
         private void ButtonFechar_Click(object sender, RoutedEventArgs e)
         {
-            MenuPrincipal menu = new MenuPrincipal(nombreEmpleado, codigoEmpleado); // Se regresa al menu principal con los datos del usuario actual.
-            menu.Show();
-            this.Close();
+            MessageBoxResult result = MessageBox.Show("¿Desea regresar al menú principal?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                MenuPrincipal menu = new MenuPrincipal(nombreEmpleado, codigoEmpleado); // Se regresa al menu principal con los datos del usuario actual.
+                menu.Show();
+                this.Close();
+            }
+            
         }
 
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
