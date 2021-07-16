@@ -128,43 +128,7 @@ namespace VitalCareRx
 
         }
 
-        /// <summary>
-        /// Carga los codigos de las citas del dia de hoy.
-        /// </summary>
-        public void CargarCodigoCita(ComboBox comboBox)
-        {
-            try
-            {
-                conexion.sqlConnection.Open();
-
-                SqlCommand sqlCommand = new SqlCommand("sp_LlenarComboBox", conexion.sqlConnection);
-
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-
-                sqlCommand.Parameters.AddWithValue("@accion", "CargarCodigoCita");
-
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
-                using (sqlDataAdapter)
-                {
-                    DataTable dataTable = new DataTable();
-                    sqlDataAdapter.Fill(dataTable);
-                    comboBox.DisplayMemberPath = "idCita";
-                    comboBox.SelectedValuePath = "idCita";
-                    comboBox.ItemsSource = dataTable.DefaultView;
-                    ;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                conexion.sqlConnection.Close();
-            }
-
-        }
+       
 
         /// <summary>
         /// Cargar el codigode la cita en el comboBox al seleccionar una consulta.

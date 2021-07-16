@@ -13,26 +13,20 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-
-
-
 namespace VitalCareRx
 {
     /// <summary>
-    /// Lógica de interacción para MenuPrincipal.xaml
+    /// Lógica de interacción para MenuPrincipalAdmin.xaml
     /// </summary>
-    public partial class MenuPrincipal : Window
+    public partial class MenuPrincipalAdmin : Window
     {
 
-        
-
         Empleado miEmpleado = new Empleado();
-        public MenuPrincipal(Empleado empleado)
+        public MenuPrincipalAdmin(Empleado empleado)
         {
             InitializeComponent();
             miEmpleado = empleado;
-            lbUsuario.Content = String.Format("{0} {1}", miEmpleado.PrimerNombre,  miEmpleado.PrimerApellido);
-
+            lbUsuario.Content = String.Format("{0} {1}", miEmpleado.PrimerNombre, miEmpleado.PrimerApellido);
 
             DispatcherTimer LiveTime = new DispatcherTimer(); //Instanciación de objeto de tipo DispatcherTimer.
             LiveTime.Interval = TimeSpan.FromSeconds(1);
@@ -40,12 +34,10 @@ namespace VitalCareRx
             LiveTime.Start();
             lbFecha.Content = DateTime.Now.ToLongTimeString(); //Inicializa la fecha y hora
             lbDate.Content = DateTime.Now.ToShortDateString(); //Inicializa la fecha
-
         }
-
         void timer_Tick(object sender, EventArgs e) //Evento para mostrar la fecha y hora en tiempo real
         {
-           
+
             lbFecha.Content = DateTime.Now.ToLongTimeString();
         }
 
@@ -91,14 +83,14 @@ namespace VitalCareRx
         {
 
             int index = ListViewMenu.SelectedIndex;
-            if (index == 6)
+            if (index == 8)
             {
                 ListViewMenu.SelectedIndex = 0;
                 index = ListViewMenu.SelectedIndex;
-                
+
             }
             else
-            {   
+            {
                 MoveCursorMenu(index);
             }
 
@@ -131,7 +123,7 @@ namespace VitalCareRx
         //Opcion de farmacos
         private void ltFarmacos_Selected(object sender, RoutedEventArgs e)
         {
-            Farmacos farmacos= new Farmacos(miEmpleado);
+            Farmacos farmacos = new Farmacos(miEmpleado);
             farmacos.Show();
             this.Close();
         }
@@ -153,18 +145,32 @@ namespace VitalCareRx
                 Login login = new Login();
                 login.Show();
                 this.Close();
-            } 
-           
+            }
 
-         
+
+
         }
 
         //Opcion de informacion del sistema
         private void ltInformacion_Selected(object sender, RoutedEventArgs e)
         {
-           Informacion informacion= new Informacion(miEmpleado);
-           informacion.Show();
-           this.Close();
+            Informacion informacion = new Informacion(miEmpleado);
+            informacion.Show();
+            this.Close();
+        }
+
+        private void ltEmpleados_Selected(object sender, RoutedEventArgs e)
+        {
+            Empleados empleados = new Empleados(miEmpleado);
+            empleados.Show();
+            this.Close();
+        }
+
+        private void ltBitacora_Selected(object sender, RoutedEventArgs e)
+        {
+            Bitacora bitacora = new Bitacora(miEmpleado);
+            bitacora.Show();
+            this.Close();
         }
     }
 }

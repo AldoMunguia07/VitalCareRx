@@ -13,7 +13,7 @@ using System.Windows.Controls;
 
 namespace VitalCareRx
 {
-    class Empleado
+   public class Empleado
     {
 
         //Variables miembro
@@ -98,6 +98,7 @@ namespace VitalCareRx
                         empleado.IdPuesto = Convert.ToInt32(rdr["idPuesto"]);
                         empleado.NombreUsuario = rdr["nombreUsuario"].ToString();
                         empleado.Contrasenia = rdr["contrasenia"].ToString();
+                        empleado.Estado = Convert.ToBoolean(rdr["estado"]);
 
 
                     }

@@ -19,23 +19,30 @@ namespace VitalCareRx
     /// </summary>
     public partial class Informacion : Window
     {
-        private int IdEmpleado;
-        private string nombreCompletoEmpleado;
-
-        public Informacion(int codigoEmpleado,  string nombreEmpleado)// se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
+       
+        Empleado miEmpleado = new Empleado();
+        public Informacion(Empleado empleado)// se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
                                                                       //y nombre del empleado(Se usa para volver al menu principal).
         {
             InitializeComponent();
-            IdEmpleado = codigoEmpleado;
-            nombreCompletoEmpleado = nombreEmpleado;
+            miEmpleado = empleado;
     }
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
         {
-            MenuPrincipal menuprincipal = new MenuPrincipal(nombreCompletoEmpleado, IdEmpleado); // Se regresa al menu principal con los datos del usuario actual.
-            menuprincipal.Show();
-            this.Close();
-            
+            if (miEmpleado.IdPuesto == 1)
+            {
+                MenuPrincipalAdmin menuPrincipalAdmin = new MenuPrincipalAdmin(miEmpleado);
+                menuPrincipalAdmin.Show();
+                this.Close();
+            }
+            else if (miEmpleado.IdPuesto == 2)
+            {
+                MenuPrincipal menupincipal = new MenuPrincipal(miEmpleado);
+                menupincipal.Show();
+                this.Close();
+            }
+
         }
 
         bool right = false;

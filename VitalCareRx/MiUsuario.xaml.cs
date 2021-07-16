@@ -26,19 +26,19 @@ namespace VitalCareRx
     public partial class MiUsuario : Window
     {
         
-        private int codigoEmpleado;
-        private string NameEmpleado;
+       
 
         Empleado miUsuario = new Empleado();
         private string usuario;
         Validaciones validaciones = new Validaciones();
         LlenarComboBox LlenarComboBox = new LlenarComboBox();
+        Empleado miEmpleado = new Empleado();
 
-        public MiUsuario(int empleado)// se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
+        public MiUsuario(Empleado empleado)// se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
                                       
         {
-            InitializeComponent();           
-            codigoEmpleado = empleado;
+            InitializeComponent();
+            miEmpleado = empleado;
             //miUsuario.CargarTextBox(codigoEmpleado, txtUsuario, txtPassword, txtPrimerNombre, txtSegundoNombre, txtPrimerApellido, txtSegundoApellido, txtCelular, cmbSexo);
             LlenarComboBox.CargarComboBoxSexo(cmbSexo);
             miUsuario.PrimerNombre = txtPrimerNombre.Text;
@@ -52,7 +52,7 @@ namespace VitalCareRx
         /// </summary>
         private void ObtenerDatos()
         {
-            miUsuario.IdEmpleado = codigoEmpleado;
+            miUsuario.IdEmpleado = miEmpleado.IdEmpleado;
             miUsuario.PrimerNombre = txtPrimerNombre.Text;
             miUsuario.SegundoNombre = txtSegundoNombre.Text;
             miUsuario.PrimerApellido = txtPrimerApellido.Text;
@@ -93,10 +93,18 @@ namespace VitalCareRx
             MessageBoxResult result = MessageBox.Show("¿Desea regresar al menú principal?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
-                NameEmpleado = String.Format("{0} {1}", miUsuario.PrimerNombre, miUsuario.PrimerApellido); // Se pasa por parametro el nuevo nombre de usuario actualizado o se queda con el actual en caso de
-                MenuPrincipal menu = new MenuPrincipal(NameEmpleado, codigoEmpleado);                      // que no los haya actualizado
-                menu.Show();
-                this.Close();
+                if (miEmpleado.IdPuesto == 1)
+                {
+                    MenuPrincipalAdmin menuPrincipalAdmin = new MenuPrincipalAdmin(miEmpleado);
+                    menuPrincipalAdmin.Show();
+                    this.Close();
+                }
+                else if (miEmpleado.IdPuesto == 2)
+                {
+                    MenuPrincipal menupincipal = new MenuPrincipal(miEmpleado);
+                    menupincipal.Show();
+                    this.Close();
+                }
             }
             
         }

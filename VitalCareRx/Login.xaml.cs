@@ -41,24 +41,24 @@ namespace VitalCareRx
 
                 // Verificar si el usuario existe
                 if (unEmpleado.NombreUsuario == null)
-                    MessageBox.Show("El usuario o la contraseña no es correcta. Favor verificar.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("El usuario y/o la contraseña no es correcta o usuario inactivo. Favor verificar.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 else
                 {
                     //Verificar que la contraseña ingresada es igual a la contraseña
                     // almacenada en la base de datos
-                    if (unEmpleado.obtenerContraseña(unEmpleado.IdEmpleado) == pwbPassword.Password)
+                    if (unEmpleado.obtenerContraseña(unEmpleado.IdEmpleado) == pwbPassword.Password && unEmpleado.Estado)
                     {
                         // Mostrar el formulario de carga
 
 
-                        Loading loading = new Loading(String.Format("{0} {1}", unEmpleado.PrimerNombre, unEmpleado.PrimerApellido), unEmpleado.IdEmpleado, unEmpleado.IdPuesto);
+                        Loading loading = new Loading(unEmpleado);
                         loading.Show();
                         this.Close();
               
                     }
 
                     else
-                        MessageBox.Show("El usuario o la contraseña no es correcta. Favor verificar.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("El usuario y/o la contraseña no es correcta o usuario inactivo. Favor verificar.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception)

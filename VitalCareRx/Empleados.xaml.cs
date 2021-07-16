@@ -19,9 +19,11 @@ namespace VitalCareRx
     /// </summary>
     public partial class Empleados : Window
     {
-        public Empleados()
+        Empleado miEmpleado = new Empleado();
+        public Empleados(Empleado empleado)
         {
             InitializeComponent();
+            miEmpleado = empleado;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -108,7 +110,22 @@ namespace VitalCareRx
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBoxResult result = MessageBox.Show("¿Desea regresar al menú principal?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                if (miEmpleado.IdPuesto == 1)
+                {
+                    MenuPrincipalAdmin menuPrincipalAdmin = new MenuPrincipalAdmin(miEmpleado);
+                    menuPrincipalAdmin.Show();
+                    this.Close();
+                }
+                else if (miEmpleado.IdPuesto == 2)
+                {
+                    MenuPrincipal menupincipal = new MenuPrincipal(miEmpleado);
+                    menupincipal.Show();
+                    this.Close();
+                }
+            }
         }
 
         private void btnModificarr_Click(object sender, RoutedEventArgs e)

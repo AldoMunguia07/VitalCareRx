@@ -25,18 +25,17 @@ namespace VitalCareRx
     {
        
         private Farmaco farmaco = new Farmaco();
-        private int codigoEmpleado;
-        private string nombreEmpleado;
+        
         private bool seleccionado = false;
         Validaciones validaciones = new Validaciones();
+        Empleado miEmpleado = new Empleado();
 
-        public Farmacos(int codigo, string empleado)// se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
+        public Farmacos(Empleado empleado)// se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
                                                     //y nombre del empleado(Se usa para volver al menu principal).
         {
             InitializeComponent();
             //Variables miembro
-            codigoEmpleado = codigo;
-            nombreEmpleado = empleado;           
+            miEmpleado = empleado;       
             farmaco.MostrarFarmaco(dgFarmacos);
         }
 
@@ -45,9 +44,18 @@ namespace VitalCareRx
             MessageBoxResult result = MessageBox.Show("¿Desea regresar al menú principal?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
-                MenuPrincipal menu = new MenuPrincipal(nombreEmpleado, codigoEmpleado); // Se regresa al menu principal con los datos del usuario actual.
-                menu.Show();
-                this.Close();
+                if (miEmpleado.IdPuesto == 1)
+                {
+                    MenuPrincipalAdmin menuPrincipalAdmin = new MenuPrincipalAdmin(miEmpleado);
+                    menuPrincipalAdmin.Show();
+                    this.Close();
+                }
+                else if (miEmpleado.IdPuesto == 2)
+                {
+                    MenuPrincipal menupincipal = new MenuPrincipal(miEmpleado);
+                    menupincipal.Show();
+                    this.Close();
+                }
             }
             
         }

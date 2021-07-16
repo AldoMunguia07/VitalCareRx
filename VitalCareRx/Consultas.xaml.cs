@@ -32,24 +32,24 @@ namespace VitalCareRx
         
         private Consulta consulta = new Consulta();
         private Receta receta = new Receta();
-        private int codigoEmpleado, idRecetaMedica;
-        private string nombreEmpleado;
+        private int  idRecetaMedica;
+        
         private bool seleccionado = false;
         Validaciones validaciones = new Validaciones();
         LlenarComboBox LlenarComboBox = new LlenarComboBox();
+        Empleado miEmpleado = new Empleado();
         private int idConsulta;
 
-        public Consultas(int codigo, string empleado) // se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
+        public Consultas(Empleado empleado) // se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
             //y nombre del empleado(Se usa para volver al menu principal).
         {
             InitializeComponent();
 
             //Variables miembro
 
-            codigoEmpleado = codigo;
-            nombreEmpleado = empleado;          
+            miEmpleado = empleado;
             consulta.MostrarConsultas(dgConsultas);
-            LlenarComboBox.CargarCodigoCita(cmbCodigoCitas);
+           
 
         }
 
@@ -151,7 +151,7 @@ namespace VitalCareRx
             consulta.DiagnosticoConsulta = DiagnosticoConsulta.Text.Substring(0, DiagnosticoConsulta.Text.Length - 2);
             consulta.Temperatura = float.Parse(txtTemperatura.Text);
             consulta.PresionArterial = txtPresionArterial.Text;
-            consulta.IdEmpleado = codigoEmpleado;
+            consulta.IdEmpleado = miEmpleado.IdEmpleado;
             consulta.IdCita = Convert.ToInt32(cmbCodigoCitas.SelectedValue);
 
         }
@@ -169,7 +169,7 @@ namespace VitalCareRx
             cmbCodigoCitas.SelectedValue = null;
             seleccionado = false;
             btnReceta.Content = "Receta";
-            LlenarComboBox.CargarCodigoCita(cmbCodigoCitas);
+           
             txtBuscar.Clear();
         }
 
@@ -309,9 +309,18 @@ namespace VitalCareRx
             MessageBoxResult result = MessageBox.Show("¿Desea regresar al menú principal?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
-                MenuPrincipal menu = new MenuPrincipal(nombreEmpleado, codigoEmpleado); // Se regresa al menu principal con los datos del usuario actual.
-                menu.Show();
-                this.Close();
+                if (miEmpleado.IdPuesto == 1)
+                {
+                    MenuPrincipalAdmin menuPrincipalAdmin = new MenuPrincipalAdmin(miEmpleado);
+                    menuPrincipalAdmin.Show();
+                    this.Close();
+                }
+                else if (miEmpleado.IdPuesto == 2)
+                {
+                    MenuPrincipal menupincipal = new MenuPrincipal(miEmpleado);
+                    menupincipal.Show();
+                    this.Close();
+                }
             }
             
         }

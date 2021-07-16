@@ -19,9 +19,32 @@ namespace VitalCareRx
     /// </summary>
     public partial class Bitacora : Window
     {
-        public Bitacora()
+
+        Empleado miEmpleado = new Empleado();
+        public Bitacora(Empleado empleado)
         {
             InitializeComponent();
+            miEmpleado = empleado;
+        }
+
+        private void btnCerrar_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("¿Desea regresar al menú principal?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                if (miEmpleado.IdPuesto == 1)
+                {
+                    MenuPrincipalAdmin menuPrincipalAdmin = new MenuPrincipalAdmin(miEmpleado);
+                    menuPrincipalAdmin.Show();
+                    this.Close();
+                }
+                else if (miEmpleado.IdPuesto == 2)
+                {
+                    MenuPrincipal menupincipal = new MenuPrincipal(miEmpleado);
+                    menupincipal.Show();
+                    this.Close();
+                }
+            }
         }
     }
 }

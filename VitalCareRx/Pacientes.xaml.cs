@@ -24,8 +24,8 @@ namespace VitalCareRx
     /// </summary>
     public partial class Pacientes : Window
     {
-        private string nombreEmpleado;
-        private int codigoEmpleado;
+        
+        
 
         private int estado = 1;
         bool cargado = false;
@@ -38,16 +38,16 @@ namespace VitalCareRx
         Paciente paciente = new Paciente();
         LlenarComboBox LlenarComboBox = new LlenarComboBox();
         Validaciones validaciones = new Validaciones();
+        Empleado miEmpleado = new Empleado();
 
-        public Pacientes(int codigo, string empleado)// se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
+        public Pacientes(Empleado empleado)// se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
                                                      //y nombre del empleado(Se usa para volver al menu principal).
         {
             InitializeComponent();
-
+            miEmpleado = empleado;
             btnEstado.Background = new SolidColorBrush(Color.FromArgb(165, 42, 165, 42)); // Por defecto el botón de estado se inicializa en color verde
-            nombreEmpleado = empleado;
-            codigoEmpleado = codigo;
-
+            
+            
             LlenarComboBox.CargarComboBoxSexo(cmbSexo);
             LlenarComboBox.CargarComboBoxEstado(cmbEstado);
             LlenarComboBox.CargarComboBoxTipoSangre(cmbTipoSangre);
@@ -66,9 +66,18 @@ namespace VitalCareRx
             MessageBoxResult result = MessageBox.Show("¿Desea regresar al menú principal?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
-                MenuPrincipal menu = new MenuPrincipal(nombreEmpleado, codigoEmpleado); // Se regresa al menu principal con los datos del usuario actual.
-                menu.Show();
-                this.Close();
+                if (miEmpleado.IdPuesto == 1)
+                {
+                    MenuPrincipalAdmin menuPrincipalAdmin = new MenuPrincipalAdmin(miEmpleado);
+                    menuPrincipalAdmin.Show();
+                    this.Close();
+                }
+                else if (miEmpleado.IdPuesto == 2)
+                {
+                    MenuPrincipal menupincipal = new MenuPrincipal(miEmpleado);
+                    menupincipal.Show();
+                    this.Close();
+                }
             }
             
         }
