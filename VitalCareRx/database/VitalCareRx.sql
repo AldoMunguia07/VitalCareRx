@@ -1,6 +1,7 @@
 USE tempdb
 go
 
+--DROP DATABASE VitalCareRxDB
 -- Crear la base de datos
 CREATE DATABASE VitalCareRxDB
 GO
@@ -13,6 +14,10 @@ GO
 
 CREATE SCHEMA Consultas
 GO
+
+CREATE SCHEMA Historial
+GO
+
 
 --TABLAS
 CREATE TABLE Personas.Sexo 
@@ -60,51 +65,85 @@ CREATE TABLE Personas.Paciente
 		FOREIGN KEY (idSexo) REFERENCES Personas.Sexo(idSexo)
 )
 
+CREATE TABLE Personas.Puesto
+(
 
+	idPuesto INT NOT NULL IDENTITY,
+	puesto VARCHAR(25) NOT NULL
+
+	CONSTRAINT PK_Puesto_idPuesto
+		PRIMARY KEY CLUSTERED (idPuesto)
+
+)
 
 CREATE TABLE Personas.Empleado
 (
 	idEmpleado INT NOT NULL IDENTITY,
-	primerNombre VARCHAR(25) NOT NULL,
+	primerNombre VARCHAR(25) NOT NULL, 
 	segundoNombre VARCHAR(25),
 	primerApellido VARCHAR(25) NOT NULL,
 	segundoApellido VARCHAR(25),
-	celular VARCHAR(8),
+	celular VARCHAR(8) NOT NULL,
+	correo VARCHAR(30),
+	fechaNacimiento DATE NOT NULL,
 	idSexo INT NOT NULL,
+	idPuesto INT NOT NULL,
 	nombreUsuario VARCHAR(30) NOT NULL,
-	contrasenia VARCHAR(30) NOT NULL,
+	contrasenia VARBINARY(MAX) NOT NULL,
+	estado BIT NOT NULL
 	
 
 	CONSTRAINT PK_Empleado_idEmpleado
 		PRIMARY KEY CLUSTERED (idEmpleado),
 
+	CONSTRAINT FK_Empleado$Existe$Puesto
+		FOREIGN KEY (idPuesto) REFERENCES Personas.Puesto(idPuesto),
+
 	CONSTRAINT FK_Empleado$Existe$Sexo
 		FOREIGN KEY (idSexo) REFERENCES Personas.Sexo(idSexo)
 )
 
-CREATE TABLE Consultas.Cita
+CREATE TABLE Historial.Bitacora
 (
-	idCita INT NOT NULL IDENTITY,
-	fechaCita DATE NOT NULL,
-	notas VARCHAR(200) NULL,
-	idPaciente INT NOT NULL, 
+	idBitacora INT NOT NULL IDENTITY,
+	idEmpleado INT NOT NULL,
+	pcUsuario varchar NOT NULL,
+	accion NVARCHAR(50) NOT NULL,
+	fecha DATETIME NOT NULL
 
-	CONSTRAINT PK_Cita_idCita
-		PRIMARY KEY CLUSTERED (idCita),
+	CONSTRAINT PK_Bitacora_idBitacora
+		PRIMARY KEY CLUSTERED (idBitacora),
 
-	CONSTRAINT FK_Cita$Existe$Paciente
-		FOREIGN KEY (idPaciente) REFERENCES Personas.Paciente(idPaciente)
-)	
+	CONSTRAINT FK_Bitacora$Existe$Empleado
+		FOREIGN KEY (idEmpleado) REFERENCES Personas.Empleado(idEmpleado),
+
+)
+
+CREATE TABLE Historial.ControlEmpleado
+(
+	idControlEmpleado INT NOT NULL IDENTITY,
+	idEmpleado INT NOT NULL,
+	fechaEntrada DATETIME NOT NULL,
+	fechaSalida DATETIME NULL
+
+	CONSTRAINT PK_ControlEmpleado_idControlEmpleado
+		PRIMARY KEY CLUSTERED (idControlEmpleado),
+
+	CONSTRAINT FK_ControlEmpleado$Existe$Empleado
+		FOREIGN KEY (idEmpleado) REFERENCES Personas.Empleado(idEmpleado),
+)
 
 CREATE TABLE Consultas.Consulta
 (
 	idConsulta INT NOT NULL IDENTITY,
+	fechaConsulta DATE NOT NULL,
 	motivoConsulta VARCHAR(300) NOT NULL,
 	diagnosticoConsulta VARCHAR(300) NOT NULL,
 	temperatura FLOAT NOT NULL,
 	presionArterial VARCHAR(9) NOT NULL,
 	idEmpleado INT NOT NULL,
-	idCita INT NOT NULL,
+	idPaciente INT NOT NULL
+	
 
 	CONSTRAINT PK_Consulta_idConsulta
 		PRIMARY KEY CLUSTERED (idConsulta),
@@ -112,8 +151,8 @@ CREATE TABLE Consultas.Consulta
 	CONSTRAINT FK_Consulta$Existe$Empleado
 		FOREIGN KEY (idEmpleado) REFERENCES Personas.Empleado(idEmpleado),
 
-	CONSTRAINT FK_Consulta$Existe$Cita
-		FOREIGN KEY (idCita) REFERENCES Consultas.Cita(idCita)	 
+	CONSTRAINT FK_Consulta$Existe$Paciente
+		FOREIGN KEY (idPaciente) REFERENCES Personas.Paciente(idPaciente)	 
 )
 
 
@@ -129,16 +168,32 @@ CREATE TABLE Consultas.RecetaMedica
 		FOREIGN KEY (idConsulta) REFERENCES Consultas.Consulta(idConsulta)
 )
 
-CREATE TABLE Consultas.Farmaco
-(
-	idFarmaco INT NOT NULL IDENTITY,
-	descripcionFarmaco varchar(60) NOT NULL,
+CREATE TABLE Consultas.Farmaco            
+(										
+	idFarmaco INT NOT NULL IDENTITY,	
+	descripcionFarmaco varchar(60) NOT NULL,	
 	informacionPrecaucion varchar(200) NOT NULL,
 
 	CONSTRAINT PK_Farmaco_idFarmaco
 		PRIMARY KEY CLUSTERED (idFarmaco),
 
 )
+
+CREATE TABLE Consultas.DetalleFarmaco
+(
+	idFarmaco INT NOT NULL,
+	fechaVencimiento DATE NOT NULL,
+	cantidad INT NOT NULL
+
+	CONSTRAINT PK_DetalleFarmaco_idFarmaco_fechaVencimiento
+		PRIMARY KEY CLUSTERED (idFarmaco, fechaVencimiento),
+	CONSTRAINT FK_DetalleFarmaco$Existe$Farmaco
+		FOREIGN KEY (idFarmaco) REFERENCES Consultas.Farmaco (idFarmaco)
+
+)
+
+
+
 
 
 CREATE TABLE Consultas.DetalleRecetaMedica
@@ -222,6 +277,15 @@ ALTER TABLE Personas.TipoSangre
 	ADD CONSTRAINT CHK_Personas_TipoSangre$TipoSangrePersonas
 	CHECK (descripcionTipoSangre IN('A+', 'A-', 'AB-', 'AB+','B-','B+', 'O-', 'O+'))
 GO
+
+--TABLA Personas.Puesto
+ALTER TABLE Personas.Puesto
+	ADD CONSTRAINT CHK_Personas_Puesto$PuestoEmpleado
+	CHECK (puesto IN('Administrador', 'Doctor', 'Enfermero')) -- 'Vigilante','Conserje'
+
+
+
+
 -- TABLA Personas.Empleado
 
 ALTER TABLE Personas.Empleado WITH CHECK
@@ -239,28 +303,51 @@ ALTER TABLE Personas.Empleado WITH CHECK
 		CHECK (len(contrasenia) >= 8)
 GO
 
--- Tabla Consultas.Cita
-ALTER TABLE Consultas.Cita WITH CHECK
-		ADD CONSTRAINT CHK_Consultas_Cita$VerificarFechaCita
-		CHECK (fechaCita >= CONVERT (date, GETDATE()))
+ALTER TABLE Personas.Empleado WITH CHECK
+		ADD CONSTRAINT CHK_Personas_Empleado$VerificarFechaNacimiento
+		CHECK (fechaNacimiento <= CONVERT (date, GETDATE()))
 GO
+
+ALTER TABLE Personas.Empleado 
+	ADD CONSTRAINT AK_Personas_Empleado_correo
+	UNIQUE NONCLUSTERED (correo)
+GO
+
 
 
 -- Tabla Consultas.Consulta
 ALTER TABLE Consultas.Consulta
-		ADD CONSTRAINT AK_Consultas_Consulta_idCita
-		UNIQUE NONCLUSTERED (idCita)
+		ADD CONSTRAINT AK_Consultas_Consulta_idPaciente
+		UNIQUE NONCLUSTERED (idPaciente)
 GO
+
 
 ALTER TABLE Consultas.Consulta WITH CHECK
 		ADD CONSTRAINT CHK_Consultas_Consulta$VerificarTemperatura
 		CHECK (temperatura > 0)
 GO
 
+ALTER TABLE Consultas.Consulta WITH CHECK
+		ADD CONSTRAINT CHK_Consultas_Consulta$VerificarFechaConsulta
+		CHECK (fechaConsulta = CONVERT (date, GETDATE()))
+GO
+
+
 -- Tabla Consultas.DetalleRecetaMedica
 ALTER TABLE Consultas.DetalleRecetaMedica WITH CHECK
 		ADD CONSTRAINT CHK_Consultas_DetalleRecetaMedica$VerificarCantidadFarmacos
 		CHECK (cantidad > 0)
+GO
+
+-- Tabla Consultas.DetalleFarmaco
+ALTER TABLE Consultas.DetalleFarmaco WITH CHECK
+		ADD CONSTRAINT CHK_Consultas_DetalleFarmaco$VerificarCantidadFarmacos
+		CHECK (cantidad >= 0)
+GO
+
+ALTER TABLE Consultas.DetalleFarmaco WITH CHECK
+		ADD CONSTRAINT CHK_Consultas_DetalleFarmaco$VerificarFechaVencimiento
+		CHECK (fechaVencimiento > CONVERT (date, DATEADD(day, 7, GETDATE())))
 GO
 
 
@@ -292,3 +379,9 @@ INSERT [Personas].[TipoSangre]  VALUES ( 'O+')
 
 INSERT [Consultas].[Farmaco]  VALUES ('Simvastatina', 'Para controlar el colesterol')INSERT [Consultas].[Farmaco] VALUES ('Aspirina', ' Casi para todo')INSERT [Consultas].[Farmaco]  VALUES ('Omeprazol', 'Para la acidez de est�mago')INSERT [Consultas].[Farmaco]  VALUES ('Lexotiroxina s�dica', 'Para reemplazar la tiroxina')INSERT [Consultas].[Farmaco]  VALUES ('Ramipril', 'Para la hipertensi�n')INSERT [Consultas].[Farmaco] VALUES ('Amlodipina', 'Para la hipertensi�n y la angina')INSERT [Consultas].[Farmaco] VALUES ('Paracetamol ', 'Para aliviar el dolor')INSERT [Consultas].[Farmaco]  VALUES ('Salbutamol', 'Para el asma')
 
+-- Datos tabla puesto
+INSERT INTO [Personas].[Puesto] VALUES ('Administrador');
+
+INSERT INTO [Personas].[Puesto] VALUES ('Doctor');
+
+INSERT INTO [Personas].[Puesto] VALUES ('Enfermero');
