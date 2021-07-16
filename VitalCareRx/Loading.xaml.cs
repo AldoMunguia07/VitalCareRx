@@ -28,12 +28,14 @@ namespace VitalCareRx
         private string str;
         private string usuarioActual;
         private int codigoEmpleado;
+        private int idPuesto;
 
         public Loading(string empleado, int codigo, int puesto)
         {
             InitializeComponent();
             usuarioActual = empleado;
             codigoEmpleado = codigo;
+            idPuesto = puesto;
             timer = new Timer(35);
             timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
             timer.Start();
@@ -76,9 +78,18 @@ namespace VitalCareRx
                 {
 
                     timer.Stop();
-                    MenuPrincipal menupincipal = new MenuPrincipal(usuarioActual, codigoEmpleado);
-                    menupincipal.Show();
-                    this.Close();
+                    if (idPuesto == 1)
+                    {
+
+                        this.Close();
+                    }
+                    else if (idPuesto == 2)
+                    {
+                        MenuPrincipal menupincipal = new MenuPrincipal(usuarioActual, codigoEmpleado);
+                        menupincipal.Show();
+                        this.Close();
+                    }
+                    
                 }
             }));
         }

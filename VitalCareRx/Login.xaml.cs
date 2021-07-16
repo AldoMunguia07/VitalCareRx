@@ -46,7 +46,7 @@ namespace VitalCareRx
                 {
                     //Verificar que la contraseña ingresada es igual a la contraseña
                     // almacenada en la base de datos
-                    if (unEmpleado.Contrasenia == pwbPassword.Password)
+                    if (unEmpleado.obtenerContraseña(unEmpleado.IdEmpleado) == pwbPassword.Password)
                     {
                         // Mostrar el formulario de carga
 

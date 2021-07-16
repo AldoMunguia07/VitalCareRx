@@ -39,7 +39,7 @@ namespace VitalCareRx
         {
             InitializeComponent();           
             codigoEmpleado = empleado;
-            miUsuario.CargarTextBox(codigoEmpleado, txtUsuario, txtPassword, txtPrimerNombre, txtSegundoNombre, txtPrimerApellido, txtSegundoApellido, txtCelular, cmbSexo);
+            //miUsuario.CargarTextBox(codigoEmpleado, txtUsuario, txtPassword, txtPrimerNombre, txtSegundoNombre, txtPrimerApellido, txtSegundoApellido, txtCelular, cmbSexo);
             LlenarComboBox.CargarComboBoxSexo(cmbSexo);
             miUsuario.PrimerNombre = txtPrimerNombre.Text;
             miUsuario.PrimerApellido = txtPrimerApellido.Text;

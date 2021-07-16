@@ -97,8 +97,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Bitacora.xaml.cs">
+      <DependentUpon>Bitacora.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Empleados.xaml.cs">
       <DependentUpon>Empleados.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Inventario.xaml.cs">
+      <DependentUpon>Inventario.xaml</DependentUpon>
     </Compile>
     <Compile Include="LlenarComboBox.cs" />
     <Compile Include="Conexion.cs" />
@@ -120,6 +126,10 @@
       <DependentUpon>RecetasConsultaPaciente.xaml</DependentUpon>
     </Compile>
     <Compile Include="Validaciones.cs" />
+    <Page Include="Bitacora.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Consultas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -137,6 +147,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Informacion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Inventario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

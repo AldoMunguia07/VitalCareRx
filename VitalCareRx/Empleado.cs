@@ -268,7 +268,7 @@ namespace VitalCareRx
 
                     //Del objeto DataTable se le asigna el valor correspondiente a cada TextBox.
                     txtUsuario.Text = Empleado.Rows[0]["nombreUsuario"].ToString();
-                    txtPassword.Text = Empleado.Rows[0]["contrasenia"].ToString();
+                    txtPassword.Text = obtenerContraseña(codigoEmpleado);
                     txtPrimerNombre.Text = Empleado.Rows[0]["primerNombre"].ToString();
                     txtSegundoNombre.Text = Empleado.Rows[0]["segundoNombre"].ToString();
                     txtPrimerApellido.Text = Empleado.Rows[0]["primerApellido"].ToString();
@@ -331,6 +331,45 @@ namespace VitalCareRx
             {
                 conexion.sqlConnection.Close();
             }
+
+
+        }
+
+        public string obtenerContraseña(int idEmpleado)
+        {
+            try
+            {
+                conexion.sqlConnection.Open();
+                //Query para añadir un paciente
+                SqlCommand sqlCommand = new SqlCommand("sp_Empleados", conexion.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+
+
+                using (sqlDataAdapter)
+                {
+                    sqlCommand.Parameters.AddWithValue("@idEmpleado", idEmpleado);
+                    sqlCommand.Parameters.AddWithValue("@accion", "obtenerPass");
+
+                    DataTable dataTable = new DataTable();
+                    sqlDataAdapter.Fill(dataTable);
+                    return dataTable.Rows[0]["contrasenia"].ToString();
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+            }
+
+
 
 
         }
