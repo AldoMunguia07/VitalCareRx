@@ -120,10 +120,6 @@
       <DependentUpon>RecetasConsultaPaciente.xaml</DependentUpon>
     </Compile>
     <Compile Include="Validaciones.cs" />
-    <Page Include="CitasPaciente.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Consultas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -156,10 +152,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Cita.cs" />
-    <Compile Include="CitasPaciente.xaml.cs">
-      <DependentUpon>CitasPaciente.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Consulta.cs" />
     <Compile Include="Consultas.xaml.cs">
       <DependentUpon>Consultas.xaml</DependentUpon>
@@ -182,10 +174,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="NuevoEmpleado.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pacientes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -202,9 +190,6 @@
   <ItemGroup>
     <Compile Include="MenuPrincipal.xaml.cs">
       <DependentUpon>MenuPrincipal.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="NuevoEmpleado.xaml.cs">
-      <DependentUpon>NuevoEmpleado.xaml</DependentUpon>
     </Compile>
     <Compile Include="Paciente.cs" />
     <Compile Include="Pacientes.xaml.cs">

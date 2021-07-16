@@ -130,5 +130,10 @@ namespace VitalCareRx
         {
 
         }
+
+        private void btnEstado_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

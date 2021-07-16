@@ -464,20 +464,6 @@ namespace VitalCareRx
             OcultarColumnas();
         }
 
-        private void btnCitas_Click(object sender, RoutedEventArgs e)
-        {
-            if (seleccionado) //Para ver las citas de un paciente de seleccinarlo primero.
-            {
-                CitasPaciente citasPaciente = new CitasPaciente(idPaciente); //Se envia el DNI del paciente para visualizar las citas correspondientes a dicho paciente.
-                citasPaciente.ShowDialog(); //ShowDialog perimte volver a ventana de paciente una vez se cierre la ventana de CitasPaciente.
-            }
-            else
-            {
-                MessageBox.Show("¡Para ver las citas debes seleccionar un paciente!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
-        }
-
         private void btnConsultas_Click(object sender, RoutedEventArgs e)
         {
             if (seleccionado) //Para ver las consultas de un paciente de seleccinarlo primero.

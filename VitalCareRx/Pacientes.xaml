@@ -130,11 +130,8 @@
         <Button Name="btnEstado" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="466,94,0,0" Height="23" Grid.Column="1" Click="btnEstado_Click">
             <materialDesign:PackIcon Kind="AccountCheckOutline" Height="17" Width="25" Foreground="#FFF" />
         </Button>
-
-        <Button Name="btnCitas" Content="Citas" HorizontalAlignment="Left" VerticalAlignment="Top" Width="109" Margin="482,544,0,0" Click="btnCitas_Click"/>
         <Button Name="btnConsultas" Content="  Consultas" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114" Margin="59,544,0,0" RenderTransformOrigin="0.4,0.594" Grid.Column="1" Click="btnConsultas_Click"/>
         <materialDesign:PackIcon Kind="BookAccountOutline" Height="27" Width="48" Foreground="#FFF" Margin="54,544,0,0" Grid.Column="1" />
-        <materialDesign:PackIcon Kind="BookClockOutline" Height="27" Width="48" Foreground="#FFF" Margin="476,544,0,0" />
         <ComboBox Name ="cmbEstado"  HorizontalAlignment="Left" Margin="68,550,0,0" VerticalAlignment="Top" Width="168" Background="White" SelectionChanged="cmbEstado_SelectionChanged"/>
         <Label Content="PACIENTES" HorizontalAlignment="Left" Margin="108,526,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
 

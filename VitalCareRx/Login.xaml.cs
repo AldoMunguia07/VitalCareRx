@@ -79,12 +79,7 @@ namespace VitalCareRx
         }
 
         
-        private void btnNuevaCuenta_Click(object sender, RoutedEventArgs e)
-        {
-            NuevoEmpleado nuevoEmpleado = new NuevoEmpleado();
-            nuevoEmpleado.Show();
-            this.Close();
-        }
+      
 
         
 
@@ -136,6 +131,11 @@ namespace VitalCareRx
         private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             right = false;
+        }
+
+        private void btnRecuperarPass_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

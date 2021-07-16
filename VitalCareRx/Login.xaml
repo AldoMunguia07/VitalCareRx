@@ -60,7 +60,7 @@
             <materialDesign:PackIcon Name="IconoBoton" Kind="EyeOff" Height="15" Width="15" Foreground="Black"/>
         </Button>
 
-        <Button Name="btnNuevaCuenta" Width="251" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="63,0,52,10" Content="¿DESEA UNA NUEVA CUENTA?" Foreground="Gray" Background="Transparent" Grid.ColumnSpan="2" Height="29" Click="btnNuevaCuenta_Click"/>
+        <Button Name="btnRecuperarPass" Width="251" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="63,0,52,10" Content="¿Has olvidado la contraseña?" Foreground="Gray" Background="Transparent" Grid.ColumnSpan="2" Height="29" Click="btnRecuperarPass_Click"/>
 
 
 

@@ -37,10 +37,14 @@
             <Label Content="Primer apellido" HorizontalAlignment="Left" Margin="25,158,0,0" VerticalAlignment="Top" Foreground="White" Width="126" FontWeight="Bold" FontSize="14"/>
             <Label Content="Segundo apellido" HorizontalAlignment="Left" Margin="339,14,0,0" VerticalAlignment="Top" Foreground="White" Width="126" FontWeight="Bold" FontSize="14"/>
             <Label Content="Celular" HorizontalAlignment="Left" Margin="339,88,0,0" VerticalAlignment="Top" Foreground="White" Width="104" FontSize="14" FontWeight="Bold"/>
-            <Label Content="Usuario" HorizontalAlignment="Left" Margin="954,88,0,0" VerticalAlignment="Top" Foreground="White" Width="104" FontSize="14" FontWeight="Bold" Grid.ColumnSpan="2"/>
-            <Label Content="Contraseña" HorizontalAlignment="Left" Margin="954,158,0,0" VerticalAlignment="Top" Foreground="White" Width="120" FontSize="14" FontWeight="Bold" Grid.ColumnSpan="2"/>
-            <TextBox x:Name="txtUsuario" PreviewKeyDown="txtUsuario_PreviewKeyDown" MaxLength="15" HorizontalAlignment="Left" Height="28" Margin="954,109,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" FontSize="20" Grid.ColumnSpan="2"/>
-            <TextBox x:Name="txtContrasenia" HorizontalAlignment="Left" Height="28" Margin="954,184,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" FontSize="20" Grid.ColumnSpan="2"/>
+            <Label Content="Usuario" HorizontalAlignment="Left" Margin="951,14,0,0" VerticalAlignment="Top" Foreground="White" Width="104" FontSize="14" FontWeight="Bold"/>
+            <Label Content="Contraseña" HorizontalAlignment="Left" Margin="950,90,0,0" VerticalAlignment="Top" Foreground="White" Width="120" FontSize="14" FontWeight="Bold" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="txtUsuario" PreviewKeyDown="txtUsuario_PreviewKeyDown" MaxLength="15" HorizontalAlignment="Left" Height="28" Margin="950,43,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" FontSize="20" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="txtContrasenia" HorizontalAlignment="Left" Height="28" Margin="950,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" FontSize="20" Grid.ColumnSpan="2"/>
+            <Label Content="Estado" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="951,158,0,0" Foreground="White" FontWeight="Bold" Width="66" RenderTransformOrigin="1.604,0.083" FontSize="14"/>
+            <Button Name="btnEstado" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="950,188,0,0" Height="28" Click="btnEstado_Click" Grid.ColumnSpan="2">
+                <materialDesign:PackIcon Kind="AccountCheckOutline" Height="17" Width="25" Foreground="#FFF" />
+            </Button>
             <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="149,33,0,0" VerticalAlignment="Top" Width="138" Click="btnAgregar_Click" Grid.Column="1">
                 <Button.Background>
                     <LinearGradientBrush>
@@ -57,7 +61,7 @@
             <ProgressBar
          Style="{StaticResource MaterialDesignCircularProgressBar}"
          Value="0"
-        IsIndeterminate="True" Height="Auto" Margin="1017,3,306,666" Width="Auto" Foreground="#74EEAB" Grid.ColumnSpan="2" />
+        IsIndeterminate="True" Height="Auto" Margin="32,577,931,92" Width="Auto" Foreground="#74EEAB" />
             <DataGrid HorizontalAlignment="Left" Height="252" Margin="13,307,0,0" VerticalAlignment="Top" Width="1387" Grid.ColumnSpan="2"/>
             <Rectangle  Height="45" VerticalAlignment="Bottom" Margin="44,0,53,403" RadiusY="10" RadiusX="10" Fill="#FF1C1C1C" Grid.ColumnSpan="2">
                 <Rectangle.Effect>
@@ -99,12 +103,12 @@
                     </TransformGroup>
                 </materialDesign:PackIcon.RenderTransform>
             </materialDesign:PackIcon>
-            <ComboBox x:Name ="cmbEstado"  HorizontalAlignment="Left" Margin="742,592,0,0" VerticalAlignment="Top" Width="270" Background="{x:Null}"  Height="28"/>
-            <Label Content="EMPLEADOS" HorizontalAlignment="Left" Margin="843,575,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <ComboBox x:Name ="cmbEstado"  HorizontalAlignment="Left" Margin="742,592,0,0" VerticalAlignment="Top" Width="270" Background="{x:Null}"  Height="28" Foreground="White" BorderBrush="#89FFFFFF"/>
+            <Label Content="EMPLEADOS" HorizontalAlignment="Left" Margin="843,575,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"/>
             <Button x:Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="149,184,0,0" VerticalAlignment="Top" Width="138" Click="btnLimpiar_Click" Grid.Column="1"/>
             <materialDesign:PackIcon Kind="AccountPlus" Height="32" Width="26" Foreground="#FFF" Margin="149,33,0,0" Grid.Column="1" />
             <materialDesign:PackIcon Kind="TextBoxMinus" Height="32" Width="27" Foreground="#FFF" Margin="149,184,0,0" Grid.Column="1" />
-            <materialDesign:PackIcon Kind="Account" Width="68" Height="64" VerticalAlignment="Center" Margin="1029,14,0,622" Foreground="#74EEAB" Grid.ColumnSpan="2"/>
+            <materialDesign:PackIcon Kind="Account" Width="68" Height="64" VerticalAlignment="Center" Margin="44,588,0,48" Foreground="#74EEAB"/>
             <TextBox x:Name="txtCorreo" PreviewTextInput="txtCelular_PreviewTextInput" PreviewKeyDown="txtCelular_PreviewKeyDown" HorizontalAlignment="Left" Height="28" Margin="339,184,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="270" Background="White" RenderTransformOrigin="0.5,0.5" MaxLength="8" />
             <Label Content="Correo" HorizontalAlignment="Left" Margin="339,158,0,0" VerticalAlignment="Top" Foreground="White" Width="104" FontSize="14" FontWeight="Bold"/>
             <DatePicker HorizontalAlignment="Left" Margin="638,46,0,0" VerticalAlignment="Top" Width="270"/>
