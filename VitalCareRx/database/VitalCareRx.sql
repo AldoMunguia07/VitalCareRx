@@ -107,7 +107,7 @@ CREATE TABLE Historial.Bitacora
 (
 	idBitacora INT NOT NULL IDENTITY,
 	idEmpleado INT NOT NULL,
-	pcUsuario varchar NOT NULL,
+	pcUsuario VARCHAR(70) NOT NULL,
 	accion NVARCHAR(50) NOT NULL,
 	fecha DATETIME NOT NULL
 
