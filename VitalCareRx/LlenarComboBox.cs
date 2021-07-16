@@ -212,5 +212,42 @@ namespace VitalCareRx
             }
 
         }
+
+        public void CargarEmpleado(ComboBox comboBox)
+        {
+            try
+            {
+                conexion.sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand("sp_LlenarComboBox", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.AddWithValue("@accion", "cargarEmpleados");
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+                    sqlDataAdapter.Fill(dataTable);
+                    comboBox.DisplayMemberPath = "Empleado";
+                    comboBox.SelectedValuePath = "idEmpleado";
+                    comboBox.ItemsSource = dataTable.DefaultView;
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                // Cerrar la conexión
+                conexion.sqlConnection.Close();
+            }
+
+        }
     }
 }

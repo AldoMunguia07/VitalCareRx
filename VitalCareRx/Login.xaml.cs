@@ -20,6 +20,7 @@ namespace VitalCareRx
     public partial class Login : Window
     {
         private Empleado empleado = new Empleado();
+        AportesControl aportes = new AportesControl();
 
         public Login()
         {
@@ -50,7 +51,7 @@ namespace VitalCareRx
                     {
                         // Mostrar el formulario de carga
 
-
+                        
                         Loading loading = new Loading(unEmpleado);
                         loading.Show();
                         this.Close();

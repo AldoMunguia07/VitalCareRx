@@ -44,11 +44,11 @@
             </Button>
         </Grid>
         <DataGrid  x:Name="gridBitacora" HorizontalAlignment="Left" Height="310" Margin="8,104,0,0" VerticalAlignment="Top" Width="996"/>
-        <DatePicker HorizontalAlignment="Left" Margin="191,452,0,0" VerticalAlignment="Top" Width="235" Height="38"/>
-        <ComboBox x:Name ="cmbEstado"  HorizontalAlignment="Left" Margin="524,459,0,0" VerticalAlignment="Top" Width="270" Background="{x:Null}"  Height="28"/>
+        <DatePicker Name="dtFechaAccion" HorizontalAlignment="Left" Margin="191,449,0,0" VerticalAlignment="Top" Width="235" Height="38" SelectedDateChanged="dtFechaAccion_SelectedDateChanged"/>
+        <ComboBox x:Name ="cmbEmpleado"  HorizontalAlignment="Left" Margin="524,459,0,0" VerticalAlignment="Top" Width="270" Background="{x:Null}"  Height="28" SelectionChanged="cmbEmpleado_SelectionChanged" />
         <Label Content="EMPLEADOS" HorizontalAlignment="Left" Margin="620,435,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Image Source="IMAGENES/PrimeroDios.png" Height="103" VerticalAlignment="Top" Margin="0,487,947,0" RenderTransformOrigin="0.5,0.5"/>
-        <Button x:Name="btnRestaurar" Content="Restaurar" HorizontalAlignment="Left" Margin="415,525,0,0" VerticalAlignment="Top" Width="138"/>
+        <Button x:Name="btnRestaurar" Content="Restaurar" HorizontalAlignment="Left" Margin="415,525,0,0" VerticalAlignment="Top" Width="138" Click="btnRestaurar_Click"/>
         <materialDesign:PackIcon Kind="Reload" Height="32" Width="27" Foreground="#FFF" Margin="415,525,0,0" />
 
         <Label Foreground="White" Content="BITACORA HISTORIAL" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Margin="861,244,-155,0" Height="52" Width="384" RenderTransformOrigin="0.5,0.5">

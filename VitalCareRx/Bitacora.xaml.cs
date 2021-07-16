@@ -21,10 +21,16 @@ namespace VitalCareRx
     {
 
         Empleado miEmpleado = new Empleado();
+        LlenarComboBox LlenarComboBox = new LlenarComboBox();
+        AportesControl AportesControl = new AportesControl();
         public Bitacora(Empleado empleado)
         {
             InitializeComponent();
             miEmpleado = empleado;
+            AportesControl.MostrarBitacora(gridBitacora);
+            LlenarComboBox.CargarEmpleado(cmbEmpleado);
+           
+
         }
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
@@ -44,6 +50,38 @@ namespace VitalCareRx
                     menupincipal.Show();
                     this.Close();
                 }
+            }
+        }
+
+        private void btnRestaurar_Click(object sender, RoutedEventArgs e)
+        {
+            cmbEmpleado.SelectedValue = null;
+            dtFechaAccion.SelectedDate = null;
+            AportesControl.MostrarBitacora(gridBitacora);
+        }
+
+        private void cmbEmpleado_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(dtFechaAccion.SelectedDate == null) 
+            {
+                AportesControl.MostrarBitacoraFiltro(gridBitacora, dtFechaAccion, cmbEmpleado);
+            }
+            else
+            {
+                AportesControl.MostrarBitacoraFiltroAmbos(gridBitacora, dtFechaAccion, cmbEmpleado);
+            }
+            
+        }
+
+        private void dtFechaAccion_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbEmpleado.SelectedValue == null)
+            {
+                AportesControl.MostrarBitacoraFiltro(gridBitacora, dtFechaAccion, cmbEmpleado);
+            }
+            else
+            {
+                AportesControl.MostrarBitacoraFiltroAmbos(gridBitacora, dtFechaAccion, cmbEmpleado);
             }
         }
     }

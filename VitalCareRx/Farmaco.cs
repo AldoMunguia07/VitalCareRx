@@ -15,8 +15,11 @@ namespace VitalCareRx
     {
         //Variables miembro
         Conexion conexion = new Conexion();
+        AportesControl aportes = new AportesControl();
+       
 
         public int IdFarmaco { get; set; }
+        public int IdEmpleado { get; set; }
         public string DescripcionFarmaco { get; set; }
         public string InformacionPrecaucion { get; set; }
 
@@ -92,7 +95,10 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@descripcionFarmaco", farmaco.DescripcionFarmaco);
                 sqlCommand.Parameters.AddWithValue("@informacionPrecaucion", farmaco.InformacionPrecaucion);
                 sqlCommand.Parameters.AddWithValue("@accion", "Insertar");
+                aportes.ContextoSesion(IdEmpleado, conexion.sqlConnection);
+                
                 sqlCommand.ExecuteNonQuery();
+               
             }
             catch (Exception e)
             {
@@ -128,7 +134,7 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@informacionPrecaucion", farmaco.InformacionPrecaucion);
                 sqlCommand.Parameters.AddWithValue("@idFarmaco", farmaco.IdFarmaco);
                 sqlCommand.Parameters.AddWithValue("@accion", "Modificar");
-
+                aportes.ContextoSesion(IdEmpleado, conexion.sqlConnection);
                 sqlCommand.ExecuteNonQuery();
             }
             catch (System.Exception)

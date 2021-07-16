@@ -37,6 +37,7 @@ namespace VitalCareRx
             //Variables miembro
             miEmpleado = empleado;       
             farmaco.MostrarFarmaco(dgFarmacos);
+            farmaco.IdEmpleado = miEmpleado.IdEmpleado;
         }
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
