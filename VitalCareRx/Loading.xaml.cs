@@ -29,7 +29,7 @@ namespace VitalCareRx
         private string usuarioActual;
         private int codigoEmpleado;
 
-        public Loading(string empleado, int codigo)
+        public Loading(string empleado, int codigo, int puesto)
         {
             InitializeComponent();
             usuarioActual = empleado;

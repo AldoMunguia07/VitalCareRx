@@ -10,6 +10,7 @@ using System.Configuration;
 using System.Data;
 using System.Windows.Controls;
 
+
 namespace VitalCareRx
 {
     class Empleado
@@ -31,24 +32,37 @@ namespace VitalCareRx
 
         public string Celular { get; set; }
 
+        public string Correo { get; set; }
+
+        public DateTime FechaNacimiento { get; set; }
+
         public int IdSexo { get; set; }
+
+        public int IdPuesto { get; set; }
 
         public string NombreUsuario { get; set; }
 
         public string Contrasenia { get; set; }
 
+        public bool Estado { get; set; }
+
         public Empleado() { }
 
-        public Empleado(string primerNombre, string segundoNombre, string primerApellido, string segundoApellido, string celular, int idSexo, string nombreUsuario, string contrasenia )
+        public Empleado(int idEmpleado, string primerNombre, string segundoNombre, string primerApellido, string segundoApellido, string celular, string correo, DateTime fechaNacimiento, int idSexo, int idPuesto, string nombreUsuario, string contrasenia, bool estado )
         {
+            IdEmpleado = idEmpleado;
             PrimerNombre = primerNombre;
             SegundoNombre = segundoNombre;
             PrimerApellido = primerApellido;
             SegundoApellido = segundoApellido;
             Celular = celular;
+            Correo = correo;
+            FechaNacimiento = fechaNacimiento;
             IdSexo = idSexo;
+            IdPuesto = idPuesto;
             NombreUsuario = nombreUsuario;
             Contrasenia = contrasenia;
+            Estado = estado;
 
 
         }
@@ -79,12 +93,9 @@ namespace VitalCareRx
                     {
                         // Obtener los valores del empleado si la consulta retorna valores
                         empleado.IdEmpleado = Convert.ToInt32(rdr["idEmpleado"]);
-                        empleado.PrimerNombre = rdr["primerNombre"].ToString();
-                        empleado.SegundoNombre = rdr["segundoNombre"].ToString();
-                        empleado.PrimerApellido = rdr["primerApellido"].ToString();
-                        empleado.SegundoApellido = rdr["segundoApellido"].ToString();
-                        empleado.Celular = rdr["celular"].ToString();
-                        empleado.IdSexo = Convert.ToInt32(rdr["idSexo"]);
+                        empleado.PrimerNombre = rdr["primerNombre"].ToString();                        
+                        empleado.PrimerApellido = rdr["primerApellido"].ToString();                    
+                        empleado.IdPuesto = Convert.ToInt32(rdr["idPuesto"]);
                         empleado.NombreUsuario = rdr["nombreUsuario"].ToString();
                         empleado.Contrasenia = rdr["contrasenia"].ToString();
 
@@ -127,9 +138,13 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@primerApellido", empleado.PrimerApellido);
                 sqlCommand.Parameters.AddWithValue("@segundoApellido", empleado.SegundoApellido);
                 sqlCommand.Parameters.AddWithValue("@celular", empleado.Celular);
+                sqlCommand.Parameters.AddWithValue("@correo", empleado.Correo);
+                sqlCommand.Parameters.AddWithValue("@fechaNacimiento", empleado.FechaNacimiento);
                 sqlCommand.Parameters.AddWithValue("@idSexo", empleado.IdSexo);
+                sqlCommand.Parameters.AddWithValue("@idPuesto", empleado.IdPuesto);
                 sqlCommand.Parameters.AddWithValue("@nombreUsuario", empleado.NombreUsuario);
                 sqlCommand.Parameters.AddWithValue("@contrasenia", empleado.Contrasenia);
+                sqlCommand.Parameters.AddWithValue("@estado", empleado.Estado);
                 sqlCommand.Parameters.AddWithValue("@accion", "insertar");
 
                 sqlCommand.ExecuteNonQuery();
@@ -168,9 +183,13 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@primerApellido", empleado.PrimerApellido);
                 sqlCommand.Parameters.AddWithValue("@segundoApellido", empleado.SegundoApellido);
                 sqlCommand.Parameters.AddWithValue("@celular", empleado.Celular);
+                sqlCommand.Parameters.AddWithValue("@correo", empleado.Correo);
+                sqlCommand.Parameters.AddWithValue("@fechaNacimiento", empleado.FechaNacimiento);
                 sqlCommand.Parameters.AddWithValue("@idSexo", empleado.IdSexo);
+                sqlCommand.Parameters.AddWithValue("@idPuesto", empleado.IdPuesto);
                 sqlCommand.Parameters.AddWithValue("@nombreUsuario", empleado.NombreUsuario);
                 sqlCommand.Parameters.AddWithValue("@contrasenia", empleado.Contrasenia);
+                sqlCommand.Parameters.AddWithValue("@estado", empleado.Estado);
                 sqlCommand.Parameters.AddWithValue("@accion", "modificar");
 
                 sqlCommand.ExecuteNonQuery();
@@ -226,8 +245,9 @@ namespace VitalCareRx
 
         }
 
+        
         public void CargarTextBox(int codigoEmpleado, TextBox txtUsuario, TextBox txtPassword, TextBox txtPrimerNombre, TextBox txtSegundoNombre, TextBox txtPrimerApellido, TextBox txtSegundoApellido,
-            TextBox txtCelular, ComboBox cmbSexo)
+            TextBox txtCelular, TextBox txtCorreo, DatePicker fechaNacimiento, ComboBox cmbSexo)
         {
             try
             {
@@ -254,6 +274,8 @@ namespace VitalCareRx
                     txtPrimerApellido.Text = Empleado.Rows[0]["primerApellido"].ToString();
                     txtSegundoApellido.Text = Empleado.Rows[0]["segundoApellido"].ToString();
                     txtCelular.Text = Empleado.Rows[0]["celular"].ToString();
+                    txtCorreo.Text = Empleado.Rows[0]["correo"].ToString();
+                    fechaNacimiento.SelectedDate = Convert.ToDateTime(Empleado.Rows[0]["fechaNacimiento"]);
                     cmbSexo.SelectedValue = Empleado.Rows[0]["idSexo"].ToString();
 
                 }
