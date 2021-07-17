@@ -150,5 +150,107 @@ namespace VitalCareRx
             }
          
         }
+
+
+        public void RegistrarEntrada(Empleado empleado)
+        {
+
+            try
+            {
+                conexion.sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand("sp_Aportes", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.AddWithValue("@idEmpleado", empleado.IdEmpleado);
+                sqlCommand.Parameters.AddWithValue("@HoraEntrada", DateTime.Now);
+                sqlCommand.Parameters.AddWithValue("@accion", "InsertarEntrada");
+                sqlCommand.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+
+
+            }
+
+        }
+
+        public void RegistrarSalida(Empleado empleado)
+        {
+
+            try
+            {
+                conexion.sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand("sp_Aportes", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.AddWithValue("@HoraSalida", DateTime.Now);
+                sqlCommand.Parameters.AddWithValue("@idControlEmpleado", CapturarControl(empleado));
+                sqlCommand.Parameters.AddWithValue("@accion", "InsertarSalida");
+                sqlCommand.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+
+
+            }
+
+        }
+
+        public int CapturarControl(Empleado empleado)
+        {
+
+            try
+            {
+               
+
+                SqlCommand sqlCommand = new SqlCommand("sp_Aportes", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.AddWithValue("@idEmpleado", empleado.IdEmpleado);
+                sqlCommand.Parameters.AddWithValue("@accion", "CapturarIdControl");
+              
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    DataTable data = new DataTable();
+                    sqlDataAdapter.Fill(data);
+                    return (Convert.ToInt32(data.Rows[0]["idControlEmpleado"]));
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+               
+
+
+            }
+
+        }
     }
 }

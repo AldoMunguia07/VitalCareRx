@@ -29,12 +29,46 @@
         <Grid Margin="250,10,0,0">
 
             <Grid x:Name="GridPrincipal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Margin="183,295,334.2,295"/>
-            <Image Source="IMAGENES/PrimeroDios.png" Height="155" VerticalAlignment="Top" Margin="10,158,10,0" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="4"/>
-            <TextBlock Foreground="#74EEAB" HorizontalAlignment="Left" Height="71" Margin="212,318,0,0" TextWrapping="Wrap" Text="¡BIENVENIDO!" VerticalAlignment="Top" Width="364" TextAlignment="Center" FontSize="48" FontWeight="Bold"/>
-            <Label  Name="lbFecha" HorizontalContentAlignment="Center"  HorizontalAlignment="Left" Content="TIMER"   Margin="184,416,0,0" VerticalAlignment="Top" Height="80" Width="410" FontSize="60" FontWeight="Bold"   />
-            <Label  Name="lbDate" HorizontalContentAlignment="Center"  HorizontalAlignment="Left" Content="TIMER"   Margin="184,496,0,0" VerticalAlignment="Top" Height="54" Width="410" FontSize="35" FontWeight="Bold" Foreground="#708090"   />
-        </Grid>
+            <Image Source="IMAGENES/PrimeroDios.png" Height="155" VerticalAlignment="Top" Margin="10,32,10,0" RenderTransformOrigin="0.5,0.5"/>
+            <TextBlock Foreground="#74EEAB" HorizontalAlignment="Left" Height="71" Margin="212,192,0,0" TextWrapping="Wrap" Text="¡BIENVENIDO!" VerticalAlignment="Top" Width="364" TextAlignment="Center" FontSize="48" FontWeight="Bold"/>
+            <Label  Name="lbFecha" HorizontalContentAlignment="Center"  HorizontalAlignment="Left" Content="TIMER"   Margin="184,264,0,0" VerticalAlignment="Top" Height="80" Width="410" FontSize="60" FontWeight="Bold"   />
+            <Label  Name="lbDate" HorizontalContentAlignment="Center"  HorizontalAlignment="Left" Content="TIMER"   Margin="184,344,0,0" VerticalAlignment="Top" Height="54" Width="410" FontSize="35" FontWeight="Bold" Foreground="#708090"   />
+            <Button Name="btnSalida" Content="Marcar hora salida" HorizontalAlignment="Left" Height="136" Margin="311,420,0,0" VerticalAlignment="Top" Width="142" Style="{DynamicResource RoundCorner}"   Foreground="White" BorderBrush="White" Click="btnSalida_Click" >
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="80"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Background>
 
+                    <LinearGradientBrush>
+
+                        <GradientStop Color="#74EEAB" Offset="0.9"/>
+                        <GradientStop Color="#1c1c1c" Offset="0.1"/>
+                    </LinearGradientBrush>
+
+                </Button.Background>
+
+            </Button>
+            <Button Name="btnEntradaboton" Content="Marcar Hora Entrada" HorizontalAlignment="Left" Height="136" Margin="89,420,0,0" VerticalAlignment="Top" Width="142" Style="{DynamicResource RoundCorner}"   Foreground="White" BorderBrush="White" Click="btnEntradaboton_Click" >
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="80"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Background>
+
+                    <LinearGradientBrush>
+
+                        <GradientStop Color="#74EEAB" Offset="0.9"/>
+                        <GradientStop Color="#1c1c1c" Offset="0.1"/>
+                    </LinearGradientBrush>
+
+                </Button.Background>
+
+            </Button>
+           
+        </Grid>
         <Grid Width="250" HorizontalAlignment="Left" >
             <Grid.Background>
                 <LinearGradientBrush>

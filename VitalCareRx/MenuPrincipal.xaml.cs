@@ -27,13 +27,13 @@ namespace VitalCareRx
         
 
         Empleado miEmpleado = new Empleado();
+        AportesControl AportesControl = new AportesControl();
         public MenuPrincipal(Empleado empleado)
         {
             InitializeComponent();
             miEmpleado = empleado;
             lbUsuario.Content = String.Format("{0} {1}", miEmpleado.PrimerNombre,  miEmpleado.PrimerApellido);
-
-
+            
             DispatcherTimer LiveTime = new DispatcherTimer(); //Instanciación de objeto de tipo DispatcherTimer.
             LiveTime.Interval = TimeSpan.FromSeconds(1);
             LiveTime.Tick += timer_Tick;
@@ -47,6 +47,7 @@ namespace VitalCareRx
         {
            
             lbFecha.Content = DateTime.Now.ToLongTimeString();
+
         }
 
         private void ButtonFechar_Click(object sender, RoutedEventArgs e)
@@ -165,6 +166,19 @@ namespace VitalCareRx
            Informacion informacion= new Informacion(miEmpleado);
            informacion.Show();
            this.Close();
+        }
+
+        private void btnEntradaboton_Click(object sender, RoutedEventArgs e)
+        {
+            AportesControl.RegistrarEntrada(miEmpleado);
+            btnEntradaboton.Visibility = Visibility.Hidden;
+            MessageBox.Show("A marcado la hora de entrada!");
+        }
+
+        private void btnSalida_Click(object sender, RoutedEventArgs e)
+        {
+            AportesControl.RegistrarSalida(miEmpleado);
+            MessageBox.Show("A marcado la hora de salida!");
         }
     }
 }
