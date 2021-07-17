@@ -32,18 +32,18 @@ namespace VitalCareRx
         private int codigoFarmaco;
         Validaciones validaciones = new Validaciones();
         LlenarComboBox LlenarComboBox = new LlenarComboBox();
-
+        private Empleado miEmpleado = new Empleado();
         private Receta receta = new Receta();
-
-        public Recetas(int idConsulta, int idRecetaMedica) // Recibe como paramtero el id de la consulta y el id de la receta (La informacion de este formulario se guarda en una tabla detalle)
+       
+        public Recetas(int idConsulta, int idRecetaMedica, Empleado empleado) // Recibe como paramtero el id de la consulta y el id de la receta (La informacion de este formulario se guarda en una tabla detalle)
         {
             InitializeComponent();
             codigoConsulta = idConsulta;
             codigoRecetaMedica = idRecetaMedica;
-
+            miEmpleado = empleado;
             LlenarComboBox.CargarFarmacos(cmbFarmacos);
             receta.MostrarFarmacos(dgRecetas, codigoConsulta);
-
+            receta.IdEmpleado = miEmpleado.IdEmpleado;
             validarSeleccionado = false;
             
         }
@@ -151,11 +151,22 @@ namespace VitalCareRx
             TextRange indicaciones = new TextRange(rtxtIndicaciones.Document.ContentStart, rtxtIndicaciones.Document.ContentEnd);
             TextRange duracionTratamiento = new TextRange(rtxtDuracionTratamiento.Document.ContentStart, rtxtDuracionTratamiento.Document.ContentEnd);
 
+            
             receta.IdConsulta = codigoConsulta;
             receta.Indicaciones = indicaciones.Text.Substring(0, indicaciones.Text.Length - 2);
             receta.DuracionTratamiento = duracionTratamiento.Text.Substring(0, duracionTratamiento.Text.Length - 2);
             receta.Cantidad = Convert.ToInt32(txtCantidad.Text);
-            receta.IdFarmaco = Convert.ToInt32(cmbFarmacos.SelectedValue);
+            if (validarSeleccionado)
+            {
+                receta.IdFarmaco = codigoFarmaco;
+               
+                
+            }
+            else 
+            {
+                receta.IdFarmaco = Convert.ToInt32(cmbFarmacos.SelectedValue);
+            }
+            
             receta.IdReceta = codigoRecetaMedica;
             
         }
@@ -214,10 +225,13 @@ namespace VitalCareRx
                 TextRange DuracionTratamiento = new TextRange(rtxtDuracionTratamiento.Document.ContentStart, rtxtDuracionTratamiento.Document.ContentEnd);
                 TextRange Indicaciones = new TextRange(rtxtIndicaciones.Document.ContentStart, rtxtIndicaciones.Document.ContentEnd);
 
+                codigoRecetaMedica = Convert.ToInt32(rowSelected.Row["Receta Medica"].ToString());
                 cmbFarmacos.SelectedValue = rowSelected.Row["Codigo Farmaco"].ToString();
                 txtCantidad.Text = rowSelected.Row["Cantidad"].ToString();
                 DuracionTratamiento.Text = rowSelected.Row["Duracion"].ToString();
                 Indicaciones.Text = rowSelected.Row["Indicaciones"].ToString();
+
+
 
                 codigoFarmaco = Convert.ToInt32(rowSelected.Row["Codigo Farmaco"].ToString()); // Se pasa id de farmaco para la correspondinete validacion en el proceso de modificar un farmaco.
 

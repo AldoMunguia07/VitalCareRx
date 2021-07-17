@@ -15,6 +15,7 @@ namespace VitalCareRx
     class Paciente
     {
         Conexion conexion = new Conexion();
+        AportesControl aportes = new AportesControl();
 
         //Propiedades
         public int IdPaciente { get; set; }
@@ -44,8 +45,10 @@ namespace VitalCareRx
 
         public int IdSexo { get; set; }
 
-        
-   
+        public int IdEmpleado { get; set; }
+
+
+
 
 
         // Constructores
@@ -100,7 +103,7 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@idSexo", paciente.IdSexo);
                 sqlCommand.Parameters.AddWithValue("@estado", paciente.Estado);
                 sqlCommand.Parameters.AddWithValue("@accion", "insertar");
-              
+                aportes.ContextoSesion(IdEmpleado, conexion.sqlConnection);
 
 
                 sqlCommand.ExecuteNonQuery();
@@ -152,7 +155,7 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@idSexo", paciente.IdSexo);
                 sqlCommand.Parameters.AddWithValue("@estado", paciente.Estado);
                 sqlCommand.Parameters.AddWithValue("@accion", "modificar");
-
+                aportes.ContextoSesion(IdEmpleado, conexion.sqlConnection);
                 sqlCommand.ExecuteNonQuery();
 
             }
@@ -185,7 +188,7 @@ namespace VitalCareRx
                 // Establecer los valores de los parámetros
                 sqlCommand.Parameters.AddWithValue("@idPaciente", paciente.IdPaciente);
                 sqlCommand.Parameters.AddWithValue("@accion", "banear");
-
+                aportes.ContextoSesion(IdEmpleado, conexion.sqlConnection);
                 sqlCommand.ExecuteNonQuery();
             }
             catch (Exception)

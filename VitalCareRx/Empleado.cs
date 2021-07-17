@@ -19,6 +19,7 @@ namespace VitalCareRx
         //Variables miembro
 
         Conexion conexion = new Conexion();
+        AportesControl aportes = new AportesControl();
 
         public int IdEmpleado { get; set; }
 
@@ -147,7 +148,7 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@contrasenia", empleado.Contrasenia);
                 sqlCommand.Parameters.AddWithValue("@estado", empleado.Estado);
                 sqlCommand.Parameters.AddWithValue("@accion", "insertar");
-
+                aportes.ContextoSesion(IdEmpleado, conexion.sqlConnection);
                 sqlCommand.ExecuteNonQuery();
 
             }
@@ -192,7 +193,7 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@contrasenia", empleado.Contrasenia);
                 sqlCommand.Parameters.AddWithValue("@estado", empleado.Estado);
                 sqlCommand.Parameters.AddWithValue("@accion", "modificar");
-
+                aportes.ContextoSesion(IdEmpleado, conexion.sqlConnection);
                 sqlCommand.ExecuteNonQuery();
 
             }

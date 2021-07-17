@@ -83,13 +83,14 @@ namespace VitalCareRx
 
                                     consulta.CrearConsulta(consulta);
 
-                                    LimpiarFormulario();
+                                    
 
-                                    OcultarColumnas();
+                                    consulta.MostrarConsultas(dgConsultas);
+                                    LimpiarFormulario();
 
                                     MessageBox.Show("La consulta se ha insertado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                                    consulta.MostrarConsultas(dgConsultas);
+
 
                                 }
                                 catch (Exception)
@@ -181,8 +182,8 @@ namespace VitalCareRx
             cmbPaciente.SelectedValue = null;
             seleccionado = false;
             btnReceta.Content = "Receta";
-           
             txtBuscar.Clear();
+            OcultarColumnas();
         }
 
 
@@ -251,15 +252,16 @@ namespace VitalCareRx
 
                                 consulta.ModificarConsulta(consulta);
 
-                                LimpiarFormulario();
+                              
 
                                 consulta.MostrarConsultas(dgConsultas);
 
-                                OcultarColumnas();
+                               
+
+                                LimpiarFormulario();
+
 
                                 MessageBox.Show("La consulta se ha modificado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                                
                             }
                             else
                             {
@@ -306,9 +308,10 @@ namespace VitalCareRx
         {
             if (seleccionado)
             {
-                receta.RecetaMedica(idConsulta,idRecetaMedica,consulta);
+                
+                receta.RecetaMedica(idConsulta,idRecetaMedica,consulta, miEmpleado);
                 idRecetaMedica = consulta.CapturarIdRecetaMedica(idConsulta);
-                Recetas recetas = new Recetas(idConsulta,idRecetaMedica);
+                Recetas recetas = new Recetas(idConsulta, idRecetaMedica, miEmpleado);
                 recetas.ShowDialog(); //ShowDialog perimte volver a ventana de consulta una vez se cierre la ventana de Recetas.
                 btnReceta.Content = "Ver receta";
                 
@@ -343,8 +346,9 @@ namespace VitalCareRx
 
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
-            LimpiarFormulario();
+            
             consulta.MostrarConsultas(dgConsultas);
+            LimpiarFormulario();
 
         }
 

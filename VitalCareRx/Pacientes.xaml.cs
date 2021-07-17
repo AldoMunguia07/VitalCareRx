@@ -46,7 +46,7 @@ namespace VitalCareRx
             InitializeComponent();
             miEmpleado = empleado;
             btnEstado.Background = new SolidColorBrush(Color.FromArgb(165, 42, 165, 42)); // Por defecto el botón de estado se inicializa en color verde
-            
+            paciente.IdEmpleado = miEmpleado.IdEmpleado;
             
             LlenarComboBox.CargarComboBoxSexo(cmbSexo);
             LlenarComboBox.CargarComboBoxEstado(cmbEstado);

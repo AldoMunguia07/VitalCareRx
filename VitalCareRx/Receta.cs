@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 using System.Windows.Controls;
+using System.Windows;
 
 namespace VitalCareRx
 {
@@ -17,6 +18,7 @@ namespace VitalCareRx
         //Variables miembro
 
         Conexion conexion = new Conexion();
+        AportesControl aportes = new AportesControl();
 
 
         public int IdReceta {get; set;}
@@ -31,7 +33,9 @@ namespace VitalCareRx
 
         public string Indicaciones { get; set; }
 
-        
+        public int IdEmpleado { get; set; }
+
+
 
         // Constructores
 
@@ -112,8 +116,7 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@duracion", receta.DuracionTratamiento);
                 sqlCommand.Parameters.AddWithValue("@indicacion", receta.Indicaciones);
                 sqlCommand.Parameters.AddWithValue("@accion", "InsertarFarmaco");
-
-
+                aportes.ContextoSesion(IdEmpleado, conexion.sqlConnection);
                 sqlCommand.ExecuteNonQuery();
 
             }
@@ -146,7 +149,7 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@idRecetaMedica", receta.IdReceta);
                 sqlCommand.Parameters.AddWithValue("@idFarmaco", receta.IdFarmaco);
                 sqlCommand.Parameters.AddWithValue("@accion", "EliminarFarmaco");
-
+                aportes.ContextoSesion(IdEmpleado, conexion.sqlConnection);
                 sqlCommand.ExecuteNonQuery();
             }
             catch (Exception)
@@ -183,7 +186,7 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@duracion", receta.DuracionTratamiento);
                 sqlCommand.Parameters.AddWithValue("@indicacion", receta.Indicaciones);
                 sqlCommand.Parameters.AddWithValue("@accion", "ModificarFarmaco");
-
+                aportes.ContextoSesion(IdEmpleado, conexion.sqlConnection);
                 sqlCommand.ExecuteNonQuery();
             }
             catch (Exception)
@@ -248,7 +251,7 @@ namespace VitalCareRx
         /// <summary>
         /// Metodo para crear o visualizar una receta medica
         /// </summary>
-        public void RecetaMedica(int idConsulta, int idRecetaMedica, Consulta consulta)
+        public void RecetaMedica(int idConsulta, int idRecetaMedica, Consulta consulta, Empleado empleado)
         {
             if (!ValidarCrearRecetaMedica(idConsulta)) //Si la consulta no tiene una receta procede a crearle una.
             {
@@ -265,14 +268,15 @@ namespace VitalCareRx
                     // Establecer los valores de los parámetros
                     sqlCommand.Parameters.AddWithValue("@idConsulta", idConsulta);
                     sqlCommand.Parameters.AddWithValue("@accion", "InsertarReceta");
+                    aportes.ContextoSesion(empleado.IdEmpleado, conexion.sqlConnection);
                     sqlCommand.ExecuteNonQuery();
 
                     idRecetaMedica = consulta.CapturarIdRecetaMedica(idConsulta);
 
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
+                    MessageBox.Show(ex.Message);
                     throw;
                 }
                 finally
