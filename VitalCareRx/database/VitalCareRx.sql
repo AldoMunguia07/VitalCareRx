@@ -281,7 +281,7 @@ GO
 --TABLA Personas.Puesto
 ALTER TABLE Personas.Puesto
 	ADD CONSTRAINT CHK_Personas_Puesto$PuestoEmpleado
-	CHECK (puesto IN('Administrador', 'Doctor', 'Enfermero')) -- 'Vigilante','Conserje'
+	CHECK (puesto IN('Administrador', 'Doctor')) 
 
 
 
@@ -316,11 +316,6 @@ GO
 
 
 -- Tabla Consultas.Consulta
-ALTER TABLE Consultas.Consulta
-		ADD CONSTRAINT AK_Consultas_Consulta_idPaciente
-		UNIQUE NONCLUSTERED (idPaciente)
-GO
-
 
 ALTER TABLE Consultas.Consulta WITH CHECK
 		ADD CONSTRAINT CHK_Consultas_Consulta$VerificarTemperatura
@@ -329,7 +324,7 @@ GO
 
 ALTER TABLE Consultas.Consulta WITH CHECK
 		ADD CONSTRAINT CHK_Consultas_Consulta$VerificarFechaConsulta
-		CHECK (fechaConsulta = CONVERT (date, GETDATE()))
+		CHECK (CONVERT(DATE,fechaConsulta) = CONVERT(DATE,GETDATE()))
 GO
 
 

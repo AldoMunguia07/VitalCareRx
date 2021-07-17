@@ -130,48 +130,7 @@ namespace VitalCareRx
 
        
 
-        /// <summary>
-        /// Cargar el codigode la cita en el comboBox al seleccionar una consulta.
-        /// </summary>
-        public void CargarCodigoCitaSeleccionar(int idConsulta, ComboBox comboBox)
-        {
-
-            try
-            {
-                conexion.sqlConnection.Open();
-
-                SqlCommand sqlCommand = new SqlCommand("sp_LlenarComboBox", conexion.sqlConnection);
-
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-
-
-                sqlCommand.Parameters.AddWithValue("@accion", "CargarCodigoCitaSeleccionar");
-
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
-
-                using (sqlDataAdapter)
-                {
-                    DataTable dataTable = new DataTable();
-                    sqlDataAdapter.Fill(dataTable);
-                    comboBox.DisplayMemberPath = "idCita";
-                    comboBox.SelectedValuePath = "idCita";
-                    comboBox.ItemsSource = dataTable.DefaultView;
-                    ;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                conexion.sqlConnection.Close();
-            }
-
-
-
-        }
+        
 
         /// <summary>
         /// Metodo para cargar el ComboBox farmacos con información.
@@ -233,6 +192,43 @@ namespace VitalCareRx
                     sqlDataAdapter.Fill(dataTable);
                     comboBox.DisplayMemberPath = "Empleado";
                     comboBox.SelectedValuePath = "idEmpleado";
+                    comboBox.ItemsSource = dataTable.DefaultView;
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                // Cerrar la conexión
+                conexion.sqlConnection.Close();
+            }
+
+        }
+
+        public void CargarPaciente(ComboBox comboBox)
+        {
+            try
+            {
+                conexion.sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand("sp_LlenarComboBox", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.AddWithValue("@accion", "cargarPacientes");
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+                    sqlDataAdapter.Fill(dataTable);
+                    comboBox.DisplayMemberPath = "Paciente";
+                    comboBox.SelectedValuePath = "idPaciente";
                     comboBox.ItemsSource = dataTable.DefaultView;
 
                 }

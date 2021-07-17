@@ -8,6 +8,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Controls;
+using System.Windows;
 
 namespace VitalCareRx
 {
@@ -23,18 +24,23 @@ namespace VitalCareRx
         public float Temperatura { get; set; }
         public string PresionArterial { get; set; }
         public int IdEmpleado { get; set; }
-        public int IdCita { get; set; }
+        
+        public DateTime Fecha { get; set;}
+
+        public int IdPaciente { get; set;}
 
         public Consulta() { }
 
-        public Consulta(string motivoConsulta, string diagnosticoConsulta, float temperatura, string presionArterial, int idEmpleado, int idCita ) 
+        AportesControl aportesControl = new AportesControl();
+        public Consulta(string motivoConsulta, string diagnosticoConsulta, float temperatura, string presionArterial, int idEmpleado, DateTime fecha, int idPaciente ) 
         {
             MotivoConsulta = motivoConsulta;
             DiagnosticoConsulta = diagnosticoConsulta;
             Temperatura = temperatura;
             PresionArterial = presionArterial;
             IdEmpleado = idEmpleado;
-            IdCita = idCita;
+            Fecha = fecha;
+            IdPaciente = idPaciente;
 
         }
 
@@ -141,14 +147,14 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@temperatura", consulta.Temperatura);
                 sqlCommand.Parameters.AddWithValue("@presionArterial", consulta.PresionArterial);
                 sqlCommand.Parameters.AddWithValue("@idEmpleado", consulta.IdEmpleado);
-                sqlCommand.Parameters.AddWithValue("@idCita", consulta.IdCita);
+                sqlCommand.Parameters.AddWithValue("@idPaciente", consulta.IdPaciente);
                 sqlCommand.Parameters.AddWithValue("@accion", "Insertar");
-
-            sqlCommand.ExecuteNonQuery();
+                aportesControl.ContextoSesion(IdEmpleado, conexion.sqlConnection);
+                sqlCommand.ExecuteNonQuery();
             }
             catch (Exception e)
             {
-
+                MessageBox.Show(e.Message);
                 throw e;
             }
             finally
@@ -178,10 +184,11 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@temperatura", consulta.Temperatura);
                 sqlCommand.Parameters.AddWithValue("@presionArterial", consulta.PresionArterial);
                 sqlCommand.Parameters.AddWithValue("@idEmpleado", consulta.IdEmpleado);
-                sqlCommand.Parameters.AddWithValue("@idCita", consulta.IdCita);
+                sqlCommand.Parameters.AddWithValue("@idPaciente", consulta.IdPaciente);
                 sqlCommand.Parameters.AddWithValue("@idConsulta", consulta.IdConsulta);
                 sqlCommand.Parameters.AddWithValue("@accion", "Modificar");
 
+                aportesControl.ContextoSesion(IdEmpleado, conexion.sqlConnection);
                 sqlCommand.ExecuteNonQuery();
             }
             catch (Exception)

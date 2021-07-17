@@ -49,8 +49,18 @@ namespace VitalCareRx
 
             miEmpleado = empleado;
             consulta.MostrarConsultas(dgConsultas);
+            LlenarComboBox.CargarPaciente(cmbPaciente);
+
            
 
+        }
+
+        /// <summary>
+        /// Ocultar columnas del DataGridView
+        /// </summary>
+        private void OcultarColumnas()
+        {
+            dgConsultas.Columns[0].Visibility = Visibility.Hidden;
         }
 
 
@@ -74,6 +84,8 @@ namespace VitalCareRx
                                     consulta.CrearConsulta(consulta);
 
                                     LimpiarFormulario();
+
+                                    OcultarColumnas();
 
                                     MessageBox.Show("La consulta se ha insertado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -130,7 +142,7 @@ namespace VitalCareRx
             TextRange DiagnosticoConsulta = new TextRange(rtxtDiagnostico.Document.ContentStart, rtxtDiagnostico.Document.ContentEnd);
 
             if (MotivoConsulta.Text!= "\r\n" && DiagnosticoConsulta.Text != "\r\n"
-                && txtTemperatura.Text != string.Empty && txtPresionArterial.Text != string.Empty && cmbCodigoCitas.SelectedValue != null) 
+                && txtTemperatura.Text != string.Empty && txtPresionArterial.Text != string.Empty && cmbPaciente.SelectedValue != null) 
             {
                 return true;
             }
@@ -152,7 +164,7 @@ namespace VitalCareRx
             consulta.Temperatura = float.Parse(txtTemperatura.Text);
             consulta.PresionArterial = txtPresionArterial.Text;
             consulta.IdEmpleado = miEmpleado.IdEmpleado;
-            consulta.IdCita = Convert.ToInt32(cmbCodigoCitas.SelectedValue);
+            consulta.IdPaciente = Convert.ToInt32(cmbPaciente.SelectedValue);
 
         }
 
@@ -166,7 +178,7 @@ namespace VitalCareRx
             rtxtDiagnostico.Document.Blocks.Clear();
             txtTemperatura.Text = string.Empty;
             txtPresionArterial.Text = string.Empty;
-            cmbCodigoCitas.SelectedValue = null;
+            cmbPaciente.SelectedValue = null;
             seleccionado = false;
             btnReceta.Content = "Receta";
            
@@ -197,9 +209,8 @@ namespace VitalCareRx
                 DiagnosticoConsulta.Text = rowSelected.Row["Diagnostico"].ToString();
 
                 txtTemperatura.Text = rowSelected.Row["Temperatura"].ToString();
-                txtPresionArterial.Text = rowSelected.Row["Presion arterial"].ToString();
-                LlenarComboBox.CargarCodigoCitaSeleccionar(Convert.ToInt32(rowSelected.Row["Codigo de consulta"]),cmbCodigoCitas);
-                cmbCodigoCitas.SelectedValue = rowSelected.Row["Codigo de cita"].ToString();
+                txtPresionArterial.Text = rowSelected.Row["Presión arterial"].ToString();
+                cmbPaciente.SelectedValue = rowSelected.Row["idPaciente"].ToString();
 
                 consulta.IdConsulta = Convert.ToInt32(rowSelected.Row["Codigo de consulta"]);
 
@@ -242,9 +253,13 @@ namespace VitalCareRx
 
                                 LimpiarFormulario();
 
+                                consulta.MostrarConsultas(dgConsultas);
+
+                                OcultarColumnas();
+
                                 MessageBox.Show("La consulta se ha modificado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                                consulta.MostrarConsultas(dgConsultas);
+                                
                             }
                             else
                             {
@@ -283,6 +298,7 @@ namespace VitalCareRx
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {
             consulta.Buscar(txtBuscar.Text, dgConsultas);
+            OcultarColumnas();
         }
 
        
@@ -410,6 +426,11 @@ namespace VitalCareRx
         private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             right = false;
+        }
+
+        private void dgConsultas_Loaded(object sender, RoutedEventArgs e)
+        {
+            OcultarColumnas();
         }
     }
 }
