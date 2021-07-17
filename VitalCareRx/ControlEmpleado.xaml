@@ -1,0 +1,73 @@
+﻿<Window x:Class="VitalCareRx.ControlEmpleado"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:VitalCareRx"
+        mc:Ignorable="d"
+        Title="ControlEmpleado" Height="590" Width="1090" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" >
+    <Grid>
+
+        <Grid.Background>
+            <LinearGradientBrush>
+                <GradientStop Color="#74EEAB" Offset="0"/>
+                <GradientStop Color="#1c1c1c" Offset="1"/>
+
+
+
+            </LinearGradientBrush>
+        </Grid.Background>
+        <DataGrid  x:Name="gridControlEmpleado" HorizontalAlignment="Left" Height="310" Margin="16,104,0,0" VerticalAlignment="Top" Width="996"/>
+        <DatePicker Name="dtFechaBusqueda" HorizontalAlignment="Left" Margin="223,449,0,0" VerticalAlignment="Top" Width="235" Height="38" SelectedDateChanged="dtFechaBusqueda_SelectedDateChanged" Foreground="White" BorderBrush="#89FFFFFF"/>
+        <ComboBox x:Name ="cmbEmpleado"  HorizontalAlignment="Left" Margin="540,459,0,0" VerticalAlignment="Top" Width="270" Background="{x:Null}"  Height="28" SelectionChanged="cmbEmpleado_SelectionChanged" Foreground="White" BorderBrush="#89FFFFFF" />
+        <Label Content="EMPLEADOS" HorizontalAlignment="Left" Margin="636,435,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="#DDFFFFFF"/>
+        <Image Source="IMAGENES/PrimeroDios.png" Height="103" VerticalAlignment="Top" Margin="8,477,939,0" RenderTransformOrigin="0.5,0.5"/>
+        <Button x:Name="btnRestaurar" Content="Restaurar" HorizontalAlignment="Left" Margin="429,527,0,0" VerticalAlignment="Top" Width="138" Click="btnRestaurar_Click" Background="#FF1C1C1C"/>
+        <materialDesign:PackIcon Kind="Reload" Height="32" Width="27" Foreground="#FFF" Margin="429,527,0,0" />
+        <Rectangle  Height="43" VerticalAlignment="Bottom" Margin="22,0,81,491" RadiusY="10" RadiusX="10" Fill="#FF1C1C1C">
+            <Rectangle.Effect>
+                <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
+            </Rectangle.Effect>
+
+
+
+        </Rectangle>
+
+        <Grid HorizontalAlignment="Left" Height="590" VerticalAlignment="Top" Width="60" Margin="1030,0,0,0">
+
+            <Grid.Background>
+
+                <LinearGradientBrush>
+                    <GradientStop Color="#1c1c1c" Offset="0.01"/>
+
+
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Button x:Name="btnCerrar" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Red" Margin="2,1,3,544" RenderTransformOrigin="0.5,0.5" Click="btnCerrar_Click">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+                <materialDesign:PackIcon Kind="CloseCircleOutline" Height="35" Width="47" RenderTransformOrigin="0.352,0.42" />
+            </Button>
+        </Grid>
+        <Label Content="Listado de control de empleados" HorizontalAlignment="Left" Margin="309,54,0,0" VerticalAlignment="Top" FontSize="30" Foreground="White" Height="45" Width="448"/>
+        <Label Foreground="White" Content="CONTROL EMPLEADOS" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36" FontWeight="Bold"  Height="52" Width="410" RenderTransformOrigin="0.5,0.5" Margin="852,264,-172,0">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Label Content="BUSQUEDA" HorizontalAlignment="Left" Margin="310,435,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="#DDFFFFFF"/>
+
+    </Grid>
+</Window>

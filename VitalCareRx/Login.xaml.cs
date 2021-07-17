@@ -136,7 +136,9 @@ namespace VitalCareRx
 
         private void btnRecuperarPass_Click(object sender, RoutedEventArgs e)
         {
-
+            RecuperarContrasenia recuperarContrasenia = new RecuperarContrasenia();
+            recuperarContrasenia.Show();
+            this.Close();
         }
     }
 }

@@ -101,6 +101,9 @@
     <Compile Include="Bitacora.xaml.cs">
       <DependentUpon>Bitacora.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ControlEmpleado.xaml.cs">
+      <DependentUpon>ControlEmpleado.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Empleados.xaml.cs">
       <DependentUpon>Empleados.xaml</DependentUpon>
     </Compile>
@@ -129,6 +132,9 @@
     <Compile Include="RecetasConsultaPaciente.xaml.cs">
       <DependentUpon>RecetasConsultaPaciente.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RecuperarContrasenia.xaml.cs">
+      <DependentUpon>RecuperarContrasenia.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Validaciones.cs" />
     <Page Include="Bitacora.xaml">
       <SubType>Designer</SubType>
@@ -139,6 +145,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ConsultasPaciente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ControlEmpleado.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -205,6 +215,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RecetasConsultaPaciente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RecuperarContrasenia.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

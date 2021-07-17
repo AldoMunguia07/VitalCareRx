@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:VitalCareRx"
         mc:Ignorable="d"
-        Title="MenuPrincipalAdmin" Height="650" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown"
+        Title="MenuPrincipalAdmin" Height="720" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown"
         MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp">
     <Grid Background="#FFEEEEEE">
         <StackPanel VerticalAlignment="Top">
@@ -29,10 +29,10 @@
         <Grid Margin="250,10,0,0">
 
             <Grid x:Name="GridPrincipal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Margin="183,295,334.2,295"/>
-            <Image Source="IMAGENES/PrimeroDios.png" Height="155" VerticalAlignment="Top" Margin="10,158,10,0" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="4"/>
-            <TextBlock Foreground="#74EEAB" HorizontalAlignment="Left" Height="71" Margin="212,318,0,0" TextWrapping="Wrap" Text="¡BIENVENIDO!" VerticalAlignment="Top" Width="364" TextAlignment="Center" FontSize="48" FontWeight="Bold"/>
-            <Label  Name="lbFecha" HorizontalContentAlignment="Center"  HorizontalAlignment="Left" Content="TIMER"   Margin="184,416,0,0" VerticalAlignment="Top" Height="80" Width="410" FontSize="60" FontWeight="Bold"   />
-            <Label  Name="lbDate" HorizontalContentAlignment="Center"  HorizontalAlignment="Left" Content="TIMER"   Margin="184,496,0,0" VerticalAlignment="Top" Height="54" Width="410" FontSize="35" FontWeight="Bold" Foreground="#708090"   />
+            <Image Source="IMAGENES/PrimeroDios.png" Height="271" VerticalAlignment="Top" Margin="224,107,202,0" RenderTransformOrigin="0.5,0.5"/>
+            <TextBlock Foreground="#74EEAB" HorizontalAlignment="Left" Height="71" Margin="284,389,0,0" TextWrapping="Wrap" Text="¡BIENVENIDO!" VerticalAlignment="Top" Width="364" TextAlignment="Center" FontSize="55" FontWeight="Bold"/>
+            <Label  Name="lbFecha" HorizontalContentAlignment="Center"  HorizontalAlignment="Left" Content="TIMER"   Margin="260,462,0,0" VerticalAlignment="Top" Height="80" Width="410" FontSize="65" FontWeight="Bold"   />
+            <Label  Name="lbDate" HorizontalContentAlignment="Center"  HorizontalAlignment="Left" Content="TIMER"   Margin="258,540,0,0" VerticalAlignment="Top" Height="54" Width="410" FontSize="40" FontWeight="Bold" Foreground="#708090"   />
 
         </Grid>
 
@@ -53,7 +53,7 @@
             <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}">
                 <Grid x:Name="GridCursor" Margin="0 100 0 0" Background="#FF0069C0" Width="10" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top"/>
             </materialDesign:TransitioningContent>
-            <ListView x:Name="ListViewMenu" Margin="0,100,-14,-47" Foreground="LightGray" FontFamily="Champagne &amp; Limousines" FontSize="18" SelectionChanged="ListViewMenu_SelectionChanged" SelectedIndex="0">
+            <ListView x:Name="ListViewMenu" Margin="0,100,-14,0" Foreground="LightGray" FontFamily="Champagne &amp; Limousines" FontSize="18" SelectionChanged="ListViewMenu_SelectionChanged" SelectedIndex="0">
                 <ListViewItem Name="ltInicio" Height="60">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Home" Height="30" Width="30"  />
@@ -84,12 +84,6 @@
                         <TextBlock Text="Mi usuario" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                     </StackPanel>
                 </ListViewItem>
-                <ListViewItem Name="ltInformacion" Height="60" Selected="ltInformacion_Selected">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="InformationOutline" Height="30" Width="30" />
-                        <TextBlock Text="Acerca de VCRx" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
-                    </StackPanel>
-                </ListViewItem>
 
                 <ListViewItem Name="ltEmpleados" Height="60" Selected="ltEmpleados_Selected">
                     <StackPanel Orientation="Horizontal">
@@ -103,6 +97,18 @@
                         <TextBlock Text="Bitacora" FontSize="17" VerticalAlignment="Center" Margin="20 0" Width="70"/>
                     </StackPanel>
                 </ListViewItem>
+                <ListViewItem Name="ltControlEmpleado" Height="60" Selected="ltControlEmpleado_Selected">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="PeopleTickOutline" Height="30" Width="30" />
+                        <TextBlock Text="Control de Empleados" FontSize="17" VerticalAlignment="Center" Margin="20 0" Width="170"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem x:Name="ltInformacion" Height="60" Selected="ltInformacion_Selected">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="InformationOutline" Height="30" Width="30" />
+                        <TextBlock Text="Acerca de VCRx" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                    </StackPanel>
+                </ListViewItem>
                 <ListViewItem Name="ltSalida" Height="60" Selected="ltSalida_Selected">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="ExitRun" Height="30" Width="30" />
@@ -110,10 +116,11 @@
                     </StackPanel>
                 </ListViewItem>
 
+
             </ListView>
             <Label Name="lbUsuario"  Foreground="White" Content="NAME" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="86,38,0,0" FontSize="18" Width="164" Height="36"/>
         </Grid>
-        <materialDesign:PackIcon Kind="Account" Height="95" Width="86" Margin="10,0,0,555" VerticalAlignment="Bottom" Foreground="White" />
+        <materialDesign:PackIcon Kind="Account" Height="95" Width="86" Margin="0,0,0,625" VerticalAlignment="Bottom" Foreground="White" />
 
     </Grid>
 </Window>

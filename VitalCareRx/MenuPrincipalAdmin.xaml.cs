@@ -83,7 +83,7 @@ namespace VitalCareRx
         {
 
             int index = ListViewMenu.SelectedIndex;
-            if (index == 8)
+            if (index == 9)
             {
                 ListViewMenu.SelectedIndex = 0;
                 index = ListViewMenu.SelectedIndex;
@@ -170,6 +170,13 @@ namespace VitalCareRx
         {
             Bitacora bitacora = new Bitacora(miEmpleado);
             bitacora.Show();
+            this.Close();
+        }
+
+        private void ltControlEmpleado_Selected(object sender, RoutedEventArgs e)
+        {
+            ControlEmpleado controlempleado = new ControlEmpleado(miEmpleado);
+            controlempleado.Show();
             this.Close();
         }
     }
