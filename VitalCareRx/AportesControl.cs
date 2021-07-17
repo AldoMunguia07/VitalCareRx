@@ -244,11 +244,114 @@ namespace VitalCareRx
 
                 throw e;
             }
-            finally
+           
+
+        }
+
+        public string MensajeHorasTrabajadas(Empleado empleado)
+        {
+
+            try
             {
+
+                SqlCommand sqlCommand = new SqlCommand("sp_Aportes", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+
+                sqlCommand.Parameters.AddWithValue("@idEmpleado", empleado.IdEmpleado);
+                sqlCommand.Parameters.AddWithValue("@accion", "mensajeFecha");
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    DataTable data = new DataTable();
+                    sqlDataAdapter.Fill(data);
+                    return data.Rows[0]["mensaje"].ToString();
+                }
                
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            
+        }
+
+        public bool validarEntrada(Empleado empleado)
+        {
+            try
+            {
+
+                SqlCommand sqlCommand = new SqlCommand("sp_Aportes", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
 
 
+                sqlCommand.Parameters.AddWithValue("@idEmpleado", empleado.IdEmpleado);
+                sqlCommand.Parameters.AddWithValue("@accion", "validarEntradaSalida");
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    DataTable data = new DataTable();
+                    sqlDataAdapter.Fill(data);
+
+                    if (data.Rows.Count != 0)
+                    {
+                        return false;
+                    }
+
+                    return true;
+                    
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+
+        }
+
+        public bool validarSalida(Empleado empleado)
+        {
+            try
+            {
+
+                SqlCommand sqlCommand = new SqlCommand("sp_Aportes", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+
+                sqlCommand.Parameters.AddWithValue("@idEmpleado", empleado.IdEmpleado);
+                sqlCommand.Parameters.AddWithValue("@accion", "validarEntradaSalida");
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    DataTable data = new DataTable();
+                    sqlDataAdapter.Fill(data);
+
+                    
+                    if (data.Rows[0]["fechaSalida"].ToString() == String.Empty)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
             }
 
         }

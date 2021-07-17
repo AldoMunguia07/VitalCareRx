@@ -35,20 +35,50 @@ namespace VitalCareRx
             lbUsuario.Content = String.Format("{0} {1}", miEmpleado.PrimerNombre,  miEmpleado.PrimerApellido);
             
             DispatcherTimer LiveTime = new DispatcherTimer(); //Instanciación de objeto de tipo DispatcherTimer.
-            LiveTime.Interval = TimeSpan.FromSeconds(1);
+            LiveTime.Interval = TimeSpan.FromMilliseconds(50);
             LiveTime.Tick += timer_Tick;
             LiveTime.Start();
             lbFecha.Content = DateTime.Now.ToLongTimeString(); //Inicializa la fecha y hora
             lbDate.Content = DateTime.Now.ToShortDateString(); //Inicializa la fecha
-          
+            entradaControles();
 
         }
 
         void timer_Tick(object sender, EventArgs e) //Evento para mostrar la fecha y hora en tiempo real
         {
-           
+            lbDate.Content = DateTime.Now.ToShortDateString();
             lbFecha.Content = DateTime.Now.ToLongTimeString();
 
+            entradaControles();
+
+        }
+
+        private void entradaControles()
+        {
+            if(AportesControl.validarEntrada(miEmpleado))
+            {
+                lbHoraEntradaSalida.Content = "Marcar hora entrda";
+                btnEntradaboton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+               
+                lbHoraEntradaSalida.Content = "Marcar hora salida";
+                btnEntradaboton.Visibility = Visibility.Hidden;
+
+                if (AportesControl.validarSalida(miEmpleado))
+                {
+                    lbHoraEntradaSalida.Content = "Marcar hora salida";
+                    btnSalida.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    lbHoraEntradaSalida.Content = "Ya realizó su control diario";
+                    btnSalida.Visibility = Visibility.Hidden;
+                }
+            }
+
+           
         }
 
         private void ButtonFechar_Click(object sender, RoutedEventArgs e)
@@ -175,26 +205,17 @@ namespace VitalCareRx
             MessageBoxResult result = MessageBox.Show("¿Desea marcar hora entrada?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
-                
-                AportesControl.RegistrarEntrada(miEmpleado);
-                btnEntradaboton.Visibility = Visibility.Hidden;
-                string a = "Marcar hora Entrada";
+                AportesControl.RegistrarEntrada(miEmpleado);       
                 lbHoraEntradaSalida.Content = "Marcar hora Salida";
                 MessageBox.Show("A marcado la hora de entrada!");
             }
-          
-
-
-
-
-
 
         }
 
         private void btnSalida_Click(object sender, RoutedEventArgs e)
         {
 
-            MessageBoxResult result = MessageBox.Show("¿Desea marcar hora salida?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult result = MessageBox.Show(String.Format("¿Desea marcar hora salida? \n{0}", AportesControl.MensajeHorasTrabajadas(miEmpleado)), "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
                 AportesControl.RegistrarSalida(miEmpleado);
