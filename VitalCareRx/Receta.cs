@@ -170,7 +170,7 @@ namespace VitalCareRx
         /// Metodo para modificar un farmaco de una receta.
         /// </summary>
         /// <param name="receta"></param>
-        public void ModificarFarmacoReceta(Receta receta)
+        public void ModificarFarmacoReceta(Receta receta, int idFarmaco)
         {
             try
             {
@@ -182,6 +182,7 @@ namespace VitalCareRx
 
                 sqlCommand.Parameters.AddWithValue("@idRecetaMedica", receta.IdReceta);
                 sqlCommand.Parameters.AddWithValue("@idFarmaco", receta.IdFarmaco);
+                sqlCommand.Parameters.AddWithValue("@idFarmaco2", idFarmaco);
                 sqlCommand.Parameters.AddWithValue("@cantidad", receta.Cantidad);
                 sqlCommand.Parameters.AddWithValue("@duracion", receta.DuracionTratamiento);
                 sqlCommand.Parameters.AddWithValue("@indicacion", receta.Indicaciones);

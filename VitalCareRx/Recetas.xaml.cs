@@ -254,7 +254,7 @@ namespace VitalCareRx
                                 
                                 ObtenerValores();
 
-                                receta.ModificarFarmacoReceta(receta);
+                                receta.ModificarFarmacoReceta(receta, Convert.ToInt32(cmbFarmacos.SelectedValue));
 
                                 LimpiarFormulario();
 
