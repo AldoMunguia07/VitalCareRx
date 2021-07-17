@@ -24,7 +24,7 @@ namespace VitalCareRx
     public partial class MenuPrincipal : Window
     {
 
-        
+     
 
         Empleado miEmpleado = new Empleado();
         AportesControl AportesControl = new AportesControl();
@@ -40,6 +40,7 @@ namespace VitalCareRx
             LiveTime.Start();
             lbFecha.Content = DateTime.Now.ToLongTimeString(); //Inicializa la fecha y hora
             lbDate.Content = DateTime.Now.ToShortDateString(); //Inicializa la fecha
+          
 
         }
 
@@ -170,15 +171,37 @@ namespace VitalCareRx
 
         private void btnEntradaboton_Click(object sender, RoutedEventArgs e)
         {
-            AportesControl.RegistrarEntrada(miEmpleado);
-            btnEntradaboton.Visibility = Visibility.Hidden;
-            MessageBox.Show("A marcado la hora de entrada!");
+
+            MessageBoxResult result = MessageBox.Show("¿Desea marcar hora entrada?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                
+                AportesControl.RegistrarEntrada(miEmpleado);
+                btnEntradaboton.Visibility = Visibility.Hidden;
+                string a = "Marcar hora Entrada";
+                lbHoraEntradaSalida.Content = "Marcar hora Salida";
+                MessageBox.Show("A marcado la hora de entrada!");
+            }
+          
+
+
+
+
+
+
         }
 
         private void btnSalida_Click(object sender, RoutedEventArgs e)
         {
-            AportesControl.RegistrarSalida(miEmpleado);
-            MessageBox.Show("A marcado la hora de salida!");
+
+            MessageBoxResult result = MessageBox.Show("¿Desea marcar hora salida?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                AportesControl.RegistrarSalida(miEmpleado);
+                MessageBox.Show("A marcado la hora de salida!");
+            }   
         }
+
+        
     }
 }
