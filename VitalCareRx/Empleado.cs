@@ -68,6 +68,89 @@ namespace VitalCareRx
 
         }
 
+        public void VerEmpleados(DataGrid grid, int estado)
+        {
+
+
+            try
+            {
+                conexion.sqlConnection.Open();
+                //Query para modificar un paciente
+                SqlCommand sqlCommand = new SqlCommand("sp_Empleados", conexion.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                // Establecer los valores de los parámetros
+                sqlCommand.Parameters.AddWithValue("@estado", estado);
+                sqlCommand.Parameters.AddWithValue("@accion", "verEmpleados");
+
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    grid.ItemsSource = dataTable.DefaultView;
+
+                    grid.IsReadOnly = true; // El grid es de solo lectura.
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+            }
+        }
+
+        public void VerUnEmpleado(DataGrid grid, int estado, string nombreEmpleado)
+        {
+
+
+            try
+            {
+                conexion.sqlConnection.Open();
+                //Query para modificar un paciente
+                SqlCommand sqlCommand = new SqlCommand("sp_Empleados", conexion.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                // Establecer los valores de los parámetros
+                sqlCommand.Parameters.AddWithValue("@estado", estado);
+                sqlCommand.Parameters.AddWithValue("@nombreEmpleado", nombreEmpleado);
+                sqlCommand.Parameters.AddWithValue("@accion", "verUnEmpleado");
+
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    grid.ItemsSource = dataTable.DefaultView;
+
+                    grid.IsReadOnly = true; // El grid es de solo lectura.
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+            }
+        }
+
         /// <summary>
         /// Buscar un empleado en la base de datos 
         /// </summary>
@@ -148,7 +231,7 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@contrasenia", empleado.Contrasenia);
                 sqlCommand.Parameters.AddWithValue("@estado", empleado.Estado);
                 sqlCommand.Parameters.AddWithValue("@accion", "insertar");
-                aportes.ContextoSesion(IdEmpleado, conexion.sqlConnection);
+                aportes.ContextoSesion(CodigoMayor(), conexion.sqlConnection);
                 sqlCommand.ExecuteNonQuery();
 
             }
@@ -163,6 +246,35 @@ namespace VitalCareRx
                 conexion.sqlConnection.Close();
             }
 
+        }
+
+        private int CodigoMayor()
+        {
+            try
+            {
+                SqlCommand sqlCommand = new SqlCommand("sp_Empleados", conexion.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.AddWithValue("@accion", "codigoMayor");
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    return Convert.ToInt32(dataTable.Rows[0]["idEmpleado"]);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
         }
 
         /// <summary>
@@ -196,6 +308,35 @@ namespace VitalCareRx
                 aportes.ContextoSesion(IdEmpleado, conexion.sqlConnection);
                 sqlCommand.ExecuteNonQuery();
 
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+            }
+        }
+
+        public void EliminarEmpleado(Empleado empleado)
+        {
+            try
+            {
+                conexion.sqlConnection.Open();
+                //Query para modificar un paciente
+                SqlCommand sqlCommand = new SqlCommand("sp_Empleados", conexion.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+
+
+                // Establecer los valores de los parámetros
+                sqlCommand.Parameters.AddWithValue("@idEmpleado", empleado.IdEmpleado);
+                sqlCommand.Parameters.AddWithValue("@estado", empleado.IdEmpleado);
+                sqlCommand.Parameters.AddWithValue("@accion", "desactivar");
+                aportes.ContextoSesion(IdEmpleado, conexion.sqlConnection);
+                sqlCommand.ExecuteNonQuery();
             }
             catch (Exception)
             {

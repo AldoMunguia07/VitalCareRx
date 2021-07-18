@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Text.RegularExpressions; // Para validar qeu el correo este correcto.
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace VitalCareRx
 {
@@ -155,6 +157,21 @@ namespace VitalCareRx
             else
             {
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Cargar el color al boton del estado.
+        /// </summary>
+        public void CargarColorBoton(Button btnEstado, int estado)
+        {
+            if (estado == 1) // Si el estado es un que lo pase a color verde
+            {
+                btnEstado.Background = new SolidColorBrush(Color.FromArgb(165, 42, 165, 42));
+            }
+            else // Sino que lo pase a color rojo.
+            {
+                btnEstado.Background = new SolidColorBrush(Color.FromArgb(140, 255, 0, 0));
             }
         }
     }
