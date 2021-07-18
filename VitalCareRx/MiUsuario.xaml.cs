@@ -32,14 +32,14 @@ namespace VitalCareRx
         private string usuario;
         Validaciones validaciones = new Validaciones();
         LlenarComboBox LlenarComboBox = new LlenarComboBox();
-        Empleado miEmpleado = new Empleado();
+        
 
         public MiUsuario(Empleado empleado)// se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
                                       
         {
             InitializeComponent();
-            miEmpleado = empleado;
-            //miUsuario.CargarTextBox(codigoEmpleado, txtUsuario, txtPassword, txtPrimerNombre, txtSegundoNombre, txtPrimerApellido, txtSegundoApellido, txtCelular, cmbSexo);
+            miUsuario = empleado;
+            miUsuario.CargarTextBox(miUsuario.IdEmpleado, txtUsuario, txtPassword, txtPrimerNombre, txtSegundoNombre, txtPrimerApellido, txtSegundoApellido, txtCelular, txtCorreo, dtpFechaNacimiento, cmbSexo);
             LlenarComboBox.CargarComboBoxSexo(cmbSexo);
             miUsuario.PrimerNombre = txtPrimerNombre.Text;
             miUsuario.PrimerApellido = txtPrimerApellido.Text;
@@ -52,12 +52,14 @@ namespace VitalCareRx
         /// </summary>
         private void ObtenerDatos()
         {
-            miUsuario.IdEmpleado = miEmpleado.IdEmpleado;
+            miUsuario.IdEmpleado = miUsuario.IdEmpleado;
             miUsuario.PrimerNombre = txtPrimerNombre.Text;
             miUsuario.SegundoNombre = txtSegundoNombre.Text;
             miUsuario.PrimerApellido = txtPrimerApellido.Text;
             miUsuario.SegundoApellido = txtSegundoApellido.Text;
             miUsuario.Celular = txtCelular.Text;
+            miUsuario.Correo = txtCorreo.Text;
+            miUsuario.FechaNacimiento = dtpFechaNacimiento.SelectedDate.Value;
             miUsuario.IdSexo = Convert.ToInt32(cmbSexo.SelectedValue);
             miUsuario.NombreUsuario = txtUsuario.Text;
             miUsuario.Contrasenia = txtPassword.Text;
@@ -93,15 +95,15 @@ namespace VitalCareRx
             MessageBoxResult result = MessageBox.Show("¿Desea regresar al menú principal?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
-                if (miEmpleado.IdPuesto == 1)
+                if (miUsuario.IdPuesto == 1)
                 {
-                    MenuPrincipalAdmin menuPrincipalAdmin = new MenuPrincipalAdmin(miEmpleado);
+                    MenuPrincipalAdmin menuPrincipalAdmin = new MenuPrincipalAdmin(miUsuario);
                     menuPrincipalAdmin.Show();
                     this.Close();
                 }
-                else if (miEmpleado.IdPuesto == 2)
+                else if (miUsuario.IdPuesto == 2)
                 {
-                    MenuPrincipal menupincipal = new MenuPrincipal(miEmpleado);
+                    MenuPrincipal menupincipal = new MenuPrincipal(miUsuario);
                     menupincipal.Show();
                     this.Close();
                 }
@@ -117,7 +119,8 @@ namespace VitalCareRx
         {
             if(txtPrimerNombre.Text != String.Empty &&  txtPrimerApellido.Text !=
                 String.Empty && txtCelular.Text != String.Empty && txtUsuario.Text !=
-                String.Empty && txtPassword.Text != String.Empty && cmbSexo.SelectedValue != null)
+                String.Empty && txtPassword.Text != String.Empty && cmbSexo.SelectedValue != null && txtCorreo.Text != String.Empty
+                && dtpFechaNacimiento.SelectedDate != null)
             {
                 return true;
             }
@@ -173,9 +176,9 @@ namespace VitalCareRx
                     MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            catch (Exception)
+            catch (Exception g)
             {
-                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(g.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
             
@@ -237,5 +240,7 @@ namespace VitalCareRx
         {
             validaciones.ValidarEspacio(e);
         }
+
+   
     }
 }

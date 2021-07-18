@@ -253,7 +253,7 @@ namespace VitalCareRx
         {
             try
             {
-                conexion.sqlConnection.Open();
+                
                 //Query para añadir un paciente
                 SqlCommand sqlCommand = new SqlCommand("sp_Empleados", conexion.sqlConnection);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
@@ -277,7 +277,7 @@ namespace VitalCareRx
                     txtSegundoApellido.Text = Empleado.Rows[0]["segundoApellido"].ToString();
                     txtCelular.Text = Empleado.Rows[0]["celular"].ToString();
                     txtCorreo.Text = Empleado.Rows[0]["correo"].ToString();
-                    fechaNacimiento.SelectedDate = Convert.ToDateTime(Empleado.Rows[0]["fechaNacimiento"]);
+                    fechaNacimiento.SelectedDate = Convert.ToDateTime(Empleado.Rows[0]["fechaNacimiento"]).Date;
                     cmbSexo.SelectedValue = Empleado.Rows[0]["idSexo"].ToString();
 
                 }
@@ -287,10 +287,7 @@ namespace VitalCareRx
 
                 throw;
             }
-            finally
-            {
-                conexion.sqlConnection.Close();
-            }
+           
 
         }
 
