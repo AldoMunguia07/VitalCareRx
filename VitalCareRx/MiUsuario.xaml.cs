@@ -139,23 +139,39 @@ namespace VitalCareRx
                         {
                             if (txtCelular.Text.Length == 8) // El numero de telefono debe contener 8 dígitos.
                             {
-                                if (txtPassword.Text.Length >= 8) // el campo contraseña debe tener 8 o más caracteres
+                                if (validaciones.Email_Correcto(txtCorreo.Text))
                                 {
+                                    if (dtpFechaNacimiento.SelectedDate <= DateTime.Now.Date)
+                                    {
+                                        if (txtPassword.Text.Length >= 8) // el campo contraseña debe tener 8 o más caracteres
+                                        {
 
-                                    ObtenerDatos();
-                                    miUsuario.ModificarEmpleado(miUsuario);
-                                    MessageBox.Show("¡Datos actualizados correctamente!", "USUARIO", MessageBoxButton.OK, MessageBoxImage.Information);
-                                    usuario = txtUsuario.Text;
+                                            ObtenerDatos();
+                                            miUsuario.ModificarEmpleado(miUsuario);
+                                            MessageBox.Show("¡Datos actualizados correctamente!", "USUARIO", MessageBoxButton.OK, MessageBoxImage.Information);
+                                            usuario = txtUsuario.Text;
 
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("¡La contraseña debe contener almenos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("¡La fecha de nacimiento no puede ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                    }
                                 }
                                 else
                                 {
-                                    MessageBox.Show("¡La contraseña debe contener almenos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                    MessageBox.Show("¡La dirección de correo electronico no es valida", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                                 }
+                                
                             }
                             else
                             {
-                                MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                MessageBox.Show("¡El número de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                             }
                         }
                         else

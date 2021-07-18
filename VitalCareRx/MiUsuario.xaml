@@ -20,7 +20,7 @@
             <Button Name="btnCerrar" Background="#a30000" HorizontalAlignment="Left" Margin="306,0,0,0" VerticalAlignment="Top" Width="58" Click="btnCerrar_Click">
                 <materialDesign:PackIcon Kind="CloseCircleOutline" Width="29" Height="28" VerticalAlignment="Center" Foreground="White"/>
             </Button>
-            <TextBox x:Name="txtCorreo"  HorizontalAlignment="Left" Height="28" Margin="25,378,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" Background="White" RenderTransformOrigin="0.5,0.5" MaxLength="8"/>
+            <TextBox x:Name="txtCorreo"  HorizontalAlignment="Left" Height="28" Margin="25,378,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" Background="White" RenderTransformOrigin="0.5,0.5"/>
         </Grid>
         <Button Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="524,543,0,0" VerticalAlignment="Top" Width="137" Click="btnModificar_Click"/>
         <materialDesign:PackIcon Kind="AccountEdit" Width="29" Height="28" VerticalAlignment="Center" Foreground="White" Margin="526,545,0,17"/>

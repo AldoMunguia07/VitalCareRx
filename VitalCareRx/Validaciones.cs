@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Text.RegularExpressions; // Para validar qeu el correo este correcto.
 
 namespace VitalCareRx
 {
@@ -127,6 +128,33 @@ namespace VitalCareRx
             {
 
                 MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+
+        /// <summary>
+        /// Verifica que el correo electronico estebe bien escrito o no
+        /// </summary>
+        /// <param name="correo">El correo a evaluar</param>
+        /// <returns></returns>
+        public Boolean Email_Correcto(String correo)
+        {
+            String expresion;
+            expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+            if (Regex.IsMatch(correo, expresion))
+            {
+                if (Regex.Replace(correo, expresion, String.Empty).Length == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
             }
         }
     }

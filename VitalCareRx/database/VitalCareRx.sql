@@ -84,7 +84,7 @@ CREATE TABLE Personas.Empleado
 	primerApellido VARCHAR(25) NOT NULL,
 	segundoApellido VARCHAR(25),
 	celular VARCHAR(8) NOT NULL,
-	correo VARCHAR(30),
+	correo VARCHAR(70),
 	fechaNacimiento DATE NOT NULL,
 	idSexo INT NOT NULL,
 	idPuesto INT NOT NULL,
@@ -108,7 +108,7 @@ CREATE TABLE Historial.Bitacora
 	idBitacora INT NOT NULL IDENTITY,
 	idEmpleado INT NOT NULL,
 	pcUsuario VARCHAR(70) NOT NULL,
-	accion NVARCHAR(50) NOT NULL,
+	accion NVARCHAR(200) NOT NULL,
 	fecha DATETIME NOT NULL
 
 	CONSTRAINT PK_Bitacora_idBitacora
@@ -372,11 +372,32 @@ INSERT [Personas].[TipoSangre]  VALUES ( 'O+')
 
 -- Datos tabla Farmaco
 
-INSERT [Consultas].[Farmaco]  VALUES ('Simvastatina', 'Para controlar el colesterol')INSERT [Consultas].[Farmaco] VALUES ('Aspirina', ' Casi para todo')INSERT [Consultas].[Farmaco]  VALUES ('Omeprazol', 'Para la acidez de est�mago')INSERT [Consultas].[Farmaco]  VALUES ('Lexotiroxina s�dica', 'Para reemplazar la tiroxina')INSERT [Consultas].[Farmaco]  VALUES ('Ramipril', 'Para la hipertensi�n')INSERT [Consultas].[Farmaco] VALUES ('Amlodipina', 'Para la hipertensi�n y la angina')INSERT [Consultas].[Farmaco] VALUES ('Paracetamol ', 'Para aliviar el dolor')INSERT [Consultas].[Farmaco]  VALUES ('Salbutamol', 'Para el asma')
+INSERT [Consultas].[Farmaco]  VALUES ('Simvastatina', 'Para controlar el colesterol')INSERT [Consultas].[Farmaco] VALUES ('Aspirina', ' Casi para todo')INSERT [Consultas].[Farmaco]  VALUES ('Omeprazol', 'Para la acidez de estómago')INSERT [Consultas].[Farmaco]  VALUES ('Lexotiroxina sódica', 'Para reemplazar la tiroxina')INSERT [Consultas].[Farmaco]  VALUES ('Ramipril', 'Para la hipertensión')INSERT [Consultas].[Farmaco] VALUES ('Amlodipina', 'Para la hipertensión y la angina')INSERT [Consultas].[Farmaco] VALUES ('Paracetamol ', 'Para aliviar el dolor')INSERT [Consultas].[Farmaco]  VALUES ('Salbutamol', 'Para el asma')
 
 -- Datos tabla puesto
 INSERT INTO [Personas].[Puesto] VALUES ('Administrador');
 
 INSERT INTO [Personas].[Puesto] VALUES ('Doctor');
 
-INSERT INTO [Personas].[Puesto] VALUES ('Enfermero');
+-- Datos de un usuario tipo Administrador.
+
+DECLARE	@return_value int
+
+EXEC	@return_value = [dbo].[sp_Empleados]
+		@primerNombre = N'Admin',
+		@segundoNombre = N'Admin',
+		@primerApellido = N'Admin',
+		@segundoApellido = N'Admin',
+		@celular = N'12345678',
+		@correo = N'Admin@gmail.com',
+		@fechaNacimiento = '1990-02-02',
+		@idSexo = 1,
+		@idPuesto = 1,
+		@nombreUsuario = N'admin',
+		@contrasenia = N'admin123',
+		@estado = 1,
+		@accion = N'insertar'
+
+SELECT	'Return Value' = @return_value
+
+GO
