@@ -22,24 +22,41 @@ namespace VitalCareRx
     public partial class ControlEmpleado : Window
     {
         Empleado miEmpleado = new Empleado();
+        LlenarComboBox llenarComboBox = new LlenarComboBox();
+        AportesControl aportesControl = new AportesControl();
+        bool bandera = true;
         public ControlEmpleado( Empleado empleado)
         {
             InitializeComponent();
+            miEmpleado = empleado;
+            llenarComboBox.CargarAnios(cmbAnio);
+            llenarComboBox.CargarMes(cmbMes);
+            llenarComboBox.CargarEmpleado(cmbEmpleado);
+            aportesControl.MostrarControlEmpleados(gridControlEmpleado);
+            
         }
 
         private void cmbEmpleado_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-        }
-
-        private void dtFechaBusqueda_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            if (cmbAnio.SelectedValue == null && cmbMes.SelectedValue == null && bandera)
+            {
+                
+                MessageBox.Show("Seleccione el año y el mes", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else 
+            {
+                aportesControl.MostrarControlEmpleadoTodos(gridControlEmpleado,cmbAnio,cmbMes,cmbEmpleado);
+            }
         }
 
         private void btnRestaurar_Click(object sender, RoutedEventArgs e)
         {
-
+            bandera = false;
+            cmbEmpleado.SelectedValue = null;
+            cmbAnio.SelectedValue = null;
+            cmbMes.SelectedValue = null;
+            aportesControl.MostrarControlEmpleados(gridControlEmpleado);
+            bandera = true;
         }
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
@@ -59,6 +76,39 @@ namespace VitalCareRx
                     menupincipal.Show();
                     this.Close();
                 }
+            }
+        }
+
+        private void cmbAnio_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbEmpleado.SelectedValue == null && cmbMes.SelectedValue != null)
+            {
+                aportesControl.MostrarControlEmpleadoFiltro(gridControlEmpleado, cmbEmpleado, cmbAnio, cmbMes);
+            }
+            else if (cmbMes.SelectedValue == null)
+            {
+                MessageBox.Show("Seleccione el mes", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                aportesControl.MostrarControlEmpleadoTodos(gridControlEmpleado,cmbAnio,cmbMes,cmbEmpleado);
+            }
+            
+        }
+
+        private void cmbMes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbEmpleado.SelectedValue == null && cmbAnio.SelectedValue != null)
+            {
+                aportesControl.MostrarControlEmpleadoFiltro(gridControlEmpleado, cmbEmpleado, cmbAnio, cmbMes);
+            }
+            else if (cmbAnio.SelectedValue == null && bandera)
+            {
+                MessageBox.Show("Seleccione el año", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                aportesControl.MostrarControlEmpleadoTodos(gridControlEmpleado, cmbAnio, cmbMes, cmbEmpleado);
             }
         }
     }

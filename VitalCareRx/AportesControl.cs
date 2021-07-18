@@ -355,5 +355,124 @@ namespace VitalCareRx
             }
 
         }
+
+        public void MostrarControlEmpleados(DataGrid dataGrid)
+        {
+            try
+            {
+                conexion.sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand("sp_Aportes", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                sqlCommand.Parameters.AddWithValue("@accion", "MostrarControl");
+
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    dataGrid.ItemsSource = dataTable.DefaultView;
+
+                    dataGrid.IsReadOnly = true; // El grid es de solo lectura.
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+            }
+
+        }
+
+        public void MostrarControlEmpleadoFiltro(DataGrid dataGrid,ComboBox cmbEmpleado, ComboBox cmbAnio, ComboBox cmbMes)
+        {
+            try
+            {
+                conexion.sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand("sp_Aportes", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                sqlCommand.Parameters.AddWithValue("@accion", "MostrarControlParametros");
+                sqlCommand.Parameters.AddWithValue("@anio", Convert.ToInt32(cmbAnio.SelectedValue));
+                sqlCommand.Parameters.AddWithValue("@mes", Convert.ToInt32(cmbMes.SelectedValue));
+                sqlCommand.Parameters.AddWithValue("@idEmpleado", Convert.ToInt32(cmbEmpleado.SelectedValue));
+
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    dataGrid.ItemsSource = dataTable.DefaultView;
+
+                    dataGrid.IsReadOnly = true; // El grid es de solo lectura.
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+            }
+        }
+
+        public void MostrarControlEmpleadoTodos(DataGrid dataGrid, ComboBox cmbAnio, ComboBox cmbMes ,ComboBox cmbEmpleado)
+        {
+            try
+            {
+                conexion.sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand("sp_Aportes", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                sqlCommand.Parameters.AddWithValue("@accion", "MostrarControlParametrosAmbos");
+                sqlCommand.Parameters.AddWithValue("@anio", Convert.ToInt32(cmbAnio.SelectedValue));
+                sqlCommand.Parameters.AddWithValue("@mes", Convert.ToInt32(cmbMes.SelectedValue));
+                sqlCommand.Parameters.AddWithValue("@idEmpleado", Convert.ToInt32(cmbEmpleado.SelectedValue));
+
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    dataGrid.ItemsSource = dataTable.DefaultView;
+
+                    dataGrid.IsReadOnly = true; // El grid es de solo lectura.
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+            }
+        }
+
+        
     }
 }

@@ -19,8 +19,7 @@
             </LinearGradientBrush>
         </Grid.Background>
         <DataGrid  x:Name="gridControlEmpleado" HorizontalAlignment="Left" Height="310" Margin="16,104,0,0" VerticalAlignment="Top" Width="996"/>
-        <DatePicker Name="dtFechaBusqueda" HorizontalAlignment="Left" Margin="223,449,0,0" VerticalAlignment="Top" Width="235" Height="38" SelectedDateChanged="dtFechaBusqueda_SelectedDateChanged" Foreground="White" BorderBrush="#89FFFFFF"/>
-        <ComboBox x:Name ="cmbEmpleado"  HorizontalAlignment="Left" Margin="540,459,0,0" VerticalAlignment="Top" Width="270" Background="{x:Null}"  Height="28" SelectionChanged="cmbEmpleado_SelectionChanged" Foreground="White" BorderBrush="#89FFFFFF" />
+        <ComboBox x:Name ="cmbEmpleado"  HorizontalAlignment="Left" Margin="540,459,0,0" VerticalAlignment="Top" Width="270" Background="{x:Null}"  Height="28" SelectionChanged="cmbEmpleado_SelectionChanged" Foreground="Black" BorderBrush="#89FFFFFF" />
         <Label Content="EMPLEADOS" HorizontalAlignment="Left" Margin="636,435,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="#DDFFFFFF"/>
         <Image Source="IMAGENES/PrimeroDios.png" Height="103" VerticalAlignment="Top" Margin="8,477,939,0" RenderTransformOrigin="0.5,0.5"/>
         <Button x:Name="btnRestaurar" Content="Restaurar" HorizontalAlignment="Left" Margin="429,527,0,0" VerticalAlignment="Top" Width="138" Click="btnRestaurar_Click" Background="#FF1C1C1C"/>
@@ -67,7 +66,10 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Label Content="BUSQUEDA" HorizontalAlignment="Left" Margin="310,435,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="#DDFFFFFF"/>
+        <ComboBox Name="cmbAnio" HorizontalAlignment="Left" Height="38" Margin="156,449,0,0" VerticalAlignment="Top" Width="141" SelectionChanged="cmbAnio_SelectionChanged"/>
+        <ComboBox Name="cmbMes"  HorizontalAlignment="Left" Height="38" Margin="351,449,0,0" VerticalAlignment="Top" Width="141" SelectionChanged="cmbMes_SelectionChanged"/>
+        <Label Content="MES" HorizontalAlignment="Left" Margin="387,425,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="#DDFFFFFF"/>
+        <Label Content="AÑO" HorizontalAlignment="Left" Margin="207,425,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="#DDFFFFFF"/>
 
     </Grid>
 </Window>
