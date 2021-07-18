@@ -394,6 +394,45 @@ namespace VitalCareRx
 
         }
 
+        public void MostrarControlPorEmpleados(DataGrid dataGrid, ComboBox cmbEmpleado)
+        {
+            try
+            {
+                conexion.sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand("sp_Aportes", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                sqlCommand.Parameters.AddWithValue("@idEmpleado", Convert.ToInt32(cmbEmpleado.SelectedValue));
+                sqlCommand.Parameters.AddWithValue("@accion", "MostrarControlPorEmpleados");
+
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    dataGrid.ItemsSource = dataTable.DefaultView;
+
+                    dataGrid.IsReadOnly = true; // El grid es de solo lectura.
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+            }
+
+        }
+
         public void MostrarControlEmpleadoFiltro(DataGrid dataGrid,ComboBox cmbEmpleado, ComboBox cmbAnio, ComboBox cmbMes)
         {
             try

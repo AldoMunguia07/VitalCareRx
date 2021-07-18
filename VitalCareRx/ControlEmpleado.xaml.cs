@@ -40,8 +40,8 @@ namespace VitalCareRx
         {
             if (cmbAnio.SelectedValue == null && cmbMes.SelectedValue == null && bandera)
             {
-                
-                MessageBox.Show("Seleccione el año y el mes", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                aportesControl.MostrarControlPorEmpleados(gridControlEmpleado, cmbEmpleado);
             }
             else 
             {
