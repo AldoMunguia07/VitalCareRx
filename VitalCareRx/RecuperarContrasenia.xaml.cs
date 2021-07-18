@@ -12,6 +12,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+// Agregar los namespaces de conexión con SQL Server
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Data;
+using System.Net.Mail;
+using System.Net;
+
 namespace VitalCareRx
 {
     /// <summary>
@@ -19,9 +26,11 @@ namespace VitalCareRx
     /// </summary>
     public partial class RecuperarContrasenia : Window
     {
+        RecuperarContra recuperar = new RecuperarContra();
         public RecuperarContrasenia()
         {
             InitializeComponent();
+            
         }
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
@@ -34,6 +43,11 @@ namespace VitalCareRx
                 this.Close();
 
             }
+        }
+
+        private void btnRecuperar_Click(object sender, RoutedEventArgs e)
+        {
+            recuperar.Recuperar(txtCorreo);
         }
     }
 }

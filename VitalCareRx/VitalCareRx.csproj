@@ -135,6 +135,7 @@
     <Compile Include="RecuperarContrasenia.xaml.cs">
       <DependentUpon>RecuperarContrasenia.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RecuperarContra.cs" />
     <Compile Include="Validaciones.cs" />
     <Page Include="Bitacora.xaml">
       <SubType>Designer</SubType>
