@@ -9,11 +9,11 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 using System.Windows.Controls;
-
+using System.Windows;
 
 namespace VitalCareRx
 {
-   public class Empleado
+    public class Empleado
     {
 
         //Variables miembro
@@ -49,7 +49,7 @@ namespace VitalCareRx
 
         public Empleado() { }
 
-        public Empleado(int idEmpleado, string primerNombre, string segundoNombre, string primerApellido, string segundoApellido, string celular, string correo, DateTime fechaNacimiento, int idSexo, int idPuesto, string nombreUsuario, string contrasenia, bool estado )
+        public Empleado(int idEmpleado, string primerNombre, string segundoNombre, string primerApellido, string segundoApellido, string celular, string correo, DateTime fechaNacimiento, int idSexo, int idPuesto, string nombreUsuario, string contrasenia, bool estado)
         {
             IdEmpleado = idEmpleado;
             PrimerNombre = primerNombre;
@@ -177,8 +177,8 @@ namespace VitalCareRx
                     {
                         // Obtener los valores del empleado si la consulta retorna valores
                         empleado.IdEmpleado = Convert.ToInt32(rdr["idEmpleado"]);
-                        empleado.PrimerNombre = rdr["primerNombre"].ToString();                        
-                        empleado.PrimerApellido = rdr["primerApellido"].ToString();                    
+                        empleado.PrimerNombre = rdr["primerNombre"].ToString();
+                        empleado.PrimerApellido = rdr["primerApellido"].ToString();
                         empleado.IdPuesto = Convert.ToInt32(rdr["idPuesto"]);
                         empleado.NombreUsuario = rdr["nombreUsuario"].ToString();
                         empleado.Contrasenia = rdr["contrasenia"].ToString();
@@ -194,8 +194,8 @@ namespace VitalCareRx
             catch (Exception ex)
             {
                 throw ex;
-                
-                
+
+
             }
             finally
             {
@@ -203,13 +203,13 @@ namespace VitalCareRx
                 conexion.sqlConnection.Close();
             }
         }
-        
+
         /// <summary>
         /// Método para crear un nuevo empleado 
         /// </summary>
         public void CrearNuevoEmpleado(Empleado empleado)
         {
-           
+
             try
             {
                 conexion.sqlConnection.Open();
@@ -274,7 +274,7 @@ namespace VitalCareRx
 
                 throw;
             }
-           
+
         }
 
         /// <summary>
@@ -355,7 +355,7 @@ namespace VitalCareRx
         /// <returns>Codigo de empleado</returns>
         public int CodigoEmpleado()
         {
-            
+
 
             try
             {
@@ -388,13 +388,13 @@ namespace VitalCareRx
 
         }
 
-        
+
         public void CargarTextBox(int codigoEmpleado, TextBox txtUsuario, TextBox txtPassword, TextBox txtPrimerNombre, TextBox txtSegundoNombre, TextBox txtPrimerApellido, TextBox txtSegundoApellido,
             TextBox txtCelular, TextBox txtCorreo, DatePicker fechaNacimiento, ComboBox cmbSexo)
         {
             try
             {
-                
+
                 //Query para añadir un paciente
                 SqlCommand sqlCommand = new SqlCommand("sp_Empleados", conexion.sqlConnection);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
@@ -428,7 +428,7 @@ namespace VitalCareRx
 
                 throw;
             }
-           
+
 
         }
 
@@ -512,8 +512,47 @@ namespace VitalCareRx
 
 
 
+
         }
 
+        public bool ExisteCorreo(TextBox txtCorreo)
+        {
+            try
+            {
 
+             
+
+                SqlCommand sqlCommand = new SqlCommand("sp_Empleados", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.AddWithValue("@correo", txtCorreo.Text);
+                sqlCommand.Parameters.AddWithValue("@accion", "buscarUsuarioCorreo");
+
+
+                DataTable data = new DataTable();
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+                using (sqlDataAdapter)
+                {
+
+                    sqlDataAdapter.Fill(data);
+                }
+                if (data.Rows.Count != 0)
+                {
+                    return true;
+
+                }   
+                
+                return false;
+                
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+          
+
+        }
     }
 }

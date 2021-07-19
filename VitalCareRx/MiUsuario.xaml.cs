@@ -32,7 +32,8 @@ namespace VitalCareRx
         private string usuario;
         Validaciones validaciones = new Validaciones();
         LlenarComboBox LlenarComboBox = new LlenarComboBox();
-        
+        private string correo;
+
 
         public MiUsuario(Empleado empleado)// se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
                                       
@@ -44,6 +45,7 @@ namespace VitalCareRx
             miUsuario.PrimerNombre = txtPrimerNombre.Text;
             miUsuario.PrimerApellido = txtPrimerApellido.Text;
             usuario = txtUsuario.Text; // se asigna el valor de la txtUsuario para la posteiror validacion (Que no permita ingresar un usuario existente).
+            correo = txtCorreo.Text;//se asigna el valor de la txtCorreo para la posteiror validacion (Que no permita ingresar un usuario existente).
         }
 
 
@@ -145,11 +147,21 @@ namespace VitalCareRx
                                     {
                                         if (txtPassword.Text.Length >= 8) // el campo contraseña debe tener 8 o más caracteres
                                         {
+                                            if (!miUsuario.ExisteCorreo(txtCorreo) || correo == txtCorreo.Text)
+                                            {
+                                                ObtenerDatos();
+                                                miUsuario.ModificarEmpleado(miUsuario);
+                                                MessageBox.Show("¡Datos actualizados correctamente!", "USUARIO", MessageBoxButton.OK, MessageBoxImage.Information);
+                                                usuario = txtUsuario.Text;
+                                                correo = txtCorreo.Text;
+                                            }
+                                            else
+                                            {
+                                                MessageBox.Show("¡El correo ingresado ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                                txtCorreo.Text = correo;
+                                            }
 
-                                            ObtenerDatos();
-                                            miUsuario.ModificarEmpleado(miUsuario);
-                                            MessageBox.Show("¡Datos actualizados correctamente!", "USUARIO", MessageBoxButton.OK, MessageBoxImage.Information);
-                                            usuario = txtUsuario.Text;
+                                         
 
                                         }
                                         else

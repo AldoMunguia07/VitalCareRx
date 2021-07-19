@@ -30,7 +30,8 @@ namespace VitalCareRx
         int idEmpleado;
         bool seleccionado = false;
         bool cargado = false;
-
+        private string usuario;
+        private string correo;
         public Empleados(Empleado empleado)
         {
             InitializeComponent();
@@ -66,69 +67,136 @@ namespace VitalCareRx
 
         private void txtPrimerNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-
+            validaciones.Sololetras(e);
 
         }
 
         private void txtPrimerNombre_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-
+            validaciones.ValidarEspacio(e);
         }
 
         private void txtCelular_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-
-
+            validaciones.SoloNumeros(e);
         }
 
         private void txtCelular_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-
+            validaciones.ValidarEspacio(e);
         }
 
         private void txtSegundoNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-
+            validaciones.Sololetras(e);
         }
 
         private void txtSegundoNombre_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-
+            validaciones.ValidarEspacio(e);
         }
 
         private void txtPrimerApellido_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-
+            validaciones.Sololetras(e);
         }
 
         private void txtPrimerApellido_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-
+            validaciones.ValidarEspacio(e);
         }
 
         private void txtSegundoApellido_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        { 
-
+        {
+            validaciones.Sololetras(e);
         }
 
         private void txtSegundoApellido_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-
+            validaciones.ValidarEspacio(e);
         }
 
 
         private void txtUsuario_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-
+            validaciones.ValidarEspacio(e);
         }
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
-            
-            ObtenerDatos();
-            unEmpleado.CrearNuevoEmpleado(unEmpleado);
-            miEmpleado.VerEmpleados(gridEmpleados, Convert.ToInt32(cmbEstado.SelectedValue));
-            LimpiarFormulario();
+            if (Validar())//los campos no deben de estar vacios
+            {
+                if (!seleccionado)//No se debe seleccionar el datagrid
+                {
+                    if (txtCelular.Text.Length == 8)// El numero de telefono debe contener 8 digitos. 
+                    {
+                        if (validaciones.Email_Correcto(txtCorreo.Text))//Valida que el correo este escrito correctamente.
+                        {
+                            if (dtFecha.SelectedDate <= DateTime.Now.Date)//la fecha ingresada debe ser menor a la fecha actual
+                            {
+                                if (!unEmpleado.ExisteUsuario(txtUsuario.Text))//Se valida que el nombre de usuario no exista.
+                                {
+                                    if (!unEmpleado.ExisteCorreo(txtCorreo)) 
+                                    {
+                                        if (txtUsuario.Text.Length >= 5)//El usuario debe contener almenos 5 caracteres.
+                                        {
+                                            if (txtContrasenia.Text.Length >= 8)//La contraseña debe tener almenos 8 caracteres o mas.
+                                            {
+                                                ObtenerDatos();
+                                                unEmpleado.CrearNuevoEmpleado(unEmpleado);
+                                                miEmpleado.VerEmpleados(gridEmpleados, Convert.ToInt32(cmbEstado.SelectedValue));
+                                                LimpiarFormulario();
+                                                MessageBox.Show("¡Empleado agregado exitosamente!", "EMPLEADO", MessageBoxButton.OK, MessageBoxImage.Information);
+                                            }
+                                            else
+                                            {
+                                                MessageBox.Show("¡La contraseña debe contener almenos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("¡El nombre de usuario debe contener almenos 5 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("¡El correo ingresado ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                    }
+
+                                   
+                                    
+                                }
+                                else
+                                {
+                                    MessageBox.Show("¡El nombre de usuario ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("¡La fecha de nacimiento no puede ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("¡La dirección de correo electronico no es valida", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("¡No se puede agregar al mismo empleado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("¡Debe llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+         
         }
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
@@ -215,17 +283,98 @@ namespace VitalCareRx
             lblContra.Visibility = Visibility.Visible;
             txtContrasenia.Visibility = Visibility.Visible;
             txtBuscar.Clear();
+            usuario = string.Empty;
+            correo = string.Empty;
             OcultarColumnas();
 
         }
-
+        private bool Validar()
+        {
+            
+            //Validación que no permita campos vacíos.
+            if ( txtPrimerNombre.Text != String.Empty && txtPrimerApellido.Text != String.Empty
+                && txtCelular.Text != String.Empty && txtCorreo.Text != String.Empty && txtUsuario.Text != String.Empty && txtContrasenia.Text != String.Empty && dtFecha.SelectedDate != null
+                && cmbSexo.SelectedValue != null )
+            {
+                return true;
+            }
+            return false;
+        }
 
         private void btnModificarr_Click(object sender, RoutedEventArgs e)
         {
-            ObtenerDatos();
-            unEmpleado.ModificarEmpleado(unEmpleado);
-            miEmpleado.VerEmpleados(gridEmpleados, Convert.ToInt32(cmbEstado.SelectedValue));
-            LimpiarFormulario();
+            if (seleccionado)
+            {
+                if (Validar())//los campos no deben de estar vacios
+                {
+                    if (txtCelular.Text.Length == 8)// El numero de telefono debe contener 8 digitos. 
+                    {
+                        if (validaciones.Email_Correcto(txtCorreo.Text))//Valida que el correo este escrito correctamente.
+                        {
+                            if (dtFecha.SelectedDate <= DateTime.Now.Date)//la fecha ingresada debe ser menor a la fecha actual
+                            {
+                                if (!unEmpleado.ExisteUsuario(txtUsuario.Text) || usuario == txtUsuario.Text)//Se valida que el nombre de usuario no exista.
+                                {
+                                    if (!unEmpleado.ExisteCorreo(txtCorreo) || correo == txtCorreo.Text)
+                                    {
+                                        if (txtContrasenia.Text.Length >= 8)//La contraseña debe tener almenos 8 caracteres o mas.
+                                        {
+                                            if(txtUsuario.Text.Length >= 5)//El usuario debe contener almenos 5 caracteres.
+                                            {
+                                                ObtenerDatos();
+                                                unEmpleado.ModificarEmpleado(unEmpleado);
+                                                miEmpleado.VerEmpleados(gridEmpleados, Convert.ToInt32(cmbEstado.SelectedValue));
+                                                LimpiarFormulario();
+                                                MessageBox.Show("¡Empleado modificados exitosamente!", "EMPLEADO", MessageBoxButton.OK, MessageBoxImage.Information);
+                                            }
+                                            else
+                                            {
+                                                MessageBox.Show("¡La usuario debe contener almenos 5 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                            }
+                                           
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("¡La contraseña debe contener almenos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("¡El correo ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                    }
+                                   
+                                }
+                                else
+                                {
+                                    MessageBox.Show("¡El nombre de usuario ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("¡La fecha de nacimiento no puede ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            }
+                        }
+                        else
+                        {
+                           MessageBox.Show("¡La dirección de correo electronico no es valida", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("¡Debe llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("¡Debe seleccionar un empleado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+               
+        
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
@@ -291,7 +440,9 @@ namespace VitalCareRx
                 txtCelular.Text = rowSelected.Row["Celular"].ToString();
                 dtFecha.SelectedDate = Convert.ToDateTime(rowSelected.Row["Fecha de nacimiento"]);
                 txtUsuario.Text = rowSelected.Row["Nombre de usuario"].ToString();
+                usuario = txtUsuario.Text;
                 txtCorreo.Text = rowSelected.Row["Correo"].ToString();
+                correo = txtCorreo.Text;
                 txtContrasenia.Text = rowSelected.Row["contrasenia"].ToString(); ;
 
                 if (rowSelected.Row["Estado"].ToString() == "True")
