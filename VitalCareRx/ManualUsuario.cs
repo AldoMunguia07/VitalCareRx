@@ -12,20 +12,14 @@ namespace VitalCareRx
 {
     public partial class ManualUsuario : Form
     {
-        public ManualUsuario()
+        public ManualUsuario(string ubicacion)
         {
             InitializeComponent();
 
-            string baseDir = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.StartupPath);
-            MessageBox.Show(baseDir);
+            string baseDir = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.StartupPath);           
             string ruta = baseDir.Substring(0, baseDir.Length - 3);
-            MessageBox.Show(ruta);
 
-
-
-
-
-            web.Navigate($@"{ruta}Manual de usuario\Pacientes\OutDocument.htm");
+            web.Navigate($@"{ruta}{ubicacion}");
         }
     }
 }

@@ -223,6 +223,64 @@ namespace VitalCareRx
             }   
         }
 
-        
+        private void btnPacienteM_Click(object sender, RoutedEventArgs e)
+        {
+            ManualUsuario manualUsuario = new ManualUsuario(@"Manual de usuario\Pacientes\OutDocument.htm");
+            manualUsuario.ShowDialog();
+        }
+
+        private void btnIniciarSesionM_Click(object sender, RoutedEventArgs e)
+        {
+            ManualUsuario manualUsuario = new ManualUsuario(@"Manual de usuario\Login\OutDocument.htm");
+            manualUsuario.ShowDialog();
+        }
+
+        private void btnMenuPM_Click(object sender, RoutedEventArgs e)
+        {
+            ManualUsuario manualUsuario = new ManualUsuario(@"Manual de usuario\Menu principal\OutDocument.htm");
+            manualUsuario.ShowDialog();
+        }
+
+        private void btnConsultasPPM_Click(object sender, RoutedEventArgs e)
+        {
+            ManualUsuario manualUsuario = new ManualUsuario(@"Manual de usuario\ConsultasPorPaciente\OutDocument.html");
+            manualUsuario.ShowDialog();
+        }
+
+        private void btnRecetasPPM_Click(object sender, RoutedEventArgs e)
+        {
+            ManualUsuario manualUsuario = new ManualUsuario(@"Manual de usuario\RecetasPorPaciente\OutDocument.html");
+            manualUsuario.ShowDialog();
+        }
+
+        private void btnConsultas_Click(object sender, RoutedEventArgs e)
+        {
+            ManualUsuario manualUsuario = new ManualUsuario(@"Manual de usuario\Consultas\OutDocument.html");
+            manualUsuario.ShowDialog();
+        }
+
+        private void btnRecetasM_Click(object sender, RoutedEventArgs e)
+        {
+            ManualUsuario manualUsuario = new ManualUsuario(@"Manual de usuario\Receta Medica\OutDocument.html");
+            manualUsuario.ShowDialog();
+        }
+
+        private void btnFarmacos_Click(object sender, RoutedEventArgs e)
+        {
+            ManualUsuario manualUsuario = new ManualUsuario(@"Manual de usuario\Farmaco\OutDocument.htm");
+            manualUsuario.ShowDialog();
+        }
+
+        private void btnMiUsuarioM_Click(object sender, RoutedEventArgs e)
+        {
+            ManualUsuario manualUsuario = new ManualUsuario(@"Manual de usuario\Mi Usuario\OutDocument.htm");
+            manualUsuario.ShowDialog();
+        }
+
+        private void btnContraM_Click(object sender, RoutedEventArgs e)
+        {
+            ManualUsuario manualUsuario = new ManualUsuario(@"Manual de usuario\Recuperar Contrasenia\OutDocument.html");
+            manualUsuario.ShowDialog();
+        }
     }
 }
