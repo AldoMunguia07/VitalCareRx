@@ -22,6 +22,7 @@ namespace VitalCareRx
     {
 
         Empleado miEmpleado = new Empleado();
+        ManualAyuda manualAyuda = new ManualAyuda();
         public MenuPrincipalAdmin(Empleado empleado)
         {
             InitializeComponent();
@@ -178,6 +179,66 @@ namespace VitalCareRx
             ControlEmpleado controlempleado = new ControlEmpleado(miEmpleado);
             controlempleado.Show();
             this.Close();
+        }
+
+        private void btnIniciarSesion_Click(object sender, RoutedEventArgs e)
+        {
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Inicio de sesión\OutDocument.htm");
+        }
+
+        private void btnMenuPrincipal_Click(object sender, RoutedEventArgs e)
+        {
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Menu Principal Admin\OutDocument.htm");
+        }
+
+        private void btnPacientes_Click(object sender, RoutedEventArgs e)
+        {
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Pacientes\OutDocument.htm");
+        }
+
+        private void btnConsultasporPaciente_Click(object sender, RoutedEventArgs e)
+        {
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\ConsultasPorPaciente\OutDocument.html");
+        }
+
+        private void btnRecetasporPaciente_Click(object sender, RoutedEventArgs e)
+        {
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\RecetasPorPaciente\OutDocument.html");
+        }
+
+        private void btnConsultas_Click(object sender, RoutedEventArgs e)
+        {
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Consultas\OutDocument.html");
+        }
+
+        private void btnRecetasMedicas_Click(object sender, RoutedEventArgs e)
+        {
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Receta Medica\OutDocument.html");
+        }
+
+        private void btnFarmacos_Click(object sender, RoutedEventArgs e)
+        {
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Farmaco\OutDocument.htm");
+        }
+
+        private void btnMiUsuario_Click(object sender, RoutedEventArgs e)
+        {
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Mi Usuario\OutDocument.htm");
+        }
+
+        private void btnBitacora_Click(object sender, RoutedEventArgs e)
+        {
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Bitacora\OutDocument.html");
+        }
+
+        private void btnControlEmpleado_Click(object sender, RoutedEventArgs e)
+        {
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Control de Empleados\OutDocument.htm");
+        }
+
+        private void btnRecuperarContrasenia_Click(object sender, RoutedEventArgs e)
+        {
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Recuperar Contrasenia\OutDocument.html");
         }
     }
 }

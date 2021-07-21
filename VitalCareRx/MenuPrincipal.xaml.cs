@@ -28,6 +28,7 @@ namespace VitalCareRx
 
         Empleado miEmpleado = new Empleado();
         AportesControl AportesControl = new AportesControl();
+        ManualAyuda manualAyuda = new ManualAyuda();
         public MenuPrincipal(Empleado empleado)
         {
             InitializeComponent();
@@ -225,62 +226,54 @@ namespace VitalCareRx
 
         private void btnPacienteM_Click(object sender, RoutedEventArgs e)
         {
-            ManualUsuario manualUsuario = new ManualUsuario(@"Manual de usuario\Pacientes\OutDocument.htm");
-            manualUsuario.ShowDialog();
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Pacientes\OutDocument.htm");
+            
         }
 
         private void btnIniciarSesionM_Click(object sender, RoutedEventArgs e)
         {
-            ManualUsuario manualUsuario = new ManualUsuario(@"Manual de usuario\Login\OutDocument.htm");
-            manualUsuario.ShowDialog();
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Inicio de sesión\OutDocument.htm");
+            
         }
 
         private void btnMenuPM_Click(object sender, RoutedEventArgs e)
         {
-            ManualUsuario manualUsuario = new ManualUsuario(@"Manual de usuario\Menu principal\OutDocument.htm");
-            manualUsuario.ShowDialog();
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Menu principal\OutDocument.htm");
         }
 
         private void btnConsultasPPM_Click(object sender, RoutedEventArgs e)
         {
-            ManualUsuario manualUsuario = new ManualUsuario(@"Manual de usuario\ConsultasPorPaciente\OutDocument.html");
-            manualUsuario.ShowDialog();
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\ConsultasPorPaciente\OutDocument.html");
         }
 
         private void btnRecetasPPM_Click(object sender, RoutedEventArgs e)
         {
-            ManualUsuario manualUsuario = new ManualUsuario(@"Manual de usuario\RecetasPorPaciente\OutDocument.html");
-            manualUsuario.ShowDialog();
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\RecetasPorPaciente\OutDocument.html");
         }
 
         private void btnConsultas_Click(object sender, RoutedEventArgs e)
         {
-            ManualUsuario manualUsuario = new ManualUsuario(@"Manual de usuario\Consultas\OutDocument.html");
-            manualUsuario.ShowDialog();
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Consultas\OutDocument.html");
         }
 
         private void btnRecetasM_Click(object sender, RoutedEventArgs e)
         {
-            ManualUsuario manualUsuario = new ManualUsuario(@"Manual de usuario\Receta Medica\OutDocument.html");
-            manualUsuario.ShowDialog();
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Receta Medica\OutDocument.html");
         }
 
         private void btnFarmacos_Click(object sender, RoutedEventArgs e)
         {
-            ManualUsuario manualUsuario = new ManualUsuario(@"Manual de usuario\Farmaco\OutDocument.htm");
-            manualUsuario.ShowDialog();
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Farmaco\OutDocument.htm");
         }
 
         private void btnMiUsuarioM_Click(object sender, RoutedEventArgs e)
         {
-            ManualUsuario manualUsuario = new ManualUsuario(@"Manual de usuario\Mi Usuario\OutDocument.htm");
-            manualUsuario.ShowDialog();
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Mi Usuario\OutDocument.htm");
         }
 
         private void btnContraM_Click(object sender, RoutedEventArgs e)
         {
-            ManualUsuario manualUsuario = new ManualUsuario(@"Manual de usuario\Recuperar Contrasenia\OutDocument.html");
-            manualUsuario.ShowDialog();
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Recuperar Contrasenia\OutDocument.html");
         }
     }
 }
