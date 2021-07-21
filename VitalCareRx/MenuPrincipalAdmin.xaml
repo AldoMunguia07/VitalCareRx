@@ -9,6 +9,100 @@
         Title="MenuPrincipalAdmin" Height="720" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown"
         MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp">
     <Grid Background="#FFEEEEEE">
+
+        <materialDesign:PopupBox 
+                 
+            Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}"
+            PlacementMode="BottomAndAlignCentres"
+            ToggleCheckedContentCommand="{Binding FloatingActionDemoCommand}"
+            ToggleCheckedContentCommandParameter="wowsers"
+                
+            ToolTip="Manual de Usuario"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Width="40" Margin="1150,13,0,663" RenderTransformOrigin="-1.657,-0.625" Height="Auto">
+            <materialDesign:PopupBox.ToggleContent>
+                <materialDesign:PackIcon
+                    Kind="Help"
+                    Width="24"
+                    Height="24" />
+            </materialDesign:PopupBox.ToggleContent>
+
+            <materialDesign:PopupBox.ToggleCheckedContent>
+                <materialDesign:PackIcon
+                    Kind="Menu"
+                    Width="24"
+                    Height="24" />
+            </materialDesign:PopupBox.ToggleCheckedContent>
+            <StackPanel>
+                <Button Background="#1c1c1c"
+                    ToolTip="Iniciar Sesión"
+                     >
+                    <materialDesign:PackIcon Kind="AccountKeyOutline" Height="17" Width="25" Foreground="#FFF" />
+                </Button>
+                <Button Background="#1c1c1c"
+                    ToolTip="Menu Principal"
+                    IsEnabled="True"
+                 >
+                    <materialDesign:PackIcon Kind="FormSelect" Height="17" Width="25" Foreground="#FFF" />
+                </Button>
+                <Button Background="#1c1c1c" 
+                    ToolTip="Pacientes"
+                 >
+                    <materialDesign:PackIcon Kind="AccountHeartOutline" Height="17" Width="25" Foreground="#FFF" />
+                </Button>
+                <Button Background="#1c1c1c" 
+                    ToolTip="Consultas por paciente"
+                 >
+                    <materialDesign:PackIcon Kind="BadgeAccountOutline" Height="17" Width="25" Foreground="#FFF" />
+                </Button>
+                <Button Background="#1c1c1c" 
+                    ToolTip="Recetas por paciente"
+                 >
+                    <materialDesign:PackIcon Kind="Medicine" Height="17" Width="25" Foreground="#FFF" />
+                </Button>
+                <Button Background="#1c1c1c" 
+                    ToolTip="Consultas"
+                 >
+                    <materialDesign:PackIcon Kind="Book" Height="17" Width="25" Foreground="#FFF" />
+                </Button>
+                <Button Background="#1c1c1c" 
+                    ToolTip="Recetas Medicas"
+                 >
+                    <materialDesign:PackIcon Kind="MedicalBag" Height="17" Width="25" Foreground="#FFF" />
+                </Button>
+                <Button Background="#1c1c1c" 
+                    ToolTip="Farmacos"
+                 >
+                    <materialDesign:PackIcon Kind="BottleTonicPlusOutline" Height="17" Width="25" Foreground="#FFF" />
+                </Button>
+                <Button Background="#1c1c1c" 
+                    ToolTip="Mi Usuario"
+                 >
+                    <materialDesign:PackIcon Kind="UserEdit" Height="17" Width="25" Foreground="#FFF" />
+                </Button>
+                <Button Background="#1c1c1c" 
+                    ToolTip="Bitacora"
+                 >
+                    <materialDesign:PackIcon Kind="BookOpenPageVariant" Height="17" Width="25" Foreground="#FFF" />
+                </Button>
+                <Button Background="#1c1c1c" 
+                    ToolTip="Control de Empleado"
+                 >
+                    <materialDesign:PackIcon Kind="FolderAccount" Height="17" Width="25" Foreground="#FFF" />
+                </Button>
+                <Button Background="#1c1c1c" 
+                    ToolTip="Recuperar Contraseña"
+                 >
+                    <materialDesign:PackIcon Kind="AccountConvert" Height="17" Width="25" Foreground="#FFF" />
+                </Button>
+
+
+            </StackPanel>
+        </materialDesign:PopupBox>
+
+
+
+
+
         <StackPanel VerticalAlignment="Top">
             <Grid Background="#1c1c1c" Height="10"/>
             <Grid Margin="5">
@@ -16,13 +110,7 @@
 
 
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 0">
-
-
-                    <Button  x:Name="ButtonFechar" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Red" Click="ButtonFechar_Click">
-                        <materialDesign:PackIcon Kind="CloseCircleOutline" Height="30" Width="30" />
-                    </Button>
-                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 0"/>
             </Grid>
         </StackPanel>
 

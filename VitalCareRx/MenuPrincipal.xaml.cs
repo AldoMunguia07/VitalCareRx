@@ -57,7 +57,7 @@ namespace VitalCareRx
         {
             if(AportesControl.validarEntrada(miEmpleado))
             {
-                lbHoraEntradaSalida.Content = "Marcar hora entrda";
+                lbHoraEntradaSalida.Content = "Marcar hora entrada";
                 btnEntradaboton.Visibility = Visibility.Visible;
             }
             else
