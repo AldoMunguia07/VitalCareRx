@@ -183,62 +183,62 @@ namespace VitalCareRx
 
         private void btnIniciarSesion_Click(object sender, RoutedEventArgs e)
         {
-            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Inicio de sesión\OutDocument.htm");
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Login.html");
         }
 
         private void btnMenuPrincipal_Click(object sender, RoutedEventArgs e)
         {
-            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Menu Principal Admin\OutDocument.htm");
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Menú Principal(admin).html");
         }
 
         private void btnPacientes_Click(object sender, RoutedEventArgs e)
         {
-            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Pacientes\OutDocument.htm");
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Pacientes.html");
         }
 
         private void btnConsultasporPaciente_Click(object sender, RoutedEventArgs e)
         {
-            manualAyuda.LlamarManualUsuario(@"Manual de usuario\ConsultasPorPaciente\OutDocument.html");
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\ConsultasPorPaciente.html");
         }
 
         private void btnRecetasporPaciente_Click(object sender, RoutedEventArgs e)
         {
-            manualAyuda.LlamarManualUsuario(@"Manual de usuario\RecetasPorPaciente\OutDocument.html");
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\RecetasPorPaciente.html");
         }
 
         private void btnConsultas_Click(object sender, RoutedEventArgs e)
         {
-            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Consultas\OutDocument.html");
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Consultas.html");
         }
 
         private void btnRecetasMedicas_Click(object sender, RoutedEventArgs e)
         {
-            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Receta Medica\OutDocument.html");
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Receta Medica.html");
         }
 
         private void btnFarmacos_Click(object sender, RoutedEventArgs e)
         {
-            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Farmaco\OutDocument.htm");
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Farmacos.html");
         }
 
         private void btnMiUsuario_Click(object sender, RoutedEventArgs e)
         {
-            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Mi Usuario\OutDocument.htm");
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Mi Usuario.html");
         }
 
         private void btnBitacora_Click(object sender, RoutedEventArgs e)
         {
-            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Bitacora\OutDocument.html");
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Bitacora.html");
         }
 
         private void btnControlEmpleado_Click(object sender, RoutedEventArgs e)
         {
-            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Control de Empleados\OutDocument.htm");
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Control de Empleados.html");
         }
 
         private void btnRecuperarContrasenia_Click(object sender, RoutedEventArgs e)
         {
-            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Recuperar Contrasenia\OutDocument.html");
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Recuperar Contrasenia.html");
         }
     }
 }

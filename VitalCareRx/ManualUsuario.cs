@@ -18,7 +18,7 @@ namespace VitalCareRx
 
             string baseDir = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.StartupPath);           
             string ruta = baseDir.Substring(0, baseDir.Length - 3);
-
+          
             web.Navigate($@"{ruta}{ubicacion}");
         }
     }
