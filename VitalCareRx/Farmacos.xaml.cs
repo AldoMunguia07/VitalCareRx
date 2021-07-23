@@ -223,12 +223,18 @@ namespace VitalCareRx
                 txtDescripcionFarmaco.Text = rowSelected.Row["Farmaco"].ToString();
                 IndicacionesFarmaco.Text = rowSelected.Row["Informacion del farmaco"].ToString();
                 farmaco.IdFarmaco = Convert.ToInt32(rowSelected.Row["Codigo Farmaco"]);
+                ObtenerValores();
 
 
             }
 
         }
 
+        private void btnInventario_Click(object sender, RoutedEventArgs e)
+        {
+            Inventario inventario = new Inventario(farmaco);
+            inventario.ShowDialog();
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             farmaco.BuscarFarmaco(txtBuscarFarmaco.Text, dgFarmacos);
@@ -278,5 +284,7 @@ namespace VitalCareRx
         {
             validaciones.CaracteresInecesarios(e);
         }
+
+       
     }
 }

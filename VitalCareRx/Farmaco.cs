@@ -11,7 +11,7 @@ using System.Windows.Controls;
 
 namespace VitalCareRx
 {
-    class Farmaco
+    public class Farmaco
     {
         //Variables miembro
         Conexion conexion = new Conexion();

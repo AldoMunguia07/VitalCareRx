@@ -19,9 +19,23 @@ namespace VitalCareRx
     /// </summary>
     public partial class Inventario : Window
     {
-        public Inventario()
+        Farmaco unFarmaco = new Farmaco();
+
+        public Inventario(Farmaco farmaco)
         {
             InitializeComponent();
+
+            unFarmaco = farmaco;
+            lblFarmaco.Content = farmaco.DescripcionFarmaco;
+        }
+
+        private void btnCerrar_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("¿Desea regresar al formulario anterior?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                this.Close();
+            }
         }
     }
 }

@@ -9,7 +9,7 @@
         Title="MainWindow" Icon="IMAGENES/ImagendeIcono.png" Height="600" Width="1024" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" MouseDown="Window_MouseDown"
         MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp">
     <Grid>
-        <Image Source="IMAGENES/PrimeroDios.png" Height="101" VerticalAlignment="Top" Margin="561,489,293,0" RenderTransformOrigin="0.5,0.5" />
+        <Image Source="IMAGENES/PrimeroDios.png" Height="86" VerticalAlignment="Top" Margin="586,504,293,0" RenderTransformOrigin="0.5,0.5" />
         <Grid HorizontalAlignment="Left" Height="600" Margin="731,0,0,0" VerticalAlignment="Top" Width="293">
 
             <Grid.Background>
@@ -48,7 +48,7 @@
             </Label.Background>
         </Label>
         <TextBox Name="txtBuscarFarmaco" HorizontalAlignment="Left" Height="33" Margin="274,504,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139" />
-        <Button Name="btnAgregar" Content="Añadir" HorizontalAlignment="Left" Margin="183,463,0,0" VerticalAlignment="Top" Width="110" Click="btnAgregar_Click">
+        <Button Name="btnAgregar" Content="Añadir" HorizontalAlignment="Left" Margin="295,463,0,0" VerticalAlignment="Top" Width="110" Click="btnAgregar_Click">
             <Button.Background>
                 <LinearGradientBrush>
 
@@ -57,7 +57,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="398,461,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="-0.242,0.544" Click="btnModificar_Click"/>
+        <Button Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="510,461,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="-0.242,0.544" Click="btnModificar_Click"/>
         <Button Name="btnBuscar" Content="Buscar" HorizontalAlignment="Left" Margin="291,542,0,0" VerticalAlignment="Top" Width="110" Click="Button_Click">
             <Button.Background>
                 <LinearGradientBrush>
@@ -67,7 +67,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <materialDesign:PackIcon Kind="SquareEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="183,461,0,0" RenderTransformOrigin="0.5,0.5" >
+        <materialDesign:PackIcon Kind="SquareEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="295,461,0,0" RenderTransformOrigin="0.5,0.5" >
             <materialDesign:PackIcon.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -77,10 +77,29 @@
                 </TransformGroup>
             </materialDesign:PackIcon.RenderTransform>
         </materialDesign:PackIcon>
-        <materialDesign:PackIcon Kind="BookEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="398,463,0,0" />
+        <materialDesign:PackIcon Kind="BookEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="510,463,0,0" />
         <materialDesign:PackIcon Kind="FeatureSearchOutline" Height="32" Width="24" Foreground="#FFF" Margin="291,542,0,0" />
 
         <Button Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="828,494,0,0" VerticalAlignment="Top" Width="109" Click="btnLimpiar_Click"/>        <materialDesign:PackIcon Kind="TextBoxMinus" Height="32" Width="27" Foreground="#FFF" Margin="828,494,0,0" />
+        <Button x:Name="btnInventario" Content="Inventario" HorizontalAlignment="Left" Margin="90,463,0,0" VerticalAlignment="Top" Width="110" Click="btnInventario_Click">
+            <Button.Background>
+                <LinearGradientBrush>
+
+                    <GradientStop Color="#ff8000" Offset="0.1"/>
+                    <GradientStop Color="#1c1c1c" Offset="2"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <materialDesign:PackIcon Kind="CartOutline" Height="32" Width="24" Foreground="#FFF" Margin="91,461,0,0" RenderTransformOrigin="0.5,0.5" >
+            <materialDesign:PackIcon.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-1.253"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </materialDesign:PackIcon.RenderTransform>
+        </materialDesign:PackIcon>
 
 
     </Grid>

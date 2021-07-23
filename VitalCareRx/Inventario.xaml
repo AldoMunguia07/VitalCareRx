@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Inventario" Height="590" Width="950" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" >
     <Grid>
-        <Label Content="FARMACO" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Foreground="White" FontFamily="Verdana" Width="932" HorizontalContentAlignment="Center" Height="32">
+        <Label x:Name="lblFarmaco" Content="FARMACO" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Foreground="White" FontFamily="Verdana" Width="932" HorizontalContentAlignment="Center" Height="46">
             <Label.Background>
 
                 <LinearGradientBrush>
@@ -32,7 +32,7 @@
 
                 </LinearGradientBrush>
             </Grid.Background>
-            <Button x:Name="btnCerrar" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Red" Margin="2,1,3,544" RenderTransformOrigin="0.5,0.5">
+            <Button x:Name="btnCerrar" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Red" Margin="2,1,3,544" RenderTransformOrigin="0.5,0.5" Click="btnCerrar_Click">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="-1"/>
