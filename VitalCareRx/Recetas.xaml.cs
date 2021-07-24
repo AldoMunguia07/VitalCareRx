@@ -335,13 +335,7 @@ namespace VitalCareRx
                                 ObtenerValores();
                                 dgRecetas.Items.RemoveAt(indice);
                                 farmacos.RemoveAt(indice);
-                                // receta.ModificarFarmacoReceta(receta, Convert.ToInt32(cmbFarmacos.SelectedValue));
-                                /* farmacos[indice].IdReceta = receta.IdReceta;
-                                 farmacos[indice].IdFarmaco = receta.IdFarmaco;
-                                 farmacos[indice].Farmaco = cmbFarmacos.Text;
-                                 farmacos[indice].Cantidad = receta.Cantidad;
-                                 farmacos[indice].DuracionTratamiento = receta.DuracionTratamiento;
-                                 farmacos[indice].Indicaciones = receta.Indicaciones;*/
+                                
 
                                 AgregarDetalle();
 
@@ -455,6 +449,7 @@ namespace VitalCareRx
                         receta.DuracionTratamiento = detalleR.DuracionTratamiento;
                         receta.Indicaciones = detalleR.Indicaciones;
                         receta.AgregarFarmacoAReceta(receta);
+                        receta.retirarInventario(receta.IdFarmaco, receta.Cantidad);
                     }
 
                     MessageBox.Show("Receta generada exitosamente", "Receta", MessageBoxButton.OK, MessageBoxImage.Information);

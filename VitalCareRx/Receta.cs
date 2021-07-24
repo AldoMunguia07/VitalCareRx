@@ -21,7 +21,7 @@ namespace VitalCareRx
         AportesControl aportes = new AportesControl();
 
 
-        public int IdReceta {get; set;}
+        public int IdReceta { get; set; }
 
         public int IdConsulta { get; set; }
 
@@ -41,7 +41,7 @@ namespace VitalCareRx
 
         public Receta() { }
 
-        public Receta(int idReceta, int idConsulta,int idFarmaco, int cantidad, string duracionTratamiento, string indicaciones) 
+        public Receta(int idReceta, int idConsulta, int idFarmaco, int cantidad, string duracionTratamiento, string indicaciones)
         {
             IdReceta = idReceta;
             IdConsulta = idConsulta;
@@ -161,7 +161,7 @@ namespace VitalCareRx
             {
                 conexion.sqlConnection.Close();
             }
-            
+
 
 
         }
@@ -288,7 +288,7 @@ namespace VitalCareRx
             }
         }
 
-        
+
 
         /// <summary>
         /// Metodo para validar si el farmaco ya esta en la receta.
@@ -336,5 +336,124 @@ namespace VitalCareRx
             }
 
         }
+
+        public void retirarInventario(int idFarmaco, int cantidad)
+        {
+            try
+            {
+                
+                int restante = 0;
+                while (cantidad > 0)
+                {
+
+                    if (cantidad > cantInventario(idFarmaco))
+                    {
+                        restante = cantInventario(idFarmaco);
+                    }
+                    else
+                    {
+                        restante = cantidad;
+                    }
+
+
+                    conexion.sqlConnection.Open();
+
+                    SqlCommand sqlCommand = new SqlCommand("sp_Farmacos", conexion.sqlConnection);
+
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                    sqlCommand.Parameters.AddWithValue("@cantidad", restante);
+                    sqlCommand.Parameters.AddWithValue("@idFarmaco", idFarmaco);
+                    sqlCommand.Parameters.AddWithValue("@cantInventario", cantInventario(idFarmaco));
+                    sqlCommand.Parameters.AddWithValue("@fechaVencimiento", fecha(idFarmaco));
+                    sqlCommand.Parameters.AddWithValue("@accion", "RetirarInventario");
+                    aportes.ContextoSesion(IdEmpleado, conexion.sqlConnection);
+                    
+
+                    
+                   
+                    cantidad -= restante;
+                    
+                    
+                    sqlCommand.ExecuteNonQuery();
+                    conexion.sqlConnection.Close();
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+            }
+        }
+
+        private DateTime fecha(int idFarmaco)
+        {
+            try
+            {
+               
+
+                SqlCommand sqlCommand = new SqlCommand("sp_Farmacos", conexion.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.AddWithValue("@idFarmaco", idFarmaco);
+                sqlCommand.Parameters.AddWithValue("@accion", "fecha");
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    return Convert.ToDateTime(dataTable.Rows[0]["fechaVencimiento"]);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        private int cantInventario(int idFarmaco)
+        {
+            try
+            {
+
+                SqlCommand sqlCommand = new SqlCommand("sp_Farmacos", conexion.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.AddWithValue("@idFarmaco", idFarmaco);
+                sqlCommand.Parameters.AddWithValue("@accion", "cantInventario");
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    return Convert.ToInt32(dataTable.Rows[0]["cantidad"]);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+
     }
 }
