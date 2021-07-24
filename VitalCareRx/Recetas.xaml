@@ -51,7 +51,16 @@
 
             <Label Background="#1c1c1c" Content="Cantidad de fármaco" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,145,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="326" Height="33"/>
         </Grid>
-        <DataGrid Name = "dgRecetas" HorizontalAlignment="Left" Height="285" Margin="8,99,0,0" VerticalAlignment="Top" Width="644" SelectionChanged="dgRecetas_SelectionChanged" Grid.ColumnSpan="2"/>
+        <DataGrid Name = "dgRecetas" HorizontalAlignment="Left" Height="285" Margin="8,99,0,0" VerticalAlignment="Top" Width="644" SelectionChanged="dgRecetas_SelectionChanged" Grid.ColumnSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="idReceta" IsReadOnly="True" Binding="{Binding Path=IdReceta}" Width="*" ></DataGridTextColumn>
+                <DataGridTextColumn Header="idFarmaco" IsReadOnly="True"  Binding="{Binding Path=IdFarmaco}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Farmaco" IsReadOnly="True"  Binding="{Binding Path=Farmaco}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cantidad" IsReadOnly="True"  Binding="{Binding Path=Cantidad}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Duración" IsReadOnly="True"  Binding="{Binding Path=DuracionTratamiento}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Indicaciones" IsReadOnly="True"  Binding="{Binding Path=Indicaciones}" Width="*"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
         <Label Background="#1c1c1c" Content="Indicaciones" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="64,379,-8,181" FontSize="20" Foreground="White" FontFamily="Verdana" Height="30" Width="326" RenderTransformOrigin="0.612,0.375" Grid.Column="1"/>
         <Label Content="Listado de fármacos" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1,41,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="661" RenderTransformOrigin="0.5,0.5" Height="36" Grid.ColumnSpan="2">
             <Label.RenderTransform>
@@ -96,6 +105,15 @@
         <materialDesign:PackIcon Kind="DeleteCircle" Height="32" Width="24" Foreground="#FFF" Margin="496,482,0,0" />
 
         <Button Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="166,525,0,0" VerticalAlignment="Top" Width="108" Click="btnLimpiar_Click" Grid.Column="1"/>        <materialDesign:PackIcon Kind="TextBoxMinus" Height="32" Width="26" Foreground="#FFF" Margin="166,525,0,0" Grid.Column="1" />
+        <Button x:Name = "btnGenerarReceta" Content="Generar receta" HorizontalAlignment="Left" Margin="278,536,0,0" VerticalAlignment="Top" Width="142" Click="btnGenerarReceta_Click">
+            <Button.Background>
+                <LinearGradientBrush>
+
+                    <GradientStop Color="#FF48C7A0" Offset="0.1"/>
+                    <GradientStop Color="#74EEAB" Offset="2"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
 
 
     </Grid>
