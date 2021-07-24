@@ -35,6 +35,7 @@ namespace VitalCareRx
         private Empleado miEmpleado = new Empleado();
         private Receta receta = new Receta();
 
+       
         List<DetalleReceta> farmacos = new List<DetalleReceta>();
 
         public Recetas(int idConsulta, int idRecetaMedica, Empleado empleado) // Recibe como paramtero el id de la consulta y el id de la receta (La informacion de este formulario se guarda en una tabla detalle)
@@ -47,9 +48,14 @@ namespace VitalCareRx
             //receta.MostrarFarmacos(dgRecetas, codigoConsulta);
             receta.IdEmpleado = miEmpleado.IdEmpleado;
             validarSeleccionado = false;
-            
+            OcultarColumnas();
         }
 
+        private void OcultarColumnas()
+        {
+            dgRecetas.Columns[0].Visibility = Visibility.Hidden;
+            dgRecetas.Columns[1].Visibility = Visibility.Hidden;
+        }
 
         private void AgregarDetalle()
         {
@@ -63,7 +69,7 @@ namespace VitalCareRx
                 Indicaciones = receta.Indicaciones
             };
 
-
+            
 
             farmacos.Add(new DetalleReceta
             {
@@ -74,8 +80,10 @@ namespace VitalCareRx
                 DuracionTratamiento = receta.DuracionTratamiento,
                 Indicaciones = receta.Indicaciones
             });
+
             dgRecetas.Items.Add(detalleReceta);
             LimpiarFormulario();
+            OcultarColumnas();
         }
 
         private void btnAñadir_Click(object sender, RoutedEventArgs e)
@@ -101,21 +109,29 @@ namespace VitalCareRx
                                 }
                                 else
                                 {
-
+                                    bool encontrado = false;
                                     foreach (DetalleReceta detalle in farmacos)
                                     {
-
+                                       
                                         if (Convert.ToInt32(cmbFarmacos.SelectedValue) == detalle.IdFarmaco)
                                         {
-                                            MessageBox.Show("El farmaco ya a sido agregado a la receta medica de la consulta.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                                            LimpiarFormulario();
-                                        }
-                                        else
-                                        {
-                                            ObtenerValores();
-                                            AgregarDetalle();
-                                            MessageBox.Show("Farmaco agreado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
-                                        }
+                                            encontrado = true;
+                                            break;
+                                            
+                                        }                                       
+
+                                    }
+
+                                    if (!encontrado)
+                                    {
+                                        ObtenerValores();
+                                        AgregarDetalle();
+                                        MessageBox.Show("Farmaco agreado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("El farmaco ya a sido agregado a la receta medica de la consulta.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                        LimpiarFormulario();
                                     }
                                 }
                             
@@ -173,11 +189,9 @@ namespace VitalCareRx
                     dgRecetas.Items.RemoveAt(indice);
                     farmacos.RemoveAt(indice);
 
-                    
 
                     LimpiarFormulario();
 
-                   
 
                     MessageBox.Show("Farmaco eliminado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -188,10 +202,10 @@ namespace VitalCareRx
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                MessageBox.Show("Ha ocurrido un error al momento de realizar la elimnacion... Favor intentelo de nuevo mas tarde", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
@@ -211,9 +225,9 @@ namespace VitalCareRx
             receta.Cantidad = Convert.ToInt32(txtCantidad.Text);
             if (validarSeleccionado)
             {
-                receta.IdFarmaco = codigoFarmaco;
-               
-                
+                receta.IdFarmaco = Convert.ToInt32(cmbFarmacos.SelectedValue);
+
+
             }
             else 
             {
@@ -260,27 +274,36 @@ namespace VitalCareRx
             rtxtDuracionTratamiento.Document.Blocks.Clear();
             cmbFarmacos.SelectedValue = null;
             validarSeleccionado = false;
+            dgRecetas.SelectedValue = false;
+            
         }
 
         //Evento para enviar la información del grid a las textBox
         private void dgRecetas_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+           
             int indice = dgRecetas.SelectedIndex;
+            TextRange indicaciones = new TextRange(rtxtIndicaciones.Document.ContentStart, rtxtIndicaciones.Document.ContentEnd);
+            TextRange durationTratamiento = new TextRange(rtxtDuracionTratamiento.Document.ContentStart, rtxtDuracionTratamiento.Document.ContentEnd);
 
-            if (indice != null) // Si no esta seleccionado que no capture el id
+            if (indice > -1) // Si no esta seleccionado que no capture el id
             {
                 validarSeleccionado = true;
-                
-                //Asiganamos contenido a todas las textBox segun la columna en base a la fila seleccionada
 
-                TextRange DuracionTratamiento = new TextRange(rtxtDuracionTratamiento.Document.ContentStart, rtxtDuracionTratamiento.Document.ContentEnd);
-                TextRange Indicaciones = new TextRange(rtxtIndicaciones.Document.ContentStart, rtxtIndicaciones.Document.ContentEnd);
+                codigoFarmaco = farmacos[indice].IdFarmaco;
+                cmbFarmacos.SelectedValue = farmacos[indice].IdFarmaco;
+                txtCantidad.Text = farmacos[indice].Cantidad.ToString();
+                durationTratamiento.Text = farmacos[indice].DuracionTratamiento;
+                indicaciones.Text = farmacos[indice].Indicaciones;
 
-             
+
+
+
             }
 
         }
+
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
@@ -290,18 +313,46 @@ namespace VitalCareRx
                 {
                     if (ValidarCampos()) // El usuario no tiene que dejar los campos vacios.
                     {
-                        if (!receta.ValidarFarmacoEnReceta(cmbFarmacos, codigoRecetaMedica) || codigoFarmaco == Convert.ToInt32(cmbFarmacos.SelectedValue)) // Valida si el farmaco no esta en la receta actual y si es el codigo de farmaco seleccionado, con esa
+
+                        bool encontrado = false;
+                        foreach (DetalleReceta detalle in farmacos)
+                        {
+
+                            if (Convert.ToInt32(cmbFarmacos.SelectedValue) == detalle.IdFarmaco)
+                            {
+                                encontrado = true;
+                                break;
+
+                            }
+
+                        }
+
+                        if (!encontrado || codigoFarmaco == Convert.ToInt32(cmbFarmacos.SelectedValue)) // Valida si el farmaco no esta en la receta actual y si es el codigo de farmaco seleccionado, con esa
                         {                                                                                             // condición pasara a la siguiente validación
                             if (int.Parse(txtCantidad.Text) > 0 && int.Parse(txtCantidad.Text) <= 25) // La cantidad de farmacos debe ser mayor a 0 y menor a 25
                             {
-                                
+                               int indice = dgRecetas.SelectedIndex;
                                 ObtenerValores();
+                                dgRecetas.Items.RemoveAt(indice);
+                                farmacos.RemoveAt(indice);
+                                // receta.ModificarFarmacoReceta(receta, Convert.ToInt32(cmbFarmacos.SelectedValue));
+                                /* farmacos[indice].IdReceta = receta.IdReceta;
+                                 farmacos[indice].IdFarmaco = receta.IdFarmaco;
+                                 farmacos[indice].Farmaco = cmbFarmacos.Text;
+                                 farmacos[indice].Cantidad = receta.Cantidad;
+                                 farmacos[indice].DuracionTratamiento = receta.DuracionTratamiento;
+                                 farmacos[indice].Indicaciones = receta.Indicaciones;*/
 
-                                receta.ModificarFarmacoReceta(receta, Convert.ToInt32(cmbFarmacos.SelectedValue));
+                                AgregarDetalle();
+
+
+
+
+
 
                                 LimpiarFormulario();
 
-                                receta.MostrarFarmacos(dgRecetas, codigoConsulta);
+                                //receta.MostrarFarmacos(dgRecetas, codigoConsulta);
 
                                 MessageBox.Show("Farmaco modificado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
                                 
@@ -330,10 +381,10 @@ namespace VitalCareRx
                     MessageBox.Show("¡Es requerido que seleccione un farmaco!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
@@ -366,7 +417,7 @@ namespace VitalCareRx
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
             LimpiarFormulario();
-            receta.MostrarFarmacos(dgRecetas, codigoConsulta);
+            //receta.MostrarFarmacos(dgRecetas, codigoConsulta);
         }
 
    
@@ -404,15 +455,18 @@ namespace VitalCareRx
                         receta.DuracionTratamiento = detalleR.DuracionTratamiento;
                         receta.Indicaciones = detalleR.Indicaciones;
                         receta.AgregarFarmacoAReceta(receta);
-
-                        MessageBox.Show("Receta generada exitosamente", "Receta", MessageBoxButton.OK, MessageBoxImage.Information);
-
-
                     }
+
+                    MessageBox.Show("Receta generada exitosamente", "Receta", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
 
             
+        }
+
+        private void dgRecetas_CurrentCellChanged(object sender, EventArgs e)
+        {
+
         }
     }  
 }

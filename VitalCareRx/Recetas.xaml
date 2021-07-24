@@ -51,7 +51,7 @@
 
             <Label Background="#1c1c1c" Content="Cantidad de fármaco" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,145,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="326" Height="33"/>
         </Grid>
-        <DataGrid Name = "dgRecetas" HorizontalAlignment="Left" Height="285" Margin="8,99,0,0" VerticalAlignment="Top" Width="644" SelectionChanged="dgRecetas_SelectionChanged" Grid.ColumnSpan="2">
+        <DataGrid Name = "dgRecetas" HorizontalAlignment="Left" Height="285" Margin="8,99,0,0" VerticalAlignment="Top" Width="644" SelectionChanged="dgRecetas_SelectionChanged" CurrentCellChanged="dgRecetas_CurrentCellChanged" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="idReceta" IsReadOnly="True" Binding="{Binding Path=IdReceta}" Width="*" ></DataGridTextColumn>
                 <DataGridTextColumn Header="idFarmaco" IsReadOnly="True"  Binding="{Binding Path=IdFarmaco}" Width="*"></DataGridTextColumn>
