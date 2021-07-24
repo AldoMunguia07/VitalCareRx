@@ -200,5 +200,207 @@ namespace VitalCareRx
             }
         }
 
+        public void AgregarCantidad(int idFarmaco, DateTime fechaVencimiento, int cantidad)
+        {
+            try
+            {
+                conexion.sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand("sp_Farmacos", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                
+                sqlCommand.Parameters.AddWithValue("@idFarmaco", idFarmaco);
+                sqlCommand.Parameters.AddWithValue("@fechaVencimiento", fechaVencimiento);
+                sqlCommand.Parameters.AddWithValue("@cantidad", cantidad);
+                sqlCommand.Parameters.AddWithValue("@accion", "InsertarDetalle");
+                aportes.ContextoSesion(IdEmpleado, conexion.sqlConnection);
+
+                sqlCommand.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+
+
+            }
+        }
+
+        public void MostrarDetalleFarmaco(DataGrid dataGrid, int idFarmaco)
+        {
+
+            try
+            {
+                
+
+                SqlCommand sqlCommand = new SqlCommand("sp_Farmacos", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+                sqlCommand.Parameters.AddWithValue("@idFarmaco", idFarmaco);
+                sqlCommand.Parameters.AddWithValue("@accion", "MostrarDetalleFarmaco");
+
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    dataGrid.ItemsSource = dataTable.DefaultView;
+
+                    dataGrid.IsReadOnly = true; // El grid es de solo lectura.
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
+        }
+
+        public void ModificarCantidad(int idFarmaco, DateTime fechaVencimiento, DateTime fechaVencimiento2, int cantidad)
+        {
+            try
+            {
+                conexion.sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand("sp_Farmacos", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.AddWithValue("@idFarmaco", idFarmaco);
+                sqlCommand.Parameters.AddWithValue("@fechaVencimiento2", fechaVencimiento2);
+                sqlCommand.Parameters.AddWithValue("@fechaVencimiento", fechaVencimiento);                
+                sqlCommand.Parameters.AddWithValue("@cantidad", cantidad);
+                sqlCommand.Parameters.AddWithValue("@accion", "ActualizarDetalle");
+                aportes.ContextoSesion(IdEmpleado, conexion.sqlConnection);
+
+                sqlCommand.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+
+
+            }
+        }
+
+        public void EliminarDetalle(int idFarmaco, DateTime fechaVencimiento)
+        {
+            try
+            {
+                conexion.sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand("sp_Farmacos", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.AddWithValue("@idFarmaco", idFarmaco);              
+                sqlCommand.Parameters.AddWithValue("@fechaVencimiento", fechaVencimiento);                
+                sqlCommand.Parameters.AddWithValue("@accion", "EliminarDetalle");
+                aportes.ContextoSesion(IdEmpleado, conexion.sqlConnection);
+
+                sqlCommand.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+
+
+            }
+        }
+
+        public void SumarCantidad(int idFarmaco, DateTime fechaVencimiento, int cantidad)
+        {
+            try
+            {
+                conexion.sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand("sp_Farmacos", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.AddWithValue("@idFarmaco", idFarmaco);               
+                sqlCommand.Parameters.AddWithValue("@fechaVencimiento", fechaVencimiento);
+                sqlCommand.Parameters.AddWithValue("@cantidad", cantidad);
+                sqlCommand.Parameters.AddWithValue("@accion", "SumarCantidad");
+                aportes.ContextoSesion(IdEmpleado, conexion.sqlConnection);
+
+                sqlCommand.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+
+
+            }
+        }
+
+        public bool ExisteLote(int idFarmaco, DateTime fechaVencimiento)
+        {
+            try
+            {
+
+                //Query para modificar un paciente
+                SqlCommand sqlCommand = new SqlCommand("sp_Farmacos", conexion.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    sqlCommand.Parameters.AddWithValue("@idFarmaco", idFarmaco);
+                    sqlCommand.Parameters.AddWithValue("@fechaVencimiento", fechaVencimiento); 
+                    sqlCommand.Parameters.AddWithValue("@accion", "VerificarFecha");
+
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+
+                    if (dataTable.Rows.Count != 0)  //Si existe que devuelva un true
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
     }
 }

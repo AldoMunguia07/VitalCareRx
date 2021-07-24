@@ -234,6 +234,7 @@ namespace VitalCareRx
         {
             Inventario inventario = new Inventario(farmaco);
             inventario.ShowDialog();
+            farmaco.MostrarFarmaco(dgFarmacos);
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {

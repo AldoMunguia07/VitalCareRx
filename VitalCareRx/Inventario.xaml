@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         Title="Inventario" Height="590" Width="950" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" >
     <Grid>
-        <Label x:Name="lblFarmaco" Content="FARMACO" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Foreground="White" FontFamily="Verdana" Width="932" HorizontalContentAlignment="Center" Height="46">
+        <Label x:Name="lblFarmaco" Content="FARMACO" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Foreground="White" FontFamily="Verdana" Width="932" HorizontalContentAlignment="Center" Height="46" MouseDown="Window_MouseDown"
+        MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp">
             <Label.Background>
 
                 <LinearGradientBrush>
@@ -44,11 +45,11 @@
                 <materialDesign:PackIcon Kind="CloseCircleOutline" Height="35" Width="47" RenderTransformOrigin="0.352,0.42" />
             </Button>
         </Grid>
-        <DataGrid  x:Name="gridBitacora" HorizontalAlignment="Left" Height="252" Margin="50,232,0,0" VerticalAlignment="Top" Width="794"/>
+        <DataGrid  x:Name="gridDetalleFarmaco" HorizontalAlignment="Left" Height="252" Margin="198,236,0,0" VerticalAlignment="Top" Width="516" AutoGeneratingColumn="gridDetalleFarmaco_AutoGeneratingColumn" SelectionChanged="gridDetalleFarmaco_SelectionChanged"/>
         <Label Content="Fecha de Vencimiento" HorizontalAlignment="Left" Margin="148,54,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="15"/>
-        <DatePicker HorizontalAlignment="Left" Margin="148,88,0,0" VerticalAlignment="Top" Width="162" Height="32" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <DatePicker Name="dtFecha" HorizontalAlignment="Left" Margin="148,88,0,0" VerticalAlignment="Top" Width="162" Height="34" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         <Image Source="IMAGENES/PrimeroDios.png" Height="93" VerticalAlignment="Top" Margin="10,489,812,0" RenderTransformOrigin="0.5,0.5"/>
-        <Button x:Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="656,142,0,0" VerticalAlignment="Top" Width="138"/>
+        <Button x:Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="656,142,0,0" VerticalAlignment="Top" Width="138" Click="btnLimpiar_Click"/>
         <materialDesign:PackIcon Kind="BookCancel" Height="32" Width="26" Foreground="#FFF" Margin="656,142,0,0" />
 
         <Label Foreground="#74EEAB" Content="DETALLE FARMACO" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Margin="348,200,0,0" Height="31" Width="192" RenderTransformOrigin="0.5,0.5">
@@ -62,7 +63,7 @@
             </Label.RenderTransform>
         </Label>
 
-        <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="102,142,0,0" VerticalAlignment="Top" Width="138">
+        <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="102,142,0,0" VerticalAlignment="Top" Width="138" Click="btnAgregar_Click">
             <Button.Background>
                 <LinearGradientBrush>
 
@@ -72,9 +73,9 @@
             </Button.Background>
         </Button>
         <materialDesign:PackIcon Kind="AccountPlus" Height="32" Width="26" Foreground="#FFF" Margin="102,142,0,0" />
-        <Button Name="btnModificar"  Content="Modificar" HorizontalAlignment="Left" Margin="288,142,0,0" VerticalAlignment="Top" Width="138" />
+        <Button Name="btnModificar"  Content="Modificar" HorizontalAlignment="Left" Margin="288,142,0,0" VerticalAlignment="Top" Width="138" Click="btnModificar_Click" />
         <materialDesign:PackIcon Kind="SquareEditOutline" Height="32" Width="24" Foreground="#FFF" Margin="288,142,0,0" />
-        <Button Name="btnEliminar"  Content="Eliminar" HorizontalAlignment="Left" Margin="474,142,0,0" VerticalAlignment="Top" Width="138"  Height="32" >
+        <Button Name="btnEliminar"  Content="Eliminar" HorizontalAlignment="Left" Margin="474,142,0,0" VerticalAlignment="Top" Width="138"  Height="32" Click="btnEliminar_Click">
             <Button.Background>
                 <LinearGradientBrush>
 
@@ -85,7 +86,7 @@
         </Button>
         <materialDesign:PackIcon Kind="Delete" Height="32" Width="24" Foreground="#FFF" Margin="474,142,0,0" RenderTransformOrigin="5.742,0.696" />
         <Label Content="Cantidad de fármaco" HorizontalAlignment="Left" Margin="572,54,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="15"/>
-        <TextBox HorizontalAlignment="Left" Height="32" Margin="540,88,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="234" FontSize="20"/>
+        <TextBox Name="txtCantidad" HorizontalAlignment="Left" Height="34" Margin="540,88,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="234" FontSize="20"/>
         <Label Content="Buscar por fecha de vencimiento" HorizontalAlignment="Left" Margin="322,498,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="15"/>
         <materialDesign:PackIcon Kind="AccountSearchOutline" Height="24" Width="35" Foreground="Black" Margin="551,498,0,0" RenderTransformOrigin="0.658,0.54"/>
         <DatePicker HorizontalAlignment="Left" Margin="322,526,0,0" VerticalAlignment="Top" Width="264" Height="34" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
