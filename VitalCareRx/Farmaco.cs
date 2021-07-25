@@ -267,6 +267,43 @@ namespace VitalCareRx
            
         }
 
+        public void MostrarDetalleFarmacoFiltro(DataGrid dataGrid, int idFarmaco, DatePicker fecha)
+        {
+
+            try
+            {
+
+
+                SqlCommand sqlCommand = new SqlCommand("sp_Farmacos", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+                sqlCommand.Parameters.AddWithValue("@idFarmaco", idFarmaco);
+                sqlCommand.Parameters.AddWithValue("@fechaVencimiento", fecha.SelectedDate);
+
+                sqlCommand.Parameters.AddWithValue("@accion", "MostrarDetalleFarmacoFiltro");
+
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    dataGrid.ItemsSource = dataTable.DefaultView;
+
+                    dataGrid.IsReadOnly = true; // El grid es de solo lectura.
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
         public void ModificarCantidad(int idFarmaco, DateTime fechaVencimiento, DateTime fechaVencimiento2, int cantidad)
         {
             try

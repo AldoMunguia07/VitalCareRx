@@ -155,6 +155,7 @@ namespace VitalCareRx
         {
             seleccionado = false;
             dtFecha.SelectedDate = null;
+            dtFechaBuscar.SelectedDate = null;
             txtCantidad.Clear();
             fechaV = DateTime.Now;
             unFarmaco.MostrarDetalleFarmaco(gridDetalleFarmaco, unFarmaco.IdFarmaco);
@@ -215,6 +216,11 @@ namespace VitalCareRx
         private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             right = false;
+        }
+
+        private void dtFechaBuscar_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            unFarmaco.MostrarDetalleFarmacoFiltro(gridDetalleFarmaco, unFarmaco.IdFarmaco, dtFechaBuscar);
         }
     }
 }
