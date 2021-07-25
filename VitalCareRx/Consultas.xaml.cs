@@ -311,8 +311,18 @@ namespace VitalCareRx
                 
                 receta.RecetaMedica(idConsulta,idRecetaMedica,consulta, miEmpleado);
                 idRecetaMedica = consulta.CapturarIdRecetaMedica(idConsulta);
-                Recetas recetas = new Recetas(idConsulta, idRecetaMedica, miEmpleado);
-                recetas.ShowDialog(); //ShowDialog perimte volver a ventana de consulta una vez se cierre la ventana de Recetas.
+
+                if (receta.ValidarReceta(idRecetaMedica))
+                {
+                    RecetasConsultaPaciente recetasConsultaPaciente = new RecetasConsultaPaciente(idConsulta);
+                    recetasConsultaPaciente.ShowDialog();
+                }
+                else
+                {
+                    Recetas recetas = new Recetas(idConsulta, idRecetaMedica, miEmpleado);
+                    recetas.ShowDialog(); //ShowDialog perimte volver a ventana de consulta una vez se cierre la ventana de Recetas.
+                }
+                
                 btnReceta.Content = "Ver receta";
                 
             }

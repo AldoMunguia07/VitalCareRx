@@ -455,5 +455,70 @@ namespace VitalCareRx
         }
 
 
+        public bool ValidarReceta(int idReceta)
+        {
+            try
+            {
+                SqlCommand sqlCommand = new SqlCommand("sp_RecetasMedicas", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+
+                    sqlCommand.Parameters.AddWithValue("@idRecetaMedica", idReceta);
+                    sqlCommand.Parameters.AddWithValue("@accion", "ValidarDetalleReceta");
+
+                    DataTable dataTable = new DataTable();
+                    sqlDataAdapter.Fill(dataTable);
+
+                    if (dataTable.Rows.Count != 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public int VerificarCantidad(int idFarmaco)
+        {
+            try
+            {
+
+                SqlCommand sqlCommand = new SqlCommand("sp_Farmacos", conexion.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.AddWithValue("@idFarmaco", idFarmaco);
+                sqlCommand.Parameters.AddWithValue("@accion", "VerificarCantidad");
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    return Convert.ToInt32(dataTable.Rows[0]["cantidad"]);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+
     }
 }

@@ -232,9 +232,17 @@ namespace VitalCareRx
 
         private void btnInventario_Click(object sender, RoutedEventArgs e)
         {
-            Inventario inventario = new Inventario(farmaco);
-            inventario.ShowDialog();
-            farmaco.MostrarFarmaco(dgFarmacos);
+            if (seleccionado)
+            {
+                Inventario inventario = new Inventario(farmaco);
+                inventario.ShowDialog();
+                farmaco.MostrarFarmaco(dgFarmacos);
+            }
+            else
+            {
+                MessageBox.Show("¡Debe seleccionar un Farmaco!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {

@@ -98,31 +98,12 @@ namespace VitalCareRx
                        
                         if (int.Parse(txtCantidad.Text) > 0 && int.Parse(txtCantidad.Text) <= 25) // La cantidad de farmacos debe ser mayor a 0 y menor a 25
                         {
-                            try
+                            if (receta.VerificarCantidad(Convert.ToInt32(cmbFarmacos.SelectedValue)) >= int.Parse(txtCantidad.Text))
                             {
-
-                                if (farmacos.Count == 0)
+                                try
                                 {
-                                    ObtenerValores();
-                                    AgregarDetalle();
-                                    MessageBox.Show("Farmaco agreado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
-                                }
-                                else
-                                {
-                                    bool encontrado = false;
-                                    foreach (DetalleReceta detalle in farmacos)
-                                    {
-                                       
-                                        if (Convert.ToInt32(cmbFarmacos.SelectedValue) == detalle.IdFarmaco)
-                                        {
-                                            encontrado = true;
-                                            break;
-                                            
-                                        }                                       
 
-                                    }
-
-                                    if (!encontrado)
+                                    if (farmacos.Count == 0)
                                     {
                                         ObtenerValores();
                                         AgregarDetalle();
@@ -130,23 +111,51 @@ namespace VitalCareRx
                                     }
                                     else
                                     {
-                                        MessageBox.Show("El farmaco ya a sido agregado a la receta medica de la consulta.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                                        LimpiarFormulario();
+                                        bool encontrado = false;
+                                        foreach (DetalleReceta detalle in farmacos)
+                                        {
+
+                                            if (Convert.ToInt32(cmbFarmacos.SelectedValue) == detalle.IdFarmaco)
+                                            {
+                                                encontrado = true;
+                                                break;
+
+                                            }
+
+                                        }
+
+                                        if (!encontrado)
+                                        {
+                                            ObtenerValores();
+                                            AgregarDetalle();
+                                            MessageBox.Show("Farmaco agreado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("El farmaco ya a sido agregado a la receta medica de la consulta.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                            LimpiarFormulario();
+                                        }
                                     }
+
+
+                                    LimpiarFormulario();
+
                                 }
+                                catch (InvalidOperationException ex)
+                                {
+
+                                }
+                                catch (Exception)
+                                {
+                                    MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show(string.Format("¡Cantidad insuficiente del farmaco {0}\nactualmente se cuenta con {1} unidades!", cmbFarmacos.Text,
+                                receta.VerificarCantidad(Convert.ToInt32(cmbFarmacos.SelectedValue))),  "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            }
                             
-
-                                LimpiarFormulario();
-
-                            }
-                            catch(InvalidOperationException ex)
-                            {
-
-                            }
-                            catch (Exception)
-                            {
-                                MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                            }
                         }
                         else
                         {
@@ -331,25 +340,29 @@ namespace VitalCareRx
                         {                                                                                             // condición pasara a la siguiente validación
                             if (int.Parse(txtCantidad.Text) > 0 && int.Parse(txtCantidad.Text) <= 25) // La cantidad de farmacos debe ser mayor a 0 y menor a 25
                             {
-                               int indice = dgRecetas.SelectedIndex;
-                                ObtenerValores();
-                                dgRecetas.Items.RemoveAt(indice);
-                                farmacos.RemoveAt(indice);
-                                
-
-                                AgregarDetalle();
-
+                                if (receta.VerificarCantidad(Convert.ToInt32(cmbFarmacos.SelectedValue)) >= int.Parse(txtCantidad.Text))
+                                {
+                                    int indice = dgRecetas.SelectedIndex;
+                                    ObtenerValores();
+                                    dgRecetas.Items.RemoveAt(indice);
+                                    farmacos.RemoveAt(indice);
 
 
+                                    AgregarDetalle();
+
+                                    LimpiarFormulario();
 
 
 
-                                LimpiarFormulario();
+                                    MessageBox.Show("Farmaco modificado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
+                                }
+                                else
+                                {
+                                    MessageBox.Show(string.Format("¡Cantidad insuficiente del farmaco {0}\nactualmente se cuenta con {1} unidades!", cmbFarmacos.Text,
+                                    receta.VerificarCantidad(Convert.ToInt32(cmbFarmacos.SelectedValue))), "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                }
 
-                                //receta.MostrarFarmacos(dgRecetas, codigoConsulta);
 
-                                MessageBox.Show("Farmaco modificado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
-                                
                             }
                             else
                             {
@@ -453,6 +466,7 @@ namespace VitalCareRx
                     }
 
                     MessageBox.Show("Receta generada exitosamente", "Receta", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close();
                 }
             }
 
