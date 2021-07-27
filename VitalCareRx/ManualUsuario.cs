@@ -20,9 +20,9 @@ namespace VitalCareRx
       
 
             string ruta = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
-            MessageBox.Show(ruta);
+            
 
-            web.Navigate($@"{ruta}\{ubicacion}");
+            web.Navigate($@"{ruta}\Omega Soft Evolution\Vital Care Rx\{ubicacion}");
         }
     }
 }
