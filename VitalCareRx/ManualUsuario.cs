@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,10 +17,12 @@ namespace VitalCareRx
         {
             InitializeComponent();
 
-            string baseDir = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.StartupPath);           
-            string ruta = baseDir.Substring(0, baseDir.Length - 3);
-          
-            web.Navigate($@"{ruta}{ubicacion}");
+      
+
+            string ruta = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
+            MessageBox.Show(ruta);
+
+            web.Navigate($@"{ruta}\{ubicacion}");
         }
     }
 }
