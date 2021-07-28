@@ -8,12 +8,13 @@ using System.Windows.Input;
 using System.Text.RegularExpressions; // Para validar qeu el correo este correcto.
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.IO;
 
 namespace VitalCareRx
 {
-     class Validaciones
+    public class Validaciones
     {
-
+        public string ruta = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
         public void SoloNumeros(TextCompositionEventArgs e)
         {
             try

@@ -19,6 +19,7 @@ namespace VitalCareRx
     /// </summary>
     public partial class Reportes2 : Window
     {
+        Validaciones Validaciones = new Validaciones();
         public Reportes2()
         {
             InitializeComponent();
@@ -28,7 +29,8 @@ namespace VitalCareRx
 
         private void Reportes2_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Report.ReportPath = System.IO.Path.Combine(Environment.CurrentDirectory, @"Reportes\ControlPlanilla.rdl");
+            this.Report.ReportPath = String.Format(@"{0}\Omega Soft Evolution\Vital Care Rx\Reportes\ControlPlanilla.rdl", Validaciones.ruta);
+           
             this.Report.RefreshReport();
         }
     }
