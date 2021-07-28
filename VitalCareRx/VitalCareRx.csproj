@@ -196,6 +196,9 @@
       <DependentUpon>RecuperarContrasenia.xaml</DependentUpon>
     </Compile>
     <Compile Include="RecuperarContra.cs" />
+    <Compile Include="Reportes2.xaml.cs">
+      <DependentUpon>Reportes2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Validaciones.cs" />
     <Page Include="Bitacora.xaml">
       <SubType>Designer</SubType>
@@ -283,6 +286,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Reportes2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MenuPrincipal.xaml.cs">
@@ -317,6 +324,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Reportes\ControlPlanilla.rdl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

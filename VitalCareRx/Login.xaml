@@ -61,6 +61,7 @@
         </Button>
 
         <Button Name="btnRecuperarPass" Width="251" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="63,0,52,10" Content="¿Has olvidado la contraseña?" Foreground="Gray" Background="Transparent" Grid.ColumnSpan="2" Height="29" Click="btnRecuperarPass_Click"/>
+        <Button Content="Button" HorizontalAlignment="Left" Height="35" Margin="56,369,0,0" VerticalAlignment="Top" Width="54" Click="Button_Click_1"/>
 
 
 
