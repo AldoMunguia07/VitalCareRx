@@ -15,9 +15,12 @@
             </LinearGradientBrush>
         </Grid.Background>
         <ListView HorizontalAlignment="Left" Height="354"  VerticalAlignment="Top" Width="285" Margin="6,81,0,0" Foreground="#1c1c1c" FontFamily="Champagne &amp; Limousines" FontSize="18"  SelectedIndex="0">
-            <ListViewItem Name="lt" Height="60">                <StackPanel Orientation="Horizontal">                    <materialDesign:PackIcon Kind="BookAccount" Height="30" Width="30"  />                    <TextBlock Text="Consultas por paciente" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>                </StackPanel>            </ListViewItem>
+            <ListViewItem Name="ltConsultasPorEmpleado" Selected="ltConsultasPorEmpleado_Selected" Height="60">                <StackPanel Orientation="Horizontal">                    <materialDesign:PackIcon Kind="AccountTieOutline" Height="30" Width="30"  />                    <TextBlock Text="Consultas por Empleado" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>                </StackPanel>            </ListViewItem>
+            <ListViewItem Name="ltConsultaFarmacosRecetados" Selected="ltConsultaFarmacosRecetados_Selected" Height="60">                <StackPanel Orientation="Horizontal">                    <materialDesign:PackIcon Kind="MedicalBag" Height="30" Width="30"  />                    <TextBlock Text="Farmacos Recetados" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>                </StackPanel>            </ListViewItem>
+            
+            
         </ListView>
-        <Label Content="Reportes Empleados" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="300" FontSize="20" Foreground="#DDF9F9F9" Background="#1c1c1c" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Label Content="Reportes Consultas" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="300" FontSize="20" Foreground="#DDF9F9F9" Background="#1c1c1c" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         <Button x:Name="btnCerrar" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="White" Click="btnCerrar_Click" Margin="244,-3,-2,397">
             <materialDesign:PackIcon Kind="CloseCircleOutline" Height="30" Width="30" RenderTransformOrigin="0.352,0.42" />
         </Button>

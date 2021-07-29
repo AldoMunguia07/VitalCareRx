@@ -28,5 +28,16 @@ namespace VitalCareRx
         {
             this.Close();
         }
+
+        private void ltProductoVencimiento_Selected(object sender, RoutedEventArgs e)
+        {
+            VerReporte verReporte = new VerReporte("ProductoXVencimiento.rdl");
+            verReporte.ShowDialog();
+        }
+
+        private void ltFarmacosIngresados_Selected(object sender, RoutedEventArgs e)
+        {
+       
+        }
     }
 }

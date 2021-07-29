@@ -34,5 +34,17 @@ namespace VitalCareRx
             VerReporte verReporte = new VerReporte("ControlPlanilla.rdl");
             verReporte.ShowDialog();
         }
+
+        private void ltAccionPorEmpleado_Selected(object sender, RoutedEventArgs e)
+        {
+            VerReporte verReporte = new VerReporte("AccionesXEmpleado.rdl");
+            verReporte.ShowDialog();
+        }
+
+        private void ltFarmacoXEmpleado_Selected(object sender, RoutedEventArgs e)
+        {
+            VerReporte verReporte = new VerReporte("FarmacosXEmpleado.rdl");
+            verReporte.ShowDialog();
+        }
     }
 }

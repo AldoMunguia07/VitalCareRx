@@ -28,5 +28,16 @@ namespace VitalCareRx
         {
             this.Close();
         }
+
+        private void ltConsultasPorPaciente_Selected(object sender, RoutedEventArgs e)
+        {
+            VerReporte verReporte = new VerReporte("Reporte_ConsultasxPaciente.rdl");
+            verReporte.ShowDialog();
+        }
+
+        private void ltFarmacoPorPaciente_Selected(object sender, RoutedEventArgs e)
+        {
+          
+        }
     }
 }
