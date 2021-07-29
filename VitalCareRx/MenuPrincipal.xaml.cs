@@ -124,7 +124,7 @@ namespace VitalCareRx
         {
 
             int index = ListViewMenu.SelectedIndex;
-            if (index == 6)
+            if (index == 7)
             {
                 ListViewMenu.SelectedIndex = 0;
                 index = ListViewMenu.SelectedIndex;
@@ -198,6 +198,13 @@ namespace VitalCareRx
            Informacion informacion= new Informacion(miEmpleado);
            informacion.Show();
            this.Close();
+        }
+
+        private void ltReportes_Selected(object sender, RoutedEventArgs e)
+        {
+            ReportesUsuario reportes = new ReportesUsuario(miEmpleado);
+            reportes.Show();
+            this.Close();
         }
 
         private void btnEntradaboton_Click(object sender, RoutedEventArgs e)
@@ -275,5 +282,7 @@ namespace VitalCareRx
         {
             manualAyuda.LlamarManualUsuario(@"Manual de usuario\Recuperar Contrasenia.html");
         }
+
+      
     }
 }

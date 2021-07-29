@@ -71,10 +71,10 @@
             </Grid.Background>
             <materialDesign:PackIcon Kind="Account" Height="95" Width="86" Margin="0,0,0,505" VerticalAlignment="Bottom" Foreground="White" />
 
-            <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}">
+            <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}" Margin="0,0,0,4">
                 <Grid x:Name="GridCursor" Margin="0 100 0 0" Background="#FF0069C0" Width="10" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top"/>
             </materialDesign:TransitioningContent>
-            <ListView x:Name="ListViewMenu" Margin="0,100,-14,70" Foreground="LightGray" FontFamily="Champagne &amp; Limousines" FontSize="18" SelectionChanged="ListViewMenu_SelectionChanged" SelectedIndex="0">
+            <ListView x:Name="ListViewMenu" Margin="0,100,-20,10" Foreground="LightGray" FontFamily="Champagne &amp; Limousines" FontSize="18" SelectionChanged="ListViewMenu_SelectionChanged" SelectedIndex="0">
                 <ListViewItem Name="ltInicio" Height="60">                    <StackPanel Orientation="Horizontal">                        <materialDesign:PackIcon Kind="Home" Height="30" Width="30"  />                        <TextBlock Text="Inicio" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>                    </StackPanel>                </ListViewItem>
                 <ListViewItem Name="ltPacientes" Height="60" Selected="ltPacientes_Selected" >
                     <StackPanel Orientation="Horizontal">
@@ -100,6 +100,12 @@
                         <TextBlock Text="Mi usuario" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                     </StackPanel>
                 </ListViewItem>
+                <ListViewItem x:Name="ltReportes" Height="60" Selected="ltReportes_Selected" >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="FileReport" Height="30" Width="30" />
+                        <TextBlock Text="Reportes" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                    </StackPanel>
+                </ListViewItem>
                 <ListViewItem Name="ltInformacion" Height="60" Selected="ltInformacion_Selected">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="InformationOutline" Height="30" Width="30" />
@@ -112,6 +118,8 @@
                         <TextBlock Text="Salir" FontSize="17" VerticalAlignment="Center" Margin="20 0" Width="34"/>
                     </StackPanel>
                 </ListViewItem>
+                
+                
 
             </ListView>
             <Label Name="lbUsuario"  Foreground="White" Content="NAME" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="86,38,0,0" FontSize="18" Width="164" Height="36"/>

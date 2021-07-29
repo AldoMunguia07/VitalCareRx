@@ -1,0 +1,27 @@
+﻿<Window x:Class="VitalCareRx.ReportesFarmaco"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:VitalCareRx"
+        mc:Ignorable="d"
+        Title="ReportesFarmaco" Height="450" Width="300"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush>
+
+                <GradientStop Color="#74EEAB" Offset="0.8"/>
+                <GradientStop Color="#1c1c1c"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <ListView HorizontalAlignment="Left" Height="354"  VerticalAlignment="Top" Width="285" Margin="6,81,0,0" Foreground="#1c1c1c" FontFamily="Champagne &amp; Limousines" FontSize="18"  SelectedIndex="0">
+            <ListViewItem Name="lt" Height="60">                <StackPanel Orientation="Horizontal">                    <materialDesign:PackIcon Kind="BookAccount" Height="30" Width="30"  />                    <TextBlock Text="Consultas por paciente" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>                </StackPanel>            </ListViewItem>
+        </ListView>
+        <Label Content="Reportes Empleados" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="300" FontSize="20" Foreground="#DDF9F9F9" Background="#1c1c1c" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Button x:Name="btnCerrar" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="White" Click="btnCerrar_Click" Margin="244,-3,-2,397">
+            <materialDesign:PackIcon Kind="CloseCircleOutline" Height="30" Width="30" RenderTransformOrigin="0.352,0.42" />
+        </Button>
+
+    </Grid>
+</Window>

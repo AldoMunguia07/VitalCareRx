@@ -141,10 +141,6 @@ namespace VitalCareRx
             this.Close();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            Reportes2 reportes = new Reportes2();
-            reportes.Show();
-        }
+      
     }
 }
