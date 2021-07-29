@@ -202,9 +202,6 @@
     <Compile Include="Reportes.xaml.cs">
       <DependentUpon>Reportes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Reportes2.xaml.cs">
-      <DependentUpon>Reportes2.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ReportesConsultas.xaml.cs">
       <DependentUpon>ReportesConsultas.xaml</DependentUpon>
     </Compile>
@@ -218,6 +215,9 @@
       <DependentUpon>ReportesUsuario.xaml</DependentUpon>
     </Compile>
     <Compile Include="Validaciones.cs" />
+    <Compile Include="VerReporte.xaml.cs">
+      <DependentUpon>VerReporte.xaml</DependentUpon>
+    </Compile>
     <Page Include="Bitacora.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -312,10 +312,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Reportes2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ReportesConsultas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -329,6 +325,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ReportesUsuario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VerReporte.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -366,9 +366,12 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="Reportes\ControlPlanilla.rdl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Include="Reportes\AccionesXEmpleado.rdl" />
+    <None Include="Reportes\ConsultasxEmpleado.rdl" />
+    <None Include="Reportes\ControlPlanilla.rdl" />
+    <None Include="Reportes\FarmacosXEmpleado.rdl" />
+    <None Include="Reportes\ProductoxVencimiento.rdl" />
+    <None Include="Reportes\Reporte_ConsultasxPaciente.rdl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

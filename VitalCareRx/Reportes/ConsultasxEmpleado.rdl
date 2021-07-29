@@ -3,102 +3,74 @@
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="DataSource1">
+    <DataSource Name="cnnVitalCareRx">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=(local)\SQLEXPRESS;Initial Catalog=VitalCareRxDB</ConnectString>
+        <ConnectString>Data Source=(local)\sqlexpress;Initial Catalog=VitalCareRxDB</ConnectString>
         <IntegratedSecurity>true</IntegratedSecurity>
       </ConnectionProperties>
       <rd:SecurityType>Integrated</rd:SecurityType>
-      <rd:DataSourceID>4d440386-4891-4422-8acd-81f7a8257e5d</rd:DataSourceID>
+      <rd:DataSourceID>5a9cbdba-00f3-4c97-af58-cb082f035c74</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="Anio">
+    <DataSet Name="Doctores">
       <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>select distinct(YEAR(CE.fechaEntrada)) 'Anio'
-	from Historial.ControlEmpleado CE</CommandText>
+        <DataSourceName>cnnVitalCareRx</DataSourceName>
+        <CommandText>Select  idEmpleado, CONCAT(a.primerNombre,' ',a.primerApellido) Empleados From Personas.Empleado a join Personas.Puesto b
+on a.idPuesto = b.idPuesto 
+Where b.idPuesto=2 </CommandText>
       </Query>
       <Fields>
-        <Field Name="Anio">
-          <DataField>Anio</DataField>
+        <Field Name="idEmpleado">
+          <DataField>idEmpleado</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Empleados">
+          <DataField>Empleados</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
-    <DataSet Name="ControlPlanilla">
+    <DataSet Name="ConsultaPorDoctores">
       <Query>
-        <DataSourceName>DataSource1</DataSourceName>
+        <DataSourceName>cnnVitalCareRx</DataSourceName>
         <QueryParameters>
-          <QueryParameter Name="@Empleado">
-            <Value>=Parameters!empleado.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@Mes">
-            <Value>=Parameters!mes.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@Año">
-            <Value>=Parameters!Año.Value</Value>
+          <QueryParameter Name="@idEmpleado">
+            <Value>=Parameters!idEmpleado.Value</Value>
           </QueryParameter>
         </QueryParameters>
-        <CommandText>select DAY(CE.fechaEntrada) 'Dia del Mes', CONVERT(char(5),CE.fechaEntrada,108) 'Hora de Entrada', 
-	convert(char(5), CE.fechaSalida,108) 'Hora Salida', CONCAT(CONVERT(INT, DATEDIFF(MINUTE, fechaEntrada, fechaSalida) / 60), ' horas y ', CONVERT(INT, ROUND(((DATEDIFF(MINUTE, fechaEntrada, 
-			fechaSalida) / 60.00) - CONVERT(INT,DATEDIFF(MINUTE, fechaEntrada, fechaSalida) / 60.00)) * 60, 0)),' minutos') 'Tiempo trabajado'
-	from Historial.ControlEmpleado CE JOIN Personas.Empleado E
-	ON CE.idEmpleado = E.idEmpleado
-	WHERE CE.idEmpleado = @Empleado and MONTH(CE.fechaEntrada) = @Mes and YEAR(CE.fechaEntrada) = @Año</CommandText>
+        <CommandText>Select a.fechaConsulta'Fecha Consulta', CONCAT(b.primerNombre, ' ' , b.primerApellido) Nombre,a.motivoConsulta 'Motivo Consulta', a.diagnosticoConsulta Diagnostico, a.temperatura Temperatura, a.presionArterial 'Presion Arterial'
+FROM Consultas.Consulta a join  Personas.Paciente b on
+a.idPaciente = b.idPaciente join Personas.Empleado c on 
+a.idEmpleado = c.idEmpleado 
+where c.idEmpleado = @idEmpleado
+order by a.fechaConsulta</CommandText>
       </Query>
       <Fields>
-        <Field Name="Dia_del_Mes">
-          <DataField>Dia del Mes</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+        <Field Name="Fecha_Consulta">
+          <DataField>Fecha Consulta</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
-        <Field Name="Hora_de_Entrada">
-          <DataField>Hora de Entrada</DataField>
+        <Field Name="Nombre">
+          <DataField>Nombre</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Hora_Salida">
-          <DataField>Hora Salida</DataField>
+        <Field Name="Motivo_Consulta">
+          <DataField>Motivo Consulta</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Tiempo_trabajado">
-          <DataField>Tiempo trabajado</DataField>
+        <Field Name="Diagnostico">
+          <DataField>Diagnostico</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-      </Fields>
-    </DataSet>
-    <DataSet Name="Empleado">
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>select E.idEmpleado 'ID', CONCAT(E.primerNombre, ' ', E.primerApellido) 'Nombre del Empleado' from Personas.Empleado E</CommandText>
-      </Query>
-      <Fields>
-        <Field Name="ID">
-          <DataField>ID</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+        <Field Name="Temperatura">
+          <DataField>Temperatura</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
         </Field>
-        <Field Name="Nombre_del_Empleado">
-          <DataField>Nombre del Empleado</DataField>
+        <Field Name="Presion_Arterial">
+          <DataField>Presion Arterial</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-    </DataSet>
-    <DataSet Name="Mes">
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>SET LANGUAGE SPANISH
-	select distinct(DATENAME(MONTH, CE.fechaEntrada)) 'Nombre del Mes', MONTH(CE.fechaEntrada) 'Numero de Mes' 
-	from Historial.ControlEmpleado CE
-	ORDER BY MONTH(CE.fechaEntrada)</CommandText>
-      </Query>
-      <Fields>
-        <Field Name="Nombre_del_Mes">
-          <DataField>Nombre del Mes</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Numero_de_Mes">
-          <DataField>Numero de Mes</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
@@ -107,25 +79,68 @@
     <ReportSection>
       <Body>
         <ReportItems>
+          <Textbox Name="ReportTitle">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Consultas por doctores</Value>
+                    <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>22pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:WatermarkTextbox>Title</rd:WatermarkTextbox>
+            <rd:DefaultName>ReportTitle</rd:DefaultName>
+            <Top>0mm</Top>
+            <Height>12.7mm</Height>
+            <Width>168.71926mm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>LightGreen</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
           <Tablix Name="Tablix1">
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>30.79998mm</Width>
+                  <Width>26.86467mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>42.07247mm</Width>
+                  <Width>25.27718mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>31.14099mm</Width>
+                  <Width>41.73424mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>48.68631mm</Width>
+                  <Width>23.73064mm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>23.51897mm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>27.59356mm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>8.04333mm</Height>
+                  <Height>6.21771mm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -136,10 +151,8 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Dia del mes</Value>
+                                  <Value>Fecha consulta</Value>
                                   <Style>
-                                    <FontStyle>Italic</FontStyle>
-                                    <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -186,17 +199,15 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox3">
+                        <Textbox Name="Textbox4">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Hora de entrada</Value>
+                                  <Value>Pacientes</Value>
                                   <Style>
-                                    <FontStyle>Italic</FontStyle>
-                                    <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -206,7 +217,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox3</rd:DefaultName>
+                          <rd:DefaultName>Textbox4</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>SeaGreen</Color>
@@ -243,17 +254,15 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox5">
+                        <Textbox Name="Textbox6">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Hora de salida</Value>
+                                  <Value>Motivo de consulta</Value>
                                   <Style>
-                                    <FontStyle>Italic</FontStyle>
-                                    <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -263,7 +272,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox5</rd:DefaultName>
+                          <rd:DefaultName>Textbox6</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>SeaGreen</Color>
@@ -300,17 +309,16 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox7">
+                        <Textbox Name="Textbox9">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Tiempo trabajado</Value>
+                                  <Value>Diagnóstico</Value>
                                   <Style>
-                                    <FontStyle>Italic</FontStyle>
-                                    <FontSize>11pt</FontSize>
+                                    <FontFamily>Arial</FontFamily>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -320,7 +328,119 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox7</rd:DefaultName>
+                          <rd:DefaultName>Textbox9</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox11">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Temperatura</Value>
+                                  <Style>
+                                    <FontFamily>Arial</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox11</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox13">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Presión Arterial</Value>
+                                  <Style>
+                                    <FontFamily>Arial</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox13</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>SeaGreen</Color>
@@ -358,18 +478,18 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>8.04333mm</Height>
+                  <Height>6.21771mm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Dia_del_Mes">
+                        <Textbox Name="Fecha_Consulta">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Dia_del_Mes.Value</Value>
+                                  <Value>=CDate(Fields!Fecha_Consulta.Value).ToString("dd/MM/yyyy")</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -378,40 +498,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Dia_del_Mes</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>SeaGreen</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Hora_de_Entrada">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!Hora_de_Entrada.Value</Value>
-                                  <Style />
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Hora_de_Entrada</rd:DefaultName>
+                          <rd:DefaultName>Fecha_Consulta</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>SeaGreen</Color>
@@ -448,14 +535,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Hora_Salida">
+                        <Textbox Name="Nombre">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Hora_Salida.Value</Value>
+                                  <Value>=Fields!Nombre.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -464,7 +551,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Hora_Salida</rd:DefaultName>
+                          <rd:DefaultName>Nombre</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>SeaGreen</Color>
@@ -501,14 +588,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Tiempo_trabajado">
+                        <Textbox Name="Motivo_Consulta">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Tiempo_trabajado.Value</Value>
+                                  <Value>=Fields!Motivo_Consulta.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -517,7 +604,172 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Tiempo_trabajado</rd:DefaultName>
+                          <rd:DefaultName>Motivo_Consulta</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Diagnostico">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Diagnostico.Value</Value>
+                                  <Style>
+                                    <FontFamily>Arial</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Diagnostico</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Temperatura">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Temperatura.Value</Value>
+                                  <Style>
+                                    <FontFamily>Arial</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Temperatura</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Presion_Arterial">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Presion_Arterial.Value</Value>
+                                  <Style>
+                                    <FontFamily>Arial</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Presion_Arterial</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>SeaGreen</Color>
@@ -562,6 +814,8 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -574,50 +828,30 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>ControlPlanilla</DataSetName>
-            <Top>6.2089mm</Top>
-            <Left>4.5036mm</Left>
-            <Height>16.08666mm</Height>
-            <Width>152.69975mm</Width>
+            <DataSetName>ConsultaPorDoctores</DataSetName>
+            <Top>21.5125mm</Top>
+            <Left>0mm</Left>
+            <Height>12.43542mm</Height>
+            <Width>168.71926mm</Width>
+            <ZIndex>1</ZIndex>
             <Style>
               <Border>
-                <Color>SeaGreen</Color>
-                <Style>Solid</Style>
+                <Style>None</Style>
               </Border>
-              <TopBorder>
-                <Color>SeaGreen</Color>
-                <Style>Solid</Style>
-                <Width>1pt</Width>
-              </TopBorder>
-              <BottomBorder>
-                <Color>SeaGreen</Color>
-                <Style>Solid</Style>
-                <Width>1pt</Width>
-              </BottomBorder>
-              <LeftBorder>
-                <Color>SeaGreen</Color>
-                <Style>Solid</Style>
-                <Width>1pt</Width>
-              </LeftBorder>
-              <RightBorder>
-                <Color>SeaGreen</Color>
-                <Style>Solid</Style>
-                <Width>1pt</Width>
-              </RightBorder>
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>52.91666mm</Height>
+        <Height>57.15mm</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>162.89842mm</Width>
+      <Width>168.71926mm</Width>
       <Page>
         <PageHeader>
-          <Height>38.17055mm</Height>
+          <Height>26.8745mm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -642,8 +876,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>8.7631mm</Top>
-              <Left>52.87267mm</Left>
+              <Top>7.90575mm</Top>
+              <Left>57.42084mm</Left>
               <Height>10.23333mm</Height>
               <Width>59.20439mm</Width>
               <Style>
@@ -660,8 +894,8 @@
               <Source>Embedded</Source>
               <Value>PrimeroDios</Value>
               <Sizing>FitProportional</Sizing>
-              <Top>0.85735mm</Top>
-              <Left>128.05493mm</Left>
+              <Top>2.2613mm</Top>
+              <Left>133.22084mm</Left>
               <Height>22.84931mm</Height>
               <Width>29.14842mm</Width>
               <ZIndex>1</ZIndex>
@@ -671,44 +905,6 @@
                 </Border>
               </Style>
             </Image>
-            <Textbox Name="ReportTitle">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>Control de planilla</Value>
-                      <Style>
-                        <FontFamily>Segoe UI Light</FontFamily>
-                        <FontSize>22pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                        <TextDecoration>None</TextDecoration>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:WatermarkTextbox>Title</rd:WatermarkTextbox>
-              <rd:DefaultName>ReportTitle</rd:DefaultName>
-              <Top>25.47055mm</Top>
-              <Height>12.7mm</Height>
-              <Width>162.89842mm</Width>
-              <ZIndex>2</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <BackgroundColor>LightGreen</BackgroundColor>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
           </ReportItems>
           <Style>
             <Border>
@@ -717,7 +913,7 @@
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>15.24mm</Height>
+          <Height>14.8125mm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -738,8 +934,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>ExecutionTime</rd:DefaultName>
-              <Top>4.82771mm</Top>
-              <Left>103.1961mm</Left>
+              <Top>3.96458mm</Top>
+              <Left>108.92342mm</Left>
               <Height>6.35mm</Height>
               <Width>50.8mm</Width>
               <Style>
@@ -767,8 +963,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>PageNumber</rd:DefaultName>
-              <Top>5.17771mm</Top>
-              <Left>13.99902mm</Left>
+              <Top>4.31458mm</Top>
+              <Left>11.43mm</Left>
               <Height>6mm</Height>
               <Width>13.09375mm</Width>
               <ZIndex>1</ZIndex>
@@ -797,8 +993,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>TotalPages</rd:DefaultName>
-              <Top>5.17771mm</Top>
-              <Left>42.0386mm</Left>
+              <Top>4.31458mm</Top>
+              <Left>39.46958mm</Left>
               <Height>6mm</Height>
               <Width>9.125mm</Width>
               <ZIndex>2</ZIndex>
@@ -829,8 +1025,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox8</rd:DefaultName>
-              <Top>5.17771mm</Top>
-              <Left>29.20944mm</Left>
+              <Top>4.31458mm</Top>
+              <Left>26.64042mm</Left>
               <Height>6mm</Height>
               <Width>11.41805mm</Width>
               <ZIndex>3</ZIndex>
@@ -863,36 +1059,14 @@
     </ReportSection>
   </ReportSections>
   <ReportParameters>
-    <ReportParameter Name="empleado">
-      <DataType>String</DataType>
+    <ReportParameter Name="idEmpleado">
+      <DataType>Integer</DataType>
       <Prompt>Empleado</Prompt>
       <ValidValues>
         <DataSetReference>
-          <DataSetName>Empleado</DataSetName>
-          <ValueField>ID</ValueField>
-          <LabelField>Nombre_del_Empleado</LabelField>
-        </DataSetReference>
-      </ValidValues>
-    </ReportParameter>
-    <ReportParameter Name="mes">
-      <DataType>String</DataType>
-      <Prompt>Mes</Prompt>
-      <ValidValues>
-        <DataSetReference>
-          <DataSetName>Mes</DataSetName>
-          <ValueField>Numero_de_Mes</ValueField>
-          <LabelField>Nombre_del_Mes</LabelField>
-        </DataSetReference>
-      </ValidValues>
-    </ReportParameter>
-    <ReportParameter Name="Año">
-      <DataType>String</DataType>
-      <Prompt>Año</Prompt>
-      <ValidValues>
-        <DataSetReference>
-          <DataSetName>Anio</DataSetName>
-          <ValueField>Anio</ValueField>
-          <LabelField>Anio</LabelField>
+          <DataSetName>Doctores</DataSetName>
+          <ValueField>idEmpleado</ValueField>
+          <LabelField>Empleados</LabelField>
         </DataSetReference>
       </ValidValues>
     </ReportParameter>
@@ -905,17 +1079,7 @@
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>empleado</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>1</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>mes</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>2</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>Año</ParameterName>
+          <ParameterName>idEmpleado</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
@@ -1208,5 +1372,5 @@ ONuRRjg9Tjg9voQxGrMfE8Lpm2lNP/RHzzrBN8Hzf/zz1/eevbrklAAAAAAAAABgo66C6FMPjelvQuk/
     </EmbeddedImage>
   </EmbeddedImages>
   <rd:ReportUnitType>Mm</rd:ReportUnitType>
-  <rd:ReportID>ab6d8029-26de-46ec-ae2f-a9a5cd56f964</rd:ReportID>
+  <rd:ReportID>54064b34-6850-4752-98b1-61db35cf75bb</rd:ReportID>
 </Report>

@@ -3,101 +3,81 @@
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="DataSource1">
+    <DataSource Name="VitalCareRx">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
         <ConnectString>Data Source=(local)\SQLEXPRESS;Initial Catalog=VitalCareRxDB</ConnectString>
         <IntegratedSecurity>true</IntegratedSecurity>
       </ConnectionProperties>
       <rd:SecurityType>Integrated</rd:SecurityType>
-      <rd:DataSourceID>4d440386-4891-4422-8acd-81f7a8257e5d</rd:DataSourceID>
+      <rd:DataSourceID>9fca5ed8-866d-4ffe-bc90-ca04fd832d8d</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="Anio">
+    <DataSet Name="FarmacoxVencimiento">
       <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>select distinct(YEAR(CE.fechaEntrada)) 'Anio'
-	from Historial.ControlEmpleado CE</CommandText>
-      </Query>
-      <Fields>
-        <Field Name="Anio">
-          <DataField>Anio</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-      </Fields>
-    </DataSet>
-    <DataSet Name="ControlPlanilla">
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
+        <DataSourceName>VitalCareRx</DataSourceName>
         <QueryParameters>
-          <QueryParameter Name="@Empleado">
-            <Value>=Parameters!empleado.Value</Value>
+          <QueryParameter Name="@Año">
+            <Value>=Parameters!anio.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@Mes">
             <Value>=Parameters!mes.Value</Value>
           </QueryParameter>
-          <QueryParameter Name="@Año">
-            <Value>=Parameters!Año.Value</Value>
-          </QueryParameter>
         </QueryParameters>
-        <CommandText>select DAY(CE.fechaEntrada) 'Dia del Mes', CONVERT(char(5),CE.fechaEntrada,108) 'Hora de Entrada', 
-	convert(char(5), CE.fechaSalida,108) 'Hora Salida', CONCAT(CONVERT(INT, DATEDIFF(MINUTE, fechaEntrada, fechaSalida) / 60), ' horas y ', CONVERT(INT, ROUND(((DATEDIFF(MINUTE, fechaEntrada, 
-			fechaSalida) / 60.00) - CONVERT(INT,DATEDIFF(MINUTE, fechaEntrada, fechaSalida) / 60.00)) * 60, 0)),' minutos') 'Tiempo trabajado'
-	from Historial.ControlEmpleado CE JOIN Personas.Empleado E
-	ON CE.idEmpleado = E.idEmpleado
-	WHERE CE.idEmpleado = @Empleado and MONTH(CE.fechaEntrada) = @Mes and YEAR(CE.fechaEntrada) = @Año</CommandText>
+        <CommandText>select F.descripcionFarmaco 'Nombre del Farmaco', F.informacionPrecaucion 'Descripcion del Farmaco',
+	DAY(DF.fechaVencimiento) 'Fecha del Dia', DF.cantidad 'Cantidad Lote'
+	from Consultas.Farmaco F JOIN Consultas.DetalleFarmaco DF
+	ON F.idFarmaco = DF.idFarmaco
+	WHERE MONTH(DF.fechaVencimiento) = @Mes AND YEAR(DF.fechaVencimiento) = @Año</CommandText>
       </Query>
       <Fields>
-        <Field Name="Dia_del_Mes">
-          <DataField>Dia del Mes</DataField>
+        <Field Name="Nombre_del_Farmaco">
+          <DataField>Nombre del Farmaco</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Descripcion_del_Farmaco">
+          <DataField>Descripcion del Farmaco</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Fecha_del_Dia">
+          <DataField>Fecha del Dia</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="Hora_de_Entrada">
-          <DataField>Hora de Entrada</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Hora_Salida">
-          <DataField>Hora Salida</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Tiempo_trabajado">
-          <DataField>Tiempo trabajado</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-    </DataSet>
-    <DataSet Name="Empleado">
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>select E.idEmpleado 'ID', CONCAT(E.primerNombre, ' ', E.primerApellido) 'Nombre del Empleado' from Personas.Empleado E</CommandText>
-      </Query>
-      <Fields>
-        <Field Name="ID">
-          <DataField>ID</DataField>
+        <Field Name="Cantidad_Lote">
+          <DataField>Cantidad Lote</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Nombre_del_Empleado">
-          <DataField>Nombre del Empleado</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
     <DataSet Name="Mes">
       <Query>
-        <DataSourceName>DataSource1</DataSourceName>
+        <DataSourceName>VitalCareRx</DataSourceName>
         <CommandText>SET LANGUAGE SPANISH
-	select distinct(DATENAME(MONTH, CE.fechaEntrada)) 'Nombre del Mes', MONTH(CE.fechaEntrada) 'Numero de Mes' 
-	from Historial.ControlEmpleado CE
-	ORDER BY MONTH(CE.fechaEntrada)</CommandText>
+	select distinct(DATENAME(MONTH, DF.fechaVencimiento)) 'Nombre del Mes', MONTH(DF.fechaVencimiento) 'Mes' 
+	from Consultas.DetalleFarmaco DF
+	ORDER BY MONTH(DF.fechaVencimiento)</CommandText>
       </Query>
       <Fields>
         <Field Name="Nombre_del_Mes">
           <DataField>Nombre del Mes</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Numero_de_Mes">
-          <DataField>Numero de Mes</DataField>
+        <Field Name="Mes">
+          <DataField>Mes</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Anio">
+      <Query>
+        <DataSourceName>VitalCareRx</DataSourceName>
+        <CommandText>select distinct(YEAR(DF.fechaVencimiento))
+	from Consultas.DetalleFarmaco DF</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="ID">
+          <DataField />
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
       </Fields>
@@ -111,21 +91,21 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>30.79998mm</Width>
+                  <Width>43.85516mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>42.07247mm</Width>
+                  <Width>57.67918mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>31.14099mm</Width>
+                  <Width>28.0035mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>48.68631mm</Width>
+                  <Width>36.15457mm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>8.04333mm</Height>
+                  <Height>8.15622mm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -136,9 +116,8 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Dia del mes</Value>
+                                  <Value>Nombre del fármaco</Value>
                                   <Style>
-                                    <FontStyle>Italic</FontStyle>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -193,9 +172,8 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Hora de entrada</Value>
+                                  <Value>Descripción del fármaco</Value>
                                   <Style>
-                                    <FontStyle>Italic</FontStyle>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -250,9 +228,8 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Hora de salida</Value>
+                                  <Value>Fecha del dia</Value>
                                   <Style>
-                                    <FontStyle>Italic</FontStyle>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -307,9 +284,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Tiempo trabajado</Value>
+                                  <Value>Cantidad del lote</Value>
                                   <Style>
-                                    <FontStyle>Italic</FontStyle>
+                                    <FontFamily>Arial</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -358,18 +335,18 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>8.04333mm</Height>
+                  <Height>8.15622mm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Dia_del_Mes">
+                        <Textbox Name="Nombre_del_Farmaco">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Dia_del_Mes.Value</Value>
+                                  <Value>=Fields!Nombre_del_Farmaco.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -378,40 +355,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Dia_del_Mes</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>SeaGreen</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Hora_de_Entrada">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!Hora_de_Entrada.Value</Value>
-                                  <Style />
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Hora_de_Entrada</rd:DefaultName>
+                          <rd:DefaultName>Nombre_del_Farmaco</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>SeaGreen</Color>
@@ -448,14 +392,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Hora_Salida">
+                        <Textbox Name="Descripcion_del_Farmaco">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Hora_Salida.Value</Value>
+                                  <Value>=Fields!Descripcion_del_Farmaco.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -464,7 +408,61 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Hora_Salida</rd:DefaultName>
+                          <rd:DefaultName>Descripcion_del_Farmaco</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>SeaGreen</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <rd:Selected>true</rd:Selected>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Fecha_del_Dia">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Fecha_del_Dia.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Fecha_del_Dia</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>SeaGreen</Color>
@@ -501,15 +499,17 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Tiempo_trabajado">
+                        <Textbox Name="Cantidad_Lote">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Tiempo_trabajado.Value</Value>
-                                  <Style />
+                                  <Value>=Fields!Cantidad_Lote.Value</Value>
+                                  <Style>
+                                    <FontFamily>Arial</FontFamily>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -517,32 +517,12 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Tiempo_trabajado</rd:DefaultName>
+                          <rd:DefaultName>Cantidad_Lote</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>SeaGreen</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <TopBorder>
-                              <Color>SeaGreen</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>SeaGreen</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <LeftBorder>
-                              <Color>SeaGreen</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>SeaGreen</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </RightBorder>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -574,53 +554,84 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>ControlPlanilla</DataSetName>
-            <Top>6.2089mm</Top>
-            <Left>4.5036mm</Left>
-            <Height>16.08666mm</Height>
-            <Width>152.69975mm</Width>
+            <DataSetName>FarmacoxVencimiento</DataSetName>
+            <Top>22.56367mm</Top>
+            <Left>0mm</Left>
+            <Height>16.31244mm</Height>
+            <Width>165.69241mm</Width>
             <Style>
               <Border>
-                <Color>SeaGreen</Color>
-                <Style>Solid</Style>
+                <Style>None</Style>
               </Border>
-              <TopBorder>
-                <Color>SeaGreen</Color>
-                <Style>Solid</Style>
-                <Width>1pt</Width>
-              </TopBorder>
-              <BottomBorder>
-                <Color>SeaGreen</Color>
-                <Style>Solid</Style>
-                <Width>1pt</Width>
-              </BottomBorder>
-              <LeftBorder>
-                <Color>SeaGreen</Color>
-                <Style>Solid</Style>
-                <Width>1pt</Width>
-              </LeftBorder>
-              <RightBorder>
-                <Color>SeaGreen</Color>
-                <Style>Solid</Style>
-                <Width>1pt</Width>
-              </RightBorder>
             </Style>
           </Tablix>
+          <Textbox Name="ReportTitle2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Fármaco por vencimiento</Value>
+                    <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>22pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:WatermarkTextbox>Title</rd:WatermarkTextbox>
+            <rd:DefaultName>ReportTitle</rd:DefaultName>
+            <Top>1.76389mm</Top>
+            <Height>12.7mm</Height>
+            <Width>165.69242mm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>LightGreen</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>52.91666mm</Height>
+        <Height>57.15mm</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>162.89842mm</Width>
+      <Width>166.53909mm</Width>
       <Page>
         <PageHeader>
-          <Height>38.17055mm</Height>
+          <Height>25.4mm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
+            <Image Name="Image1">
+              <Source>Embedded</Source>
+              <Value>PrimeroDios</Value>
+              <Sizing>FitProportional</Sizing>
+              <Top>1.49236mm</Top>
+              <Left>133.369mm</Left>
+              <Height>22.84931mm</Height>
+              <Width>29.14842mm</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Image>
             <Textbox Name="Textbox2">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
@@ -642,67 +653,15 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>8.7631mm</Top>
-              <Left>52.87267mm</Left>
+              <Top>9.89199mm</Top>
+              <Left>50.62703mm</Left>
               <Height>10.23333mm</Height>
               <Width>59.20439mm</Width>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Image Name="Image1">
-              <Source>Embedded</Source>
-              <Value>PrimeroDios</Value>
-              <Sizing>FitProportional</Sizing>
-              <Top>0.85735mm</Top>
-              <Left>128.05493mm</Left>
-              <Height>22.84931mm</Height>
-              <Width>29.14842mm</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
-              </Style>
-            </Image>
-            <Textbox Name="ReportTitle">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>Control de planilla</Value>
-                      <Style>
-                        <FontFamily>Segoe UI Light</FontFamily>
-                        <FontSize>22pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                        <TextDecoration>None</TextDecoration>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:WatermarkTextbox>Title</rd:WatermarkTextbox>
-              <rd:DefaultName>ReportTitle</rd:DefaultName>
-              <Top>25.47055mm</Top>
-              <Height>12.7mm</Height>
-              <Width>162.89842mm</Width>
-              <ZIndex>2</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <BackgroundColor>LightGreen</BackgroundColor>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -717,7 +676,7 @@
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>15.24mm</Height>
+          <Height>14.18167mm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -738,8 +697,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>ExecutionTime</rd:DefaultName>
-              <Top>4.82771mm</Top>
-              <Left>103.1961mm</Left>
+              <Top>4.29855mm</Top>
+              <Left>103.0392mm</Left>
               <Height>6.35mm</Height>
               <Width>50.8mm</Width>
               <Style>
@@ -767,8 +726,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>PageNumber</rd:DefaultName>
-              <Top>5.17771mm</Top>
-              <Left>13.99902mm</Left>
+              <Top>3.53313mm</Top>
+              <Left>9.99078mm</Left>
               <Height>6mm</Height>
               <Width>13.09375mm</Width>
               <ZIndex>1</ZIndex>
@@ -797,8 +756,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>TotalPages</rd:DefaultName>
-              <Top>5.17771mm</Top>
-              <Left>42.0386mm</Left>
+              <Top>3.53313mm</Top>
+              <Left>38.03036mm</Left>
               <Height>6mm</Height>
               <Width>9.125mm</Width>
               <ZIndex>2</ZIndex>
@@ -829,8 +788,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox8</rd:DefaultName>
-              <Top>5.17771mm</Top>
-              <Left>29.20944mm</Left>
+              <Top>3.53313mm</Top>
+              <Left>25.2012mm</Left>
               <Height>6mm</Height>
               <Width>11.41805mm</Width>
               <ZIndex>3</ZIndex>
@@ -863,36 +822,25 @@
     </ReportSection>
   </ReportSections>
   <ReportParameters>
-    <ReportParameter Name="empleado">
-      <DataType>String</DataType>
-      <Prompt>Empleado</Prompt>
-      <ValidValues>
-        <DataSetReference>
-          <DataSetName>Empleado</DataSetName>
-          <ValueField>ID</ValueField>
-          <LabelField>Nombre_del_Empleado</LabelField>
-        </DataSetReference>
-      </ValidValues>
-    </ReportParameter>
-    <ReportParameter Name="mes">
-      <DataType>String</DataType>
-      <Prompt>Mes</Prompt>
-      <ValidValues>
-        <DataSetReference>
-          <DataSetName>Mes</DataSetName>
-          <ValueField>Numero_de_Mes</ValueField>
-          <LabelField>Nombre_del_Mes</LabelField>
-        </DataSetReference>
-      </ValidValues>
-    </ReportParameter>
-    <ReportParameter Name="Año">
+    <ReportParameter Name="anio">
       <DataType>String</DataType>
       <Prompt>Año</Prompt>
       <ValidValues>
         <DataSetReference>
           <DataSetName>Anio</DataSetName>
-          <ValueField>Anio</ValueField>
-          <LabelField>Anio</LabelField>
+          <ValueField>ID</ValueField>
+          <LabelField>ID</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="mes">
+      <DataType>Integer</DataType>
+      <Prompt>Mes</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Mes</DataSetName>
+          <ValueField>Mes</ValueField>
+          <LabelField>Nombre_del_Mes</LabelField>
         </DataSetReference>
       </ValidValues>
     </ReportParameter>
@@ -903,19 +851,14 @@
       <NumberOfRows>2</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>empleado</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>mes</ParameterName>
+          <ParameterName>anio</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>Año</ParameterName>
+          <ParameterName>mes</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
@@ -1208,5 +1151,5 @@ ONuRRjg9Tjg9voQxGrMfE8Lpm2lNP/RHzzrBN8Hzf/zz1/eevbrklAAAAAAAAABgo66C6FMPjelvQuk/
     </EmbeddedImage>
   </EmbeddedImages>
   <rd:ReportUnitType>Mm</rd:ReportUnitType>
-  <rd:ReportID>ab6d8029-26de-46ec-ae2f-a9a5cd56f964</rd:ReportID>
+  <rd:ReportID>c6674ea2-5582-4345-bc62-0a93e0a97448</rd:ReportID>
 </Report>

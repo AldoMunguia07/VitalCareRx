@@ -28,5 +28,11 @@ namespace VitalCareRx
         {
             this.Close();
         }
+
+        private void lt_Selected(object sender, RoutedEventArgs e)
+        {
+            VerReporte verReporte = new VerReporte("ControlPlanilla.rdl");
+            verReporte.ShowDialog();
+        }
     }
 }
