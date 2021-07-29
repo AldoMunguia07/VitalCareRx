@@ -37,7 +37,8 @@ namespace VitalCareRx
 
         private void ltFarmacoPorPaciente_Selected(object sender, RoutedEventArgs e)
         {
-          
+            VerReporte verReporte = new VerReporte("FarmacosXPaciente.rdl");
+            verReporte.ShowDialog();
         }
     }
 }

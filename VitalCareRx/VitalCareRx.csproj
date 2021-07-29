@@ -366,10 +366,14 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Reportes\5FarmacosMasIngresados.rdl" />
     <None Include="Reportes\AccionesXEmpleado.rdl" />
     <None Include="Reportes\ConsultasxEmpleado.rdl" />
     <None Include="Reportes\ControlPlanilla.rdl" />
+    <None Include="Reportes\FarmacosenExistencia.rdl" />
+    <None Include="Reportes\FarmacosXConsultas.rdl" />
     <None Include="Reportes\FarmacosXEmpleado.rdl" />
+    <None Include="Reportes\FarmacosXPaciente.rdl" />
     <None Include="Reportes\ProductoxVencimiento.rdl" />
     <None Include="Reportes\Reporte_ConsultasxPaciente.rdl" />
   </ItemGroup>

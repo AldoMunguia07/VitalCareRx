@@ -37,7 +37,14 @@ namespace VitalCareRx
 
         private void ltFarmacosIngresados_Selected(object sender, RoutedEventArgs e)
         {
-       
+            VerReporte verReporte = new VerReporte("5FarmacosMasIngresados.rdl");
+            verReporte.ShowDialog();
+        }
+
+        private void ltFarmacosExistencia_Selected(object sender, RoutedEventArgs e)
+        {
+            VerReporte verReporte = new VerReporte("FarmacosenExistencia.rdl");
+            verReporte.ShowDialog();
         }
     }
 }
