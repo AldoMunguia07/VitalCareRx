@@ -383,7 +383,7 @@ INSERT INTO [Personas].[Puesto] VALUES ('Doctor');
 -- Datos de un usuario tipo Administrador.
 
 INSERT INTO [Personas].[Empleado] VALUES ('Admin', 'Admin', 'Admin', 'Admin', '12345678', 'Admin@gmail.com', '1990-02-02', 1, 1, 'admin', (ENCRYPTBYPASSPHRASE('ecrypt07','admin123')), 1)
-
+GO
 -- PROECEDIMIENTOS ALMACENADOS
 
 -- SP_UsuarioActual
