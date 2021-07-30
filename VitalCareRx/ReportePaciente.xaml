@@ -16,7 +16,7 @@
                 <GradientStop Color="#FF00E4FF"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <ListView HorizontalAlignment="Left" Height="354"  VerticalAlignment="Top" Width="285" Margin="6,81,0,0" Foreground="#1c1c1c" FontFamily="Champagne &amp; Limousines" FontSize="18" SelectedIndex="0">
+        <ListView HorizontalAlignment="Left" Height="354"  VerticalAlignment="Top" Width="285" Margin="6,81,0,0" Foreground="#1c1c1c" FontFamily="Champagne &amp; Limousines" FontSize="18">
             <ListViewItem Name="ltConsultasPorPaciente" Height="60" Selected="ltConsultasPorPaciente_Selected">                <StackPanel Orientation="Horizontal">                    <materialDesign:PackIcon Kind="BookAccount" Height="30" Width="30"  />                    <TextBlock Text="Consultas por paciente" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>                </StackPanel>            </ListViewItem>
             <ListViewItem Name="ltFarmacoPorPaciente" Height="60" Selected="ltFarmacoPorPaciente_Selected">                <StackPanel Orientation="Horizontal">                    <materialDesign:PackIcon Kind="BottleTonicPlus" Height="30" Width="30"  />                    <TextBlock Text="Fármaco por paciente" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>                </StackPanel>            </ListViewItem>
         </ListView>
