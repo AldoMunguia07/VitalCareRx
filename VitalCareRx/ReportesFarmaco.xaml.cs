@@ -46,5 +46,10 @@ namespace VitalCareRx
             VerReporte verReporte = new VerReporte("FarmacosenExistencia.rdl");
             verReporte.ShowDialog();
         }
+
+        private void ltFarmacos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ltFarmacos.UnselectAll();
+        }
     }
 }

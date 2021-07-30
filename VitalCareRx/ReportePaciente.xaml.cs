@@ -22,6 +22,7 @@ namespace VitalCareRx
         public ReportePaciente()
         {
             InitializeComponent();
+            ltPacientes.UnselectAll();
         }
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
@@ -31,14 +32,22 @@ namespace VitalCareRx
 
         private void ltConsultasPorPaciente_Selected(object sender, RoutedEventArgs e)
         {
+            
             VerReporte verReporte = new VerReporte("Reporte_ConsultasxPaciente.rdl");
             verReporte.ShowDialog();
+
         }
 
         private void ltFarmacoPorPaciente_Selected(object sender, RoutedEventArgs e)
         {
             VerReporte verReporte = new VerReporte("FarmacosXPaciente.rdl");
             verReporte.ShowDialog();
+            
+        }
+
+        private void ltPacientes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ltPacientes.UnselectAll();
         }
     }
 }

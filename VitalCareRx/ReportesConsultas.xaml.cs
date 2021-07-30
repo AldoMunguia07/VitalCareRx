@@ -40,5 +40,10 @@ namespace VitalCareRx
             VerReporte verReporte = new VerReporte("FarmacosXConsultas.rdl");
             verReporte.ShowDialog();
         }
+
+        private void ltConsultas_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ltConsultas.UnselectAll();
+        }
     }
 }
