@@ -22,8 +22,7 @@ SUM(DF.cantidad) 'Unidades ingresadas '
 from Consultas.Farmaco F INNER JOIN 
 Consultas.DetalleFarmaco DF ON DF.idFarmaco = F.idFarmaco
 GROUP BY F.idFarmaco,F.descripcionFarmaco,F.informacionPrecaucion
-ORDER BY SUM(DF.cantidad) DESC
-</CommandText>
+ORDER BY SUM(DF.cantidad) DESC</CommandText>
       </Query>
       <Fields>
         <Field Name="idFarmaco">
@@ -49,63 +48,25 @@ ORDER BY SUM(DF.cantidad) DESC
     <ReportSection>
       <Body>
         <ReportItems>
-          <Textbox Name="ReportTitle">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>5 Fármacos mas ingresados.</Value>
-                    <Style>
-                      <FontFamily>Segoe UI Light</FontFamily>
-                      <FontSize>22pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:WatermarkTextbox>Title</rd:WatermarkTextbox>
-            <rd:DefaultName>ReportTitle</rd:DefaultName>
-            <Top>0.35278mm</Top>
-            <Left>0cm</Left>
-            <Height>12.7mm</Height>
-            <Width>162.89842mm</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <BackgroundColor>LightGreen</BackgroundColor>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
           <Tablix Name="Tablix1">
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>42.16936mm</Width>
+                  <Width>27.83946mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>32.57363mm</Width>
+                  <Width>47.15404mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>45.27363mm</Width>
+                  <Width>47.15404mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>36.5318mm</Width>
+                  <Width>34.1363mm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>6.35mm</Height>
+                  <Height>6.61458mm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -116,7 +77,7 @@ ORDER BY SUM(DF.cantidad) DESC
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Código del Fármaco</Value>
+                                  <Value>Código Farmaco</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -259,14 +220,14 @@ ORDER BY SUM(DF.cantidad) DESC
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox9">
+                        <Textbox Name="Textbox11">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Unidades recetadas</Value>
+                                  <Value>Unidades ingresadas </Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                   </Style>
@@ -275,7 +236,7 @@ ORDER BY SUM(DF.cantidad) DESC
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox9</rd:DefaultName>
+                          <rd:DefaultName>Textbox11</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>SeaGreen</Color>
@@ -312,7 +273,7 @@ ORDER BY SUM(DF.cantidad) DESC
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>5.29167mm</Height>
+                  <Height>6.61458mm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -466,14 +427,14 @@ ORDER BY SUM(DF.cantidad) DESC
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Unidades_Recetadas">
+                        <Textbox Name="Unidades_ingresadas_">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Unidades_Recetadas.Value</Value>
+                                  <Value>=Fields!Unidades_ingresadas_.Value</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                   </Style>
@@ -482,7 +443,7 @@ ORDER BY SUM(DF.cantidad) DESC
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Unidades_Recetadas</rd:DefaultName>
+                          <rd:DefaultName>Unidades_ingresadas_</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>SeaGreen</Color>
@@ -538,12 +499,11 @@ ORDER BY SUM(DF.cantidad) DESC
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>DataSet1</DataSetName>
-            <Top>22.57083mm</Top>
-            <Left>2.64583mm</Left>
-            <Height>11.64167mm</Height>
-            <Width>156.54842mm</Width>
-            <ZIndex>1</ZIndex>
+            <DataSetName>FarmacosMasIngresados</DataSetName>
+            <Top>12.78125mm</Top>
+            <Left>2.91042mm</Left>
+            <Height>13.22917mm</Height>
+            <Width>156.28384mm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -561,7 +521,7 @@ ORDER BY SUM(DF.cantidad) DESC
       <Width>162.89842mm</Width>
       <Page>
         <PageHeader>
-          <Height>26.8745mm</Height>
+          <Height>39.5745mm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -615,6 +575,45 @@ ORDER BY SUM(DF.cantidad) DESC
                 </Border>
               </Style>
             </Image>
+            <Textbox Name="ReportTitle">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>5 Fármacos mas ingresados.</Value>
+                      <Style>
+                        <FontFamily>Segoe UI Light</FontFamily>
+                        <FontSize>22pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                        <TextDecoration>None</TextDecoration>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:WatermarkTextbox>Title</rd:WatermarkTextbox>
+              <rd:DefaultName>ReportTitle</rd:DefaultName>
+              <Top>26.8745mm</Top>
+              <Left>0cm</Left>
+              <Height>12.7mm</Height>
+              <Width>162.89842mm</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <BackgroundColor>LightGreen</BackgroundColor>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
           </ReportItems>
           <Style>
             <Border>

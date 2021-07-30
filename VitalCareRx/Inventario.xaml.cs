@@ -21,6 +21,7 @@ namespace VitalCareRx
     public partial class Inventario : Window
     {
         Farmaco unFarmaco = new Farmaco();
+        Validaciones Validaciones = new Validaciones();
         bool seleccionado = false;
         DateTime fechaV;
         public Inventario(Farmaco farmaco)
@@ -230,6 +231,16 @@ namespace VitalCareRx
         private void dtFechaBuscar_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             unFarmaco.MostrarDetalleFarmacoFiltro(gridDetalleFarmaco, unFarmaco.IdFarmaco, dtFechaBuscar);
+        }
+
+        private void txtCantidad_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            Validaciones.ValidarEspacio(e);
+        }
+
+        private void txtCantidad_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Validaciones.SoloNumeros(e);
         }
     }
 }
