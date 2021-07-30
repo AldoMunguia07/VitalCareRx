@@ -885,7 +885,7 @@
       </ValidValues>
     </ReportParameter>
     <ReportParameter Name="Año">
-      <DataType>String</DataType>
+      <DataType>Integer</DataType>
       <Prompt>Año</Prompt>
       <ValidValues>
         <DataSetReference>

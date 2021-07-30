@@ -55,12 +55,12 @@ GROUP BY F.idFarmaco,F.descripcionFarmaco,F.informacionPrecaucion</CommandText>
     <DataSet Name="Año">
       <Query>
         <DataSourceName>cnnVitalCareRx</DataSourceName>
-        <CommandText>select distinct(YEAR(C.fechaConsulta))
+        <CommandText>select distinct(YEAR(C.fechaConsulta)) Anio
 	from Consultas.Consulta C</CommandText>
       </Query>
       <Fields>
-        <Field Name="ID">
-          <DataField />
+        <Field Name="Anio">
+          <DataField>Anio</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
       </Fields>
@@ -835,13 +835,13 @@ GROUP BY F.idFarmaco,F.descripcionFarmaco,F.informacionPrecaucion</CommandText>
   </ReportSections>
   <ReportParameters>
     <ReportParameter Name="Año">
-      <DataType>String</DataType>
+      <DataType>Integer</DataType>
       <Prompt>Año</Prompt>
       <ValidValues>
         <DataSetReference>
           <DataSetName>Año</DataSetName>
-          <ValueField>ID</ValueField>
-          <LabelField>ID</LabelField>
+          <ValueField>Anio</ValueField>
+          <LabelField>Anio</LabelField>
         </DataSetReference>
       </ValidValues>
     </ReportParameter>

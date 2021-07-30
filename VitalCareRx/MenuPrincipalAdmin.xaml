@@ -29,9 +29,9 @@
 
             <Grid x:Name="GridPrincipal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Margin="183,295,334.2,295"/>
             <Image Source="IMAGENES/PrimeroDios.png" Height="271" VerticalAlignment="Top" Margin="224,107,202,0" RenderTransformOrigin="0.5,0.5"/>
-            <TextBlock Foreground="#74EEAB" HorizontalAlignment="Left" Height="71" Margin="284,389,0,0" TextWrapping="Wrap" Text="¡BIENVENIDO!" VerticalAlignment="Top" Width="364" TextAlignment="Center" FontSize="55" FontWeight="Bold"/>
-            <Label  Name="lbFecha" HorizontalContentAlignment="Center"  HorizontalAlignment="Left" Content="TIMER"   Margin="260,462,0,0" VerticalAlignment="Top" Height="80" Width="410" FontSize="65" FontWeight="Bold"   />
-            <Label  Name="lbDate" HorizontalContentAlignment="Center"  HorizontalAlignment="Left" Content="TIMER"   Margin="258,540,0,0" VerticalAlignment="Top" Height="54" Width="410" FontSize="40" FontWeight="Bold" Foreground="#708090"   />
+            <TextBlock Foreground="#74EEAB" HorizontalAlignment="Left" Height="71" Margin="309,383,0,0" TextWrapping="Wrap" Text="¡BIENVENIDO!" VerticalAlignment="Top" Width="452" TextAlignment="Center" FontSize="55" FontWeight="Bold"/>
+            <Label  Name="lbFecha" HorizontalContentAlignment="Center"  HorizontalAlignment="Left" Content="TIMER"   Margin="328,489,0,0" VerticalAlignment="Top" Height="80" Width="410" FontSize="65" FontWeight="Bold"   />
+            <Label  Name="lbDate" HorizontalContentAlignment="Center"  HorizontalAlignment="Left" Content="TIMER"   Margin="326,567,0,0" VerticalAlignment="Top" Height="54" Width="410" FontSize="40" FontWeight="Bold" Foreground="#708090"   />
 
         </Grid>
 
@@ -120,7 +120,7 @@
                         <TextBlock Text="Salir" FontSize="17" VerticalAlignment="Center" Margin="20 0" Width="34"/>
                     </StackPanel>
                 </ListViewItem>
-              
+
 
 
             </ListView>

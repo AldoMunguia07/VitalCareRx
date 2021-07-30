@@ -71,12 +71,12 @@
     <DataSet Name="Anio">
       <Query>
         <DataSourceName>VitalCareRx</DataSourceName>
-        <CommandText>select distinct(YEAR(DF.fechaVencimiento))
+        <CommandText>select distinct(YEAR(DF.fechaVencimiento)) anio
 	from Consultas.DetalleFarmaco DF</CommandText>
       </Query>
       <Fields>
-        <Field Name="ID">
-          <DataField />
+        <Field Name="anio">
+          <DataField>anio</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
       </Fields>
@@ -821,13 +821,13 @@
   </ReportSections>
   <ReportParameters>
     <ReportParameter Name="anio">
-      <DataType>String</DataType>
+      <DataType>Integer</DataType>
       <Prompt>Año</Prompt>
       <ValidValues>
         <DataSetReference>
           <DataSetName>Anio</DataSetName>
-          <ValueField>ID</ValueField>
-          <LabelField>ID</LabelField>
+          <ValueField>anio</ValueField>
+          <LabelField>anio</LabelField>
         </DataSetReference>
       </ValidValues>
     </ReportParameter>

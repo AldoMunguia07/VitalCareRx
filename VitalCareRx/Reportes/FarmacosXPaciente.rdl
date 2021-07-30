@@ -34,8 +34,7 @@ from Personas.Paciente P</CommandText>
       <Query>
         <DataSourceName>cnnVitalCareRx</DataSourceName>
         <CommandText>select distinct(YEAR(C.fechaConsulta)) 'Anio'
-	from Consultas.Consulta C
-</CommandText>
+	from Consultas.Consulta C</CommandText>
       </Query>
       <Fields>
         <Field Name="Anio">
@@ -852,7 +851,7 @@ GROUP BY F.idFarmaco,F.descripcionFarmaco ,F.informacionPrecaucion </CommandText
       </ValidValues>
     </ReportParameter>
     <ReportParameter Name="Año">
-      <DataType>String</DataType>
+      <DataType>Integer</DataType>
       <Prompt>Año</Prompt>
       <ValidValues>
         <DataSetReference>
