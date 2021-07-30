@@ -55,7 +55,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="idReceta" IsReadOnly="True" Binding="{Binding Path=IdReceta}" Width="*" ></DataGridTextColumn>
                 <DataGridTextColumn Header="idFarmaco" IsReadOnly="True"  Binding="{Binding Path=IdFarmaco}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Farmaco" IsReadOnly="True"  Binding="{Binding Path=Farmaco}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Fármaco" IsReadOnly="True"  Binding="{Binding Path=Farmaco}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Cantidad" IsReadOnly="True"  Binding="{Binding Path=Cantidad}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Duración" IsReadOnly="True"  Binding="{Binding Path=DuracionTratamiento}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Indicaciones" IsReadOnly="True"  Binding="{Binding Path=Indicaciones}" Width="*"></DataGridTextColumn>

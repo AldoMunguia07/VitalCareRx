@@ -204,16 +204,16 @@ namespace VitalCareRx
                 TextRange MotivoConsulta = new TextRange(rtxtMotivoConsulta.Document.ContentStart, rtxtMotivoConsulta.Document.ContentEnd);
                 TextRange DiagnosticoConsulta = new TextRange(rtxtDiagnostico.Document.ContentStart, rtxtDiagnostico.Document.ContentEnd);
 
-                idConsulta = Convert.ToInt32(rowSelected.Row["Codigo de consulta"]); //Capturamos el id de la consulta para pasarlo por parametro al ver o crear una receta.
+                idConsulta = Convert.ToInt32(rowSelected.Row["Código de consulta"]); //Capturamos el id de la consulta para pasarlo por parametro al ver o crear una receta.
 
                 MotivoConsulta.Text = rowSelected.Row["Motivo"].ToString();
-                DiagnosticoConsulta.Text = rowSelected.Row["Diagnostico"].ToString();
+                DiagnosticoConsulta.Text = rowSelected.Row["Diagnóstico"].ToString();
 
                 txtTemperatura.Text = rowSelected.Row["Temperatura"].ToString();
                 txtPresionArterial.Text = rowSelected.Row["Presión arterial"].ToString();
                 cmbPaciente.SelectedValue = rowSelected.Row["idPaciente"].ToString();
 
-                consulta.IdConsulta = Convert.ToInt32(rowSelected.Row["Codigo de consulta"]);
+                consulta.IdConsulta = Convert.ToInt32(rowSelected.Row["Código de consulta"]);
 
                 if (receta.ValidarCrearRecetaMedica(idConsulta)) // si la consulta ya tiene una receta que capture el id de esa receta para posteriormente poder visualizar la receta de dicha consulta.
                 {

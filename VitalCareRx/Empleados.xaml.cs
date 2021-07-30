@@ -432,7 +432,7 @@ namespace VitalCareRx
                 seleccionado = true;
                
              
-                idEmpleado = Convert.ToInt32(rowSelected.Row["Codigo empleado"].ToString());
+                idEmpleado = Convert.ToInt32(rowSelected.Row["Código empleado"].ToString());
                 txtPrimerNombre.Text = rowSelected.Row["primerNombre"].ToString();
                 txtSegundoNombre.Text = rowSelected.Row["segundoNombre"].ToString();
                 txtPrimerApellido.Text = rowSelected.Row["primerApellido"].ToString();

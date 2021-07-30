@@ -60,7 +60,7 @@ namespace VitalCareRx
             if (rowSelected != null) // Si no esta seleccionado que no capture el id
             {
                 seleccionado = true;
-                codigoConsulta = Convert.ToInt32(rowSelected.Row["Codigo de consulta"]); // Capturamos el id de consulta para enviarlo como parametro al llamar a ventana de recetas.
+                codigoConsulta = Convert.ToInt32(rowSelected.Row["Código de consulta"]); // Capturamos el id de consulta para enviarlo como parametro al llamar a ventana de recetas.
             }
             else
             {

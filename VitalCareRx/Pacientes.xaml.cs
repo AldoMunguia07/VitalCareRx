@@ -142,7 +142,7 @@ namespace VitalCareRx
                 txtSegundoNombre.Text = rowSelected.Row["segundoNombre"].ToString();
                 txtPrimerApellido.Text = rowSelected.Row["primerApellido"].ToString();
                 txtSegundoApellido.Text = rowSelected.Row["segundoApellido"].ToString();
-                direccion.Text = rowSelected.Row["Direccion"].ToString();
+                direccion.Text = rowSelected.Row["Dirección"].ToString();
                 txtCelular.Text = rowSelected.Row["Celular"].ToString();
                 dtFechaNacimiento.SelectedDate = Convert.ToDateTime(rowSelected.Row["Fecha de nacimiento"]);
                 txtPeso.Text = rowSelected.Row["Peso (lbs)"].ToString();
