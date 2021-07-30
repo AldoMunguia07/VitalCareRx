@@ -6,10 +6,9 @@
     <DataSource Name="cnnVitalCareRx">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=(local)\sqlexpress;Initial Catalog=VitalCareRxDB</ConnectString>
-        <IntegratedSecurity>true</IntegratedSecurity>
+        <ConnectString>Data Source=DBServer;Initial Catalog=VitalCareRxDB</ConnectString>
       </ConnectionProperties>
-      <rd:SecurityType>Integrated</rd:SecurityType>
+      <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>5a9cbdba-00f3-4c97-af58-cb082f035c74</rd:DataSourceID>
     </DataSource>
   </DataSources>

@@ -6,10 +6,9 @@
     <DataSource Name="cnnVitalCareRx">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=(local)\SQLEXPRESS;Initial Catalog=VitalCareRxDB</ConnectString>
-        <IntegratedSecurity>true</IntegratedSecurity>
+        <ConnectString>Data Source=DBServer;Initial Catalog=VitalCareRxDB</ConnectString>
       </ConnectionProperties>
-      <rd:SecurityType>Integrated</rd:SecurityType>
+      <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>50362dca-cd56-4082-b4e8-12e5c6548796</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -154,7 +153,7 @@ HAVING SUM(DRM.cantidad) &gt; 0
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>9.8425mm</Height>
+                  <Height>11.43mm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -624,7 +623,7 @@ HAVING SUM(DRM.cantidad) &gt; 0
             <DataSetName>Farmacos</DataSetName>
             <Top>49.23367mm</Top>
             <Left>3.1141mm</Left>
-            <Height>19.685mm</Height>
+            <Height>21.2725mm</Height>
             <Width>154.57756mm</Width>
             <ZIndex>3</ZIndex>
             <Style>
