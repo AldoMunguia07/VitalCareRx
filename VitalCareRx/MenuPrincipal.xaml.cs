@@ -283,6 +283,9 @@ namespace VitalCareRx
             manualAyuda.LlamarManualUsuario(@"Manual de usuario\Recuperar Contrasenia.html");
         }
 
-      
+        private void btnInventario_Click(object sender, RoutedEventArgs e)
+        {
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Inventario.html");
+        }
     }
 }

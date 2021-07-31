@@ -9,7 +9,7 @@
         Title="Bitacora" Height="590" Width="1090" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown"
         MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp">
     <Grid>
-        <Label Content="Listado de bitacora" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,14,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="1015" HorizontalContentAlignment="Center" Height="38">
+        <Label Content="Listado de bitácora" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,14,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="1015" HorizontalContentAlignment="Center" Height="38">
             <Label.Background>
 
                 <LinearGradientBrush>
@@ -68,7 +68,7 @@
         <Button x:Name="btnRestaurar" Content="Restaurar" HorizontalAlignment="Left" Margin="415,525,0,0" VerticalAlignment="Top" Width="138" Click="btnRestaurar_Click"/>
         <materialDesign:PackIcon Kind="Reload" Height="32" Width="27" Foreground="#FFF" Margin="415,525,0,0" />
 
-        <Label Foreground="White" Content="BITACORA HISTORIAL" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Margin="861,244,-155,0" Height="52" Width="384" RenderTransformOrigin="0.5,0.5">
+        <Label Foreground="White" Content="BITÁCORA HISTORIAL" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Margin="861,244,-155,0" Height="52" Width="384" RenderTransformOrigin="0.5,0.5">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

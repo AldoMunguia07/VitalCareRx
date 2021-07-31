@@ -9,7 +9,7 @@
         Title="Inventario" Height="590" Width="950" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown"
         MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp" >
     <Grid>
-        <Label x:Name="lblFarmaco" Content="FARMACO" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Foreground="White" FontFamily="Verdana" Width="932" HorizontalContentAlignment="Center" Height="46" >
+        <Label x:Name="lblFarmaco" Content="FÁRMACO" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Foreground="White" FontFamily="Verdana" Width="932" HorizontalContentAlignment="Center" Height="46" >
             <Label.Background>
 
                 <LinearGradientBrush>
@@ -68,7 +68,7 @@
         <Button x:Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="656,142,0,0" VerticalAlignment="Top" Width="138" Click="btnLimpiar_Click"/>
         <materialDesign:PackIcon Kind="BookCancel" Height="32" Width="26" Foreground="#FFF" Margin="656,142,0,0" />
 
-        <Label Foreground="#74EEAB" Content="DETALLE FARMACO" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Margin="348,200,0,0" Height="31" Width="192" RenderTransformOrigin="0.5,0.5">
+        <Label Foreground="#74EEAB" Content="DETALLE FÁRMACO" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Margin="348,200,0,0" Height="31" Width="192" RenderTransformOrigin="0.5,0.5">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

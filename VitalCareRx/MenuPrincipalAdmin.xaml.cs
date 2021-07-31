@@ -254,5 +254,14 @@ namespace VitalCareRx
 
         }
 
+        private void btnInventario_Click(object sender, RoutedEventArgs e)
+        {
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Inventario.html");
+        }
+
+        private void btnEmpleados_Click(object sender, RoutedEventArgs e)
+        {
+            manualAyuda.LlamarManualUsuario(@"Manual de usuario\Empleados.html");
+        }
     }
 }

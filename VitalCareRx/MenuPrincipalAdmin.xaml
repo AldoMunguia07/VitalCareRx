@@ -93,7 +93,7 @@
                 <ListViewItem Name="ltBitacora" Height="60" Selected="ltBitacora_Selected">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="BookClock" Height="30" Width="30" />
-                        <TextBlock Text="Bitacora" FontSize="17" VerticalAlignment="Center" Margin="20 0" Width="70"/>
+                        <TextBlock Text="Bitácora" FontSize="17" VerticalAlignment="Center" Margin="20 0" Width="70"/>
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Name="ltControlEmpleado" Height="60" Selected="ltControlEmpleado_Selected">
@@ -187,17 +187,27 @@
                     <materialDesign:PackIcon Kind="MedicalBag" Height="17" Width="25" Foreground="#FFF" />
                 </Button>
                 <Button x:Name="btnFarmacos" Background="#1c1c1c" 
-                    ToolTip="Farmacos" Click = "btnFarmacos_Click"
+                    ToolTip="Fármacos" Click = "btnFarmacos_Click"
                  >
                     <materialDesign:PackIcon Kind="BottleTonicPlusOutline" Height="17" Width="25" Foreground="#FFF" />
+                </Button>
+                <Button x:Name="btnInventario" Background="#1c1c1c" 
+                    ToolTip="Inventario" Click="btnInventario_Click"
+                 >
+                    <materialDesign:PackIcon Kind="AddShoppingCart" Height="17" Width="25" Foreground="#FFF" />
                 </Button>
                 <Button x:Name="btnMiUsuario" Background="#1c1c1c" 
                     ToolTip="Mi Usuario" Click = "btnMiUsuario_Click"
                  >
                     <materialDesign:PackIcon Kind="UserEdit" Height="17" Width="25" Foreground="#FFF" />
                 </Button>
+                <Button x:Name="btnEmpleados" Background="#1c1c1c" 
+                    ToolTip="Empleados" Click="btnEmpleados_Click"
+                 >
+                    <materialDesign:PackIcon Kind="PersonTie" Height="17" Width="25" Foreground="#FFF" />
+                </Button>
                 <Button x:Name="btnBitacora" Background="#1c1c1c" 
-                    ToolTip="Bitacora" Click = "btnBitacora_Click"
+                    ToolTip="Bitácora" Click = "btnBitacora_Click"
                  >
                     <materialDesign:PackIcon Kind="BookOpenPageVariant" Height="17" Width="25" Foreground="#FFF" />
                 </Button>

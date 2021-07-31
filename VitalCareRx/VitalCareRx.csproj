@@ -386,7 +386,9 @@
     <Content Include="Manual de usuario\Consultas.html" />
     <Content Include="Manual de usuario\ConsultasPorPaciente.html" />
     <Content Include="Manual de usuario\Control de Empleados.html" />
+    <Content Include="Manual de usuario\Empleados.html" />
     <Content Include="Manual de usuario\Farmacos.html" />
+    <Content Include="Manual de usuario\Inventario.html" />
     <Content Include="Manual de usuario\Login.html" />
     <Content Include="Manual de usuario\Menú Principal%28admin%29.html" />
     <Content Include="Manual de usuario\Menú Principal.html" />

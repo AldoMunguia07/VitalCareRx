@@ -188,6 +188,11 @@
                  >
                     <materialDesign:PackIcon Kind="BottleTonicPlusOutline" Height="17" Width="25" Foreground="#FFF" />
                 </Button>
+                <Button x:Name="btnInventario" Background="#1c1c1c" 
+                    ToolTip="Inventario" Click="btnInventario_Click"
+                 >
+                    <materialDesign:PackIcon Kind="AddShoppingCart" Height="17" Width="25" Foreground="#FFF" />
+                </Button>
                 <Button Name="btnMiUsuarioM" Background="#1c1c1c" 
                     ToolTip="Mi Usuario" Click="btnMiUsuarioM_Click"
                  >
