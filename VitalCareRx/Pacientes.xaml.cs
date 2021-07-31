@@ -52,6 +52,7 @@ namespace VitalCareRx
             LlenarComboBox.CargarComboBoxEstado(cmbEstado);
             LlenarComboBox.CargarComboBoxTipoSangre(cmbTipoSangre);
             paciente.VerPacientes(gridPacientes, 1);
+            
             cmbEstado.SelectedValue = 1;
 
         }

@@ -6,7 +6,8 @@
         xmlns:BoldReports="clr-namespace:BoldReports.UI.Xaml;assembly=BoldReports.Wpf"
         xmlns:local="clr-namespace:VitalCareRx"
         mc:Ignorable="d"
-        Title="Vital Care Rx" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Vital Care Rx" Height="450" Width="800" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown"
+        MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp">
     <Grid>
         <BoldReports:ReportViewer Name="Reporte"/>
     </Grid>

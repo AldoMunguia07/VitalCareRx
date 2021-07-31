@@ -6,7 +6,8 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:VitalCareRx"
         mc:Ignorable="d"
-        Title="ReportePaciente" Height="450" Width="300"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
+        Title="ReportePaciente" Height="450" Width="300"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown"
+        MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp">
     <Grid>
 
         <Grid.Background>
@@ -18,9 +19,9 @@
         </Grid.Background>
         <ListView Name="ltPacientes" HorizontalAlignment="Left" Height="354"  VerticalAlignment="Top" Width="285" Margin="6,81,0,0" Foreground="#1c1c1c" FontFamily="Champagne &amp; Limousines" FontSize="18" SelectionChanged="ltPacientes_SelectionChanged">
             <ListViewItem Name="ltConsultasPorPaciente" Height="60" Selected="ltConsultasPorPaciente_Selected">                <StackPanel Orientation="Horizontal">                    <materialDesign:PackIcon Kind="BookAccount" Height="30" Width="30"  />                    <TextBlock Text="Consultas por paciente" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>                </StackPanel>            </ListViewItem>
-            <ListViewItem Name="ltFarmacoPorPaciente" Height="60" Selected="ltFarmacoPorPaciente_Selected">                <StackPanel Orientation="Horizontal">                    <materialDesign:PackIcon Kind="BottleTonicPlus" Height="30" Width="30"  />                    <TextBlock Text="Fármaco por paciente" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>                </StackPanel>            </ListViewItem>
+            <ListViewItem Name="ltFarmacoPorPaciente" Height="60" Selected="ltFarmacoPorPaciente_Selected">                <StackPanel Orientation="Horizontal">                    <materialDesign:PackIcon Kind="BottleTonicPlus" Height="30" Width="30"  />                    <TextBlock Text="Fármacos por paciente" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>                </StackPanel>            </ListViewItem>
         </ListView>
-        <Label Content="Reportes Pacientes" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="300" FontSize="20" Foreground="#DDF9F9F9" Background="#1c1c1c" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Label Content="Reportes pacientes" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="300" FontSize="20" Foreground="#DDF9F9F9" Background="#1c1c1c" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         <Button x:Name="btnCerrar" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="White" Click="btnCerrar_Click" Margin="244,-3,-2,397">
             <materialDesign:PackIcon Kind="CloseCircleOutline" Height="30" Width="30" RenderTransformOrigin="0.352,0.42" />
         </Button>

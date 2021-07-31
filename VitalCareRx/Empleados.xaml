@@ -111,7 +111,23 @@
             <materialDesign:PackIcon Kind="Account" Width="68" Height="64" VerticalAlignment="Center" Margin="44,588,0,48" Foreground="#74EEAB"/>
             <TextBox x:Name="txtCorreo"   HorizontalAlignment="Left" Height="28" Margin="339,184,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="270" Background="White" RenderTransformOrigin="0.5,0.5" />
             <Label Content="Correo" HorizontalAlignment="Left" Margin="339,158,0,0" VerticalAlignment="Top" Foreground="White" Width="104" FontSize="14" FontWeight="Bold"/>
-            <DatePicker Name="dtFecha" HorizontalAlignment="Left" Margin="638,46,0,0" VerticalAlignment="Top" Width="270"/>
+            <DatePicker Name="dtFecha" HorizontalAlignment="Left" Margin="638,46,0,0" VerticalAlignment="Top" Width="270">
+                <DatePicker.CalendarStyle>
+                    <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                        <Style.Resources>
+                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#1c1c1c" />
+                            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#74EEAB" />
+
+
+
+                        </Style.Resources>
+
+
+                    </Style>
+
+
+                </DatePicker.CalendarStyle>
+            </DatePicker>
             <Label Content="Fecha de Nacimiento" HorizontalAlignment="Left" Margin="638,13,0,0" VerticalAlignment="Top" Foreground="White" Width="150" FontSize="14" FontWeight="Bold"/>
 
             <Image Source="IMAGENES/PrimeroDios.png" Height="95" VerticalAlignment="Top" Margin="189,574,10,0" RenderTransformOrigin="0.5,0.5" Grid.Column="1"/>

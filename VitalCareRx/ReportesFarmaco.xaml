@@ -6,7 +6,8 @@
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:VitalCareRx"
         mc:Ignorable="d"
-        Title="ReportesFarmaco" Height="450" Width="308.286"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
+        Title="ReportesFarmaco" Height="450" Width="308.286"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None"  MouseDown="Window_MouseDown"
+        MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush>
@@ -16,11 +17,11 @@
             </LinearGradientBrush>
         </Grid.Background>
         <ListView Name="ltFarmacos" HorizontalAlignment="Left" Height="354"  VerticalAlignment="Top" Width="308" Margin="0,81,0,0" Foreground="#1c1c1c" FontFamily="Champagne &amp; Limousines" FontSize="18" SelectionChanged="ltFarmacos_SelectionChanged">
-            <ListViewItem Name="ltProductoVencimiento" Height="60" Width="308" Selected="ltProductoVencimiento_Selected">                <StackPanel Orientation="Horizontal">                    <materialDesign:PackIcon Kind="CalendarRange" Height="30" Width="30"  />                    <TextBlock Text="Farmacos por Fecha de Vencimiento." FontSize="15" VerticalAlignment="Center" Margin="20 0"/>                </StackPanel>            </ListViewItem>
-            <ListViewItem Name="ltFarmacosIngresados" Height="60" Width="308" Selected="ltFarmacosIngresados_Selected">                <StackPanel Orientation="Horizontal">                    <materialDesign:PackIcon Kind="BottleTonicPlus" Height="30" Width="30"  />                    <TextBlock Text="5 Farmacos mas ingresados." FontSize="15" VerticalAlignment="Center" Margin="20 0"/>                </StackPanel>            </ListViewItem>
-            <ListViewItem Name="ltFarmacosExistencia" Height="60" Width="308" Selected="ltFarmacosExistencia_Selected">                <StackPanel Orientation="Horizontal">                    <materialDesign:PackIcon Kind="BookOpenOutline" Height="30" Width="30"  />                    <TextBlock Text="Farmacos en existencia." FontSize="15" VerticalAlignment="Center" Margin="20 0"/>                </StackPanel>            </ListViewItem>
+            <ListViewItem Name="ltProductoVencimiento" Height="60" Width="308" Selected="ltProductoVencimiento_Selected">                <StackPanel Orientation="Horizontal">                    <materialDesign:PackIcon Kind="CalendarRange" Height="30" Width="30"  />                    <TextBlock Text="Fármacos por fecha de vencimiento" FontSize="15" VerticalAlignment="Center" Margin="20 0"/>                </StackPanel>            </ListViewItem>
+            <ListViewItem Name="ltFarmacosIngresados" Height="60" Width="308" Selected="ltFarmacosIngresados_Selected">                <StackPanel Orientation="Horizontal">                    <materialDesign:PackIcon Kind="BottleTonicPlus" Height="30" Width="30"  />                    <TextBlock Text="5 Fármacos más ingresados" FontSize="15" VerticalAlignment="Center" Margin="20 0"/>                </StackPanel>            </ListViewItem>
+            <ListViewItem Name="ltFarmacosExistencia" Height="60" Width="308" Selected="ltFarmacosExistencia_Selected">                <StackPanel Orientation="Horizontal">                    <materialDesign:PackIcon Kind="BookOpenOutline" Height="30" Width="30"  />                    <TextBlock Text="Fármacos en existencia" FontSize="15" VerticalAlignment="Center" Margin="20 0"/>                </StackPanel>            </ListViewItem>
         </ListView>
-        <Label Content="Reportes Fármacos" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="308" FontSize="20" Foreground="#DDF9F9F9" Background="#1c1c1c" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Label Content="Reportes fármacos" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="308" FontSize="20" Foreground="#DDF9F9F9" Background="#1c1c1c" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         <Button x:Name="btnCerrar" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="White" Click="btnCerrar_Click" Margin="250,-3,0,400">
             <materialDesign:PackIcon Kind="CloseCircleOutline" Height="30" Width="30" RenderTransformOrigin="0.352,0.42" />
         </Button>

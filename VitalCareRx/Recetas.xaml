@@ -105,15 +105,16 @@
         <materialDesign:PackIcon Kind="DeleteCircle" Height="32" Width="24" Foreground="#FFF" Margin="496,482,0,0" />
 
         <Button Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="166,525,0,0" VerticalAlignment="Top" Width="108" Click="btnLimpiar_Click" Grid.Column="1"/>        <materialDesign:PackIcon Kind="TextBoxMinus" Height="32" Width="26" Foreground="#FFF" Margin="166,525,0,0" Grid.Column="1" />
-        <Button x:Name = "btnGenerarReceta" Content="Generar receta" HorizontalAlignment="Left" Margin="278,536,0,0" VerticalAlignment="Top" Width="142" Click="btnGenerarReceta_Click">
+        <Button x:Name = "btnGenerarReceta" Content="Generar receta" HorizontalAlignment="Left" Margin="236,542,0,0" VerticalAlignment="Top" Width="194" Click="btnGenerarReceta_Click" RenderTransformOrigin="0.488,0.604">
             <Button.Background>
                 <LinearGradientBrush>
 
-                    <GradientStop Color="#FF48C7A0" Offset="0.1"/>
-                    <GradientStop Color="#74EEAB" Offset="2"/>
+                    <GradientStop Color="#1c1c1c" Offset="0.1"/>
+                    <GradientStop Color="#FF8000" Offset="1"/>
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
+        <materialDesign:PackIcon Kind="BookmarkTick" Height="32" Width="24" Foreground="#FFF" Margin="256,540,0,0" />
 
 
     </Grid>

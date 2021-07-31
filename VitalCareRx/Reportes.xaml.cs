@@ -70,5 +70,25 @@ namespace VitalCareRx
             ReportesConsultas reportesConsultas = new ReportesConsultas();
             reportesConsultas.ShowDialog();
         }
+
+        bool right = false;
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // Si se le da click derecho que no permita mover la ventana
+            if (!right)
+            {
+                DragMove();
+            }
+        }
+
+        private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            right = true;
+        }
+
+        private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            right = false;
+        }
     }
 }

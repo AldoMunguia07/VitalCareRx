@@ -18,11 +18,10 @@
             <Grid.Background>
                 <LinearGradientBrush>
 
-                    <GradientStop Color="#58d3fc" Offset="0.1"/>
-                    <GradientStop Color="#124699" Offset="2"/>
+                    <GradientStop Color="#74EEAB" Offset="0"/>
+                    <GradientStop Color="#1c1c1c" Offset="1"/>
                 </LinearGradientBrush>
             </Grid.Background>
-            <Image Source="IMAGENES/PrimeroDios.png" Height="70" VerticalAlignment="Top" Margin="1148,524,3,-268" RenderTransformOrigin="0.5,0.5"/>
             <Label Foreground="White" Content="PACIENTES" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Margin="-86,93,0,0" Height="44" Width="220" RenderTransformOrigin="0.5,0.5">
                 <Label.RenderTransform>
                     <TransformGroup>
@@ -33,8 +32,8 @@
                     </TransformGroup>
                 </Label.RenderTransform>
             </Label>
-            <Button Name="btnModificarr"  Content="Modificar" HorizontalAlignment="Left" Margin="1089,268,0,0" VerticalAlignment="Top" Width="113" Click="btnModificarr_Click"/>
-            <Button Name="btnEliminar"  Content="Eliminar" HorizontalAlignment="Left" Margin="1268,268,0,0" VerticalAlignment="Top" Width="102"  Height="33" Click="btnEliminar_Click">
+            <Button Name="btnModificarr"  Content="Modificar" HorizontalAlignment="Left" Margin="1210,88,0,0" VerticalAlignment="Top" Width="114" Click="btnModificarr_Click"/>
+            <Button Name="btnEliminar"  Content="Eliminar" HorizontalAlignment="Left" Margin="1210,144,0,0" VerticalAlignment="Top" Width="112"  Height="33" Click="btnEliminar_Click">
                 <Button.Background>
                     <LinearGradientBrush>
 
@@ -44,7 +43,7 @@
                 </Button.Background>
             </Button>
 
-            <Button Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="917,268,0,0" VerticalAlignment="Top" Width="109" Click="btnAgregar_Click">
+            <Button Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="1210,31,0,0" VerticalAlignment="Top" Width="112" Click="btnAgregar_Click">
                 <Button.Background>
                     <LinearGradientBrush>
 
@@ -53,19 +52,10 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <materialDesign:PackIcon Kind="AccountPlus" Height="32" Width="26" Foreground="#FFF" Margin="917,267,0,0" />
-            <materialDesign:PackIcon Kind="SquareEditOutline" Height="32" Width="25" Foreground="#FFF" Margin="1089,268,0,0" />
-            <materialDesign:PackIcon Kind="Delete" Height="32" Width="24" Foreground="#FFF" Margin="1268,268,0,0" RenderTransformOrigin="5.742,0.696" />
-            <Button Content="Buscar" HorizontalAlignment="Left" Margin="22,269,0,0" VerticalAlignment="Top" Width="109" Height="32" Click="Button_Click">
-                <Button.Background>
-                    <LinearGradientBrush>
-
-                        <GradientStop Color="#FF48C7A0" Offset="0.1"/>
-                        <GradientStop Color="#74EEAB" Offset="2"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button Name ="btnSalir"  Height="Auto" Margin="1298,-1,0,302" RenderTransformOrigin="0.5,0.5" Click="btnSalir_Click">
+            <materialDesign:PackIcon Kind="AccountPlus" Height="32" Width="26" Foreground="#FFF" Margin="1210,30,0,0" />
+            <materialDesign:PackIcon Kind="SquareEditOutline" Height="32" Width="26" Foreground="#FFF" Margin="1210,88,0,0" />
+            <materialDesign:PackIcon Kind="Delete" Height="32" Width="24" Foreground="#FFF" Margin="1210,144,0,0" RenderTransformOrigin="5.742,0.696" />
+            <Button Name ="btnSalir"  Height="Auto" Margin="1352,1,-2,298" RenderTransformOrigin="0.5,0.5" Click="btnSalir_Click">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="-1"/>
@@ -83,41 +73,84 @@
                 </Button.Background>
                 <materialDesign:PackIcon Kind="CloseBox" Height="13" Width="37" Foreground="#FFF" RenderTransformOrigin="-0.039,0.159" />
             </Button>
+            <Button x:Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="1210,208,0,0" VerticalAlignment="Top" Width="110" Click="btnLimpiar_Click"/>
+            <materialDesign:PackIcon Kind="TextBoxMinus" Height="32" Width="28" Foreground="#FFF" Margin="1210,208,0,0" />
+            <Rectangle  Height="45" VerticalAlignment="Bottom" Margin="59,0,38,10" RadiusY="10" RadiusX="10" Fill="#FF1C1C1C">
+                <Rectangle.Effect>
+                    <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
+                </Rectangle.Effect>
+
+
+            </Rectangle>
+            <Label Content="Listado de Pacientes" HorizontalAlignment="Left" Margin="570,268,0,0" VerticalAlignment="Top" FontSize="30" Foreground="White"/>
         </Grid>
-        <Label Content="DNI" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="273,29,0,0" Foreground="White" RenderTransformOrigin="0.567,0.833" FontSize="18" FontWeight="Bold"/>
-        <Label Content="Primer nombre" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="176,72,0,0" Foreground="White" FontWeight="Bold" FontSize="18"/>
-        <Label Content="Segundo nombre" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="158,114,0,0" Foreground="White" FontWeight="Bold" FontSize="18"/>
-        <Label Content="Primer apellido" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="174,156,0,0" Foreground="White" FontWeight="Bold" FontSize="18"/>
-        <Label Content="Segundo apellido" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="156,208,0,0" RenderTransformOrigin="0.495,0.708" Foreground="White" FontWeight="Bold" FontSize="18"/>
-        <Label Content="Dirección" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="576,26,0,0" Foreground="White" FontWeight="Bold" Grid.ColumnSpan="2" FontSize="18"/>
-        <Label Content="Celular" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,114,0,0" Foreground="White" FontWeight="Bold" RenderTransformOrigin="1.213,1.458" FontSize="18" Grid.Column="1"/>
-        <Label Content="Fecha nacimiento" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="502,156,0,0" RenderTransformOrigin="0.495,0.625" Foreground="White" FontWeight="Bold" Grid.ColumnSpan="2" FontSize="18"/>
-        <Label Content="Peso (lbs)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="565,208,0,0" Foreground="White" FontWeight="Bold" Width="93" Grid.ColumnSpan="2" FontSize="18"/>
-        <Label Content="Estatura (cm)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="328,29,0,0" Foreground="White" FontWeight="Bold" Grid.Column="1" Width="133" FontSize="18"/>
-        <Label Content="Estado" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="381,85,0,0" Foreground="White" FontWeight="Bold" Width="66" RenderTransformOrigin="1.604,0.083" Grid.Column="1" FontSize="18"/>
-        <Label Content="Tipo sangre" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="340,146,0,0" Foreground="White" FontWeight="Bold" Grid.Column="1" FontSize="18" Width="107"/>
-        <Label Content="Sexo" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="399,208,0,0" Grid.Column="1" Foreground="White" FontWeight="Bold" FontSize="18"/>
-        <TextBox PreviewKeyDown="txtDni_PreviewKeyDown" PreviewTextInput="txtDni_PreviewTextInput" MaxLength="13" Name="txtDni" Background="White" HorizontalAlignment="Left" Height="23" Margin="322,35,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
-        <TextBox Name="txtPrimerNombre"  PreviewKeyDown="txtPrimerNombre_PreviewKeyDown" PreviewTextInput="txtPrimerNombre_PreviewTextInput"  MaxLength="20" Background="White" HorizontalAlignment="Left" Height="23" Margin="322,81,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
-        <TextBox Name="txtSegundoNombre" PreviewKeyDown="txtSegundoNombre_PreviewKeyDown" PreviewTextInput="txtSegundoNombre_PreviewTextInput" MaxLength="20" Background="White" HorizontalAlignment="Left" Height="23" Margin="322,123,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
-        <TextBox Name="txtPrimerApellido" PreviewKeyDown="txtPrimerApellido_PreviewKeyDown" PreviewTextInput="txtPrimerApellido_PreviewTextInput" MaxLength="20" Background="White" HorizontalAlignment="Left" Height="23" Margin="322,165,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
-        <TextBox Name="txtSegundoApellido" PreviewKeyDown="txtSegundoApellido_PreviewKeyDown" PreviewTextInput="txtSegundoApellido_PreviewTextInput" MaxLength="20" Background="White" HorizontalAlignment="Left" Height="23" Margin="322,217,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
-        <RichTextBox Name="richTxtDireccion" Background="White" HorizontalAlignment="Left" Height="59" Margin="89,35,0,0" VerticalAlignment="Top" Width="150" Grid.Column="1">
+        <Label Content="DNI" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="202,29,0,0" Foreground="White" RenderTransformOrigin="0.567,0.833" FontSize="18" FontWeight="Bold"/>
+        <Label Content="Primer nombre" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,72,0,0" Foreground="White" FontWeight="Bold" FontSize="18"/>
+        <Label Content="Segundo nombre" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="88,114,0,0" Foreground="White" FontWeight="Bold" FontSize="18"/>
+        <Label Content="Primer apellido" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="104,156,0,0" Foreground="White" FontWeight="Bold" FontSize="18"/>
+        <Label Content="Segundo apellido" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="86,208,0,0" RenderTransformOrigin="0.495,0.708" Foreground="White" FontWeight="Bold" FontSize="18"/>
+        <Label Content="Dirección" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="530,26,0,0" Foreground="White" FontWeight="Bold" Grid.ColumnSpan="2" FontSize="18"/>
+        <Label Content="Celular" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="545,114,0,0" Foreground="White" FontWeight="Bold" RenderTransformOrigin="1.213,1.458" FontSize="18" Grid.ColumnSpan="2"/>
+        <Label Content="Fecha nacimiento" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="456,156,0,0" RenderTransformOrigin="0.495,0.625" Foreground="White" FontWeight="Bold" Grid.ColumnSpan="2" FontSize="18"/>
+        <Label Content="Peso (lbs)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="519,208,0,0" Foreground="White" FontWeight="Bold" Width="93" Grid.ColumnSpan="2" FontSize="18"/>
+        <Label Content="Estatura (cm)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="268,29,0,0" Foreground="White" FontWeight="Bold" Grid.Column="1" Width="133" FontSize="18"/>
+        <Label Content="Estado" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="321,85,0,0" Foreground="White" FontWeight="Bold" Width="66" RenderTransformOrigin="1.604,0.083" Grid.Column="1" FontSize="18"/>
+        <Label Content="Tipo sangre" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="280,146,0,0" Foreground="White" FontWeight="Bold" Grid.Column="1" FontSize="18" Width="107"/>
+        <Label Content="Sexo" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="339,208,0,0" Grid.Column="1" Foreground="White" FontWeight="Bold" FontSize="18"/>
+        <TextBox PreviewKeyDown="txtDni_PreviewKeyDown" PreviewTextInput="txtDni_PreviewTextInput" MaxLength="13" Name="txtDni" Background="White" HorizontalAlignment="Left" Height="23" Margin="252,35,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+        <TextBox Name="txtPrimerNombre"  PreviewKeyDown="txtPrimerNombre_PreviewKeyDown" PreviewTextInput="txtPrimerNombre_PreviewTextInput"  MaxLength="20" Background="White" HorizontalAlignment="Left" Height="23" Margin="252,81,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+        <TextBox Name="txtSegundoNombre" PreviewKeyDown="txtSegundoNombre_PreviewKeyDown" PreviewTextInput="txtSegundoNombre_PreviewTextInput" MaxLength="20" Background="White" HorizontalAlignment="Left" Height="23" Margin="252,123,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+        <TextBox Name="txtPrimerApellido" PreviewKeyDown="txtPrimerApellido_PreviewKeyDown" PreviewTextInput="txtPrimerApellido_PreviewTextInput" MaxLength="20" Background="White" HorizontalAlignment="Left" Height="23" Margin="252,165,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+        <TextBox Name="txtSegundoApellido" PreviewKeyDown="txtSegundoApellido_PreviewKeyDown" PreviewTextInput="txtSegundoApellido_PreviewTextInput" MaxLength="20" Background="White" HorizontalAlignment="Left" Height="23" Margin="252,217,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+        <RichTextBox Name="richTxtDireccion" Background="White" HorizontalAlignment="Left" Height="59" Margin="43,35,0,0" VerticalAlignment="Top" Width="150" Grid.Column="1">
             <FlowDocument>
                 <Paragraph>
                     <Run Text=""/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-        <TextBox Name="txtCelular" PreviewKeyDown="txtCelular_PreviewKeyDown" PreviewTextInput="txtCelular_PreviewTextInput" Background="White" HorizontalAlignment="Left" Height="23" Margin="89,123,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" RenderTransformOrigin="0.825,0.739" MaxLength="8" Grid.Column="1" />
-        <DatePicker Name="dtFechaNacimiento"  HorizontalAlignment="Left" Margin="89,163,0,0" VerticalAlignment="Top" Width="150" RenderTransformOrigin="0.65,-1.24" Grid.Column="1"/>
-        <TextBox Name="txtPeso" PreviewKeyDown="txtPeso_PreviewKeyDown" PreviewTextInput="txtPeso_PreviewTextInput" Background="White" HorizontalAlignment="Left" Height="23" Margin="89,217,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Grid.Column="1"/>
-        <TextBox Name="txtEstatura" PreviewKeyDown="txtEstatura_PreviewKeyDown" PreviewTextInput="txtEstatura_PreviewTextInput" Background="White" HorizontalAlignment="Left" Height="23" Margin="466,34,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Grid.Column="1"/>
-        <ComboBox Name="cmbTipoSangre" Background="White" HorizontalAlignment="Left" Margin="466,153,0,0" VerticalAlignment="Top" Width="150" Grid.Column="1"/>
-        <ComboBox Name="cmbSexo" Background="White" HorizontalAlignment="Left" Margin="466,215,0,0" VerticalAlignment="Top" Width="150" Grid.Column="1" RenderTransformOrigin="0.533,1"/>
-        <DataGrid Name="gridPacientes" HorizontalAlignment="Left" Height="196" Margin="10,326,0,0" VerticalAlignment="Top" Width="1395" Grid.ColumnSpan="2" Loaded="gridPacientes_Loaded" SelectionChanged="gridPacientes_SelectionChanged" AutoGeneratingColumn="gridPacientes_AutoGeneratingColumn"/>
-        <TextBox Name="txtBuscar" HorizontalAlignment="Left" Height="34" Margin="140,266,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="249"/>
-        <materialDesign:PackIcon Kind="AccountSearchOutline" Height="42" Width="30" Foreground="#FFF" Margin="25,261,0,0" RenderTransformOrigin="0.658,0.54" >
+        <TextBox Name="txtCelular" PreviewKeyDown="txtCelular_PreviewKeyDown" PreviewTextInput="txtCelular_PreviewTextInput" Background="White" HorizontalAlignment="Left" Height="23" Margin="43,123,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" RenderTransformOrigin="0.825,0.739" MaxLength="8" Grid.Column="1" />
+        <DatePicker Name="dtFechaNacimiento"  HorizontalAlignment="Left" Margin="43,163,0,0" VerticalAlignment="Top" Width="150" RenderTransformOrigin="0.65,-1.24" Grid.Column="1">
+            <DatePicker.CalendarStyle>
+                <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                    <Style.Resources>
+                        <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#1c1c1c" />
+                        <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#74EEAB" />
+
+
+
+                    </Style.Resources>
+
+
+                </Style>
+
+
+            </DatePicker.CalendarStyle>
+        </DatePicker>
+        <TextBox Name="txtPeso" PreviewKeyDown="txtPeso_PreviewKeyDown" PreviewTextInput="txtPeso_PreviewTextInput" Background="White" HorizontalAlignment="Left" Height="23" Margin="43,217,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Grid.Column="1"/>
+        <TextBox Name="txtEstatura" PreviewKeyDown="txtEstatura_PreviewKeyDown" PreviewTextInput="txtEstatura_PreviewTextInput" Background="White" HorizontalAlignment="Left" Height="23" Margin="406,34,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Grid.Column="1"/>
+        <ComboBox Name="cmbTipoSangre" Background="White" HorizontalAlignment="Left" Margin="406,153,0,0" VerticalAlignment="Top" Width="150" Grid.Column="1"/>
+        <ComboBox Name="cmbSexo" Background="White" HorizontalAlignment="Left" Margin="406,215,0,0" VerticalAlignment="Top" Width="150" Grid.Column="1" RenderTransformOrigin="0.533,1"/>
+        <DataGrid  HorizontalContentAlignment="left" Name="gridPacientes" HorizontalAlignment="Center" Height="196" Margin="10,334,0,0" VerticalAlignment="Top" Width="1395" Grid.ColumnSpan="2" Loaded="gridPacientes_Loaded" SelectionChanged="gridPacientes_SelectionChanged" AutoGeneratingColumn="gridPacientes_AutoGeneratingColumn"/>
+        <TextBox Name="txtBuscar" HorizontalAlignment="Left" Height="34" Margin="161,545,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="249"/>
+
+        <Button Name="btnEstado" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="406,94,0,0" Height="23" Grid.Column="1" Click="btnEstado_Click">
+            <materialDesign:PackIcon Kind="AccountCheckOutline" Height="17" Width="25" Foreground="#FFF" />
+        </Button>
+        <Button Name="btnConsultas" Content="  Consultas" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114" Margin="77,547,0,0" RenderTransformOrigin="0.4,0.594" Click="btnConsultas_Click" Grid.Column="1"/>
+        <materialDesign:PackIcon Kind="BookAccountOutline" Height="27" Width="48" Foreground="#FFF" Margin="73,547,0,0" Grid.Column="1" />
+        <ComboBox Name ="cmbEstado"  HorizontalAlignment="Left" Margin="594,554,0,0" VerticalAlignment="Top" Width="168" Background="White" SelectionChanged="cmbEstado_SelectionChanged" Grid.Column="1"/>
+        <Label Content="PACIENTES" HorizontalAlignment="Left" Margin="637,530,0,0" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="1"/>
+        <Button Content="Buscar" HorizontalAlignment="Left" Margin="48,547,0,0" VerticalAlignment="Top" Width="108" Height="32" Click="Button_Click">
+            <Button.Background>
+                <LinearGradientBrush>
+
+                    <GradientStop Color="#FF48C7A0" Offset="0.1"/>
+                    <GradientStop Color="#74EEAB" Offset="2"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <materialDesign:PackIcon Kind="AccountSearchOutline" Height="42" Width="30" Foreground="#FFF" Margin="52,539,0,0" RenderTransformOrigin="0.658,0.54" >
             <materialDesign:PackIcon.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -127,15 +160,6 @@
                 </TransformGroup>
             </materialDesign:PackIcon.RenderTransform>
         </materialDesign:PackIcon>
-        <Button Name="btnEstado" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="466,94,0,0" Height="23" Grid.Column="1" Click="btnEstado_Click">
-            <materialDesign:PackIcon Kind="AccountCheckOutline" Height="17" Width="25" Foreground="#FFF" />
-        </Button>
-        <Button Name="btnConsultas" Content="  Consultas" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114" Margin="59,544,0,0" RenderTransformOrigin="0.4,0.594" Grid.Column="1" Click="btnConsultas_Click"/>
-        <materialDesign:PackIcon Kind="BookAccountOutline" Height="27" Width="48" Foreground="#FFF" Margin="54,544,0,0" Grid.Column="1" />
-        <ComboBox Name ="cmbEstado"  HorizontalAlignment="Left" Margin="68,550,0,0" VerticalAlignment="Top" Width="168" Background="White" SelectionChanged="cmbEstado_SelectionChanged"/>
-        <Label Content="PACIENTES" HorizontalAlignment="Left" Margin="108,526,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-
-        <Button Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="232,544,0,0" VerticalAlignment="Top" Width="110" Click="btnLimpiar_Click" Grid.Column="1"/>        <materialDesign:PackIcon Kind="TextBoxMinus" Height="32" Width="28" Foreground="#FFF" Margin="232,544,0,0" Grid.Column="1" />
 
 
     </Grid>

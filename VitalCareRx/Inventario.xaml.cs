@@ -201,7 +201,8 @@ namespace VitalCareRx
             Limpiar();
         }
 
-       
+
+
 
         bool right = false;
 
@@ -242,5 +243,6 @@ namespace VitalCareRx
         {
             Validaciones.SoloNumeros(e);
         }
+
     }
 }

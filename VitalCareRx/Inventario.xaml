@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:VitalCareRx"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Inventario" Height="590" Width="950" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" >
+        Title="Inventario" Height="590" Width="950" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown"
+        MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp" >
     <Grid>
-        <Label x:Name="lblFarmaco" Content="FARMACO" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Foreground="White" FontFamily="Verdana" Width="932" HorizontalContentAlignment="Center" Height="46" MouseDown="Window_MouseDown"
-        MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp">
+        <Label x:Name="lblFarmaco" Content="FARMACO" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Foreground="White" FontFamily="Verdana" Width="932" HorizontalContentAlignment="Center" Height="46" >
             <Label.Background>
 
                 <LinearGradientBrush>
@@ -47,7 +47,23 @@
         </Grid>
         <DataGrid  x:Name="gridDetalleFarmaco" HorizontalAlignment="Left" Height="252" Margin="198,236,0,0" VerticalAlignment="Top" Width="516" AutoGeneratingColumn="gridDetalleFarmaco_AutoGeneratingColumn" SelectionChanged="gridDetalleFarmaco_SelectionChanged"/>
         <Label Content="Fecha de Vencimiento" HorizontalAlignment="Left" Margin="148,54,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="15"/>
-        <DatePicker Name="dtFecha" HorizontalAlignment="Left" Margin="148,88,0,0" VerticalAlignment="Top" Width="162" Height="34" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <DatePicker Name="dtFecha" HorizontalAlignment="Left" Margin="148,88,0,0" VerticalAlignment="Top" Width="162" Height="34" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+            <DatePicker.CalendarStyle>
+                <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                    <Style.Resources>
+                        <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#1c1c1c" />
+                        <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#74EEAB" />
+
+
+
+                    </Style.Resources>
+
+
+                </Style>
+
+
+            </DatePicker.CalendarStyle>
+        </DatePicker>
         <Image Source="IMAGENES/PrimeroDios.png" Height="93" VerticalAlignment="Top" Margin="10,489,812,0" RenderTransformOrigin="0.5,0.5"/>
         <Button x:Name="btnLimpiar" Content="Limpiar" HorizontalAlignment="Left" Margin="656,142,0,0" VerticalAlignment="Top" Width="138" Click="btnLimpiar_Click"/>
         <materialDesign:PackIcon Kind="BookCancel" Height="32" Width="26" Foreground="#FFF" Margin="656,142,0,0" />
@@ -89,6 +105,22 @@
         <TextBox PreviewKeyDown="txtCantidad_PreviewKeyDown" PreviewTextInput="txtCantidad_PreviewTextInput" Name="txtCantidad" HorizontalAlignment="Left" Height="34" Margin="540,88,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="234" FontSize="20"/>
         <Label Content="Buscar por fecha de vencimiento" HorizontalAlignment="Left" Margin="322,498,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="15"/>
         <materialDesign:PackIcon Kind="AccountSearchOutline" Height="24" Width="35" Foreground="Black" Margin="551,498,0,0" RenderTransformOrigin="0.658,0.54"/>
-        <DatePicker Name="dtFechaBuscar" HorizontalAlignment="Left" Margin="322,526,0,0" VerticalAlignment="Top" Width="264" Height="34" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectedDateChanged="dtFechaBuscar_SelectedDateChanged"/>
+        <DatePicker Name="dtFechaBuscar" HorizontalAlignment="Left" Margin="322,526,0,0" VerticalAlignment="Top" Width="264" Height="34" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectedDateChanged="dtFechaBuscar_SelectedDateChanged">
+            <DatePicker.CalendarStyle>
+                <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                    <Style.Resources>
+                        <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#1c1c1c" />
+                        <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#74EEAB" />
+
+
+
+                    </Style.Resources>
+
+
+                </Style>
+
+
+            </DatePicker.CalendarStyle>
+        </DatePicker>
     </Grid>
 </Window>

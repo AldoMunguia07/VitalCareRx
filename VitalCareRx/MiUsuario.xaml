@@ -53,12 +53,31 @@
         IsIndeterminate="True" Height="Auto" Margin="80,148,476,226" Width="Auto" Foreground="#74EEAB" />
 
         <Label Content="Mi usuario" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="36,55,0,0" Height="64" Width="322" FontSize="48" Foreground="Gray" HorizontalContentAlignment="Center"/>
-        <DatePicker x:Name="dtpFechaNacimiento" HorizontalAlignment="Left" Margin="435,442,0,0" VerticalAlignment="Top" Width="303" Height="30" BorderBrush="#89FFFFFF" Background="White" Foreground="Black" FontSize="15" FirstDayOfWeek="Monday" />
+        <DatePicker Background="Black" x:Name="dtpFechaNacimiento"  Margin="435,442,36,0" VerticalAlignment="Top" Width="303" Height="30" BorderBrush="#89FFFFFF" Foreground="Black" FontSize="15" FirstDayOfWeek="Monday" HorizontalAlignment="Center"  >
+            <DatePicker.CalendarStyle>
+                <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                    <Style.Resources>
+                        <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#1c1c1c" />
+                        <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#74EEAB" />
+                        
+
+
+                    </Style.Resources>
+                   
+
+                </Style>
+                
+                
+            </DatePicker.CalendarStyle>
+            
+
+
+        </DatePicker>
         <Grid.Background>
             <LinearGradientBrush>
 
                 <GradientStop Color="#74EEAB" Offset="1"/>
-                <GradientStop Color="#1c1c1c" Offset="0.3"/>
+                <GradientStop Color="#1c1c1c" Offset="3"/>
             </LinearGradientBrush>
         </Grid.Background>
     </Grid>
