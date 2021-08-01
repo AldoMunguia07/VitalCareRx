@@ -6,7 +6,7 @@
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:VitalCareRx"
         mc:Ignorable="d"
-        Title="ReportesUsuario" Height="300" Width="1200"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
+        Title="ReportesUsuario" Height="300" Width="1200"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush>

@@ -7,9 +7,9 @@
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
         <ConnectString>Data Source=DBServer;Initial Catalog=VitalCareRxDB</ConnectString>
-        <IntegratedSecurity>true</IntegratedSecurity>
+        <Prompt>Specify a user name and password for data source cnnVitalCareRx:</Prompt>
       </ConnectionProperties>
-      <rd:SecurityType>Integrated</rd:SecurityType>
+      <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>50362dca-cd56-4082-b4e8-12e5c6548796</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -471,8 +471,8 @@ FROM [Personas].[Empleado]</CommandText>
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>AccionesEmpleados</DataSetName>
-            <Top>49.0632mm</Top>
-            <Left>3.14323mm</Left>
+            <Top>49.59237mm</Top>
+            <Left>6.02396mm</Left>
             <Height>19.55208mm</Height>
             <Width>154.54842mm</Width>
             <ZIndex>1</ZIndex>

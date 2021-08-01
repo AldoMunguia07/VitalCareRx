@@ -6,8 +6,7 @@
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:VitalCareRx"
         mc:Ignorable="d"
-        Title="ReportesFarmaco" Height="450" Width="308.286"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None"  MouseDown="Window_MouseDown"
-        MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp">
+        Title="ReportesFarmaco" Height="450" Width="308.286"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None"  MouseDown="Window_MouseDown">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush>

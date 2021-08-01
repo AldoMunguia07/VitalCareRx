@@ -6,8 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:VitalCareRx"
         mc:Ignorable="d"
-        Title="ControlEmpleado" Height="590" Width="1090" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown"
-        MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp">
+        Title="ControlEmpleado" Height="590" Width="1090" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown">
     <Grid>
 
         <Grid.Background>

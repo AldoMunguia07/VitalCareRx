@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:VitalCareRx"
         mc:Ignorable="d"
         Title="MenuPrincipalAdmin" Height="760" Width="1300" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown"
-        MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp">
+       >
     <Grid Background="#FFEEEEEE">
 
 

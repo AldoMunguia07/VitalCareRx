@@ -7,9 +7,8 @@
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
         <ConnectString>Data Source=DBServer;Initial Catalog=VitalCareRxDB</ConnectString>
-        <IntegratedSecurity>true</IntegratedSecurity>
       </ConnectionProperties>
-      <rd:SecurityType>Integrated</rd:SecurityType>
+      <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>43d35f2b-f26b-482b-ad32-a9368a78a742</rd:DataSourceID>
     </DataSource>
   </DataSources>

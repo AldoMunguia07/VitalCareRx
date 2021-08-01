@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:VitalCareRx"
         mc:Ignorable="d"
         Title="Reportes" Height="582" Width="1000"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown"
-        MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp">
+       >
     <Grid>
 
         <Grid.Background>

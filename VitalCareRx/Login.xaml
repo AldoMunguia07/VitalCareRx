@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VitalCareRx"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="VirtualCareRX" Icon="IMAGENES/ImagendeIcono.png"  Height="500" Width="370" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Visibility="Visible" MouseDown="Window_MouseDown" MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp"
+        Title="VirtualCareRX" Icon="IMAGENES/ImagendeIcono.png"  Height="500" Width="370" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Visibility="Visible" MouseDown="Window_MouseDown" 
 >
     <Grid Margin="0,0,10,0">
         <Grid.ColumnDefinitions>

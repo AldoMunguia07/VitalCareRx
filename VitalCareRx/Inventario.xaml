@@ -6,8 +6,7 @@
         xmlns:local="clr-namespace:VitalCareRx"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Inventario" Height="590" Width="950" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown"
-        MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp" >
+        Title="Inventario" Height="590" Width="950" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown">
     <Grid>
         <Label x:Name="lblFarmaco" Content="FÁRMACO" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Foreground="White" FontFamily="Verdana" Width="932" HorizontalContentAlignment="Center" Height="46" >
             <Label.Background>

@@ -34,23 +34,15 @@ namespace VitalCareRx
             this.Reporte.RefreshReport();
         }
 
-        bool right = false;
+      
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (!right)
+            if (e.ChangedButton == MouseButton.Left)
             {
                 DragMove();
             }
         }
 
-        private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            right = true;
-        }
-
-        private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            right = false;
-        }
+   
     }
 }

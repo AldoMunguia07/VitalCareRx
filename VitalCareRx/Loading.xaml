@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
        Title="MainWindow" Icon="IMAGENES/ImagendeIcono.png" Height="500" Width="370" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" MouseDown="Window_MouseDown"
-        MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp">
+        >
     <Grid>
         <Grid.Background>
             <LinearGradientBrush>

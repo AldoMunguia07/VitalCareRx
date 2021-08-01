@@ -369,12 +369,13 @@ namespace VitalCareRx
                 (e.Column as DataGridTextColumn).Binding.StringFormat = "N2";
         }
 
-        bool right = false;
+    
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             // Si se le da click derecho que no permita mover la ventana
-            if (!right)
+
+            if (e.ChangedButton == MouseButton.Left)
             {
                 DragMove();
             }
@@ -382,11 +383,7 @@ namespace VitalCareRx
         }
 
         //cuando se mantiene presionado click derecho
-        private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-
-            right = true;
-        }
+      
 
         private void txtTemperatura_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
@@ -437,11 +434,7 @@ namespace VitalCareRx
         }
 
         //cuando se suelta el click derecho
-        private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            right = false;
-        }
-
+        
         private void dgConsultas_Loaded(object sender, RoutedEventArgs e)
         {
             OcultarColumnas();

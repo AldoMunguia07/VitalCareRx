@@ -64,5 +64,14 @@ namespace VitalCareRx
             ReportesFarmaco reportesFarmaco = new ReportesFarmaco();
             reportesFarmaco.ShowDialog();
         }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                DragMove();
+            }
+        }
     }
 }

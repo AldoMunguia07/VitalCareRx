@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VitalCareRx"
         xmlns:materialDesignMahApps="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="VitalCareRx.RecuperarContrasenia"
         mc:Ignorable="d"
-        Title="RecuperarPass" Height="240" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
+        Title="RecuperarPass" Height="240" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush>

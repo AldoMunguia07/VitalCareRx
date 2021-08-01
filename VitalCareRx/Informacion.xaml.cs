@@ -50,7 +50,8 @@ namespace VitalCareRx
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             // Si se le da click derecho que no permita mover la ventana
-            if (!right)
+
+            if (e.ChangedButton == MouseButton.Left)
             {
                 DragMove();
             }
@@ -58,16 +59,6 @@ namespace VitalCareRx
         }
 
         //cuando se mantiene presionado click derecho
-        private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-
-            right = true;
-        }
-
-        //cuando se suelta el click derecho
-        private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            right = false;
-        }
+      
     }
 }
