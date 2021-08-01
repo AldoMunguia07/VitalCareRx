@@ -131,11 +131,10 @@ namespace VitalCareRx
         //Opcion de salir
         private void ltSalida_Selected(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("¿Desea cerrar sesión?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult result = MessageBox.Show("¿Desea cerrar el programa?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
-                Login login = new Login();
-                login.Show();
+             
                 this.Close();
             }
 
