@@ -468,9 +468,11 @@ namespace VitalCareRx
                     MessageBox.Show("Receta generada exitosamente", "Receta", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
                 }
-            }
-
-            
+                else
+                {
+                    MessageBox.Show("¡Debe agregar al menos un fármaco!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }    
         }
 
         private void dgRecetas_CurrentCellChanged(object sender, EventArgs e)

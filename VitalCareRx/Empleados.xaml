@@ -31,7 +31,28 @@
             <TextBox x:Name="txtPrimerApellido" MaxLength="20" PreviewTextInput="txtPrimerApellido_PreviewTextInput" PreviewKeyDown="txtPrimerApellido_PreviewKeyDown" HorizontalAlignment="Left" Height="28" Margin="25,184,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="270" Background="White" RenderTransformOrigin="0.5,0.5" />
             <TextBox x:Name="txtSegundoApellido" MaxLength="20" PreviewTextInput="txtSegundoApellido_PreviewTextInput" PreviewKeyDown="txtSegundoApellido_PreviewKeyDown" HorizontalAlignment="Left" Height="28" Margin="339,46,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="270" Background="White" RenderTransformOrigin="0.5,0.5" />
             <TextBox x:Name="txtCelular" PreviewTextInput="txtCelular_PreviewTextInput" PreviewKeyDown="txtCelular_PreviewKeyDown" HorizontalAlignment="Left" Height="28" Margin="339,120,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="270" Background="White" RenderTransformOrigin="0.5,0.5" MaxLength="8" />
+            <TextBox x:Name="txtCorreo"   HorizontalAlignment="Left" Height="28" Margin="339,184,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="270" Background="White" RenderTransformOrigin="0.5,0.5" />
+            <DatePicker Name="dtFecha" HorizontalAlignment="Left" Margin="638,46,0,0" VerticalAlignment="Top" Width="270">
+                <DatePicker.CalendarStyle>
+                    <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                        <Style.Resources>
+                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#1c1c1c" />
+                            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#74EEAB" />
+
+
+
+                        </Style.Resources>
+
+
+                    </Style>
+
+
+                </DatePicker.CalendarStyle>
+            </DatePicker>
             <ComboBox x:Name="cmbSexo" HorizontalAlignment="Left" Margin="638,122,0,0" VerticalAlignment="Top" Width="270" Background="White" Height="28"/>
+            <Button Name="btnEstado" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="638,184,0,0" Height="28" Click="btnEstado_Click">
+                <materialDesign:PackIcon Kind="AccountCheckOutline" Height="17" Width="25" Foreground="#FFF" />
+            </Button>
             <Label Content="Primer nombre" HorizontalAlignment="Left" Margin="25,13,0,0" VerticalAlignment="Top" Foreground="White" Height="28" Width="126" FontSize="14" FontWeight="Bold"/>
             <Label Content="Segundo nombre" HorizontalAlignment="Left" Margin="25,87,0,0" VerticalAlignment="Top" Foreground="White" Width="126" FontSize="14" FontWeight="Bold"/>
             <Label Content="Primer apellido" HorizontalAlignment="Left" Margin="25,158,0,0" VerticalAlignment="Top" Foreground="White" Width="126" FontWeight="Bold" FontSize="14"/>
@@ -39,12 +60,10 @@
             <Label Content="Celular" HorizontalAlignment="Left" Margin="339,88,0,0" VerticalAlignment="Top" Foreground="White" Width="104" FontSize="14" FontWeight="Bold"/>
             <Label Content="Usuario" HorizontalAlignment="Left" Margin="951,14,0,0" VerticalAlignment="Top" Foreground="White" Width="104" FontSize="14" FontWeight="Bold"/>
             <Label Name="lblContra" Content="Contraseña" HorizontalAlignment="Left" Margin="950,90,0,0" VerticalAlignment="Top" Foreground="White" Width="120" FontSize="14" FontWeight="Bold" Grid.ColumnSpan="2"/>
-            <TextBox x:Name="txtUsuario" PreviewKeyDown="txtUsuario_PreviewKeyDown" MaxLength="15" HorizontalAlignment="Left" Height="31" Margin="950,37,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" FontSize="20" Grid.ColumnSpan="2"/>
-            <TextBox x:Name="txtContrasenia" HorizontalAlignment="Left" Height="32" Margin="950,116,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" FontSize="20" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="txtUsuario" PreviewKeyDown="txtUsuario_PreviewKeyDown" MaxLength="15" HorizontalAlignment="Left" Height="36" Margin="950,37,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" FontSize="20" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="txtContrasenia" HorizontalAlignment="Left" Height="36" Margin="950,116,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" FontSize="20" Grid.ColumnSpan="2"/>
             <Label Content="Estado" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="638,152,0,0" Foreground="White" FontWeight="Bold" Width="66" RenderTransformOrigin="1.604,0.083" FontSize="14"/>
-            <Button Name="btnEstado" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="637,182,0,0" Height="28" Click="btnEstado_Click">
-                <materialDesign:PackIcon Kind="AccountCheckOutline" Height="17" Width="25" Foreground="#FFF" />
-            </Button>
+            
             <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="149,33,0,0" VerticalAlignment="Top" Width="138" Click="btnAgregar_Click" Grid.Column="1">
                 <Button.Background>
                     <LinearGradientBrush>
@@ -54,15 +73,15 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="btnCerrar" Background="#a30000" HorizontalAlignment="Left" Margin="301,0,0,0" VerticalAlignment="Top" Width="57" Click="btnCerrar_Click" Height="35" Grid.Column="1" >
-                <materialDesign:PackIcon Kind="CloseCircleOutline" Width="29" Height="28" VerticalAlignment="Center" Foreground="White"/>
+            <Button x:Name="btnCerrar" Background="#a30000" HorizontalAlignment="Left" Margin="304,0,0,0" VerticalAlignment="Top" Width="56" Click="btnCerrar_Click" Height="35" Grid.Column="1" >
+                <materialDesign:PackIcon Kind="CloseCircleOutline" Width="21" Height="28" VerticalAlignment="Center" Foreground="White"/>
             </Button>
             <Label Content="Sexo" HorizontalAlignment="Left" Margin="638,88,0,0" VerticalAlignment="Top" Foreground="White" Width="104" FontSize="14" FontWeight="Bold"/>
             <ProgressBar
          Style="{StaticResource MaterialDesignCircularProgressBar}"
          Value="0"
         IsIndeterminate="True" Height="Auto" Margin="32,577,931,92" Width="Auto" Foreground="#74EEAB" />
-            <DataGrid Name="gridEmpleados" HorizontalAlignment="Left" Height="252" Margin="13,307,0,0" VerticalAlignment="Top" Width="1387" Grid.ColumnSpan="2" Loaded="gridEmpleados_Loaded" SelectionChanged="gridEmpleados_SelectionChanged" AutoGeneratingColumn="gridEmpleados_AutoGeneratingColumn"/>
+            <DataGrid ColumnWidth="*" Name="gridEmpleados" HorizontalAlignment="Left" Height="252" Margin="13,307,0,0" VerticalAlignment="Top" Width="1387" Grid.ColumnSpan="2" Loaded="gridEmpleados_Loaded" SelectionChanged="gridEmpleados_SelectionChanged" AutoGeneratingColumn="gridEmpleados_AutoGeneratingColumn"/>
             <Rectangle  Height="45" VerticalAlignment="Bottom" Margin="44,0,53,403" RadiusY="10" RadiusX="10" Fill="#FF1C1C1C" Grid.ColumnSpan="2">
                 <Rectangle.Effect>
                     <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
@@ -109,28 +128,14 @@
             <materialDesign:PackIcon Kind="AccountPlus" Height="32" Width="26" Foreground="#FFF" Margin="149,33,0,0" Grid.Column="1" />
             <materialDesign:PackIcon Kind="TextBoxMinus" Height="32" Width="27" Foreground="#FFF" Margin="149,184,0,0" Grid.Column="1" />
             <materialDesign:PackIcon Kind="Account" Width="68" Height="64" VerticalAlignment="Center" Margin="44,588,0,48" Foreground="#74EEAB"/>
-            <TextBox x:Name="txtCorreo"   HorizontalAlignment="Left" Height="28" Margin="339,184,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="270" Background="White" RenderTransformOrigin="0.5,0.5" />
+          
             <Label Content="Correo" HorizontalAlignment="Left" Margin="339,158,0,0" VerticalAlignment="Top" Foreground="White" Width="104" FontSize="14" FontWeight="Bold"/>
-            <DatePicker Name="dtFecha" HorizontalAlignment="Left" Margin="638,46,0,0" VerticalAlignment="Top" Width="270">
-                <DatePicker.CalendarStyle>
-                    <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
-                        <Style.Resources>
-                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#1c1c1c" />
-                            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#74EEAB" />
-
-
-
-                        </Style.Resources>
-
-
-                    </Style>
-
-
-                </DatePicker.CalendarStyle>
-            </DatePicker>
+           
             <Label Content="Fecha de Nacimiento" HorizontalAlignment="Left" Margin="638,13,0,0" VerticalAlignment="Top" Foreground="White" Width="150" FontSize="14" FontWeight="Bold"/>
 
             <Image Source="IMAGENES/PrimeroDios.png" Height="95" VerticalAlignment="Top" Margin="189,574,10,0" RenderTransformOrigin="0.5,0.5" Grid.Column="1"/>
+            <Button Name="btnRestaurar" Background="#5CCB5F" Content="Restaurar contraseña" HorizontalAlignment="Left" Margin="950,184,0,0" VerticalAlignment="Top" Width="200" Click="btnRestaurar_Click"  Grid.ColumnSpan="2"/>
+            <materialDesign:PackIcon Kind="LockReset" Height="30" Width="27" Foreground="#FFF" Margin="951,184,0,0" RenderTransformOrigin="1.407,0.438" />
         </Grid>
     </Grid>
 </Window>

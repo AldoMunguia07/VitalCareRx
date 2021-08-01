@@ -48,7 +48,7 @@
             <Label Background="#1c1c1c" Content="Diagnóstico de la consulta" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,200,0,369" FontSize="20" Foreground="White" FontFamily="Verdana" Height="31" Width="285" RenderTransformOrigin="0.612,0.375"/>
             <Label Background="#1c1c1c" Content="Motivo de la consulta" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,66,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="285" HorizontalContentAlignment="Center" />
         </Grid>
-        <DataGrid x:Name="dgConsultas" HorizontalAlignment="Left" Height="324" Margin="10,76,0,0" VerticalAlignment="Top" Width="1100" SelectionChanged="dgConsultas_SelectionChanged" AutoGeneratingColumn="dgConsultas_AutoGeneratingColumn" Loaded="dgConsultas_Loaded" />
+        <DataGrid ColumnWidth="*" x:Name="dgConsultas" HorizontalAlignment="Left" Height="324" Margin="10,76,0,0" VerticalAlignment="Top" Width="1100" SelectionChanged="dgConsultas_SelectionChanged" AutoGeneratingColumn="dgConsultas_AutoGeneratingColumn" Loaded="dgConsultas_Loaded" />
         <Label Content="Listado de consultas" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,15,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="1115" HorizontalContentAlignment="Center" Height="39" >
             <Label.Background>
 

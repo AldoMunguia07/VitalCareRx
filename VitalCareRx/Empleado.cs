@@ -554,5 +554,75 @@ namespace VitalCareRx
           
 
         }
+
+
+        public int Edad(DatePicker datePicker)
+        {
+            try
+            {
+                SqlCommand sqlCommand = new SqlCommand("sp_Empleados", conexion.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.AddWithValue("@edad", datePicker.SelectedDate);
+                sqlCommand.Parameters.AddWithValue("@accion", "edad");
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+
+                    return Convert.ToInt32(dataTable.Rows[0]["Edad"]);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+
+        public string GenerarNewPass(int id, int idAdmin)
+        {
+            Random random = new Random(DateTime.Now.Millisecond);
+            string newPass = random.Next(100000000, 999999999).ToString();
+
+            try
+            {
+
+                conexion.sqlConnection.Open();
+                SqlCommand sqlCommand = new SqlCommand("sp_restaurarPassword", conexion.sqlConnection);
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.AddWithValue("@idEmpleado", id);
+                sqlCommand.Parameters.AddWithValue("@Contrasenia", newPass);
+                aportes.ContextoSesion(idAdmin, conexion.sqlConnection);
+                sqlCommand.ExecuteNonQuery();
+
+                return newPass;
+
+
+            }
+            catch (Exception)
+            {
+
+               
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+            }
+
+            return "12345678";
+        }
+
+
+
     }
 }

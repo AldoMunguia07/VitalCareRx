@@ -31,7 +31,7 @@ namespace VitalCareRx
             miEmpleado = empleado;
             llenarComboBox.CargarAnios(cmbAnio);
             llenarComboBox.CargarMes(cmbMes);
-            llenarComboBox.CargarEmpleado(cmbEmpleado);
+            llenarComboBox.CargarEmpleadoSinAdmin(cmbEmpleado);
             aportesControl.MostrarControlEmpleados(gridControlEmpleado);
             
         }
@@ -130,6 +130,15 @@ namespace VitalCareRx
         private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             right = false;
+        }
+
+        private void gridControlEmpleado_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyType == typeof(System.DateTime)) //Si la columna es de tipo DateTime que le cambie el formato a fecha corta.
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
+
+            if (e.PropertyType == typeof(System.Double)) //Si la columna es de tipo Double o float que le cambie el formato o redondear a 2 cifras.
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "N2";
         }
     }
 }

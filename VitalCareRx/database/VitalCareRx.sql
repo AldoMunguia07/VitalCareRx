@@ -136,7 +136,7 @@ CREATE TABLE Historial.ControlEmpleado
 CREATE TABLE Consultas.Consulta
 (
 	idConsulta INT NOT NULL IDENTITY,
-	fechaConsulta DATE NOT NULL,
+	fechaConsulta DATETIME NOT NULL,
 	motivoConsulta VARCHAR(300) NOT NULL,
 	diagnosticoConsulta VARCHAR(300) NOT NULL,
 	temperatura FLOAT NOT NULL,
@@ -497,7 +497,9 @@ CREATE PROCEDURE sp_Empleados
 @contrasenia VARCHAR(30) = NULL,
 @estado BIT  = NULL,
 @accion VARCHAR(50),
-@nombreEmpleado VARCHAR(80)  = NULL
+@nombreEmpleado VARCHAR(80)  = NULL,
+@edad Date = null
+
 
 
 AS
@@ -574,6 +576,8 @@ BEGIN
 	BEGIN
 		 SELECT CONVERT(VARCHAR,DECRYPTBYPASSPHRASE('ecrypt07',contrasenia)) contrasenia FROM [Personas].[Empleado] WHERE idEmpleado = @idEmpleado
 	END
+	ELSE IF @accion = 'edad'	BEGIN		select (cast(datediff(dd,@edad,GETDATE()) / 365.25 as int)) Edad	END
+
 
 END
 GO
@@ -647,6 +651,7 @@ BEGIN
 		SELECT idFarmaco FROM [Consultas].[DetalleRecetaMedica] 
 		WHERE idRecetaMedica = @idRecetaMedica 
 	END
+
 END
 GO
 
@@ -684,9 +689,15 @@ BEGIN
 		SELECT idEmpleado, CONCAT(primerNombre, ' ', primerApellido) Empleado FROM [Personas].[Empleado]
 	END	
 
+	ELSE IF @accion = 'cargarEmpleadosSinAdmin'
+	BEGIN
+		SELECT idEmpleado, CONCAT(primerNombre, ' ', primerApellido) Empleado FROM [Personas].[Empleado] WHERE idPuesto != 1
+	END	
+
 	ELSE IF @accion = 'cargarPacientes'
 	BEGIN
 		SELECT idPaciente, CONCAT(numeroIdentidad, ' - ', primerNombre, ' ', primerApellido) Paciente FROM [Personas].[Paciente]
+		WHERE estado = 1
 		ORDER BY numeroIdentidad
 	END	
 	ELSE IF @accion = 'anios'	BEGIN		SELECT DISTINCT(YEAR(CE.fechaEntrada)) 'Anios' FROM Historial.ControlEmpleado CE	END	ELSE IF @accion = 'meses'	BEGIN		SET LANGUAGE Spanish;		with Months as 		( 			select month(GETDATE()) as Numero, datename(month, GETDATE()) as Nombre, 1 as number			union all			select month(dateadd(month,number,(GETDATE()))) Monthnumber ,datename(month, dateadd(month,number,(GETDATE()))) as name, number+1 			from Months 			where number<12		)   		select Numero, Nombre 		from Months 		order by Numero	END
@@ -725,8 +736,11 @@ BEGIN
 
 	ELSE IF @accion = 'Buscar'
 	BEGIN 
-		SELECT idFarmaco as 'Código Fármaco', descripcionFarmaco as 'Fármaco', informacionPrecaucion as 'Información del fármaco' 
-		FROM [Consultas].[Farmaco] WHERE descripcionFarmaco LIKE CONCAT('%', @descripcionFarmaco, '%')
+		SELECT F.idFarmaco as 'Código Fármaco', descripcionFarmaco as 'Fármaco', informacionPrecaucion as 'Información del fármaco', ISNULL(SUM(DF.Cantidad), 0) Cantidad
+		FROM [Consultas].[Farmaco] F LEFT JOIN [Consultas].[DetalleFarmaco] DF
+		ON F.idFarmaco = DF.idFarmaco
+		WHERE descripcionFarmaco LIKE CONCAT('%', @descripcionFarmaco, '%')
+		GROUP BY  F.idFarmaco, descripcionFarmaco, informacionPrecaucion
 	END
 
 	ELSE IF @accion = 'Mostrar'
@@ -805,6 +819,7 @@ BEGIN
         WHERE idFarmaco = @idFarmaco and fechaVencimiento > CONVERT (date, DATEADD(day, 7, GETDATE()))
 			
 	END
+	ELSE IF @accion = 'farmacoRepetido'	BEGIN	SELECT * FROM Consultas.Farmaco F WHERE F.descripcionFarmaco = @descripcionFarmaco	END
 END
 GO
 
@@ -933,20 +948,27 @@ BEGIN
 	ELSE IF @accion = 'MostrarControl'
 	BEGIN
 		select Concat(E.primerNombre, ' ', E.primerApellido) 'Nombre del Empleado', CONVERT(DATE,CE.fechaEntrada) 'Fecha', 
-		CONVERT(nvarchar(5), CE.fechaEntrada, 108) 'Hora de Entrada', CONVERT(nvarchar(5), CE.fechaSalida, 108) 'Hora de Salida'  from [Historial].[ControlEmpleado] CE 
+		CONVERT(nvarchar(5), CE.fechaEntrada, 108) 'Hora de Entrada', CONVERT(nvarchar(5), CE.fechaSalida, 108) 'Hora de Salida',
+		CONCAT(CONVERT(INT, DATEDIFF(MINUTE, CE.fechaEntrada, CE.fechaSalida) / 60), ' horas y ', CONVERT(INT, ROUND(((DATEDIFF(MINUTE, CE.fechaEntrada, 
+		CE.fechaSalida) / 60.00) - CONVERT(INT,DATEDIFF(MINUTE, CE.fechaEntrada, CE.fechaSalida) / 60.00)) * 60, 0)),' minutos') 'Tiempo trabajado'	 	
+		from [Historial].[ControlEmpleado] CE 
 		INNER JOIN [Personas].[Empleado] E 
 		on E.idEmpleado = CE.idEmpleado
 
 	END
-	ELSE IF @accion = 'MostrarControlPorEmpleados'	BEGIN		set Language spanish		select YEAR(CE.fechaEntrada) 'Año', DATENAME(MONTH,CE.fechaEntrada) 'Mes',DAY(CE.fechaEntrada) 'Día',CONVERT(nvarchar(5), CE.fechaEntrada, 108) 'Hora de Entrada', 		CONVERT(nvarchar(5), CE.fechaSalida, 108) 'Hora de Salida'  from [Historial].[ControlEmpleado] CE 		WHERE CE.idEmpleado = @idEmpleado	END
+	ELSE IF @accion = 'MostrarControlPorEmpleados'	BEGIN		set Language spanish		select YEAR(CE.fechaEntrada) 'Año', DATENAME(MONTH,CE.fechaEntrada) 'Mes',DAY(CE.fechaEntrada) 'Día',CONVERT(nvarchar(5), CE.fechaEntrada, 108) 'Hora de Entrada', 		CONVERT(nvarchar(5), CE.fechaSalida, 108) 'Hora de Salida', CONCAT(CONVERT(INT, DATEDIFF(MINUTE, CE.fechaEntrada, CE.fechaSalida) / 60), ' horas y ', CONVERT(INT, ROUND(((DATEDIFF(MINUTE, fechaEntrada, 
+		CE.fechaSalida) / 60.00) - CONVERT(INT,DATEDIFF(MINUTE, CE.fechaEntrada, CE.fechaSalida) / 60.00)) * 60, 0)),' minutos') 'Tiempo trabajado'	 		from [Historial].[ControlEmpleado] CE		WHERE CE.idEmpleado = @idEmpleado	END
 
 
-	ELSE IF @accion = 'MostrarControlParametros'	BEGIN		select Concat(E.primerNombre, ' ', E.primerApellido) 'Nombre del Empleado', DAY(CE.fechaEntrada) 'Día',CONVERT(nvarchar(5), CE.fechaEntrada, 108) 'Hora de Entrada', 		CONVERT(nvarchar(5), CE.fechaSalida, 108) 'Hora de Salida'  from [Historial].[ControlEmpleado] CE 		INNER JOIN [Personas].[Empleado] E 		on E.idEmpleado = CE.idEmpleado		WHERE CE.idEmpleado = @idEmpleado OR YEAR(CE.fechaEntrada) = @anio AND MONTH(CE.fechaEntrada) = @mes	END
+	ELSE IF @accion = 'MostrarControlParametros'	BEGIN		select Concat(E.primerNombre, ' ', E.primerApellido) 'Nombre del Empleado', DAY(CE.fechaEntrada) 'Día',CONVERT(nvarchar(5), CE.fechaEntrada, 108) 'Hora de Entrada', 		CONVERT(nvarchar(5), CE.fechaSalida, 108) 'Hora de Salida', CONCAT(CONVERT(INT, DATEDIFF(MINUTE, CE.fechaEntrada, CE.fechaSalida) / 60), ' horas y ', CONVERT(INT, ROUND(((DATEDIFF(MINUTE, fechaEntrada, 
+		CE.fechaSalida) / 60.00) - CONVERT(INT,DATEDIFF(MINUTE, CE.fechaEntrada, CE.fechaSalida) / 60.00)) * 60, 0)),' minutos') 'Tiempo trabajado'	 	 		from [Historial].[ControlEmpleado] CE		INNER JOIN [Personas].[Empleado] E 		on E.idEmpleado = CE.idEmpleado		WHERE CE.idEmpleado = @idEmpleado OR YEAR(CE.fechaEntrada) = @anio AND MONTH(CE.fechaEntrada) = @mes	END
 
 	ELSE IF @accion = 'MostrarControlParametrosAmbos'
 	BEGIN
 		select DAY(CE.fechaEntrada) 'Día',CONVERT(nvarchar(5), CE.fechaEntrada, 108) 'Hora de Entrada', 
-		CONVERT(nvarchar(5), CE.fechaSalida, 108) 'Hora de Salida'  from [Historial].[ControlEmpleado] CE 
+		CONVERT(nvarchar(5), CE.fechaSalida, 108) 'Hora de Salida', CONCAT(CONVERT(INT, DATEDIFF(MINUTE, CE.fechaEntrada, CE.fechaSalida) / 60), ' horas y ', CONVERT(INT, ROUND(((DATEDIFF(MINUTE, fechaEntrada, 
+		CE.fechaSalida) / 60.00) - CONVERT(INT,DATEDIFF(MINUTE, CE.fechaEntrada, CE.fechaSalida) / 60.00)) * 60, 0)),' minutos') 'Tiempo trabajado'	 	 
+		from [Historial].[ControlEmpleado] CE 
 		WHERE CE.idEmpleado = @idEmpleado AND YEAR(CE.fechaEntrada) = @anio AND MONTH(CE.fechaEntrada) = @mes
 	END
 

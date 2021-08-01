@@ -45,7 +45,7 @@ namespace VitalCareRx
 
         private bool validar()
         {
-            if(txtCantidad.Text != String.Empty && dtFecha.SelectedDate.Value != null)
+            if(txtCantidad.Text != String.Empty && dtFecha.SelectedDate != null)
             {
                 return true;
             }
@@ -113,9 +113,17 @@ namespace VitalCareRx
                     {
                         if (Convert.ToInt32(txtCantidad.Text) >= 1 && Convert.ToInt32(txtCantidad.Text) <= 10000)
                         {
-                            unFarmaco.ModificarCantidad(unFarmaco.IdFarmaco, fechaV, dtFecha.SelectedDate.Value, Convert.ToInt32(txtCantidad.Text));
-                            Limpiar();
-                            MessageBox.Show("¡Lote modificado exitosamente!", "Inventario", MessageBoxButton.OK, MessageBoxImage.Information);
+                            if (unFarmaco.ExisteLote(unFarmaco.IdFarmaco, dtFecha.SelectedDate.Value))
+                            {
+                                unFarmaco.ModificarCantidad(unFarmaco.IdFarmaco, fechaV, dtFecha.SelectedDate.Value, Convert.ToInt32(txtCantidad.Text));
+                                Limpiar();
+                                MessageBox.Show("¡Lote modificado exitosamente!", "Inventario", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }
+                            else
+                            {
+                                MessageBox.Show(String.Format("¡Ya hay un lote con la fecha ingresada!"), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                            
                         }
                         else
                         {

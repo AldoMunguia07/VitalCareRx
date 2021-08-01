@@ -9,21 +9,24 @@
         Title="MiUsuario"  Icon="IMAGENES/ImagendeIcono.png" Height="590" Width="774" WindowStyle="None" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" ResizeMode="NoResize"
         MouseRightButtonDown="Window_MouseRightButtonDown" MouseRightButtonUp="Window_MouseRightButtonUp">
     <Grid>
-         <Grid HorizontalAlignment="Left" Height="590" Margin="410,0,0,0" VerticalAlignment="Top" Width="364" Background="#FF222222" Opacity="0.7" >
-            <TextBox Name="txtPrimerNombre" MaxLength="20" PreviewTextInput="txtPrimerNombre_PreviewTextInput" PreviewKeyDown="txtPrimerNombre_PreviewKeyDown" HorizontalAlignment="Left" Height="28" Margin="25,64,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" Background="White" RenderTransformOrigin="0.5,0.5" />
-            <TextBox Name="txtSegundoNombre" MaxLength="20" PreviewTextInput="txtSegundoNombre_PreviewTextInput" PreviewKeyDown="txtSegundoNombre_PreviewKeyDown" HorizontalAlignment="Left" Height="28" Margin="25,130,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" Background="White" RenderTransformOrigin="0.5,0.5" />
-            <TextBox Name="txtPrimerApellido" MaxLength="20" PreviewTextInput="txtPrimerApellido_PreviewTextInput" PreviewKeyDown="txtPrimerApellido_PreviewKeyDown" HorizontalAlignment="Left" Height="28" Margin="25,192,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" Background="White" RenderTransformOrigin="0.5,0.5" />
-            <TextBox Name="txtSegundoApellido" MaxLength="20" PreviewTextInput="txtSegundoApellido_PreviewTextInput" PreviewKeyDown="txtSegundoApellido_PreviewKeyDown"  HorizontalAlignment="Left" Height="28" Margin="25,253,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" Background="White" RenderTransformOrigin="0.5,0.5" />
-            <TextBox Name="txtCelular" PreviewTextInput="txtCelular_PreviewTextInput" PreviewKeyDown="txtCelular_PreviewKeyDown" HorizontalAlignment="Left" Height="28" Margin="25,316,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" Background="White" RenderTransformOrigin="0.5,0.5" MaxLength="8"/>
-            <ComboBox Name="cmbSexo" HorizontalAlignment="Left" Margin="25,499,0,0" VerticalAlignment="Top" Width="303" Background="White" Height="28"/>
+        <Grid HorizontalAlignment="Left" Height="590" Margin="410,0,0,0" VerticalAlignment="Top" Width="364" Background="#FF222222" Opacity="0.7" >
+            <TextBox TabIndex="2"  Name="txtPrimerNombre" MaxLength="20" PreviewTextInput="txtPrimerNombre_PreviewTextInput" PreviewKeyDown="txtPrimerNombre_PreviewKeyDown" HorizontalAlignment="Left" Height="28" Margin="25,64,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" Background="White" RenderTransformOrigin="0.5,0.5" />
+            <TextBox TabIndex="3" Name="txtSegundoNombre" MaxLength="20" PreviewTextInput="txtSegundoNombre_PreviewTextInput" PreviewKeyDown="txtSegundoNombre_PreviewKeyDown" HorizontalAlignment="Left" Height="28" Margin="25,130,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" Background="White" RenderTransformOrigin="0.5,0.5" />
+            <TextBox TabIndex="4" Name="txtPrimerApellido" MaxLength="20" PreviewTextInput="txtPrimerApellido_PreviewTextInput" PreviewKeyDown="txtPrimerApellido_PreviewKeyDown" HorizontalAlignment="Left" Height="28" Margin="25,192,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" Background="White" RenderTransformOrigin="0.5,0.5" />
+            <TextBox TabIndex="5" Name="txtSegundoApellido" MaxLength="20" PreviewTextInput="txtSegundoApellido_PreviewTextInput" PreviewKeyDown="txtSegundoApellido_PreviewKeyDown"  HorizontalAlignment="Left" Height="28" Margin="25,253,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" Background="White" RenderTransformOrigin="0.5,0.5" />
+            <TextBox TabIndex="6" Name="txtCelular" PreviewTextInput="txtCelular_PreviewTextInput" PreviewKeyDown="txtCelular_PreviewKeyDown" HorizontalAlignment="Left" Height="28" Margin="25,316,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" Background="White" RenderTransformOrigin="0.5,0.5" MaxLength="8"/>
+
 
             <Button Name="btnCerrar" Background="#a30000" HorizontalAlignment="Left" Margin="306,0,0,0" VerticalAlignment="Top" Width="58" Click="btnCerrar_Click">
                 <materialDesign:PackIcon Kind="CloseCircleOutline" Width="29" Height="28" VerticalAlignment="Center" Foreground="White"/>
             </Button>
-            <TextBox x:Name="txtCorreo"  HorizontalAlignment="Left" Height="28" Margin="25,378,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" Background="White" RenderTransformOrigin="0.5,0.5"/>
+            <TextBox TabIndex="7" x:Name="txtCorreo"  HorizontalAlignment="Left" Height="28" Margin="25,378,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" Background="White" RenderTransformOrigin="0.5,0.5"/>
+            <ComboBox TabIndex="9" Name="cmbSexo" HorizontalAlignment="Left" Margin="25,499,0,0" VerticalAlignment="Top" Width="303" Background="White" Height="28"/>
+           
         </Grid>
         <Button Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="524,543,0,0" VerticalAlignment="Top" Width="137" Click="btnModificar_Click"/>
         <materialDesign:PackIcon Kind="AccountEdit" Width="29" Height="28" VerticalAlignment="Center" Foreground="White" Margin="526,545,0,17"/>
+        
 
         <Grid HorizontalAlignment="Left" Height="582" VerticalAlignment="Top" Width="410" Background="White">
             <materialDesign:PackIcon Kind="Account" Width="202" Height="196" VerticalAlignment="Center" Margin="86,154,0,232" Foreground="#74EEAB"/>
@@ -34,14 +37,40 @@
             <Label Content="Celular" HorizontalAlignment="Left" Margin="444,288,-94,0" VerticalAlignment="Top" Foreground="White" Width="60" FontSize="14" FontWeight="Bold" Height="24"/>
             <Label Content="Usuario" HorizontalAlignment="Left" Margin="24,397,0,0" VerticalAlignment="Top" Foreground="Gray" Width="104" FontSize="20" FontWeight="Bold"/>
             <Label Content="Contraseña" HorizontalAlignment="Left" Margin="24,485,0,0" VerticalAlignment="Top" Foreground="Gray" Width="119" FontSize="20" FontWeight="Bold"/>
-            <TextBox Name="txtUsuario" PreviewKeyDown="txtUsuario_PreviewKeyDown" MaxLength="15" HorizontalAlignment="Left" Height="38" Margin="24,434,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="326" FontSize="20" />
-            <TextBox Name="txtPassword" HorizontalAlignment="Left" Height="38" Margin="24,520,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="326" FontSize="20"/>
+            <TextBox TabIndex="0" Name="txtUsuario" PreviewKeyDown="txtUsuario_PreviewKeyDown" MaxLength="15" HorizontalAlignment="Left" Height="38" Margin="24,434,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="326" FontSize="20" />
+            <TextBox TabIndex="1"  Name="txtPassword" HorizontalAlignment="Left" Height="38" Margin="24,520,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="326" FontSize="20"/>
             <Label Content="Sexo" HorizontalAlignment="Left" Margin="444,474,-74,0" VerticalAlignment="Top" Foreground="White" Width="40" FontSize="14" FontWeight="Bold" Height="23"/>
             <Label Content="Correo" HorizontalAlignment="Left" Margin="444,348,-94,0" VerticalAlignment="Top" Foreground="White" Width="60" FontSize="14" FontWeight="Bold" Height="24"/>
             <Label Content="Fecha de nacimiento" HorizontalAlignment="Left" Margin="444,415,-178,0" VerticalAlignment="Top" Foreground="White" Width="144" FontWeight="Bold" FontSize="14"/>
 
 
         </Grid>
+
+        <DatePicker TabIndex="8" Background="Black" x:Name="dtpFechaNacimiento"  Margin="439,442,32,0" VerticalAlignment="Top" Width="303" Height="30" BorderBrush="#89FFFFFF" Foreground="Black" FontSize="15" FirstDayOfWeek="Monday" HorizontalAlignment="Center"  >
+            <DatePicker.CalendarStyle>
+                <Style TargetType="{x:Type Calendar}">
+                    <Style.Resources>
+                        <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#1c1c1c" />
+                        <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#74EEAB" />
+
+
+
+                    </Style.Resources>
+
+
+                    <Style.BasedOn>
+                        <StaticResource ResourceKey="MaterialDesignCalendarPortrait"/>
+                    </Style.BasedOn>
+
+
+                </Style>
+
+
+            </DatePicker.CalendarStyle>
+
+
+
+        </DatePicker>
         <Rectangle Height="51" VerticalAlignment="Bottom" Margin="14,0,376,469" RadiusY="10" RadiusX="10" Fill="White" Width="384">
             <Rectangle.Effect>
                 <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
@@ -53,26 +82,7 @@
         IsIndeterminate="True" Height="Auto" Margin="80,148,476,226" Width="Auto" Foreground="#74EEAB" />
 
         <Label Content="Mi usuario" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="36,55,0,0" Height="64" Width="322" FontSize="48" Foreground="Gray" HorizontalContentAlignment="Center"/>
-        <DatePicker Background="Black" x:Name="dtpFechaNacimiento"  Margin="435,442,36,0" VerticalAlignment="Top" Width="303" Height="30" BorderBrush="#89FFFFFF" Foreground="Black" FontSize="15" FirstDayOfWeek="Monday" HorizontalAlignment="Center"  >
-            <DatePicker.CalendarStyle>
-                <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
-                    <Style.Resources>
-                        <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#1c1c1c" />
-                        <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#74EEAB" />
-                        
 
-
-                    </Style.Resources>
-                   
-
-                </Style>
-                
-                
-            </DatePicker.CalendarStyle>
-            
-
-
-        </DatePicker>
         <Grid.Background>
             <LinearGradientBrush>
 

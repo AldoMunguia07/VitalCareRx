@@ -438,6 +438,42 @@ namespace VitalCareRx
             }
         }
 
+        public bool ExisteFarmaco(string nombreFarmaco)
+        {
+            try
+            {
+                conexion.sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand("sp_Farmacos", conexion.sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    sqlCommand.Parameters.AddWithValue("@descripcionFarmaco", nombreFarmaco);
+                    sqlCommand.Parameters.AddWithValue("@accion", "farmacoRepetido");
+
+                    DataTable dataTable = new DataTable();
+
+                    sqlDataAdapter.Fill(dataTable);
+                    if (dataTable.Rows.Count >= 1) //Si el farmaco ya existe retorna un true
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conexion.sqlConnection.Close();
+            }
+        }
+
 
     }
 }

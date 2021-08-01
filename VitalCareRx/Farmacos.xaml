@@ -24,6 +24,8 @@
                 <materialDesign:PackIcon Kind="CloseCircleOutline" Height="30" Width="30" RenderTransformOrigin="0.352,0.42" />
             </Button>
 
+            
+            <TextBox PreviewTextInput="txtDescripcionFarmaco_PreviewTextInput" Name="txtDescripcionFarmaco" Background="White" HorizontalAlignment="Left" Height="32" Margin="20,168,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="255" FontSize="18"/>
             <RichTextBox PreviewTextInput="rtxtIndicaciones_PreviewTextInput" Name="rtxtIndicaciones" HorizontalAlignment="Left" Height="156" Margin="20,308,0,0" VerticalAlignment="Top" Width="255" Background="White" FontSize="20">
                 <FlowDocument>
                     <Paragraph>
@@ -31,9 +33,8 @@
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
-            <TextBox PreviewTextInput="txtDescripcionFarmaco_PreviewTextInput" Name="txtDescripcionFarmaco" Background="White" HorizontalAlignment="Left" Height="30" Margin="20,168,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="255" FontSize="18"/>
         </Grid>
-        <DataGrid SelectionChanged="dgFarmacos_SelectionChanged" Name="dgFarmacos" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="336" Margin="8,97,0,0" VerticalAlignment="Top" Width="716"/>
+        <DataGrid ColumnWidth="*" SelectionChanged="dgFarmacos_SelectionChanged" Name="dgFarmacos" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="336" Margin="8,97,0,0" VerticalAlignment="Top" Width="716"/>
         <Label Background="#1c1c1c" Content="Descripción fármaco" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="731,109,0,0" FontSize="20" Foreground="White" FontFamily="Verdana" Width="293" Height="39"/>
         <Label Background="#1c1c1c" Content="Información del fármaco" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="731,253,0,315" FontSize="20" Foreground="White" FontFamily="Verdana" Height="32" Width="293" RenderTransformOrigin="0.612,0.375"/>
         <Label Content="Listado de fármacos" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,33,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="731" HorizontalContentAlignment="Center">

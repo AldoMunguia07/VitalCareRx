@@ -27,7 +27,7 @@
 
 
         </Grid>
-        <DataGrid Name="gridRecetas" HorizontalAlignment="Left" Height="351" Margin="12,72,0,0" VerticalAlignment="Top" Width="687"/>
+        <DataGrid ColumnWidth="*" Name="gridRecetas" HorizontalAlignment="Left" Height="351" Margin="12,72,0,0" VerticalAlignment="Top" Width="687"/>
 
 
         <Label Content="Listado de recetas" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,30,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="712" HorizontalContentAlignment="Center">

@@ -19,7 +19,7 @@
 
             </LinearGradientBrush>
         </Grid.Background>
-        <DataGrid  x:Name="gridControlEmpleado" HorizontalAlignment="Left" Height="310" Margin="16,104,0,0" VerticalAlignment="Top" Width="996"/>
+        <DataGrid ColumnWidth="*"  x:Name="gridControlEmpleado" HorizontalAlignment="Left" Height="310" Margin="16,104,0,0" VerticalAlignment="Top" Width="996" AutoGeneratingColumn="gridControlEmpleado_AutoGeneratingColumn"/>
         <ComboBox x:Name ="cmbEmpleado"  HorizontalAlignment="Left" Margin="540,459,0,0" VerticalAlignment="Top" Width="270" Background="{x:Null}"  Height="28" SelectionChanged="cmbEmpleado_SelectionChanged" Foreground="Black" BorderBrush="#89FFFFFF" />
         <Label Content="EMPLEADOS" HorizontalAlignment="Left" Margin="636,435,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="#DDFFFFFF"/>
         <Image Source="IMAGENES/PrimeroDios.png" Height="103" VerticalAlignment="Top" Margin="8,477,939,0" RenderTransformOrigin="0.5,0.5"/>

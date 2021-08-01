@@ -127,78 +127,95 @@ namespace VitalCareRx
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
-            if (Validar())//los campos no deben de estar vacios
+            try
             {
-                if (!seleccionado)//No se debe seleccionar el datagrid
+                if (Validar())//los campos no deben de estar vacios
                 {
-                    if (txtCelular.Text.Length == 8)// El numero de telefono debe contener 8 digitos. 
+                    if (!seleccionado)//No se debe seleccionar el datagrid
                     {
-                        if (validaciones.Email_Correcto(txtCorreo.Text))//Valida que el correo este escrito correctamente.
+                        if (txtCelular.Text.Length == 8)// El numero de telefono debe contener 8 digitos. 
                         {
-                            if (dtFecha.SelectedDate <= DateTime.Now.Date)//la fecha ingresada debe ser menor a la fecha actual
+                            if (validaciones.Email_Correcto(txtCorreo.Text))//Valida que el correo este escrito correctamente.
                             {
-                                if (!unEmpleado.ExisteUsuario(txtUsuario.Text))//Se valida que el nombre de usuario no exista.
+                                if (dtFecha.SelectedDate <= DateTime.Now.Date)//la fecha ingresada debe ser menor a la fecha actual
                                 {
-                                    if (!unEmpleado.ExisteCorreo(txtCorreo)) 
+                                    if (!unEmpleado.ExisteUsuario(txtUsuario.Text))//Se valida que el nombre de usuario no exista.
                                     {
-                                        if (txtUsuario.Text.Length >= 5)//El usuario debe contener almenos 5 caracteres.
+                                        if (!unEmpleado.ExisteCorreo(txtCorreo))
                                         {
-                                            if (txtContrasenia.Text.Length >= 8)//La contraseña debe tener almenos 8 caracteres o mas.
+                                            if (txtUsuario.Text.Length >= 5)//El usuario debe contener almenos 5 caracteres.
                                             {
-                                                ObtenerDatos();
-                                                unEmpleado.CrearNuevoEmpleado(unEmpleado);
-                                                miEmpleado.VerEmpleados(gridEmpleados, Convert.ToInt32(cmbEstado.SelectedValue));
-                                                LimpiarFormulario();
-                                                MessageBox.Show("¡Empleado agregado exitosamente!", "EMPLEADO", MessageBoxButton.OK, MessageBoxImage.Information);
+                                                if (txtContrasenia.Text.Length >= 8)//La contraseña debe tener almenos 8 caracteres o mas.
+                                                {
+                                                    if (unEmpleado.Edad(dtFecha) >= 18)
+                                                    {
+                                                        ObtenerDatos();
+                                                        unEmpleado.CrearNuevoEmpleado(unEmpleado);
+                                                        miEmpleado.VerEmpleados(gridEmpleados, Convert.ToInt32(cmbEstado.SelectedValue));
+                                                        LimpiarFormulario();
+                                                        MessageBox.Show("¡Empleado agregado exitosamente!", "EMPLEADO", MessageBoxButton.OK, MessageBoxImage.Information);
+                                                    }
+                                                    else
+                                                    {
+                                                        MessageBox.Show("¡El empleado no puede tener menos de 18 años!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    MessageBox.Show("¡La contraseña debe contener almenos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                                }
                                             }
                                             else
                                             {
-                                                MessageBox.Show("¡La contraseña debe contener almenos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                                MessageBox.Show("¡El nombre de usuario debe contener almenos 5 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                             }
                                         }
                                         else
                                         {
-                                            MessageBox.Show("¡El nombre de usuario debe contener almenos 5 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                            MessageBox.Show("¡El correo ingresado ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                         }
+
+
+
                                     }
                                     else
                                     {
-                                        MessageBox.Show("¡El correo ingresado ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                        MessageBox.Show("¡El nombre de usuario ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                     }
-
-                                   
-                                    
                                 }
                                 else
                                 {
-                                    MessageBox.Show("¡El nombre de usuario ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                    MessageBox.Show("¡La fecha de nacimiento no puede ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("¡La fecha de nacimiento no puede ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                MessageBox.Show("¡La dirección de correo electronico no es valida", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                         }
                         else
                         {
-                            MessageBox.Show("¡La dirección de correo electronico no es valida", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("¡No se puede agregar al mismo empleado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
                     }
                 }
                 else
                 {
-                    MessageBox.Show("¡No se puede agregar al mismo empleado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
+                    MessageBox.Show("¡Debe llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("¡Debe llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+           
          
         }
 
@@ -306,98 +323,132 @@ namespace VitalCareRx
 
         private void btnModificarr_Click(object sender, RoutedEventArgs e)
         {
-            if (seleccionado)
+            try
             {
-                if (Validar())//los campos no deben de estar vacios
+                if (seleccionado)
                 {
-                    if (txtCelular.Text.Length == 8)// El numero de telefono debe contener 8 digitos. 
+                    if (Validar())//los campos no deben de estar vacios
                     {
-                        if (validaciones.Email_Correcto(txtCorreo.Text))//Valida que el correo este escrito correctamente.
+                        if (txtCelular.Text.Length == 8)// El numero de telefono debe contener 8 digitos. 
                         {
-                            if (dtFecha.SelectedDate <= DateTime.Now.Date)//la fecha ingresada debe ser menor a la fecha actual
+                            if (validaciones.Email_Correcto(txtCorreo.Text))//Valida que el correo este escrito correctamente.
                             {
-                                if (!unEmpleado.ExisteUsuario(txtUsuario.Text) || usuario == txtUsuario.Text)//Se valida que el nombre de usuario no exista.
+                                if (dtFecha.SelectedDate <= DateTime.Now.Date)//la fecha ingresada debe ser menor a la fecha actual
                                 {
-                                    if (!unEmpleado.ExisteCorreo(txtCorreo) || correo == txtCorreo.Text)
+                                    if (!unEmpleado.ExisteUsuario(txtUsuario.Text) || usuario == txtUsuario.Text)//Se valida que el nombre de usuario no exista.
                                     {
-                                        if (txtContrasenia.Text.Length >= 8)//La contraseña debe tener almenos 8 caracteres o mas.
+                                        if (!unEmpleado.ExisteCorreo(txtCorreo) || correo == txtCorreo.Text)
                                         {
-                                            if(txtUsuario.Text.Length >= 5)//El usuario debe contener almenos 5 caracteres.
+                                            if (txtContrasenia.Text.Length >= 8)//La contraseña debe tener almenos 8 caracteres o mas.
                                             {
-                                                ObtenerDatos();
-                                                unEmpleado.ModificarEmpleado(unEmpleado);
-                                                miEmpleado.VerEmpleados(gridEmpleados, Convert.ToInt32(cmbEstado.SelectedValue));
-                                                LimpiarFormulario();
-                                                MessageBox.Show("¡Empleado modificados exitosamente!", "EMPLEADO", MessageBoxButton.OK, MessageBoxImage.Information);
+                                                if (txtUsuario.Text.Length >= 5)//El usuario debe contener almenos 5 caracteres.
+                                                {
+                                                    if (unEmpleado.Edad(dtFecha) >= 18)
+                                                    {
+                                                        ObtenerDatos();
+                                                        unEmpleado.ModificarEmpleado(unEmpleado);
+                                                        miEmpleado.VerEmpleados(gridEmpleados, Convert.ToInt32(cmbEstado.SelectedValue));
+                                                        LimpiarFormulario();
+                                                        MessageBox.Show("¡Empleado modificados exitosamente!", "EMPLEADO", MessageBoxButton.OK, MessageBoxImage.Information);
+                                                    }
+                                                    else
+                                                    {
+                                                        MessageBox.Show("¡El empleado no puede tener menos de 18 años!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    MessageBox.Show("¡La usuario debe contener almenos 5 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                                }
+
                                             }
                                             else
                                             {
-                                                MessageBox.Show("¡La usuario debe contener almenos 5 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                                MessageBox.Show("¡La contraseña debe contener almenos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                             }
-                                           
                                         }
                                         else
                                         {
-                                            MessageBox.Show("¡La contraseña debe contener almenos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                            MessageBox.Show("¡El correo ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                         }
+
                                     }
                                     else
                                     {
-                                        MessageBox.Show("¡El correo ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                        MessageBox.Show("¡El nombre de usuario ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                     }
-                                   
                                 }
                                 else
                                 {
-                                    MessageBox.Show("¡El nombre de usuario ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                    MessageBox.Show("¡La fecha de nacimiento no puede ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("¡La fecha de nacimiento no puede ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                MessageBox.Show("¡La dirección de correo electronico no es valida", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                         }
                         else
                         {
-                           MessageBox.Show("¡La dirección de correo electronico no es valida", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("¡Debe llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("¡Debe llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("¡Debe seleccionar un empleado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("¡Debe seleccionar un empleado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-               
+
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }             
         
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
-            ObtenerDatos();
-            unEmpleado.EliminarEmpleado(unEmpleado);
-            miEmpleado.VerEmpleados(gridEmpleados, Convert.ToInt32(cmbEstado.SelectedValue));
-            LimpiarFormulario();
+            try
+            {
+                if (seleccionado)
+                {
+                    ObtenerDatos();
+                    unEmpleado.EliminarEmpleado(unEmpleado);
+                    miEmpleado.VerEmpleados(gridEmpleados, Convert.ToInt32(cmbEstado.SelectedValue));
+                    LimpiarFormulario();
+                }
+                else
+                {
+                    MessageBox.Show("¡Debe seleccionar un empleado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
+            
         }
 
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
-            
-            unEmpleado.VerEmpleados(gridEmpleados, estado);
             LimpiarFormulario();
+            unEmpleado.VerEmpleados(gridEmpleados, estado);
+            OcultarColumnas();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            unEmpleado.VerUnEmpleado(gridEmpleados, estado, txtBuscar.Text);
+            unEmpleado.VerUnEmpleado(gridEmpleados, Convert.ToInt32(cmbEstado.SelectedValue), txtBuscar.Text);
             OcultarColumnas();
         }
 
@@ -493,6 +544,34 @@ namespace VitalCareRx
             {
                 btnEliminar.IsEnabled = true;
             }
+        }
+
+        private void btnRestaurar_Click(object sender, RoutedEventArgs e)
+        {
+            if (seleccionado)
+            {
+                MessageBoxResult result = MessageBox.Show("¿Esta seguro de restaurar la contraseña del empleado?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        ObtenerDatos();
+                        MessageBox.Show(string.Format("Contraseña nueva: {0}", unEmpleado.GenerarNewPass(unEmpleado.IdEmpleado, miEmpleado.IdEmpleado)), "EMPLEADO", MessageBoxButton.OK, MessageBoxImage.Information);
+                        LimpiarFormulario();
+                    }
+                    catch (Exception)
+                    {
+
+                        MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("¡Debe seleccionar un empleado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+
         }
     }
 }

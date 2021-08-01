@@ -44,7 +44,7 @@
                 <materialDesign:PackIcon Kind="CloseCircleOutline" Height="35" Width="47" RenderTransformOrigin="0.352,0.42" />
             </Button>
         </Grid>
-        <DataGrid  x:Name="gridBitacora" HorizontalAlignment="Left" Height="310" Margin="8,104,0,0" VerticalAlignment="Top" Width="996"/>
+        <DataGrid x:Name="gridBitacora" HorizontalAlignment="Left" Height="310" Margin="8,104,0,0" VerticalAlignment="Top" Width="996"/>
         <DatePicker Name="dtFechaAccion" HorizontalAlignment="Left" Margin="191,449,0,0" VerticalAlignment="Top" Width="235" Height="38" SelectedDateChanged="dtFechaAccion_SelectedDateChanged">
             <DatePicker.CalendarStyle>
                 <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">

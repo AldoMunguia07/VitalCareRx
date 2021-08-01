@@ -29,6 +29,7 @@ namespace VitalCareRx
         private bool seleccionado = false;
         Validaciones validaciones = new Validaciones();
         Empleado miEmpleado = new Empleado();
+        private string nombreFarnaco;
 
         public Farmacos(Empleado empleado)// se recibe por parametro el codigo (Para ver que empleado realizo esa consulta y tambien se usa para volver al menu principal) 
                                                     //y nombre del empleado(Se usa para volver al menu principal).
@@ -90,19 +91,23 @@ namespace VitalCareRx
                 {
                     if (ValidarCampos()) // El usuario no puede dejar los campos en blanco.
                     {
+                        if (!farmaco.ExisteFarmaco(txtDescripcionFarmaco.Text))
+                        {
+                            ObtenerValores();
 
-                      
-                        ObtenerValores();
+                            farmaco.CrearFarmaco(farmaco);
 
-                        farmaco.CrearFarmaco(farmaco);
+                            LimpiarFormulario();
 
-                        LimpiarFormulario();
+                            MessageBox.Show("El farmaco se ha insertado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                        MessageBox.Show("El farmaco se ha insertado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
+                            farmaco.MostrarFarmaco(dgFarmacos);
+                        }
+                        else
+                        {
+                            MessageBox.Show("¡El fármaco que desea ingresar ya está registrado en el sistema!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
-                        farmaco.MostrarFarmaco(dgFarmacos);
-
-
+                        }
 
                     }
                     else
@@ -152,6 +157,7 @@ namespace VitalCareRx
             txtDescripcionFarmaco.Text = string.Empty;
             txtBuscarFarmaco.Text = string.Empty;
             seleccionado = false;
+            nombreFarnaco = string.Empty;
 
 
         }
@@ -165,7 +171,7 @@ namespace VitalCareRx
                     if (ValidarCampos()) // El usuario no puede dejar los campos en blanco.
                     {
 
-                        try
+                        if (!farmaco.ExisteFarmaco(txtDescripcionFarmaco.Text) || txtDescripcionFarmaco.Text == nombreFarnaco)
                         {
                             ObtenerValores();
 
@@ -176,17 +182,12 @@ namespace VitalCareRx
                             MessageBox.Show("El farmaco se ha modificado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
 
                             farmaco.MostrarFarmaco(dgFarmacos);
-
-
-
                         }
-                        catch (Exception)
+                        else
                         {
+                            MessageBox.Show("¡El fármaco que desea ingresar ya está registrado en el sistema!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
-
-                            MessageBox.Show("Ha ocurrido un error al momento de realizar la modificacion... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
-
                     }
                     else
                     {
@@ -219,6 +220,7 @@ namespace VitalCareRx
             {
                 //Asiganamos contenido a todas las textBox segun la columna en base a la fila seleccionada.
                 seleccionado = true;
+                nombreFarnaco = rowSelected.Row["Fármaco"].ToString();
                 TextRange IndicacionesFarmaco = new TextRange(rtxtIndicaciones.Document.ContentStart, rtxtIndicaciones.Document.ContentEnd);
                 txtDescripcionFarmaco.Text = rowSelected.Row["Fármaco"].ToString();
                 IndicacionesFarmaco.Text = rowSelected.Row["Información del fármaco"].ToString();

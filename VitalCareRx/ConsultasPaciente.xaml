@@ -43,7 +43,7 @@
             </Button.Background>
         </Button>
         <materialDesign:PackIcon Kind="BookmarkPlus" Height="53" Width="37" Foreground="#FFF" Margin="455,447,0,0" />
-        <DataGrid Name="gridConsultas" HorizontalAlignment="Left" Height="315" Margin="10,104,0,0" VerticalAlignment="Top" Width="1000" SelectionChanged="gridConsultas_SelectionChanged" AutoGeneratingColumn="gridConsultas_AutoGeneratingColumn"/>
+        <DataGrid ColumnWidth="*" Name="gridConsultas" HorizontalAlignment="Left" Height="315" Margin="10,104,0,0" VerticalAlignment="Top" Width="1000" SelectionChanged="gridConsultas_SelectionChanged" AutoGeneratingColumn="gridConsultas_AutoGeneratingColumn"/>
 
 
         <Label Content="Listado de consultas" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,14,0,0" FontSize="24" Foreground="White" FontFamily="Verdana" Width="1015" HorizontalContentAlignment="Center" Height="38">

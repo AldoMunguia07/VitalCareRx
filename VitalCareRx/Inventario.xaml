@@ -45,7 +45,7 @@
                 <materialDesign:PackIcon Kind="CloseCircleOutline" Height="35" Width="47" RenderTransformOrigin="0.352,0.42" />
             </Button>
         </Grid>
-        <DataGrid  x:Name="gridDetalleFarmaco" HorizontalAlignment="Left" Height="252" Margin="198,236,0,0" VerticalAlignment="Top" Width="516" AutoGeneratingColumn="gridDetalleFarmaco_AutoGeneratingColumn" SelectionChanged="gridDetalleFarmaco_SelectionChanged"/>
+        <DataGrid ColumnWidth="*" x:Name="gridDetalleFarmaco" HorizontalAlignment="Left" Height="252" Margin="198,236,0,0" VerticalAlignment="Top" Width="516" AutoGeneratingColumn="gridDetalleFarmaco_AutoGeneratingColumn" SelectionChanged="gridDetalleFarmaco_SelectionChanged"/>
         <Label Content="Fecha de Vencimiento" HorizontalAlignment="Left" Margin="148,54,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="15"/>
         <DatePicker Name="dtFecha" HorizontalAlignment="Left" Margin="148,88,0,0" VerticalAlignment="Top" Width="162" Height="34" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
             <DatePicker.CalendarStyle>
