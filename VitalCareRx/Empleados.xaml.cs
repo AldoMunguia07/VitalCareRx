@@ -550,6 +550,8 @@ namespace VitalCareRx
                         ObtenerDatos();
                         MessageBox.Show(string.Format("Contraseña nueva: {0}", unEmpleado.GenerarNewPass(unEmpleado.IdEmpleado, miEmpleado.IdEmpleado)), "EMPLEADO", MessageBoxButton.OK, MessageBoxImage.Information);
                         LimpiarFormulario();
+                        miEmpleado.VerEmpleados(gridEmpleados, Convert.ToInt32(cmbEstado.SelectedValue));
+                        OcultarColumnas();
                     }
                     catch (Exception)
                     {

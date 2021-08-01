@@ -24,6 +24,7 @@ namespace VitalCareRx
         Validaciones Validaciones = new Validaciones();
         bool seleccionado = false;
         DateTime fechaV;
+      
         public Inventario(Farmaco farmaco)
         {
             InitializeComponent();
@@ -113,7 +114,7 @@ namespace VitalCareRx
                     {
                         if (Convert.ToInt32(txtCantidad.Text) >= 1 && Convert.ToInt32(txtCantidad.Text) <= 10000)
                         {
-                            if (unFarmaco.ExisteLote(unFarmaco.IdFarmaco, dtFecha.SelectedDate.Value))
+                            if (!unFarmaco.ExisteLote(unFarmaco.IdFarmaco, dtFecha.SelectedDate.Value) || fechaV == dtFecha.SelectedDate.Value)
                             {
                                 unFarmaco.ModificarCantidad(unFarmaco.IdFarmaco, fechaV, dtFecha.SelectedDate.Value, Convert.ToInt32(txtCantidad.Text));
                                 Limpiar();
