@@ -255,45 +255,45 @@ namespace VitalCareRx
                                                 paciente.VerPacientes(gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
                                                 LimpiarFormulario();
                                                 OcultarColumnas();
-                                                MessageBox.Show("El paciente se ha modificado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
+                                                MessageBox.Show("El paciente se ha modificado con éxito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
                                                 
                                             }
                                             else
                                             {
-                                                MessageBox.Show("¡El peso debe estar dado entre 5 y 800 libras!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                                MessageBox.Show("¡El peso debe estar dado entre 5 y 800 libras!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                             }
                                         }
                                         else
                                         {
-                                            MessageBox.Show("¡La estatura debe estar dada entre 45 y 250 centimetros!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                            MessageBox.Show("¡La estatura debe estar dada entre 45 y 250 centímetros!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                         }
                                     }
                                     else
                                     {
-                                        MessageBox.Show("¡La fecha de nacimiento no puede ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                        MessageBox.Show("¡La fecha de nacimiento no puede ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
                                     }
                                 }
                                 else
                                 {
-                                    MessageBox.Show("¡Numero de identidad incompleto, debe de contener 13 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                    MessageBox.Show("¡Número de identidad incompleto, debe de contener 13 dígitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                MessageBox.Show("¡El número de celular debe contener 8 dígitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                         }
                         else
                         {
-                            MessageBox.Show("¡Numero de identidad existente!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show("¡Número de identidad existente!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
 
 
                     }
                     else
                     {
-                        MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 else
@@ -301,10 +301,10 @@ namespace VitalCareRx
                     MessageBox.Show("¡Debe seleccionar un paciente!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo más tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
            
 
@@ -385,7 +385,7 @@ namespace VitalCareRx
                                                 ObtenerDatos();
                                                 
                                                 paciente.CrearPaciente(paciente);
-                                                MessageBox.Show("El paciente se ha insertado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
+                                                MessageBox.Show("El paciente se ha insertado con éxito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
                                                 paciente.VerPacientes(gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
                                                 LimpiarFormulario();
                                                 OcultarColumnas();
@@ -395,43 +395,43 @@ namespace VitalCareRx
                                             }
                                             else
                                             {
-                                                MessageBox.Show("¡El peso debe estar dado entre 5 y 800 libras!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                                MessageBox.Show("¡El peso debe estar dado entre 5 y 800 libras!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                             }
 
 
                                         }
                                         else
                                         {
-                                            MessageBox.Show("¡La estatura debe estar dada entre 45 y 250 centimetros!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                            MessageBox.Show("¡La estatura debe estar dada entre 45 y 250 centímetros!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                         }
 
                                     }
                                     else
                                     {
-                                        MessageBox.Show("¡La fecha de nacimiento no puede ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                        MessageBox.Show("¡La fecha de nacimiento no puede ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                     }
 
 
                                 }
                                 else
                                 {
-                                    MessageBox.Show("¡Numero de identidad incompleto, debe de contener 13 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                    MessageBox.Show("¡Número de identidad incompleto, debe de contener 13 dígitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                MessageBox.Show("¡El número de celular debe contener 8 dígitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
 
                         }
                         else
                         {
-                            MessageBox.Show("¡El numero de identidad ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show("¡El número de identidad ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("¡No se puede agregar al mismo paciente!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show("¡No se puede agregar al mismo paciente!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
 
                 }
@@ -443,7 +443,7 @@ namespace VitalCareRx
             catch (Exception)
             {
 
-                MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la inserción... Favor intentelo de nuevo más tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
 
@@ -459,7 +459,7 @@ namespace VitalCareRx
                 paciente.VerPacientes(gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
                 LimpiarFormulario();
                 OcultarColumnas();
-                MessageBox.Show("El paciente se ha eliminado con exito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("El paciente se ha eliminado con éxito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
@@ -483,7 +483,7 @@ namespace VitalCareRx
             }
             else
             {
-                MessageBox.Show("¡Para ver las consultas debes seleccionar un paciente!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("¡Para ver las consultas debe seleccionar un paciente!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
 

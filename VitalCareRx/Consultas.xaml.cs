@@ -88,7 +88,7 @@ namespace VitalCareRx
                                     consulta.MostrarConsultas(dgConsultas);
                                     LimpiarFormulario();
 
-                                    MessageBox.Show("La consulta se ha insertado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    MessageBox.Show("La consulta se ha insertado con éxito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
 
 
 
@@ -97,18 +97,18 @@ namespace VitalCareRx
                                 {
 
 
-                                    MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    MessageBox.Show("Ha ocurrido un error al momento de realizar la inserción... Favor intentelo de nuevo más tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("El valor maximo de la presion sistolica es 250 y el valor minimo es 100\nEl valor maximo de la presion diastolica es 150 y el valor minimo es 40", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                MessageBox.Show("El valor máximo de la presión sistólica es 250 y el valor mínimo es 100\nEl valor máximo de la presión diastólica es 150 y el valor mínimo es 40", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
 
                         }
                         else
                         {
-                            MessageBox.Show("¡La temperatura debe estar entre 35-40 C°!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show("¡La temperatura debe estar entre 35-40 C°!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                     else
@@ -123,7 +123,7 @@ namespace VitalCareRx
             {
 
 
-                MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la inserción... Favor intentelo de nuevo más tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }        
 
             
@@ -261,11 +261,11 @@ namespace VitalCareRx
                                 LimpiarFormulario();
 
 
-                                MessageBox.Show("La consulta se ha modificado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
+                                MessageBox.Show("La consulta se ha modificado con éxito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
                             }
                             else
                             {
-                                MessageBox.Show("El valor maximo de la presion sistolica es 250 y el valor minimo es 100\nEl valor maximo de la presion diastolica es 150 y el valor minimo es 40", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                MessageBox.Show("El valor máximo de la presión sistólica es 250 y el valor mínimo es 100\nEl valor máximo de la presión diastólica es 150 y el valor mínimo es 40", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                            
 
@@ -273,7 +273,7 @@ namespace VitalCareRx
                         }
                         else
                         {
-                            MessageBox.Show("¡La temperatura debe estar entre 35-40 C°!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show("¡La temperatura debe estar entre 35-40 C°!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
 
                     }
@@ -290,7 +290,7 @@ namespace VitalCareRx
             catch (Exception)
             {
 
-                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificacion... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo más tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
            
             
@@ -328,7 +328,7 @@ namespace VitalCareRx
             }
             else
             {
-                MessageBox.Show("Por favor seleccione una celda", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Por favor seleccione una consulta", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
         }
@@ -427,7 +427,7 @@ namespace VitalCareRx
             catch (Exception)
             {
 
-                MessageBox.Show("El caracter Ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("El caracter ingresado no es correcto!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
 

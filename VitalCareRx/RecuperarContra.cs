@@ -115,16 +115,16 @@ namespace VitalCareRx
                 {
                     smtpClient.Send(ms);
                     ms.Dispose();
-                    MessageBox.Show("¡Correo enviado exitosamente, revise su correo por favor!");
+                    MessageBox.Show("¡Correo enviado exitosamente, revise su correo por favor!", "Restaurar", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 );
 
-                MessageBox.Show("Este proceso puede tardar unos segundos, por favor espere");
+                MessageBox.Show("Este proceso puede tardar unos segundos, por favor espere", "Restaurar", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show("Ha ocurrido un error al momento de enviar el correo");
+                MessageBox.Show("Ha ocurrido un error al momento de enviar el correo", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
 

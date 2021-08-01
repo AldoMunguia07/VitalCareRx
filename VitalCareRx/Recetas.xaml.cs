@@ -107,7 +107,7 @@ namespace VitalCareRx
                                     {
                                         ObtenerValores();
                                         AgregarDetalle();
-                                        MessageBox.Show("Farmaco agreado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
+                                        MessageBox.Show("Fármaco agregado exitosamente", "Receta", MessageBoxButton.OK, MessageBoxImage.Information);
                                     }
                                     else
                                     {
@@ -128,11 +128,11 @@ namespace VitalCareRx
                                         {
                                             ObtenerValores();
                                             AgregarDetalle();
-                                            MessageBox.Show("Farmaco agreado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
+                                            MessageBox.Show("Fármaco agregado exitosamente", "Receta", MessageBoxButton.OK, MessageBoxImage.Information);
                                         }
                                         else
                                         {
-                                            MessageBox.Show("El farmaco ya a sido agregado a la receta medica de la consulta.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                            MessageBox.Show("El fármaco ya a sido agregado a la receta médica de la consulta.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                             LimpiarFormulario();
                                         }
                                     }
@@ -147,26 +147,26 @@ namespace VitalCareRx
                                 }
                                 catch (Exception)
                                 {
-                                    MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    MessageBox.Show("Ha ocurrido un error al momento de realizar la inserción... Favor intentelo de nuevo más tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                 }
                             }
                             else
                             {
-                                MessageBox.Show(string.Format("¡Cantidad insuficiente del farmaco {0}\nactualmente se cuenta con {1} unidades!", cmbFarmacos.Text,
-                                receta.VerificarCantidad(Convert.ToInt32(cmbFarmacos.SelectedValue))),  "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                MessageBox.Show(string.Format("¡Cantidad insuficiente del fármaco {0}\nactualmente se cuenta con {1} unidades!", cmbFarmacos.Text,
+                                receta.VerificarCantidad(Convert.ToInt32(cmbFarmacos.SelectedValue))),  "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                             
                         }
                         else
                         {
-                            MessageBox.Show("¡La cantidad del farmaco debe estar entre 1 y 25!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show("¡La cantidad del fármaco debe estar entre 1 y 25!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                         
 
                     }
                     else
                     {
-                        MessageBox.Show("El farmaco ya a sido agregado a la receta medica de la consulta.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("El fármaco ya a sido agregado a la receta médica de la consulta.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 else
@@ -175,10 +175,10 @@ namespace VitalCareRx
                 }
             }
             
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message);
-                MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la inserción... Favor intentelo de nuevo más tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
@@ -202,19 +202,19 @@ namespace VitalCareRx
                     LimpiarFormulario();
 
 
-                    MessageBox.Show("Farmaco eliminado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Fármaco eliminado exitosamente", "Receta", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 }
                 else
                 {
-                    MessageBox.Show("¡Es requerido que seleccione un farmaco!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("¡Es requerido que seleccione un fármaco!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la eliminación", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
@@ -354,25 +354,25 @@ namespace VitalCareRx
 
 
 
-                                    MessageBox.Show("Farmaco modificado exitosamente", "Farmaco", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    MessageBox.Show("Fármaco modificado exitosamente", "Receta", MessageBoxButton.OK, MessageBoxImage.Information);
                                 }
                                 else
                                 {
-                                    MessageBox.Show(string.Format("¡Cantidad insuficiente del farmaco {0}\nactualmente se cuenta con {1} unidades!", cmbFarmacos.Text,
-                                    receta.VerificarCantidad(Convert.ToInt32(cmbFarmacos.SelectedValue))), "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                    MessageBox.Show(string.Format("¡Cantidad insuficiente del fármaco {0}\nactualmente se cuenta con {1} unidades!", cmbFarmacos.Text,
+                                    receta.VerificarCantidad(Convert.ToInt32(cmbFarmacos.SelectedValue))), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                 }
 
 
                             }
                             else
                             {
-                                MessageBox.Show("¡La cantidad del farmaco debe estar entre 1 y 25!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                MessageBox.Show("¡La cantidad del fármaco debe estar entre 1 y 25!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
 
                         }
                         else
                         {
-                            MessageBox.Show("El farmaco ya a sido agregado a la receta medica de la consulta.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("El fármaco ya a sido agregado a la receta médica de la consulta.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                     else
@@ -385,7 +385,7 @@ namespace VitalCareRx
                 }
                 else
                 {
-                    MessageBox.Show("¡Es requerido que seleccione un farmaco!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("¡Es requerido que seleccione un fármaco!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)

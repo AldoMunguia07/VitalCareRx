@@ -42,7 +42,7 @@ namespace VitalCareRx
 
                 // Verificar si el usuario existe
                 if (unEmpleado.NombreUsuario == null)
-                    MessageBox.Show("El usuario y/o la contraseña no es correcta o usuario inactivo. Favor verificar.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("El usuario y/o la contraseña no es correcta o el usuario está inactivo. Favor verificar.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 else
                 {
                     //Verificar que la contraseña ingresada es igual a la contraseña
@@ -59,12 +59,12 @@ namespace VitalCareRx
                     }
 
                     else
-                        MessageBox.Show("El usuario y/o la contraseña no es correcta o usuario inactivo. Favor verificar.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("El usuario y/o la contraseña no es correcta o el usuario está inactivo. Favor verificar.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show("Ha ocurrido un error al momento de realizar la consulta... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ha ocurrido un error al momento de iniciar sesión... Favor intentelo de nuevo más tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                
             }
         }

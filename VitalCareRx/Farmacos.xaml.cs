@@ -99,7 +99,7 @@ namespace VitalCareRx
 
                             LimpiarFormulario();
 
-                            MessageBox.Show("El farmaco se ha insertado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
+                            MessageBox.Show("El fármaco se ha insertado con éxito", "FÁRMACO", MessageBoxButton.OK, MessageBoxImage.Information);
 
                             farmaco.MostrarFarmaco(dgFarmacos);
                         }
@@ -118,14 +118,14 @@ namespace VitalCareRx
                 }
                 else
                 {
-                    MessageBox.Show("¡El Farmaco ya se encuentra ingresado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("¡El fármaco ya se encuentra ingresado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                MessageBox.Show(ex.Message);
-                MessageBox.Show("Ha ocurrido un error al momento de realizar la insercción... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+               
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la inserción... Favor intentelo de nuevo más tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
 
@@ -179,7 +179,7 @@ namespace VitalCareRx
 
                             LimpiarFormulario();
 
-                            MessageBox.Show("El farmaco se ha modificado con exito", "CONSULTA", MessageBoxButton.OK, MessageBoxImage.Information);
+                            MessageBox.Show("El fármaco se ha modificado con éxito", "FÁRMACO", MessageBoxButton.OK, MessageBoxImage.Information);
 
                             farmaco.MostrarFarmaco(dgFarmacos);
                         }
@@ -196,14 +196,14 @@ namespace VitalCareRx
                 }
                 else
                 {
-                    MessageBox.Show("¡Debe seleccionar un Farmaco!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("¡Debe seleccionar un fármaco!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception)
             {
 
 
-                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificacion... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo más tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
 
@@ -242,7 +242,7 @@ namespace VitalCareRx
             }
             else
             {
-                MessageBox.Show("¡Debe seleccionar un Farmaco!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("¡Debe seleccionar un fármaco!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }

@@ -66,7 +66,7 @@ namespace VitalCareRx
                             {
                                 unFarmaco.SumarCantidad(unFarmaco.IdFarmaco, dtFecha.SelectedDate.Value, Convert.ToInt32(txtCantidad.Text));
                                 Limpiar();
-                                MessageBox.Show("¡Se sumo cantidad ingresada a lote ya existente!", "Inventario", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                MessageBox.Show("¡Se sumó la cantidad ingresada al lote ya existente!", "Inventario", MessageBoxButton.OK, MessageBoxImage.Warning);
                             }
                             else
                             {
@@ -78,7 +78,7 @@ namespace VitalCareRx
                         }
                         else
                         {
-                            MessageBox.Show(String.Format("¡La cantidad debe estar dada entr 1 y 10,000!"), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show(String.Format("¡La cantidad debe estar dada entre 1 y 10,000!"), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                         
                     }
@@ -90,7 +90,7 @@ namespace VitalCareRx
                 }
                 else
                 {
-                    MessageBox.Show(String.Format("¡No puede agregar el mismo lote de farmacos!"), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(String.Format("¡No puede agregar el mismo lote de fármacos!"), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }               
             }
             else
@@ -127,7 +127,7 @@ namespace VitalCareRx
                         }
                         else
                         {
-                            MessageBox.Show(String.Format("¡La cantidad debe estar dada entr 1 y 10,000!"), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show(String.Format("¡La cantidad debe estar dada entre 1 y 10,000!"), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
 
                     }

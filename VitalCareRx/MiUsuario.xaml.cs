@@ -148,7 +148,7 @@ namespace VitalCareRx
                                             }
                                             else
                                             {
-                                                MessageBox.Show("¡El correo ingresado ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                                MessageBox.Show("¡El correo electrónico ingresado ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                                 txtCorreo.Text = correo;
                                             }
 
@@ -157,34 +157,34 @@ namespace VitalCareRx
                                         }
                                         else
                                         {
-                                            MessageBox.Show("¡La contraseña debe contener almenos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                            MessageBox.Show("¡La contraseña debe contener al menos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                         }
 
                                     }
                                     else
                                     {
-                                        MessageBox.Show("¡La fecha de nacimiento no puede ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                        MessageBox.Show("¡La fecha de nacimiento no puede ser mayor a la fecha actual!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                     }
                                 }
                                 else
                                 {
-                                    MessageBox.Show("¡La dirección de correo electronico no es valida", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                    MessageBox.Show("¡La dirección de correo electrónico no es válida", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                 }
                                 
                             }
                             else
                             {
-                                MessageBox.Show("¡El número de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                MessageBox.Show("¡El número de celular debe contener 8 dígitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                         }
                         else
                         {
-                            MessageBox.Show("¡El nombre de usuario debe contener almenos 5 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show("¡El nombre de usuario debe contener al menos 5 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("¡El nombre de usuario ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show("¡El nombre de usuario ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         txtUsuario.Text = usuario;
                     }
 
@@ -195,9 +195,9 @@ namespace VitalCareRx
                     MessageBox.Show("¡Es requerido llenar todos los campos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            catch (Exception g)
+            catch (Exception)
             {
-                MessageBox.Show(g.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ha ocurrido un error al momento de actualizar los datos...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
             

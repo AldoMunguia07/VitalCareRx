@@ -155,12 +155,12 @@ namespace VitalCareRx
                                                 }
                                                 else
                                                 {
-                                                    MessageBox.Show("¡La contraseña debe contener almenos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                                    MessageBox.Show("¡La contraseña debe contener al menos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                                 }
                                             }
                                             else
                                             {
-                                                MessageBox.Show("¡El nombre de usuario debe contener almenos 5 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                                MessageBox.Show("¡El nombre de usuario debe contener al menos 5 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                             }
                                         }
                                         else
@@ -183,12 +183,12 @@ namespace VitalCareRx
                             }
                             else
                             {
-                                MessageBox.Show("¡La dirección de correo electronico no es valida", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                MessageBox.Show("¡La dirección de correo electrónico no es válida", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                         }
                         else
                         {
-                            MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("¡El número de celular debe contener 8 dígitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                     else
@@ -205,7 +205,7 @@ namespace VitalCareRx
             catch (Exception)
             {
 
-                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo más tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
            
          
@@ -341,7 +341,7 @@ namespace VitalCareRx
                                                         unEmpleado.ModificarEmpleado(unEmpleado);
                                                         miEmpleado.VerEmpleados(gridEmpleados, Convert.ToInt32(cmbEstado.SelectedValue));
                                                         LimpiarFormulario();
-                                                        MessageBox.Show("¡Empleado modificados exitosamente!", "EMPLEADO", MessageBoxButton.OK, MessageBoxImage.Information);
+                                                        MessageBox.Show("¡Empleado modificado exitosamente!", "EMPLEADO", MessageBoxButton.OK, MessageBoxImage.Information);
                                                     }
                                                     else
                                                     {
@@ -352,18 +352,18 @@ namespace VitalCareRx
                                                 }
                                                 else
                                                 {
-                                                    MessageBox.Show("¡La usuario debe contener almenos 5 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                                    MessageBox.Show("¡La usuario debe contener al menos 5 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                                 }
 
                                             }
                                             else
                                             {
-                                                MessageBox.Show("¡La contraseña debe contener almenos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                                MessageBox.Show("¡La contraseña debe contener al menos 8 caracteres!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                             }
                                         }
                                         else
                                         {
-                                            MessageBox.Show("¡El correo ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                            MessageBox.Show("¡El correo electrónico ya existe!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                         }
 
                                     }
@@ -379,12 +379,12 @@ namespace VitalCareRx
                             }
                             else
                             {
-                                MessageBox.Show("¡La dirección de correo electronico no es valida", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                MessageBox.Show("¡La dirección de correo electrónico no es válida", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                         }
                         else
                         {
-                            MessageBox.Show("¡El numero de celular debe contener 8 digitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("¡El número de celular debe contener 8 dígitos!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                     else
@@ -400,7 +400,7 @@ namespace VitalCareRx
             catch (Exception)
             {
 
-                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo más tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }             
         
         }
@@ -424,7 +424,7 @@ namespace VitalCareRx
             catch (Exception)
             {
 
-                MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la eliminación... Favor intentelo de nuevo más tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
             
@@ -554,7 +554,7 @@ namespace VitalCareRx
                     catch (Exception)
                     {
 
-                        MessageBox.Show("Ha ocurrido un error al momento de realizar la modificación... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Ha ocurrido un error al momento de realizar la reatauración de contraseña... Favor intentelo de nuevo mas tarde", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }
