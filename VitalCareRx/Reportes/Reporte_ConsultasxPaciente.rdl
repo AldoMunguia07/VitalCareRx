@@ -7,8 +7,9 @@
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
         <ConnectString>Data Source=DBServer;Initial Catalog=VitalCareRxDB</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
       </ConnectionProperties>
-      <rd:SecurityType>DataBase</rd:SecurityType>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>43d35f2b-f26b-482b-ad32-a9368a78a742</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -22,7 +23,7 @@
           </QueryParameter>
         </QueryParameters>
         <CommandText>SELECT b.numeroIdentidad as 'Numero de Identidad', CONCAT(b.primerNombre, ' ',b.primerApellido) 'Nombre del paciente',
-b.celular as 'Celular',b.peso as 'Peso', b.estatura as 'Estatura' ,
+b.celular as 'Celular',ROUND(b.peso,2) as 'Peso', ROUND(b.estatura ,2) as 'Estatura',
 COUNT(a.idConsulta) as 'Cantidad de citas'
 FROM [Consultas].[Consulta] A INNER JOIN [Personas].[Paciente] B
 ON
@@ -105,7 +106,7 @@ group by b.primerNombre , b.primerApellido, b.numeroIdentidad, b.celular, b.peso
             <rd:DefaultName>ReportTitle</rd:DefaultName>
             <Top>27.92937mm</Top>
             <Height>13.49375mm</Height>
-            <Width>157.44615mm</Width>
+            <Width>161.67948mm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -133,7 +134,7 @@ group by b.primerNombre , b.primerApellido, b.numeroIdentidad, b.celular, b.peso
                   <Width>14.15208mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>15.83718mm</Width>
+                  <Width>20.07051mm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>25.26459mm</Width>
@@ -831,9 +832,9 @@ group by b.primerNombre , b.primerApellido, b.numeroIdentidad, b.celular, b.peso
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
             <Top>46.97937mm</Top>
-            <Left>2.91042mm</Left>
+            <Left>1.15594mm</Left>
             <Height>18.35mm</Height>
-            <Width>154.53573mm</Width>
+            <Width>158.76906mm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>

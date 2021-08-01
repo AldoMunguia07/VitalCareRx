@@ -7,9 +7,9 @@
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
         <ConnectString>Data Source=DBServer;Initial Catalog=VitalCareRxDB</ConnectString>
-        <Prompt>Specify a user name and password for data source cnnVitalCareRx:</Prompt>
+        <IntegratedSecurity>true</IntegratedSecurity>
       </ConnectionProperties>
-      <rd:SecurityType>DataBase</rd:SecurityType>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>50362dca-cd56-4082-b4e8-12e5c6548796</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -18,16 +18,16 @@
       <Query>
         <DataSourceName>cnnVitalCareRx</DataSourceName>
         <QueryParameters>
-          <QueryParameter Name="@idEmpleado">
-            <Value>=Parameters!idEmpleado.Value</Value>
+          <QueryParameter Name="@Empleado">
+            <Value>=Parameters!Empleado.Value</Value>
           </QueryParameter>
-          <QueryParameter Name="@fecha">
+          <QueryParameter Name="@Fecha">
             <Value>=Parameters!fecha.Value</Value>
           </QueryParameter>
         </QueryParameters>
         <CommandText>SELECT idBitacora, accion, fecha
 FROM [Historial].[Bitacora]
-WHERE idEmpleado = @idEmpleado and CONVERT(DATE, fecha) = @fecha</CommandText>
+WHERE idEmpleado = @Empleado AND CONVERT(DATE, fecha) = @Fecha</CommandText>
       </Query>
       <Fields>
         <Field Name="idBitacora">
@@ -38,7 +38,7 @@ WHERE idEmpleado = @idEmpleado and CONVERT(DATE, fecha) = @fecha</CommandText>
           <DataField>accion</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="fecha">
+        <Field Name="Fecha">
           <DataField>fecha</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
@@ -56,8 +56,8 @@ FROM [Personas].[Empleado]</CommandText>
           <DataField>empleado</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="idEmpleado">
-          <DataField>idEmpleado</DataField>
+        <Field Name="IdEmpleado">
+          <DataField>IdEmpleado</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
       </Fields>
@@ -398,14 +398,14 @@ FROM [Personas].[Empleado]</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="fecha">
+                        <Textbox Name="Fecha">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!fecha.Value</Value>
+                                  <Value>=Fields!Fecha.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -414,7 +414,7 @@ FROM [Personas].[Empleado]</CommandText>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>fecha</rd:DefaultName>
+                          <rd:DefaultName>Fecha</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>SeaGreen</Color>
@@ -690,20 +690,20 @@ FROM [Personas].[Empleado]</CommandText>
     </ReportSection>
   </ReportSections>
   <ReportParameters>
-    <ReportParameter Name="idEmpleado">
-      <DataType>String</DataType>
-      <Prompt>id Empleado</Prompt>
+    <ReportParameter Name="Empleado">
+      <DataType>Integer</DataType>
+      <Prompt>Empleado</Prompt>
       <ValidValues>
         <DataSetReference>
           <DataSetName>Empleados</DataSetName>
-          <ValueField>idEmpleado</ValueField>
+          <ValueField>IdEmpleado</ValueField>
           <LabelField>empleado</LabelField>
         </DataSetReference>
       </ValidValues>
     </ReportParameter>
     <ReportParameter Name="fecha">
       <DataType>DateTime</DataType>
-      <Prompt>fecha</Prompt>
+      <Prompt>Fecha</Prompt>
     </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
@@ -714,7 +714,7 @@ FROM [Personas].[Empleado]</CommandText>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>idEmpleado</ParameterName>
+          <ParameterName>Empleado</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>

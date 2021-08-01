@@ -7,6 +7,7 @@
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
         <ConnectString>Data Source=DBServer;Initial Catalog=VitalCareRxDB</ConnectString>
+        <Prompt>Specify a user name and password for data source cnnVitalCareRx:</Prompt>
       </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>5a9cbdba-00f3-4c97-af58-cb082f035c74</rd:DataSourceID>
@@ -744,7 +745,7 @@ GROUP BY F.idFarmaco,F.descripcionFarmaco ,F.informacionPrecaucion </CommandText
               </Paragraphs>
               <rd:DefaultName>PageNumber</rd:DefaultName>
               <Top>4.31458mm</Top>
-              <Left>0mm</Left>
+              <Left>2.26247mm</Left>
               <Height>6mm</Height>
               <Width>13.09375mm</Width>
               <ZIndex>1</ZIndex>
@@ -774,9 +775,9 @@ GROUP BY F.idFarmaco,F.descripcionFarmaco ,F.informacionPrecaucion </CommandText
               </Paragraphs>
               <rd:DefaultName>TotalPages</rd:DefaultName>
               <Top>4.31458mm</Top>
-              <Left>28.03958mm</Left>
+              <Left>31.00761mm</Left>
               <Height>6mm</Height>
-              <Width>9.125mm</Width>
+              <Width>10.18333mm</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -806,9 +807,9 @@ GROUP BY F.idFarmaco,F.descripcionFarmaco ,F.informacionPrecaucion </CommandText
               </Paragraphs>
               <rd:DefaultName>Textbox8</rd:DefaultName>
               <Top>4.31458mm</Top>
-              <Left>14.50486mm</Left>
+              <Left>17.12011mm</Left>
               <Height>6mm</Height>
-              <Width>11.41805mm</Width>
+              <Width>12.12361mm</Width>
               <ZIndex>3</ZIndex>
               <Style>
                 <Border>

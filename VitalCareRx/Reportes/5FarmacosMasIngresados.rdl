@@ -7,6 +7,7 @@
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
         <ConnectString>Data Source=DBServer;Initial Catalog=VitalCareRxDB</ConnectString>
+        <Prompt>Specify a user name and password for data source cnnVitalCareRx:</Prompt>
       </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>5a9cbdba-00f3-4c97-af58-cb082f035c74</rd:DataSourceID>
@@ -629,7 +630,6 @@ ORDER BY SUM(DF.cantidad) DESC</CommandText>
               <rd:WatermarkTextbox>Title</rd:WatermarkTextbox>
               <rd:DefaultName>ReportTitle</rd:DefaultName>
               <Top>26.8745mm</Top>
-              <Left>0cm</Left>
               <Height>12.7mm</Height>
               <Width>162.89842mm</Width>
               <ZIndex>2</ZIndex>
@@ -703,7 +703,7 @@ ORDER BY SUM(DF.cantidad) DESC</CommandText>
               </Paragraphs>
               <rd:DefaultName>PageNumber</rd:DefaultName>
               <Top>4.31458mm</Top>
-              <Left>0mm</Left>
+              <Left>2.91042mm</Left>
               <Height>6mm</Height>
               <Width>13.09375mm</Width>
               <ZIndex>1</ZIndex>
@@ -733,9 +733,9 @@ ORDER BY SUM(DF.cantidad) DESC</CommandText>
               </Paragraphs>
               <rd:DefaultName>TotalPages</rd:DefaultName>
               <Top>4.31458mm</Top>
-              <Left>28.03958mm</Left>
+              <Left>30.74988mm</Left>
               <Height>6mm</Height>
-              <Width>9.125mm</Width>
+              <Width>10.44792mm</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -763,7 +763,7 @@ ORDER BY SUM(DF.cantidad) DESC</CommandText>
               </Paragraphs>
               <rd:DefaultName>Textbox8</rd:DefaultName>
               <Top>4.31458mm</Top>
-              <Left>18.03264mm</Left>
+              <Left>20.1493mm</Left>
               <Height>6mm</Height>
               <Width>6.47917mm</Width>
               <ZIndex>3</ZIndex>

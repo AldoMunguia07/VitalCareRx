@@ -18,8 +18,7 @@
       <Query>
         <DataSourceName>cnnVitalCareRx</DataSourceName>
         <CommandText>Select  idEmpleado, CONCAT(a.primerNombre,' ',a.primerApellido) Empleados From Personas.Empleado a join Personas.Puesto b
-on a.idPuesto = b.idPuesto 
-Where b.idPuesto=2 </CommandText>
+on a.idPuesto = b.idPuesto </CommandText>
       </Query>
       <Fields>
         <Field Name="idEmpleado">
@@ -531,6 +530,7 @@ order by a.fechaConsulta</CommandText>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
