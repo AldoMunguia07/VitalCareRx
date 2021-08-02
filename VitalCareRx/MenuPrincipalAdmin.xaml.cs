@@ -42,17 +42,7 @@ namespace VitalCareRx
             lbFecha.Content = DateTime.Now.ToLongTimeString();
         }
 
-        private void ButtonFechar_Click(object sender, RoutedEventArgs e)
-        {
-
-            MessageBoxResult result = MessageBox.Show("¿Desea cerrar sesión?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if (result == MessageBoxResult.Yes)
-            {
-                Login login = new Login();
-                login.Show();
-                this.Close();
-            }
-        }
+      
 
         bool right = false;
 

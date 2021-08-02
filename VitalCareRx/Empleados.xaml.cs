@@ -142,7 +142,7 @@ namespace VitalCareRx
                                                     if (unEmpleado.Edad(dtFecha) >= 18)
                                                     {
                                                         ObtenerDatos();
-                                                        unEmpleado.CrearNuevoEmpleado(unEmpleado);
+                                                        unEmpleado.CrearNuevoEmpleado(unEmpleado, miEmpleado);
                                                         miEmpleado.VerEmpleados(gridEmpleados, Convert.ToInt32(cmbEstado.SelectedValue));
                                                         LimpiarFormulario();
                                                         MessageBox.Show("¡Empleado agregado exitosamente!", "EMPLEADO", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -338,7 +338,7 @@ namespace VitalCareRx
                                                     if (unEmpleado.Edad(dtFecha) >= 18)
                                                     {
                                                         ObtenerDatos();
-                                                        unEmpleado.ModificarEmpleado(unEmpleado);
+                                                        unEmpleado.ModificarEmpleado(unEmpleado, miEmpleado);
                                                         miEmpleado.VerEmpleados(gridEmpleados, Convert.ToInt32(cmbEstado.SelectedValue));
                                                         LimpiarFormulario();
                                                         MessageBox.Show("¡Empleado modificado exitosamente!", "EMPLEADO", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -412,7 +412,7 @@ namespace VitalCareRx
                 if (seleccionado)
                 {
                     ObtenerDatos();
-                    unEmpleado.EliminarEmpleado(unEmpleado);
+                    unEmpleado.EliminarEmpleado(unEmpleado, miEmpleado);
                     miEmpleado.VerEmpleados(gridEmpleados, Convert.ToInt32(cmbEstado.SelectedValue));
                     LimpiarFormulario();
                 }

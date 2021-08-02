@@ -17,32 +17,10 @@
     <DataSet Name="AccionesEmpleados">
       <Query>
         <DataSourceName>cnnVitalCareRx</DataSourceName>
-        <QueryParameters>
-          <QueryParameter Name="@Empleado">
-            <Value>=Parameters!Empleado.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@Fecha">
-            <Value>=Parameters!fecha.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
         <CommandText>SELECT idBitacora, accion, fecha
 FROM [Historial].[Bitacora]
-WHERE idEmpleado = @Empleado AND CONVERT(DATE, fecha) = @Fecha</CommandText>
+WHERE idEmpleado = @Empleado AND CONVERT(DATE, fecha) = CONVERT(DATE,@Fecha)</CommandText>
       </Query>
-      <Fields>
-        <Field Name="idBitacora">
-          <DataField>idBitacora</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="accion">
-          <DataField>accion</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Fecha">
-          <DataField>fecha</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-      </Fields>
     </DataSet>
     <DataSet Name="Empleados">
       <Query>

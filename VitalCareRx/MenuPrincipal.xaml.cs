@@ -198,12 +198,12 @@ namespace VitalCareRx
         private void btnEntradaboton_Click(object sender, RoutedEventArgs e)
         {
 
-            MessageBoxResult result = MessageBox.Show("¿Desea marcar hora entrada?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult result = MessageBox.Show("¿Desea marcar la hora de entrada?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
                 AportesControl.RegistrarEntrada(miEmpleado);       
                 lbHoraEntradaSalida.Content = "Marcar hora Salida";
-                MessageBox.Show("A marcado la hora de entrada!");
+                MessageBox.Show("¡A marcado la hora de entrada!", "Control diario", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
         }
@@ -211,11 +211,11 @@ namespace VitalCareRx
         private void btnSalida_Click(object sender, RoutedEventArgs e)
         {
 
-            MessageBoxResult result = MessageBox.Show(String.Format("¿Desea marcar hora salida? \n{0}", AportesControl.MensajeHorasTrabajadas(miEmpleado)), "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult result = MessageBox.Show(String.Format("¿Desea marcar la hora de salida? \n{0}", AportesControl.MensajeHorasTrabajadas(miEmpleado)), "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
                 AportesControl.RegistrarSalida(miEmpleado);
-                MessageBox.Show("A marcado la hora de salida!");
+                MessageBox.Show("¡A marcado la hora de salida!", "Control diario", MessageBoxButton.OK, MessageBoxImage.Information);
             }   
         }
 

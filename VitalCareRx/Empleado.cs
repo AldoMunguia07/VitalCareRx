@@ -207,7 +207,7 @@ namespace VitalCareRx
         /// <summary>
         /// Método para crear un nuevo empleado 
         /// </summary>
-        public void CrearNuevoEmpleado(Empleado empleado)
+        public void CrearNuevoEmpleado(Empleado empleado, Empleado miEmpleado)
         {
 
             try
@@ -231,7 +231,7 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@contrasenia", empleado.Contrasenia);
                 sqlCommand.Parameters.AddWithValue("@estado", empleado.Estado);
                 sqlCommand.Parameters.AddWithValue("@accion", "insertar");
-                aportes.ContextoSesion(CodigoMayor(), conexion.sqlConnection);
+                aportes.ContextoSesion(miEmpleado.IdEmpleado, conexion.sqlConnection);
                 sqlCommand.ExecuteNonQuery();
 
             }
@@ -281,7 +281,7 @@ namespace VitalCareRx
         /// Metodo para midificar un empleado.
         /// </summary>
         /// <param name="empleado"></param>
-        public void ModificarEmpleado(Empleado empleado)
+        public void ModificarEmpleado(Empleado empleado, Empleado miEmpleado)
         {
             try
             {
@@ -305,7 +305,7 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@contrasenia", empleado.Contrasenia);
                 sqlCommand.Parameters.AddWithValue("@estado", empleado.Estado);
                 sqlCommand.Parameters.AddWithValue("@accion", "modificar");
-                aportes.ContextoSesion(IdEmpleado, conexion.sqlConnection);
+                aportes.ContextoSesion(miEmpleado.IdEmpleado, conexion.sqlConnection);
                 sqlCommand.ExecuteNonQuery();
 
             }
@@ -320,7 +320,7 @@ namespace VitalCareRx
             }
         }
 
-        public void EliminarEmpleado(Empleado empleado)
+        public void EliminarEmpleado(Empleado empleado, Empleado miEmpleado)
         {
             try
             {
@@ -335,7 +335,7 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@idEmpleado", empleado.IdEmpleado);
                 sqlCommand.Parameters.AddWithValue("@estado", empleado.IdEmpleado);
                 sqlCommand.Parameters.AddWithValue("@accion", "desactivar");
-                aportes.ContextoSesion(IdEmpleado, conexion.sqlConnection);
+                aportes.ContextoSesion(miEmpleado.IdEmpleado, conexion.sqlConnection);
                 sqlCommand.ExecuteNonQuery();
             }
             catch (Exception)

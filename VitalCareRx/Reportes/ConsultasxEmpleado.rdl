@@ -34,44 +34,13 @@ on a.idPuesto = b.idPuesto </CommandText>
     <DataSet Name="ConsultaPorDoctores">
       <Query>
         <DataSourceName>cnnVitalCareRx</DataSourceName>
-        <QueryParameters>
-          <QueryParameter Name="@idEmpleado">
-            <Value>=Parameters!idEmpleado.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <CommandText>Select a.fechaConsulta'Fecha Consulta', CONCAT(b.primerNombre, ' ' , b.primerApellido) Nombre,a.motivoConsulta 'Motivo Consulta', a.diagnosticoConsulta Diagnostico, a.temperatura Temperatura, a.presionArterial 'Presion Arterial'
+        <CommandText>Select a.fechaConsulta'Fecha Consulta', CONCAT(b.primerNombre, ' ' , b.primerApellido) Nombre,a.motivoConsulta 'Motivo Consulta', a.diagnosticoConsulta Diagnostico, ROUND(a.temperatura,2) Temperatura, a.presionArterial 'Presion Arterial'
 FROM Consultas.Consulta a join  Personas.Paciente b on
 a.idPaciente = b.idPaciente join Personas.Empleado c on 
 a.idEmpleado = c.idEmpleado 
 where c.idEmpleado = @idEmpleado
 order by a.fechaConsulta</CommandText>
       </Query>
-      <Fields>
-        <Field Name="Fecha_Consulta">
-          <DataField>Fecha Consulta</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="Nombre">
-          <DataField>Nombre</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Motivo_Consulta">
-          <DataField>Motivo Consulta</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Diagnostico">
-          <DataField>Diagnostico</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Temperatura">
-          <DataField>Temperatura</DataField>
-          <rd:TypeName>System.Double</rd:TypeName>
-        </Field>
-        <Field Name="Presion_Arterial">
-          <DataField>Presion Arterial</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
     </DataSet>
   </DataSets>
   <ReportSections>
@@ -530,7 +499,6 @@ order by a.fechaConsulta</CommandText>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>

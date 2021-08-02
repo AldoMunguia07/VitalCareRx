@@ -7,6 +7,7 @@
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
         <ConnectString>Data Source=DBServer;Initial Catalog=VitalCareRxDB</ConnectString>
+        <Prompt>Specify a user name and password for data source cnnVitalCareRx:</Prompt>
       </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>5a9cbdba-00f3-4c97-af58-cb082f035c74</rd:DataSourceID>
@@ -113,7 +114,6 @@ GROUP BY F.idFarmaco,F.descripcionFarmaco,F.informacionPrecaucion</CommandText>
             <rd:WatermarkTextbox>Title</rd:WatermarkTextbox>
             <rd:DefaultName>ReportTitle</rd:DefaultName>
             <Top>0.35278mm</Top>
-            <Left>0cm</Left>
             <Height>12.7mm</Height>
             <Width>162.89842mm</Width>
             <Style>
@@ -741,7 +741,7 @@ GROUP BY F.idFarmaco,F.descripcionFarmaco,F.informacionPrecaucion</CommandText>
               </Paragraphs>
               <rd:DefaultName>PageNumber</rd:DefaultName>
               <Top>4.31458mm</Top>
-              <Left>0mm</Left>
+              <Left>2.64583mm</Left>
               <Height>6mm</Height>
               <Width>13.09375mm</Width>
               <ZIndex>1</ZIndex>
@@ -771,7 +771,7 @@ GROUP BY F.idFarmaco,F.descripcionFarmaco,F.informacionPrecaucion</CommandText>
               </Paragraphs>
               <rd:DefaultName>TotalPages</rd:DefaultName>
               <Top>4.31458mm</Top>
-              <Left>28.03958mm</Left>
+              <Left>31.47916mm</Left>
               <Height>6mm</Height>
               <Width>9.125mm</Width>
               <ZIndex>2</ZIndex>
@@ -801,9 +801,9 @@ GROUP BY F.idFarmaco,F.descripcionFarmaco,F.informacionPrecaucion</CommandText>
               </Paragraphs>
               <rd:DefaultName>Textbox8</rd:DefaultName>
               <Top>4.31458mm</Top>
-              <Left>18.03264mm</Left>
+              <Left>19.09097mm</Left>
               <Height>6mm</Height>
-              <Width>6.47917mm</Width>
+              <Width>10.6243mm</Width>
               <ZIndex>3</ZIndex>
               <Style>
                 <Border>

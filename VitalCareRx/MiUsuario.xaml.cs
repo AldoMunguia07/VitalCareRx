@@ -140,11 +140,19 @@ namespace VitalCareRx
                                         {
                                             if (!miUsuario.ExisteCorreo(txtCorreo) || correo == txtCorreo.Text)
                                             {
-                                                ObtenerDatos();
-                                                miUsuario.ModificarEmpleado(miUsuario);
-                                                MessageBox.Show("¡Datos actualizados correctamente!", "USUARIO", MessageBoxButton.OK, MessageBoxImage.Information);
-                                                usuario = txtUsuario.Text;
-                                                correo = txtCorreo.Text;
+                                                if (miUsuario.Edad(dtpFechaNacimiento) >= 18)
+                                                {
+                                                    ObtenerDatos();
+                                                    miUsuario.ModificarEmpleado(miUsuario, miUsuario);
+                                                    MessageBox.Show("¡Datos actualizados correctamente!", "USUARIO", MessageBoxButton.OK, MessageBoxImage.Information);
+                                                    usuario = txtUsuario.Text;
+                                                    correo = txtCorreo.Text;
+                                                }
+                                                else
+                                                {
+                                                    MessageBox.Show("¡No puede tener menos de 18 años!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                                }
+
                                             }
                                             else
                                             {
