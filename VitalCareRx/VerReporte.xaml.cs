@@ -30,7 +30,7 @@ namespace VitalCareRx
 
         private void VerReporte_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Reporte.ReportPath = String.Format(@"{0}\Omega Soft Evolution\Vital Care Rx\Reportes\{1}", validaciones.ruta,reporte);
+            this.Reporte.ReportPath = String.Format(@"{0}\Reportes\{1}", validaciones.ruta,reporte);
             this.Reporte.RefreshReport();
         }
 

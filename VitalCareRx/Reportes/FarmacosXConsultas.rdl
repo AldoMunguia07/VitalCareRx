@@ -156,7 +156,7 @@ GROUP BY F.idFarmaco,F.descripcionFarmaco,F.informacionPrecaucion</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Código del Fármaco</Value>
+                                  <Value>Código del fármaco</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -318,7 +318,7 @@ GROUP BY F.idFarmaco,F.descripcionFarmaco,F.informacionPrecaucion</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Unidades Recetadas</Value>
+                                  <Value>Unidades recetadas</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                     <FontWeight>Bold</FontWeight>
