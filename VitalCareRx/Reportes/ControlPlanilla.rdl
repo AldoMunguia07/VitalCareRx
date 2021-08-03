@@ -70,7 +70,8 @@
     <DataSet Name="Empleado">
       <Query>
         <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>select E.idEmpleado 'ID', CONCAT(E.primerNombre, ' ', E.primerApellido) 'Nombre del Empleado' from Personas.Empleado E</CommandText>
+        <CommandText>select E.idEmpleado 'ID', CONCAT(E.primerNombre, ' ', E.primerApellido) 'Nombre del Empleado' from Personas.Empleado E
+WHERE E.idPuesto != 1 </CommandText>
       </Query>
       <Fields>
         <Field Name="ID">

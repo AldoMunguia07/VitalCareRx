@@ -7,6 +7,7 @@
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
         <ConnectString>Data Source=DBServer;Initial Catalog=VitalCareRxDB</ConnectString>
+        <Prompt>Specify a user name and password for data source cnnVitalCareRx:</Prompt>
       </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>50362dca-cd56-4082-b4e8-12e5c6548796</rd:DataSourceID>
@@ -16,13 +17,11 @@
     <DataSet Name="Farmacos">
       <Query>
         <DataSourceName>cnnVitalCareRx</DataSourceName>
-        <CommandText>
-select F.idFarmaco, F.descripcionFarmaco, F.informacionPrecaucion, SUM(DRM.cantidad) 'Existencia' 
-from Consultas.Farmaco F INNER JOIN Consultas.DetalleRecetaMedica DRM 
+        <CommandText>select F.idFarmaco, F.descripcionFarmaco, F.informacionPrecaucion, SUM(DRM.cantidad) 'Existencia' 
+from Consultas.Farmaco F INNER JOIN Consultas.DetalleFarmaco DRM 
 on DRM.idFarmaco = f.idFarmaco
 GROUP BY F.idFarmaco, F.descripcionFarmaco, F.informacionPrecaucion
-HAVING SUM(DRM.cantidad) &gt; 0
-</CommandText>
+HAVING SUM(DRM.cantidad) &gt; 0</CommandText>
       </Query>
       <Fields>
         <Field Name="idFarmaco">
