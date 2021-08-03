@@ -331,7 +331,15 @@ namespace VitalCareRx
                 && direccion.Text != "\r\n" && txtCelular.Text != String.Empty && dtFechaNacimiento.SelectedDate != null
                 && txtPeso.Text != String.Empty && txtEstatura.Text != String.Empty && cmbSexo.SelectedValue != null && cmbTipoSangre.SelectedValue != null)
             {
-                return true;
+                foreach (var item in direccion.Text.Trim())
+                {
+                   
+                    if (item.ToString() != " " && item.ToString() != "\n")
+                    {
+                        return true;
+                    }
+                }
+              
             }
             return false;
         }
@@ -520,7 +528,7 @@ namespace VitalCareRx
         //Al darle click que reestablesca el formulario como en un inició.
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
-            AnioIdentidad();
+           
             LimpiarFormulario();
             paciente.VerPacientes(gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
             OcultarColumnas();

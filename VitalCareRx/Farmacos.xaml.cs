@@ -76,12 +76,28 @@ namespace VitalCareRx
             //Validación para que el usuario no deje los campos vacíos
             if (txtDescripcionFarmaco.Text != string.Empty && IndicacionesFarmaco.Text != "\r\n")
             {
+                
+                bool flag1 = false, flag2 = false;
                 foreach (var item in txtDescripcionFarmaco.Text)
                 {
                     if (item.ToString() != " ")
                     {
-                        return true;
+                        flag1 = true;
                     }
+                }
+
+
+                foreach (var item in IndicacionesFarmaco.Text.Trim())
+                {
+                    if (item.ToString() != " " && item.ToString() != "\n")
+                    {
+                        flag2 = true;
+                    }
+                }
+
+                if (flag1 && flag2)
+                {
+                    return true;
                 }
             }
 

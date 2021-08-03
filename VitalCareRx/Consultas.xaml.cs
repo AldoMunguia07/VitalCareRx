@@ -145,7 +145,28 @@ namespace VitalCareRx
             if (MotivoConsulta.Text!= "\r\n" && DiagnosticoConsulta.Text != "\r\n"
                 && txtTemperatura.Text != string.Empty && txtPresionArterial.Text != string.Empty && cmbPaciente.SelectedValue != null) 
             {
-                return true;
+                bool flag1 = false, flag2 = false;
+                foreach (var item in MotivoConsulta.Text.Trim())
+                {
+                    if (item.ToString() != " " && item.ToString() != "\n")
+                    {
+                        flag1 = true;
+                    }
+                }
+
+                foreach (var item in DiagnosticoConsulta.Text.Trim())
+                {
+                    if (item.ToString() != " " && item.ToString() != "\n")
+                    {
+                        flag2 = true;
+                    }
+                }
+
+                if (flag1 && flag2)
+                {
+                    return true;
+                }
+
             }
 
             return false;

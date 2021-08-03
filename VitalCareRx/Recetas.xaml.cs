@@ -257,7 +257,27 @@ namespace VitalCareRx
             TextRange durationTratamiento = new TextRange(rtxtDuracionTratamiento.Document.ContentStart, rtxtDuracionTratamiento.Document.ContentEnd);
             if (cmbFarmacos.SelectedValue != null && txtCantidad.Text != string.Empty && indicaciones.Text != "\r\n" && durationTratamiento.Text != "\r\n")
             {
-                return true;
+                bool flag1 = false, flag2 = false;
+                foreach (var item in indicaciones.Text.Trim())
+                {
+                    if (item.ToString() != " " && item.ToString() != "\n")
+                    {
+                        flag1 = true;
+                    }
+                }
+
+                foreach (var item in durationTratamiento.Text.Trim())
+                {
+                    if (item.ToString() != " " && item.ToString() != "\n")
+                    {
+                        flag2 = true;
+                    }
+                }
+
+                if (flag1 && flag2)
+                {
+                    return true;
+                }
             }
 
             return false;
