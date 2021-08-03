@@ -45,7 +45,7 @@ namespace VitalCareRx
             miUsuario.PrimerNombre = txtPrimerNombre.Text;
             miUsuario.PrimerApellido = txtPrimerApellido.Text;
             usuario = txtUsuario.Text; // se asigna el valor de la txtUsuario para la posteiror validacion (Que no permita ingresar un usuario existente).
-            correo = txtCorreo.Text;//se asigna el valor de la txtCorreo para la posteiror validacion (Que no permita ingresar un usuario existente).
+            correo = txtCorreo.Text.ToLower();//se asigna el valor de la txtCorreo para la posteiror validacion (Que no permita ingresar un usuario existente).
         }
 
 
@@ -138,7 +138,7 @@ namespace VitalCareRx
                                     {
                                         if (txtPassword.Text.Length >= 8) // el campo contraseña debe tener 8 o más caracteres
                                         {
-                                            if (!miUsuario.ExisteCorreo(txtCorreo) || correo == txtCorreo.Text)
+                                            if (!miUsuario.ExisteCorreo(txtCorreo) || correo == txtCorreo.Text.ToLower())
                                             {
                                                 if (miUsuario.Edad(dtpFechaNacimiento) >= 18)
                                                 {
@@ -146,7 +146,8 @@ namespace VitalCareRx
                                                     miUsuario.ModificarEmpleado(miUsuario, miUsuario);
                                                     MessageBox.Show("¡Datos actualizados correctamente!", "USUARIO", MessageBoxButton.OK, MessageBoxImage.Information);
                                                     usuario = txtUsuario.Text;
-                                                    correo = txtCorreo.Text;
+                                                    correo = txtCorreo.Text.ToLower();
+                                                    txtCorreo.Text = correo;
                                                 }
                                                 else
                                                 {

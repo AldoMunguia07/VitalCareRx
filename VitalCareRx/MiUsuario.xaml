@@ -45,7 +45,7 @@
 
         </Grid>
 
-        <DatePicker TabIndex="8" Background="Black" x:Name="dtpFechaNacimiento"  Margin="439,442,32,0" VerticalAlignment="Top" Width="303" Height="30" BorderBrush="#89FFFFFF" Foreground="Black" FontSize="15" FirstDayOfWeek="Monday" HorizontalAlignment="Center"  >
+        <DatePicker TabIndex="8" Background="Black" x:Name="dtpFechaNacimiento"  Margin="439,442,32,0" VerticalAlignment="Top" Width="303" Height="30" BorderBrush="#89FFFFFF" Foreground="Black" FontSize="15" FirstDayOfWeek="Monday" HorizontalAlignment="Center" DisplayDateStart="1950-01-01">
             <DatePicker.CalendarStyle>
                 <Style TargetType="{x:Type Calendar}">
                     <Style.Resources>

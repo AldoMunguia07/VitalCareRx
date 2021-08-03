@@ -223,7 +223,7 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@primerApellido", empleado.PrimerApellido);
                 sqlCommand.Parameters.AddWithValue("@segundoApellido", empleado.SegundoApellido);
                 sqlCommand.Parameters.AddWithValue("@celular", empleado.Celular);
-                sqlCommand.Parameters.AddWithValue("@correo", empleado.Correo);
+                sqlCommand.Parameters.AddWithValue("@correo", empleado.Correo.ToLower());
                 sqlCommand.Parameters.AddWithValue("@fechaNacimiento", empleado.FechaNacimiento);
                 sqlCommand.Parameters.AddWithValue("@idSexo", empleado.IdSexo);
                 sqlCommand.Parameters.AddWithValue("@idPuesto", empleado.IdPuesto);
@@ -297,7 +297,7 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@primerApellido", empleado.PrimerApellido);
                 sqlCommand.Parameters.AddWithValue("@segundoApellido", empleado.SegundoApellido);
                 sqlCommand.Parameters.AddWithValue("@celular", empleado.Celular);
-                sqlCommand.Parameters.AddWithValue("@correo", empleado.Correo);
+                sqlCommand.Parameters.AddWithValue("@correo", empleado.Correo.ToLower());
                 sqlCommand.Parameters.AddWithValue("@fechaNacimiento", empleado.FechaNacimiento);
                 sqlCommand.Parameters.AddWithValue("@idSexo", empleado.IdSexo);
                 sqlCommand.Parameters.AddWithValue("@idPuesto", empleado.IdPuesto);
@@ -526,7 +526,7 @@ namespace VitalCareRx
 
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                sqlCommand.Parameters.AddWithValue("@correo", txtCorreo.Text);
+                sqlCommand.Parameters.AddWithValue("@correo", txtCorreo.Text.ToLower());
                 sqlCommand.Parameters.AddWithValue("@accion", "buscarUsuarioCorreo");
 
 

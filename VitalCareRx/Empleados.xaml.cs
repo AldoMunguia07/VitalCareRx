@@ -329,7 +329,7 @@ namespace VitalCareRx
                                 {
                                     if (!unEmpleado.ExisteUsuario(txtUsuario.Text) || usuario == txtUsuario.Text)//Se valida que el nombre de usuario no exista.
                                     {
-                                        if (!unEmpleado.ExisteCorreo(txtCorreo) || correo == txtCorreo.Text)
+                                        if (!unEmpleado.ExisteCorreo(txtCorreo) || correo == txtCorreo.Text.ToLower())
                                         {
                                             if (txtContrasenia.Text.Length >= 8)//La contraseña debe tener almenos 8 caracteres o mas.
                                             {
@@ -488,7 +488,7 @@ namespace VitalCareRx
                 txtUsuario.Text = rowSelected.Row["Nombre de usuario"].ToString();
                 usuario = txtUsuario.Text;
                 txtCorreo.Text = rowSelected.Row["Correo"].ToString();
-                correo = txtCorreo.Text;
+                correo = txtCorreo.Text.ToLower();
                 txtContrasenia.Text = rowSelected.Row["contrasenia"].ToString(); ;
 
                 if (rowSelected.Row["Estado"].ToString() == "True")

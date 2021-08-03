@@ -42,10 +42,11 @@
 
             <Grid.Background>
                 <LinearGradientBrush>
-
-                    <GradientStop Color="#74EEAB" Offset="1"/>
-                    <GradientStop Color="#1c1c1c" Offset="0.3"/>
+                  
+                    <GradientStop Color="#74EEAB" Offset="1.2"/>
+                    <GradientStop Color="#1c1c1c" Offset="0.2"/>
                 </LinearGradientBrush>
+                
             </Grid.Background>
 
 
@@ -114,7 +115,7 @@
                         <TextBlock Text="Acerca de VCRx" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                     </StackPanel>
                 </ListViewItem>
-                <ListViewItem Name="ltSalida" Height="60" Selected="ltSalida_Selected">
+                <ListViewItem Name="ltSalida" Height="60" Selected="ltSalida_Selected" Foreground="LightGray">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="ExitRun" Height="30" Width="30" />
                         <TextBlock Text="Salir" FontSize="17" VerticalAlignment="Center" Margin="20 0" Width="34"/>

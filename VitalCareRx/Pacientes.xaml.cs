@@ -248,15 +248,23 @@ namespace VitalCareRx
                                         {
                                             if (float.Parse(txtPeso.Text) >= 5 && float.Parse(txtPeso.Text) <= 800) // El peso debe ser mayor o igual a 5, y menor o igual a 800.
                                             {
-                                                
-                                                ObtenerDatos();
-                                                
-                                                paciente.ActualizarPaciente(paciente);
-                                                paciente.VerPacientes(gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
-                                                LimpiarFormulario();
-                                                OcultarColumnas();
-                                                MessageBox.Show("El paciente se ha modificado con éxito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
-                                                
+                                                if (AnioIdentidad())
+                                                {
+                                                    ObtenerDatos();
+
+                                                    paciente.ActualizarPaciente(paciente);
+                                                    paciente.VerPacientes(gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
+                                                    LimpiarFormulario();
+                                                    OcultarColumnas();
+                                                    MessageBox.Show("El paciente se ha modificado con éxito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
+                                                }
+                                                else
+                                                {
+                                                    MessageBox.Show("¡La identidad y el año de nacimiento no tienen relación!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                                }
+
+
+
                                             }
                                             else
                                             {
@@ -380,17 +388,21 @@ namespace VitalCareRx
                                         {
                                             if (float.Parse(txtPeso.Text) >= 5 && float.Parse(txtPeso.Text) <= 800) // El peso debe ser mayor o igual a 5, y menor o igual a 800.
                                             {
+                                                if (AnioIdentidad())
+                                                {
+                                                    ObtenerDatos();
 
-                                                
-                                                ObtenerDatos();
-                                                
-                                                paciente.CrearPaciente(paciente);
-                                                MessageBox.Show("El paciente se ha insertado con éxito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
-                                                paciente.VerPacientes(gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
-                                                LimpiarFormulario();
-                                                OcultarColumnas();
-                                                
-                                                
+                                                    paciente.CrearPaciente(paciente);
+                                                    MessageBox.Show("El paciente se ha insertado con éxito", "PACIENTE", MessageBoxButton.OK, MessageBoxImage.Information);
+                                                    paciente.VerPacientes(gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
+                                                    LimpiarFormulario();
+                                                    OcultarColumnas();
+                                                }
+                                                else
+                                                {
+                                                    MessageBox.Show("¡La identidad y el año de nacimiento no tienen relación!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                                }
+
 
                                             }
                                             else
@@ -508,6 +520,7 @@ namespace VitalCareRx
         //Al darle click que reestablesca el formulario como en un inició.
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
+            AnioIdentidad();
             LimpiarFormulario();
             paciente.VerPacientes(gridPacientes, Convert.ToInt32(cmbEstado.SelectedValue));
             OcultarColumnas();
@@ -522,6 +535,16 @@ namespace VitalCareRx
             if (e.PropertyType == typeof(System.Double)) //Si la columna es de tipo Double o float que le cambie el formato o redondear a 2 cifras.
                 (e.Column as DataGridTextColumn).Binding.StringFormat = "N2";
 
+        }
+
+        private bool AnioIdentidad()
+        {
+            if (Convert.ToInt32(txtDni.Text.Substring(4, 4)) >= dtFechaNacimiento.SelectedDate.Value.Year && Convert.ToInt32(txtDni.Text.Substring(4, 4)) <= (dtFechaNacimiento.SelectedDate.Value.Year + 3))
+            {
+                return true;
+            }
+
+            return false;
         }
 
      

@@ -110,7 +110,7 @@
             </FlowDocument>
         </RichTextBox>
         <TextBox Name="txtCelular" PreviewKeyDown="txtCelular_PreviewKeyDown" PreviewTextInput="txtCelular_PreviewTextInput" Background="White" HorizontalAlignment="Left" Height="23" Margin="43,123,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" RenderTransformOrigin="0.825,0.739" MaxLength="8" Grid.Column="1" />
-        <DatePicker Name="dtFechaNacimiento"  HorizontalAlignment="Left" Margin="43,163,0,0" VerticalAlignment="Top" Width="150" RenderTransformOrigin="0.65,-1.24" Grid.Column="1">
+        <DatePicker Name="dtFechaNacimiento"  HorizontalAlignment="Left" Margin="43,163,0,0" VerticalAlignment="Top" Width="150" RenderTransformOrigin="0.65,-1.24" Grid.Column="1" DisplayDateStart="1910-01-01">
             <DatePicker.CalendarStyle>
                 <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
                     <Style.Resources>
