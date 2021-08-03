@@ -157,7 +157,7 @@ namespace VitalCareRx
                 MessageBoxResult result = MessageBox.Show("¿Desea eliminar el lote?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
-                    unFarmaco.EliminarDetalle(unFarmaco.IdFarmaco, dtFecha.SelectedDate.Value);
+                    unFarmaco.EliminarDetalle(unFarmaco.IdFarmaco, fechaV);
                     Limpiar();
                 }
             }

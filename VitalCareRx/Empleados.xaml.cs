@@ -327,7 +327,7 @@ namespace VitalCareRx
                             {
                                 if (dtFecha.SelectedDate <= DateTime.Now.Date)//la fecha ingresada debe ser menor a la fecha actual
                                 {
-                                    if (!unEmpleado.ExisteUsuario(txtUsuario.Text) || usuario == txtUsuario.Text)//Se valida que el nombre de usuario no exista.
+                                    if (!unEmpleado.ExisteUsuario(txtUsuario.Text) || usuario == txtUsuario.Text.ToLower())//Se valida que el nombre de usuario no exista.
                                     {
                                         if (!unEmpleado.ExisteCorreo(txtCorreo) || correo == txtCorreo.Text.ToLower())
                                         {
@@ -486,7 +486,7 @@ namespace VitalCareRx
                 txtCelular.Text = rowSelected.Row["Celular"].ToString();
                 dtFecha.SelectedDate = Convert.ToDateTime(rowSelected.Row["Fecha de nacimiento"]);
                 txtUsuario.Text = rowSelected.Row["Nombre de usuario"].ToString();
-                usuario = txtUsuario.Text;
+                usuario = txtUsuario.Text.ToLower();
                 txtCorreo.Text = rowSelected.Row["Correo"].ToString();
                 correo = txtCorreo.Text.ToLower();
                 txtContrasenia.Text = rowSelected.Row["contrasenia"].ToString(); ;

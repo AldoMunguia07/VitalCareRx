@@ -157,7 +157,7 @@
                     <materialDesign:PackIcon Kind="AccountKeyOutline" Height="17" Width="25" Foreground="#FFF" />
                 </Button>
                 <Button x:Name="btnMenuPrincipal" Background="#1c1c1c"
-                    ToolTip="Menu Principal" Click ="btnMenuPrincipal_Click"
+                    ToolTip="Menú Principal" Click ="btnMenuPrincipal_Click"
                     IsEnabled="True"
                  >
                     <materialDesign:PackIcon Kind="FormSelect" Height="17" Width="25" Foreground="#FFF" />
@@ -183,7 +183,7 @@
                     <materialDesign:PackIcon Kind="Book" Height="17" Width="25" Foreground="#FFF" />
                 </Button>
                 <Button x:Name="btnRecetasMedicas" Background="#1c1c1c" 
-                    ToolTip="Recetas Medicas" Click ="btnRecetasMedicas_Click"
+                    ToolTip="Recetas Médicas" Click ="btnRecetasMedicas_Click"
                  >
                     <materialDesign:PackIcon Kind="MedicalBag" Height="17" Width="25" Foreground="#FFF" />
                 </Button>

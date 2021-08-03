@@ -44,7 +44,7 @@ namespace VitalCareRx
             LlenarComboBox.CargarComboBoxSexo(cmbSexo);
             miUsuario.PrimerNombre = txtPrimerNombre.Text;
             miUsuario.PrimerApellido = txtPrimerApellido.Text;
-            usuario = txtUsuario.Text; // se asigna el valor de la txtUsuario para la posteiror validacion (Que no permita ingresar un usuario existente).
+            usuario = txtUsuario.Text.ToLower(); // se asigna el valor de la txtUsuario para la posteiror validacion (Que no permita ingresar un usuario existente).
             correo = txtCorreo.Text.ToLower();//se asigna el valor de la txtCorreo para la posteiror validacion (Que no permita ingresar un usuario existente).
         }
 
@@ -126,7 +126,7 @@ namespace VitalCareRx
             {
                 if (Validar()) //El usuario no debe dejar los campos en blanco.
                 {
-                    if (!miUsuario.ExisteUsuario(txtUsuario.Text) || usuario == txtUsuario.Text) // Valida si el nombre usuario no existe y si es el nombre de usurio es del empleado actual, con esa condición pasa a la siguiente validación
+                    if (!miUsuario.ExisteUsuario(txtUsuario.Text) || usuario == txtUsuario.Text.ToLower()) // Valida si el nombre usuario no existe y si es el nombre de usurio es del empleado actual, con esa condición pasa a la siguiente validación
                     {
                         if (txtUsuario.Text.Length >= 5)
                         {
@@ -145,9 +145,10 @@ namespace VitalCareRx
                                                     ObtenerDatos();
                                                     miUsuario.ModificarEmpleado(miUsuario, miUsuario);
                                                     MessageBox.Show("¡Datos actualizados correctamente!", "USUARIO", MessageBoxButton.OK, MessageBoxImage.Information);
-                                                    usuario = txtUsuario.Text;
+                                                    usuario = txtUsuario.Text.ToLower();
                                                     correo = txtCorreo.Text.ToLower();
                                                     txtCorreo.Text = correo;
+                                                    txtUsuario.Text = usuario;
                                                 }
                                                 else
                                                 {

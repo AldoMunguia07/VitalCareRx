@@ -168,7 +168,7 @@ namespace VitalCareRx
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 // Establecer los valores de los parámetros
-                sqlCommand.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
+                sqlCommand.Parameters.AddWithValue("@nombreUsuario", nombreUsuario.ToLower());
                 sqlCommand.Parameters.AddWithValue("@accion", "buscarUsuario");
 
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
@@ -227,7 +227,7 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@fechaNacimiento", empleado.FechaNacimiento);
                 sqlCommand.Parameters.AddWithValue("@idSexo", empleado.IdSexo);
                 sqlCommand.Parameters.AddWithValue("@idPuesto", empleado.IdPuesto);
-                sqlCommand.Parameters.AddWithValue("@nombreUsuario", empleado.NombreUsuario);
+                sqlCommand.Parameters.AddWithValue("@nombreUsuario", empleado.NombreUsuario.ToLower());
                 sqlCommand.Parameters.AddWithValue("@contrasenia", empleado.Contrasenia);
                 sqlCommand.Parameters.AddWithValue("@estado", empleado.Estado);
                 sqlCommand.Parameters.AddWithValue("@accion", "insertar");
@@ -301,7 +301,7 @@ namespace VitalCareRx
                 sqlCommand.Parameters.AddWithValue("@fechaNacimiento", empleado.FechaNacimiento);
                 sqlCommand.Parameters.AddWithValue("@idSexo", empleado.IdSexo);
                 sqlCommand.Parameters.AddWithValue("@idPuesto", empleado.IdPuesto);
-                sqlCommand.Parameters.AddWithValue("@nombreUsuario", empleado.NombreUsuario);
+                sqlCommand.Parameters.AddWithValue("@nombreUsuario", empleado.NombreUsuario.ToLower());
                 sqlCommand.Parameters.AddWithValue("@contrasenia", empleado.Contrasenia);
                 sqlCommand.Parameters.AddWithValue("@estado", empleado.Estado);
                 sqlCommand.Parameters.AddWithValue("@accion", "modificar");
@@ -446,7 +446,7 @@ namespace VitalCareRx
 
                 using (sqlDataAdapter)
                 {
-                    sqlCommand.Parameters.AddWithValue("@nombreUsuario", user);
+                    sqlCommand.Parameters.AddWithValue("@nombreUsuario", user.ToLower());
                     sqlCommand.Parameters.AddWithValue("@accion", "existeUsuario");
 
                     DataTable dataTable = new DataTable();
